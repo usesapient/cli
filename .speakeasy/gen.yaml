@@ -37,8 +37,8 @@ cli:
   cliName: sapient
   distribution:
     homebrew:
-      enabled: true
-      tap: usesapient/homebrew-tools
+      enabled: false
+      tap: ""
     nfpm:
       enabled: false
       formats: deb,rpm
