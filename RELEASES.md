@@ -21,3 +21,9 @@ Based on:
 - Route Homebrew publishing to Formula/sapient.rb to replace the existing tap formula.
 ### Generated
 - [cli v0.4.3] .
+
+## 2026-05-23 07:36:00
+### Changes
+- Add a Homebrew formula test for the installed sapient binary.
+### Generated
+- [cli v0.4.4] .
