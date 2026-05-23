@@ -9,8 +9,8 @@ sources:
             - 1.0.0
     sapient-public-api:
         sourceNamespace: sapient-public-api
-        sourceRevisionDigest: sha256:23ac386636b01844aabcdb9e0d1b9972a3b91371a425265469cee0ba8287d1c0
-        sourceBlobDigest: sha256:6b2673ccf662cf5c5f4db12705f1987bbec8041ee58cb820c32a18f283042d26
+        sourceRevisionDigest: sha256:dc735f7a5867991ec9587ded124d98a055a70b5b342c41ee44333a32997fc174
+        sourceBlobDigest: sha256:64050e7c71411fef5919545b6d10ce0dabd9e724cd5b69967d61d796671130da
         tags:
             - latest
             - 1.0.0
@@ -18,15 +18,17 @@ targets:
     sapient:
         source: sapient-public-api
         sourceNamespace: sapient-public-api
-        sourceRevisionDigest: sha256:23ac386636b01844aabcdb9e0d1b9972a3b91371a425265469cee0ba8287d1c0
-        sourceBlobDigest: sha256:6b2673ccf662cf5c5f4db12705f1987bbec8041ee58cb820c32a18f283042d26
+        sourceRevisionDigest: sha256:dc735f7a5867991ec9587ded124d98a055a70b5b342c41ee44333a32997fc174
+        sourceBlobDigest: sha256:64050e7c71411fef5919545b6d10ce0dabd9e724cd5b69967d61d796671130da
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         sapient-public-api:
             inputs:
-                - location: /tmp/sapient-cli-openapi.json
+                - location: https://raw.githubusercontent.com/usesapient/openapi/main/openapi.json
+                  authHeader: Authorization
+                  authSecret: $openapi_doc_auth_token
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/sapient/sapient/sapient-public-api

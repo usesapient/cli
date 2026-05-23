@@ -203,8 +203,8 @@ func (s *Prompts) PromptsList(ctx context.Context, request *operations.PromptsLi
 
 }
 
-// PromptsCreate - Create Prompt
-func (s *Prompts) PromptsCreate(ctx context.Context, request components.CreatePublicPromptRequest, opts ...operations.Option) (*operations.PromptsCreateResponse, error) {
+// PromptsCreate - Create Prompts
+func (s *Prompts) PromptsCreate(ctx context.Context, request components.CreatePublicPromptsBatchRequest, opts ...operations.Option) (*operations.PromptsCreateResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -316,12 +316,12 @@ func (s *Prompts) PromptsCreate(ctx context.Context, request components.CreatePu
 					return nil, err
 				}
 
-				var out components.PublicPrompt
+				var out components.PublicPromptBatchResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.PublicPrompt = &out
+				res.PublicPromptBatchResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -379,8 +379,8 @@ func (s *Prompts) PromptsCreate(ctx context.Context, request components.CreatePu
 
 }
 
-// PromptsTopicsList - List Topics
-func (s *Prompts) PromptsTopicsList(ctx context.Context, opts ...operations.Option) (*operations.PromptsTopicsListResponse, error) {
+// PromptsConfigRetrieve - Retrieve Prompt Config
+func (s *Prompts) PromptsConfigRetrieve(ctx context.Context, opts ...operations.Option) (*operations.PromptsConfigRetrieveResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -399,7 +399,7 @@ func (s *Prompts) PromptsTopicsList(ctx context.Context, opts ...operations.Opti
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := url.JoinPath(baseURL, "/v1/prompts/topics")
+	opURL, err := url.JoinPath(baseURL, "/v1/prompts/config")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -409,7 +409,7 @@ func (s *Prompts) PromptsTopicsList(ctx context.Context, opts ...operations.Opti
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "prompts_topics_list",
+		OperationID:      "prompts_config_retrieve",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -468,7 +468,7 @@ func (s *Prompts) PromptsTopicsList(ctx context.Context, opts ...operations.Opti
 		}
 	}
 
-	res := &operations.PromptsTopicsListResponse{
+	res := &operations.PromptsConfigRetrieveResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -485,12 +485,12 @@ func (s *Prompts) PromptsTopicsList(ctx context.Context, opts ...operations.Opti
 					return nil, err
 				}
 
-				var out []components.PublicPromptTopic
+				var out components.PublicPromptConfigResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.ResponsePromptsTopicsList = out
+				res.PublicPromptConfigResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -927,6 +927,10 @@ func (s *Prompts) PromptsTopicsDelete(ctx context.Context, request operations.Pr
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -1044,8 +1048,8 @@ func (s *Prompts) PromptsTopicsDelete(ctx context.Context, request operations.Pr
 
 }
 
-// PromptsPlatformsList - List Platforms
-func (s *Prompts) PromptsPlatformsList(ctx context.Context, opts ...operations.Option) (*operations.PromptsPlatformsListResponse, error) {
+// PromptsActionsList - List Prompt Actionables
+func (s *Prompts) PromptsActionsList(ctx context.Context, request *operations.PromptsActionsListRequest, opts ...operations.Option) (*operations.PromptsActionsListResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -1064,7 +1068,7 @@ func (s *Prompts) PromptsPlatformsList(ctx context.Context, opts ...operations.O
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := url.JoinPath(baseURL, "/v1/prompts/platforms")
+	opURL, err := url.JoinPath(baseURL, "/v1/prompts/actions")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1074,7 +1078,7 @@ func (s *Prompts) PromptsPlatformsList(ctx context.Context, opts ...operations.O
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "prompts_platforms_list",
+		OperationID:      "prompts_actions_list",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1095,6 +1099,10 @@ func (s *Prompts) PromptsPlatformsList(ctx context.Context, opts ...operations.O
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1133,7 +1141,7 @@ func (s *Prompts) PromptsPlatformsList(ctx context.Context, opts ...operations.O
 		}
 	}
 
-	res := &operations.PromptsPlatformsListResponse{
+	res := &operations.PromptsActionsListResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -1150,12 +1158,12 @@ func (s *Prompts) PromptsPlatformsList(ctx context.Context, opts ...operations.O
 					return nil, err
 				}
 
-				var out []components.PublicPromptPlatformCatalogItem
+				var out components.PromptActionablesResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.ResponsePromptsPlatformsList = out
+				res.PromptActionablesResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1164,143 +1172,24 @@ func (s *Prompts) PromptsPlatformsList(ctx context.Context, opts ...operations.O
 			}
 			return nil, sdkerrors.NewSDKDefaultError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
-	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, sdkerrors.NewSDKDefaultError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, sdkerrors.NewSDKDefaultError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	default:
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, sdkerrors.NewSDKDefaultError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
-	}
-
-	return res, nil
-
-}
-
-// PromptsEstimateCost - Estimate Prompt Cost
-func (s *Prompts) PromptsEstimateCost(ctx context.Context, opts ...operations.Option) (*operations.PromptsEstimateCostResponse, error) {
-	o := operations.Options{}
-	supportedOptions := []string{
-		operations.SupportedOptionTimeout,
-		operations.SupportedOptionSkipDeserialization,
-	}
-
-	for _, opt := range opts {
-		if err := opt(&o, supportedOptions...); err != nil {
-			return nil, fmt.Errorf("error applying option: %w", err)
-		}
-	}
-
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
-		baseURL = *o.ServerURL
-	}
-	opURL, err := url.JoinPath(baseURL, "/v1/prompts/estimate-cost")
-	if err != nil {
-		return nil, fmt.Errorf("error generating URL: %w", err)
-	}
-
-	hookCtx := hooks.HookContext{
-		SDK:              s.rootSDK,
-		SDKConfiguration: s.sdkConfiguration,
-		BaseURL:          baseURL,
-		Context:          ctx,
-		OperationID:      "prompts_estimate_cost",
-		SecuritySource:   s.sdkConfiguration.Security,
-	}
-
-	timeout := o.Timeout
-	if timeout == nil {
-		timeout = s.sdkConfiguration.Timeout
-	}
-
-	if timeout != nil {
-		var cancel context.CancelFunc
-		ctx, cancel = context.WithTimeout(ctx, *timeout)
-		defer cancel()
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
-
-	for k, v := range o.SetHeaders {
-		req.Header.Set(k, v)
-	}
-
-	req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := s.sdkConfiguration.Client.Do(req)
-	if err != nil || httpRes == nil {
-		if err != nil {
-			err = fmt.Errorf("error sending request: %w", err)
-		} else {
-			err = fmt.Errorf("error sending request: no response")
-		}
-
-		_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-		return nil, err
-	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
-		if err != nil {
-			return nil, err
-		} else if _httpRes != nil {
-			httpRes = _httpRes
-		}
-	} else {
-		httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	res := &operations.PromptsEstimateCostResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode == 422:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			if o.SkipDeserialization == nil || !*o.SkipDeserialization {
-				rawBody, err := utils.ConsumeRawBody(httpRes)
-				if err != nil {
-					return nil, err
-				}
-
-				var out components.PublicPromptCostEstimateResponse
-				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-					return nil, err
-				}
-
-				res.PublicPromptCostEstimateResponse = &out
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
 			}
+
+			var out sdkerrors.HTTPValidationError
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
+			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {

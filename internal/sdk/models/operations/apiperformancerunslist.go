@@ -4,12 +4,15 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
+	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceRunsListRequest struct {
-	OperationID string `queryParam:"style=form,explode=true,name=operation_id"`
-	Limit       *int64 `default:"20" queryParam:"style=form,explode=true,name=limit"`
+	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
+	Brand optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
+	Since optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=since"`
+	Limit *int64                                    `default:"20" queryParam:"style=form,explode=true,name=limit"`
 }
 
 func (a APIPerformanceRunsListRequest) MarshalJSON() ([]byte, error) {
@@ -23,11 +26,18 @@ func (a *APIPerformanceRunsListRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *APIPerformanceRunsListRequest) GetOperationID() string {
+func (a *APIPerformanceRunsListRequest) GetBrand() optionalnullable.OptionalNullable[string] {
 	if a == nil {
-		return ""
+		return nil
 	}
-	return a.OperationID
+	return a.Brand
+}
+
+func (a *APIPerformanceRunsListRequest) GetSince() optionalnullable.OptionalNullable[string] {
+	if a == nil {
+		return nil
+	}
+	return a.Since
 }
 
 func (a *APIPerformanceRunsListRequest) GetLimit() *int64 {
@@ -40,7 +50,7 @@ func (a *APIPerformanceRunsListRequest) GetLimit() *int64 {
 type APIPerformanceRunsListResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	PublicAPIPerformanceRunsResponse *components.PublicAPIPerformanceRunsResponse
+	EvalRunsListResponse *components.EvalRunsListResponse
 }
 
 func (a APIPerformanceRunsListResponse) MarshalJSON() ([]byte, error) {
@@ -61,9 +71,9 @@ func (a *APIPerformanceRunsListResponse) GetHTTPMeta() components.HTTPMetadata {
 	return a.HTTPMeta
 }
 
-func (a *APIPerformanceRunsListResponse) GetPublicAPIPerformanceRunsResponse() *components.PublicAPIPerformanceRunsResponse {
+func (a *APIPerformanceRunsListResponse) GetEvalRunsListResponse() *components.EvalRunsListResponse {
 	if a == nil {
 		return nil
 	}
-	return a.PublicAPIPerformanceRunsResponse
+	return a.EvalRunsListResponse
 }

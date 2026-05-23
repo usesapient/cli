@@ -15,7 +15,8 @@ import (
 )
 
 var apiPerformanceRunsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "operation-id", FieldPath: "OperationID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
+	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
+	{FlagName: "since", Shorthand: "s", FieldPath: "Since", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=since"`, Description: "string value"},
 	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 20, Description: "integer value"},
 }
 
@@ -23,9 +24,9 @@ var apiPerformanceRunsListCmdMeta = []flagutil.FlagMeta{
 func initApiPerformanceRunsListCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "runs-list",
-		Short:   "List Operation Runs",
-		Long:    "List Operation Runs",
-		Example: "  sapient api-performance runs-list --operation-id <id>",
+		Short:   "List Eval Runs",
+		Long:    "List Eval Runs",
+		Example: "  sapient api-performance runs-list",
 		RunE:    runApiPerformanceRunsListCmd,
 		Aliases: []string{"rl"},
 	}
@@ -70,7 +71,7 @@ func runApiPerformanceRunsListCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.APIPerformance.APIPerformanceRunsList(cmd.Context(), *req, sdkOpts...)
+	res, err := s.APIPerformance.APIPerformanceRunsList(cmd.Context(), req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

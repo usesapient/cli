@@ -57,3 +57,12 @@ Based on:
 - Change the generated CLI environment variable prefix from `SAPIENT` to `CLI`.
 ### Generated
 - [cli v0.4.10] .
+
+
+## 2026-05-23 17:37:47
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.764.1 (2.885.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [cli v0.5.0] .

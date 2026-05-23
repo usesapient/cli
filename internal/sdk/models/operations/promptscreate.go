@@ -10,7 +10,7 @@ import (
 type PromptsCreateResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	PublicPrompt *components.PublicPrompt
+	PublicPromptBatchResponse *components.PublicPromptBatchResponse
 }
 
 func (p PromptsCreateResponse) MarshalJSON() ([]byte, error) {
@@ -31,9 +31,9 @@ func (p *PromptsCreateResponse) GetHTTPMeta() components.HTTPMetadata {
 	return p.HTTPMeta
 }
 
-func (p *PromptsCreateResponse) GetPublicPrompt() *components.PublicPrompt {
+func (p *PromptsCreateResponse) GetPublicPromptBatchResponse() *components.PublicPromptBatchResponse {
 	if p == nil {
 		return nil
 	}
-	return p.PublicPrompt
+	return p.PublicPromptBatchResponse
 }

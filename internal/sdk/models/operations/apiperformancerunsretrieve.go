@@ -21,7 +21,7 @@ func (a *APIPerformanceRunsRetrieveRequest) GetRunID() string {
 type APIPerformanceRunsRetrieveResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	PublicAPIPerformanceRunResponse *components.PublicAPIPerformanceRunResponse
+	EvalRunResponse *components.EvalRunResponse
 }
 
 func (a APIPerformanceRunsRetrieveResponse) MarshalJSON() ([]byte, error) {
@@ -42,9 +42,9 @@ func (a *APIPerformanceRunsRetrieveResponse) GetHTTPMeta() components.HTTPMetada
 	return a.HTTPMeta
 }
 
-func (a *APIPerformanceRunsRetrieveResponse) GetPublicAPIPerformanceRunResponse() *components.PublicAPIPerformanceRunResponse {
+func (a *APIPerformanceRunsRetrieveResponse) GetEvalRunResponse() *components.EvalRunResponse {
 	if a == nil {
 		return nil
 	}
-	return a.PublicAPIPerformanceRunResponse
+	return a.EvalRunResponse
 }

@@ -28,7 +28,7 @@ func InitPromptsRoot(parent *cobra.Command) error {
 		return err
 	}
 
-	if err := initPromptsTopicsListCmd(PromptsCmd); err != nil {
+	if err := initPromptsConfigRetrieveCmd(PromptsCmd); err != nil {
 		return err
 	}
 
@@ -44,11 +44,7 @@ func InitPromptsRoot(parent *cobra.Command) error {
 		return err
 	}
 
-	if err := initPromptsPlatformsListCmd(PromptsCmd); err != nil {
-		return err
-	}
-
-	if err := initPromptsEstimateCostCmd(PromptsCmd); err != nil {
+	if err := initPromptsActionsListCmd(PromptsCmd); err != nil {
 		return err
 	}
 

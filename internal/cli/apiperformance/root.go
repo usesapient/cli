@@ -21,51 +21,7 @@ func InitApiPerformanceRoot(parent *cobra.Command) error {
 		Aliases: []string{"ap"},
 	}
 
-	if err := initApiPerformancePlatformsListCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformancePlatformsEstimateCostCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceInterfacesListCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceEvaluationConfigRetrieveCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceEvaluationConfigUpdateCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceOperationsListCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceOperationsCreateCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceOperationsRetrieveCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceOperationsUpdateCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceOperationsDeleteCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceOperationPromptsListCmd(ApiPerformanceCmd); err != nil {
-		return err
-	}
-
-	if err := initApiPerformanceOperationPromptsCreateCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceResultsRetrieveCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 
@@ -77,35 +33,95 @@ func InitApiPerformanceRoot(parent *cobra.Command) error {
 		return err
 	}
 
-	if err := initApiPerformancePromptsRetrieveCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceDiagnoseCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 
-	if err := initApiPerformancePromptsUpdateCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceConfigRetrieveCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 
-	if err := initApiPerformancePromptsDeleteCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceConfigUpdateCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 
-	if err := initApiPerformanceUseCasesListCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceSourcesListCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 
-	if err := initApiPerformanceUseCasesCreateCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceSkillsListCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 
-	if err := initApiPerformanceUseCasesRetrieveCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceEvalsListCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 
-	if err := initApiPerformanceUseCasesUpdateCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceEvalsRetrieveCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 
-	if err := initApiPerformanceUseCasesDeleteCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceEvalsUpdateCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceCustomEvalsListCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceCustomEvalsCreateCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceCustomEvalsRetrieveCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceCustomEvalsUpdateCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceCustomEvalsDeleteCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceStarterProjectsListCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceStarterProjectsCreateCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceStarterProjectsRetrieveCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceStarterProjectsUpdateCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceStarterProjectsDeleteCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceActionsListCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceActionsRefreshCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceActionsRetrieveCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceActionsUpdateCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
+	if err := initApiPerformanceActionsVerifyCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 

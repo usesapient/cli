@@ -8,7 +8,19 @@ import (
 )
 
 type PromptsTopicsDeleteRequest struct {
-	TopicID string `pathParam:"style=simple,explode=false,name=topic_id"`
+	TopicID        string `pathParam:"style=simple,explode=false,name=topic_id"`
+	ArchivePrompts *bool  `default:"false" queryParam:"style=form,explode=true,name=archive_prompts"`
+}
+
+func (p PromptsTopicsDeleteRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PromptsTopicsDeleteRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *PromptsTopicsDeleteRequest) GetTopicID() string {
@@ -16,6 +28,13 @@ func (p *PromptsTopicsDeleteRequest) GetTopicID() string {
 		return ""
 	}
 	return p.TopicID
+}
+
+func (p *PromptsTopicsDeleteRequest) GetArchivePrompts() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.ArchivePrompts
 }
 
 type PromptsTopicsDeleteResponse struct {
