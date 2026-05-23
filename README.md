@@ -189,7 +189,7 @@ Configuration is stored in `~/.config/sapient/config.yaml`.
 
 ### [api-performance](docs/sapient_api-performance.md)
 
-* [`results-retrieve`](docs/sapient_api-performance_results-retrieve.md) - Retrieve Results
+* [`targets-list`](docs/sapient_api-performance_targets-list.md) - List Targets
 * [`runs-list`](docs/sapient_api-performance_runs-list.md) - List Eval Runs
 * [`runs-retrieve`](docs/sapient_api-performance_runs-retrieve.md) - Retrieve Eval Run
 * [`diagnose`](docs/sapient_api-performance_diagnose.md) - Diagnose Eval Runs

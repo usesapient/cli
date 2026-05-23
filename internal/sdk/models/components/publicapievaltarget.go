@@ -7,19 +7,19 @@ import (
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
-type TargetType string
+type PublicAPIEvalTargetTargetType string
 
 const (
-	TargetTypeText  TargetType = "text"
-	TargetTypeAgent TargetType = "agent"
+	PublicAPIEvalTargetTargetTypeText  PublicAPIEvalTargetTargetType = "text"
+	PublicAPIEvalTargetTargetTypeAgent PublicAPIEvalTargetTargetType = "agent"
 )
 
-func (e TargetType) ToPointer() *TargetType {
+func (e PublicAPIEvalTargetTargetType) ToPointer() *PublicAPIEvalTargetTargetType {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *TargetType) IsExact() bool {
+func (e *PublicAPIEvalTargetTargetType) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "text", "agent":
@@ -29,21 +29,21 @@ func (e *TargetType) IsExact() bool {
 	return false
 }
 
-type Frequency string
+type PublicAPIEvalTargetFrequency string
 
 const (
-	FrequencyDaily         Frequency = "daily"
-	FrequencyEveryOtherDay Frequency = "every_other_day"
-	FrequencyWeekly        Frequency = "weekly"
-	FrequencyManual        Frequency = "manual"
+	PublicAPIEvalTargetFrequencyDaily         PublicAPIEvalTargetFrequency = "daily"
+	PublicAPIEvalTargetFrequencyEveryOtherDay PublicAPIEvalTargetFrequency = "every_other_day"
+	PublicAPIEvalTargetFrequencyWeekly        PublicAPIEvalTargetFrequency = "weekly"
+	PublicAPIEvalTargetFrequencyManual        PublicAPIEvalTargetFrequency = "manual"
 )
 
-func (e Frequency) ToPointer() *Frequency {
+func (e PublicAPIEvalTargetFrequency) ToPointer() *PublicAPIEvalTargetFrequency {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *Frequency) IsExact() bool {
+func (e *PublicAPIEvalTargetFrequency) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "daily", "every_other_day", "weekly", "manual":
@@ -58,10 +58,10 @@ type PublicAPIEvalTarget struct {
 	OrgID             optionalnullable.OptionalNullable[string] `json:"org_id,omitzero"`
 	BrandID           optionalnullable.OptionalNullable[string] `json:"brand_id,omitzero"`
 	IntegrationID     optionalnullable.OptionalNullable[string] `json:"integration_id,omitzero"`
-	TargetType        TargetType                                `json:"target_type"`
+	TargetType        PublicAPIEvalTargetTargetType             `json:"target_type"`
 	ExecutionPlatform string                                    `json:"execution_platform"`
 	ModelID           string                                    `json:"model_id"`
-	Frequency         *Frequency                                `default:"daily" json:"frequency"`
+	Frequency         *PublicAPIEvalTargetFrequency             `default:"daily" json:"frequency"`
 	Enabled           *bool                                     `default:"true" json:"enabled"`
 	NextRunAt         optionalnullable.OptionalNullable[string] `json:"next_run_at,omitzero"`
 	LastRunAt         optionalnullable.OptionalNullable[string] `json:"last_run_at,omitzero"`
@@ -110,9 +110,9 @@ func (p *PublicAPIEvalTarget) GetIntegrationID() optionalnullable.OptionalNullab
 	return p.IntegrationID
 }
 
-func (p *PublicAPIEvalTarget) GetTargetType() TargetType {
+func (p *PublicAPIEvalTarget) GetTargetType() PublicAPIEvalTargetTargetType {
 	if p == nil {
-		return TargetType("")
+		return PublicAPIEvalTargetTargetType("")
 	}
 	return p.TargetType
 }
@@ -131,7 +131,7 @@ func (p *PublicAPIEvalTarget) GetModelID() string {
 	return p.ModelID
 }
 
-func (p *PublicAPIEvalTarget) GetFrequency() *Frequency {
+func (p *PublicAPIEvalTarget) GetFrequency() *PublicAPIEvalTargetFrequency {
 	if p == nil {
 		return nil
 	}

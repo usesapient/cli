@@ -127,6 +127,7 @@ func (u EvalRunDetailEndpoint) MarshalJSON() ([]byte, error) {
 type EvalRunDetail struct {
 	ID              string                                                   `json:"id"`
 	Endpoint        optionalnullable.OptionalNullable[EvalRunDetailEndpoint] `json:"endpoint,omitzero"`
+	Source          optionalnullable.OptionalNullable[EvalRunSource]         `json:"source,omitzero"`
 	EvalType        optionalnullable.OptionalNullable[string]                `json:"eval_type,omitzero"`
 	Model           optionalnullable.OptionalNullable[string]                `json:"model,omitzero"`
 	ModelType       optionalnullable.OptionalNullable[string]                `json:"model_type,omitzero"`
@@ -168,6 +169,13 @@ func (e *EvalRunDetail) GetEndpoint() optionalnullable.OptionalNullable[EvalRunD
 		return nil
 	}
 	return e.Endpoint
+}
+
+func (e *EvalRunDetail) GetSource() optionalnullable.OptionalNullable[EvalRunSource] {
+	if e == nil {
+		return nil
+	}
+	return e.Source
 }
 
 func (e *EvalRunDetail) GetEvalType() optionalnullable.OptionalNullable[string] {

@@ -10,6 +10,35 @@ import (
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
+type Tag string
+
+const (
+	TagCitedPages    Tag = "cited_pages"
+	TagOpportunities Tag = "opportunities"
+	TagAll           Tag = "all"
+)
+
+func (e Tag) ToPointer() *Tag {
+	return &e
+}
+func (e *Tag) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "cited_pages":
+		fallthrough
+	case "opportunities":
+		fallthrough
+	case "all":
+		*e = Tag(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Tag: %v", v)
+	}
+}
+
 type Category string
 
 const (
@@ -102,6 +131,7 @@ type PromptsActionsListRequest struct {
 	Since             optionalnullable.OptionalNullable[string]          `queryParam:"style=form,explode=true,name=since"`
 	StartDate         optionalnullable.OptionalNullable[string]          `queryParam:"style=form,explode=true,name=start_date"`
 	EndDate           optionalnullable.OptionalNullable[string]          `queryParam:"style=form,explode=true,name=end_date"`
+	Tag               *Tag                                               `default:"all" queryParam:"style=form,explode=true,name=tag"`
 	Category          optionalnullable.OptionalNullable[Category]        `queryParam:"style=form,explode=true,name=category"`
 	OpportunityType   optionalnullable.OptionalNullable[OpportunityType] `queryParam:"style=form,explode=true,name=opportunity_type"`
 	TopicID           optionalnullable.OptionalNullable[string]          `queryParam:"style=form,explode=true,name=topic_id"`
@@ -141,6 +171,13 @@ func (p *PromptsActionsListRequest) GetEndDate() optionalnullable.OptionalNullab
 		return nil
 	}
 	return p.EndDate
+}
+
+func (p *PromptsActionsListRequest) GetTag() *Tag {
+	if p == nil {
+		return nil
+	}
+	return p.Tag
 }
 
 func (p *PromptsActionsListRequest) GetCategory() optionalnullable.OptionalNullable[Category] {

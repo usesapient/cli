@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: b4e9b595-9805-48d3-93ca-ae7b2d7fd331
 management:
-  docChecksum: 49c7c95c9c3c7093ee9da5ab0a07c50d
+  docChecksum: f20c5b5b63af6dba5924fe97b68c22d8
   docVersion: 1.0.0
   speakeasyVersion: 1.764.1
   generationVersion: 2.885.1
-  releaseVersion: 0.5.2
-  configChecksum: 0b938f2b7335969823888a16656ec4a9
+  releaseVersion: 0.5.3
+  configChecksum: e179983ce7cd85d41fc05fdf774b387d
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
 persistentEdits:
-  generation_id: f8475cff-d56a-4fc3-ad62-95c6f045511f
-  pristine_commit_hash: bb90c90100ba42fdd8dec349f54a5326dd295f12
-  pristine_tree_hash: e97a0e71d820ff0febd221eab8dd26cb767a88d6
+  generation_id: 96bccf35-2356-4ad1-88a5-858438b0e0d7
+  pristine_commit_hash: aa14c048225c4ac8b3ed360e97cc470373a3b477
+  pristine_tree_hash: 31e5d30e318a35f515acf26c94f9d78a508b43b2
 features:
   cli:
     additionalProperties: 0.0.0
@@ -115,18 +115,14 @@ trackedFiles:
     id: 7760166dee6d
     last_write_checksum: sha1:be87f058e727069c5e654fb4418e70072036491f
     pristine_git_object: b5eb72fb13fc1c13c3a8f8a5ec9a1493d858a431
-  internal/cli/apiperformance/apiperformanceresultsretrieve.go:
-    id: d1b646257baa
-    last_write_checksum: sha1:bb28660a1c8c564943bc477520d36df77701214d
-    pristine_git_object: df0090714bcad477d2f0b1c5725dd4bf87d66ce3
   internal/cli/apiperformance/apiperformancerunslist.go:
     id: b15ac59dd8ae
     last_write_checksum: sha1:d4afa0ce1911fabbedfec9236677bcbc82795198
     pristine_git_object: 93b41cb96a4554ea4022c6f7c98d96f27a26af7e
   internal/cli/apiperformance/apiperformancerunsretrieve.go:
     id: bc53a60aba36
-    last_write_checksum: sha1:4bcc9970226efeb6d445465679f3d632788b5372
-    pristine_git_object: 8b8ed264ea02da8c35abc73b396bfb9d60417945
+    last_write_checksum: sha1:b23c0037394e5bf0d535c7d41c457c4decfd8be7
+    pristine_git_object: 1e0f4da99f8fd46f95f76709bff4b312ddb86fd8
   internal/cli/apiperformance/apiperformanceskillslist.go:
     id: 82b17f84f279
     last_write_checksum: sha1:0a546b89a40ba749e6006c1c48f4013ac8348fa5
@@ -155,10 +151,14 @@ trackedFiles:
     id: "247958547369"
     last_write_checksum: sha1:3454287e9dedfb3f7fa4d4a5fab8b167dc0d81d4
     pristine_git_object: 969231d03e2e7c3fa7d465a4b0c8352eea7db275
+  internal/cli/apiperformance/apiperformancetargetslist.go:
+    id: da8ad1e71961
+    last_write_checksum: sha1:a45a4b0dbf4ecc4568b35cc3ef6ed09977bd1a0f
+    pristine_git_object: 0a19fec088ffbd9334d7dbdd4833ca462bd46dbb
   internal/cli/apiperformance/root.go:
     id: 90e2d3d06bdd
-    last_write_checksum: sha1:391b3bfd3e82c59b9d5400bde8db6792cb196ba6
-    pristine_git_object: 3d2c978dd8374edd24a2212b52ae2fb68adf3377
+    last_write_checksum: sha1:4b3b023dbe95f9d92b03635f8fee6fb53a6771ef
+    pristine_git_object: c5ec8c4a963d4d60ede9ac1610bdabc7a2e42b4c
   internal/cli/auth.go:
     id: 5ae1b1dce495
     last_write_checksum: sha1:7e262c81cfcf7ff4aae34f225f4dd868a478c9e0
@@ -173,8 +173,8 @@ trackedFiles:
     pristine_git_object: 50ef7ee485832714bbbc1c86cb50b7bcc8eb92c7
   internal/cli/prompts/promptsactionslist.go:
     id: 5feb083ff4fa
-    last_write_checksum: sha1:e61bf3d366c5235c42f89dcf02774faeb4e9f25b
-    pristine_git_object: ba5ed9b00d13bef0ab1cae7f4cab2175a77256ff
+    last_write_checksum: sha1:8b3ab2a1b2c5049b44b8cfc03272ccddd2d09d99
+    pristine_git_object: 66a660e5251b9eb74413fd4fdc2f3c7cbe2fddbf
   internal/cli/prompts/promptsconfigretrieve.go:
     id: 46e531e327b7
     last_write_checksum: sha1:37cea18dfaef72eed9008609712c60c291c146ca
@@ -233,8 +233,8 @@ trackedFiles:
     pristine_git_object: d52242fa325a1904a2a0a842907e68ca19ab7ca4
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:49c5de2ec8d66faa8e7510201deef14d9ee5b82a
-    pristine_git_object: 903ba00640c4ff90a2a5bc507e33d8dc478e9605
+    last_write_checksum: sha1:765c52a5fcfd8dcb9fc049306ae8ec7e80320c0a
+    pristine_git_object: 46fbd9b2fe094c24096560298a0c62b0bfcd503b
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:025da574178f65f9f5f0b398d089b307b4a67907
@@ -309,8 +309,8 @@ trackedFiles:
     pristine_git_object: e6a994416d0f527912d2d272e2583458f4fc9bcb
   internal/sdk/apiperformance.go:
     id: 0bf8e5ded747
-    last_write_checksum: sha1:de65dfcc83123e79e1e18ddefcf9c22fa72190a0
-    pristine_git_object: ef7990449c5263675f2d938403b7a4a9506bbc2d
+    last_write_checksum: sha1:1fa927ff85d14e9ef6b939cad812eb536e2867bd
+    pristine_git_object: 77e3363635b0f67c9ba675d192c874480a8ea71b
   internal/sdk/models/components/createprompttopicrequest.go:
     id: 8842dce398f6
     last_write_checksum: sha1:c76bebc8330adc7d44738f264b3f61a00c4e8f7f
@@ -337,8 +337,8 @@ trackedFiles:
     pristine_git_object: 249e15f493a14add11bf9004d9a3b1cd118ec317
   internal/sdk/models/components/evalrundetail.go:
     id: 9779d1c56c81
-    last_write_checksum: sha1:96bb0a68ac2b583be6beda0d4524fe6e3f2ea9c4
-    pristine_git_object: d672dadd1d690cc79174ba5b3373eb66e6bb289d
+    last_write_checksum: sha1:fa0e2cf45a69dfb30ee9523cb4c3588269bbc628
+    pristine_git_object: 55dd6f938fdda574638e4a55d4e070a601dec75e
   internal/sdk/models/components/evalrunresponse.go:
     id: f8f65220d6a1
     last_write_checksum: sha1:79cae1597fa5938922dcedf3ff804199e4d0591a
@@ -347,10 +347,14 @@ trackedFiles:
     id: c51991b83431
     last_write_checksum: sha1:00ce9e0b6d9e329df5460b6f28f6fdb4ef733907
     pristine_git_object: e8a4a40a8a3fe1be26b378c30931ce038178ffb9
+  internal/sdk/models/components/evalrunsource.go:
+    id: 508ba01e8adc
+    last_write_checksum: sha1:e526cd04dddcb636a3bba896ce78da4c292afc4c
+    pristine_git_object: 6468fc070fa386d1b8bec65324f28602acd38926
   internal/sdk/models/components/evalrunsummary.go:
     id: e31673619d47
-    last_write_checksum: sha1:5bdbb7df831c40194ed73324f5d9c00362db92c7
-    pristine_git_object: 334f0b7e74182242ae3ad658d5d3f4991d7df568
+    last_write_checksum: sha1:530afd850621002a24eefce05b227e583f31a126
+    pristine_git_object: 12ecd7ea57476ea63036af2d8f9ebdb8f07b2805
   internal/sdk/models/components/failureanalysissnapshot.go:
     id: 45e789e11ae8
     last_write_checksum: sha1:597c48d5c0a39579edfe46cfe8288e4882414060
@@ -369,8 +373,8 @@ trackedFiles:
     pristine_git_object: 1cc0f0214a5e57f69253f20801416bd8a53322f0
   internal/sdk/models/components/promptactionablesresponse.go:
     id: 32ee8fd324e8
-    last_write_checksum: sha1:96bed27c6278481b0e655ed11740da6c7eedc00d
-    pristine_git_object: 904f13b9756e20d1362a7d6a6ec4af24b64d72a2
+    last_write_checksum: sha1:7e8355b2da2da7ffb47ba3feb2bf63f10d65b662
+    pristine_git_object: 0809cd6c4f2bbaeb2a755c841427c56c12dc6dd9
   internal/sdk/models/components/promptbatcherror.go:
     id: eb824e24258a
     last_write_checksum: sha1:d80401977f5a0632d7c5a6a1a856a7c596a4e6c4
@@ -381,8 +385,8 @@ trackedFiles:
     pristine_git_object: 73631b27e6a282ce02c9178dc5bc9d1ff8674dba
   internal/sdk/models/components/publicapievaltarget.go:
     id: 9613ce70d7cf
-    last_write_checksum: sha1:778e9c56970ea0088630845ea7b3022bbd9ca546
-    pristine_git_object: 634301a350cf18685b35e643b4d4294134522d6c
+    last_write_checksum: sha1:2066cd5afc97cf7703f4d2453838e1cba59b36fb
+    pristine_git_object: a6e1afd857eff47fe44bd415c208ccc4ce088b22
   internal/sdk/models/components/publicapiperformanceaction.go:
     id: a571cef5c2cf
     last_write_checksum: sha1:a6358ffe493c68135538517e1b7da5c751c0a20c
@@ -391,10 +395,14 @@ trackedFiles:
     id: a22063570d1e
     last_write_checksum: sha1:541c3d4c9a88824dc72250b420f57dbf7c2074c7
     pristine_git_object: 71c70406dada55a959ff9770a42d93007495e077
-  internal/sdk/models/components/publicapiperformanceresultsresponse.go:
-    id: 42c45376d976
-    last_write_checksum: sha1:2f8907a2065cc3fab570fc4103b3ecd22562fae4
-    pristine_git_object: bc8e8dfcda6e2839abd0a1a19dc9f9f5440518d8
+  internal/sdk/models/components/publicapiperformancecodingagent.go:
+    id: a3d03c77e8ef
+    last_write_checksum: sha1:6e7cb5723d6d977173835970cf0acf461e0dcbbc
+    pristine_git_object: d2413cdaaa4bfd3627e23cdcc2d52efbdde067a6
+  internal/sdk/models/components/publicapiperformancecodingagentmodel.go:
+    id: 1750b89a813c
+    last_write_checksum: sha1:c32ebd5e58c654433355fe19490c5229ca97cd81
+    pristine_git_object: e22764eb1407a5ffdbe04c936bdc286aba640cf9
   internal/sdk/models/components/publicapiperformanceskill.go:
     id: a5868b2f1064
     last_write_checksum: sha1:eb22023f61294cb58d0a7add54db5f944888a150
@@ -411,6 +419,18 @@ trackedFiles:
     id: f428ed24b26a
     last_write_checksum: sha1:8bc58944cf3d157c7e21cbb0b1e5f8e27aabca74
     pristine_git_object: d1f6c48be571b66218058fd8d08a4f580d2d9e08
+  internal/sdk/models/components/publicapiperformancetargetspec.go:
+    id: dfa83f64dc65
+    last_write_checksum: sha1:cd8726d6a0b7256a9053452789f912a321c879a2
+    pristine_git_object: 21668886b8f8212660fa57ca951d8a55c5050a9c
+  internal/sdk/models/components/publicapiperformancetargetsresponse.go:
+    id: 0fe98e324e5f
+    last_write_checksum: sha1:29a98347cb054da0979e76ef3d301944b805395d
+    pristine_git_object: 4de9814ca2a9172f0c38c411cf1fd90b2bfb21d3
+  internal/sdk/models/components/publicapiperformancetextmodel.go:
+    id: f21bc7617e23
+    last_write_checksum: sha1:666114437c39b6a795ab90a5b8ecd1b8547c7a80
+    pristine_git_object: f7a4f1c70288151910c195b015021990515db0ff
   internal/sdk/models/components/publiccitedpage.go:
     id: 8a1bfd2406de
     last_write_checksum: sha1:76f5b102fcc0a659930d0ffb106b93e1a57c6ac6
@@ -631,10 +651,6 @@ trackedFiles:
     id: 8ae8b68aa14b
     last_write_checksum: sha1:0dc6b59823aa3a7b0859a06443234d21c5ccbcc9
     pristine_git_object: 08908dbff336080f790450b9a82795f51577630e
-  internal/sdk/models/operations/apiperformanceresultsretrieve.go:
-    id: 60c7bff6133c
-    last_write_checksum: sha1:46e408c8963e690a77349e865995301a2374a9ba
-    pristine_git_object: 54abf95474ccb8cc842ed0c94dc4d95b63555506
   internal/sdk/models/operations/apiperformancerunslist.go:
     id: c13036392fe0
     last_write_checksum: sha1:44359b7efc64d532595c5f90da8d36a50896f927
@@ -671,6 +687,10 @@ trackedFiles:
     id: f812bee932ba
     last_write_checksum: sha1:3fe9d58bdf998d330a36f2160fde15e5ceb3d227
     pristine_git_object: a714c496619adfc601fdf316f235bb321a74caa5
+  internal/sdk/models/operations/apiperformancetargetslist.go:
+    id: ada9f7108d29
+    last_write_checksum: sha1:7c1048e4019a6f816479b853b11c50cc72eaa587
+    pristine_git_object: 1f4685ed96733f41d8e15b2d6f29fc056efd3788
   internal/sdk/models/operations/authstatusget.go:
     id: 67a013c48e3d
     last_write_checksum: sha1:74e74a716c9cc29b77609a1544a9cad73d957d9a
@@ -681,8 +701,8 @@ trackedFiles:
     pristine_git_object: 6ddfe98975ff21154bbf07347845d6ba3bfacebc
   internal/sdk/models/operations/promptsactionslist.go:
     id: 7c4858a4911f
-    last_write_checksum: sha1:659b91c354d66ee18119407916c4263683f2053a
-    pristine_git_object: d0e75a3c34e7eeecf98eebe5250d60f5d9d67b64
+    last_write_checksum: sha1:189465a9fbcc8c927d7f78350112731920c27e07
+    pristine_git_object: b13249296f859e340c2b63692a5d4a31e175cf41
   internal/sdk/models/operations/promptsconfigretrieve.go:
     id: 5b6c4226959e
     last_write_checksum: sha1:a90313957dee17906cf42fedb3d83fe4ffa452b4
@@ -837,8 +857,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:743910efddd6b963e849056dcb23382079494b3d
-    pristine_git_object: f4682745d8e33b59812c10bd2e0cfca9b9c34edc
+    last_write_checksum: sha1:3a1dc92cfe4ecd95a19bcb4a7d9693e5ce9ab1a0
+    pristine_git_object: 08d39c8d99806f5d6ac4720db919cd5d50898cc4
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:cd01d45cc8eab10459eeefec295916709ef6d678
@@ -1169,9 +1189,10 @@ examples:
           include_cited_pages: true
           limit: 50
           cited_pages_limit: 20
+          tag: "all"
       responses:
         "200":
-          application/json: {"start_date": "<value>", "end_date": "<value>", "opportunity_count": 632383, "cited_page_count": 722085}
+          application/json: {"start_date": "<value>", "end_date": "<value>", "tag": "all", "opportunity_count": 632383, "cited_page_count": 722085}
         "422":
           application/json: {}
   api_performance_results_retrieve:
@@ -1409,5 +1430,10 @@ examples:
           application/json: {"status": "<value>"}
         "422":
           application/json: {}
+  api_performance_targets_list:
+    speakeasy-default-api-performance-targets-list:
+      responses:
+        "200":
+          application/json: {"text_models": [], "coding_agents": [{"id": "<id>", "label": "<value>", "platform": "<value>", "cost_estimate_per_eval": 9176.68}], "frequencies": ["daily"]}
 examplesVersion: 1.0.2
-releaseNotes: "## Cli SDK Changes:\n* `Sapient.Prompts.PromptsCreate()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceRunsList()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceRunsRetrieve()`:  `response` **Changed** (Breaking ⚠️)\n* `Sapient.Prompts.PromptsConfigRetrieve()`: **Added**\n* `Sapient.Prompts.PromptsActionsList()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceResultsRetrieve()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceDiagnose()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceConfigRetrieve()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceConfigUpdate()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceSourcesList()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceSkillsList()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceEvalsList()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceEvalsRetrieve()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceEvalsUpdate()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsList()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsCreate()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsRetrieve()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsUpdate()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsDelete()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsList()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsCreate()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsRetrieve()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsUpdate()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsDelete()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceActionsList()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceActionsRefresh()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceActionsRetrieve()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceActionsUpdate()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceActionsVerify()`: **Added**\n* `Sapient.Prompts.PromptsTopicsList()`: **Removed** (Breaking ⚠️)\n* `Sapient.Prompts.PromptsPlatformsList()`: **Removed** (Breaking ⚠️)\n* `Sapient.Prompts.PromptsEstimateCost()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformancePlatformsList()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformancePlatformsEstimateCost()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceInterfacesList()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceEvaluationConfigRetrieve()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceEvaluationConfigUpdate()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceOperationsList()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceOperationsCreate()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceOperationsRetrieve()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceOperationsUpdate()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceOperationsDelete()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceOperationPromptsList()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceOperationPromptsCreate()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformancePromptsRetrieve()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformancePromptsUpdate()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformancePromptsDelete()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceUseCasesList()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceUseCasesCreate()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceUseCasesRetrieve()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceUseCasesUpdate()`: **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceUseCasesDelete()`: **Removed** (Breaking ⚠️)\n* `Sapient.Prompts.PromptsTopicsDelete()`: \n  *  `request.Request.ArchivePrompts` **Added**\n"
+releaseNotes: "## Cli SDK Changes:\n* `Sapient.ApiPerformance.ApiPerformanceTargetsList()`: **Added**\n* `Sapient.ApiPerformance.ApiPerformanceResultsRetrieve()`: **Removed** (Breaking ⚠️)\n* `Sapient.Prompts.PromptsActionsList()`: \n  *  `request.Request.Tag` **Added**\n  *  `response.Tag` **Added**\n* `Sapient.ApiPerformance.ApiPerformanceRunsList()`:  `response.Data[].Source` **Added**\n* `Sapient.ApiPerformance.ApiPerformanceRunsRetrieve()`:  `response.Data.Source` **Added**\n* `Sapient.ApiPerformance.ApiPerformanceDiagnose()`:  `response.Examples[].Source` **Added**\n"
