@@ -1,0 +1,15 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    sapient-public-api:
+        inputs:
+            - location: https://raw.githubusercontent.com/usesapient/openapi/main/openapi.json
+              authHeader: Authorization
+              authSecret: $openapi_doc_auth_token
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/sapient/sapient/sapient-public-api
+targets:
+    sapient:
+        target: cli
+        source: sapient-public-api
