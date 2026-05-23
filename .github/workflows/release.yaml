@@ -1,6 +1,7 @@
 name: Release
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "v*"
@@ -22,6 +23,14 @@ jobs:
         with:
           go-version-file: "go.mod"
           cache: true
+      - name: Validate tag matches source version
+        run: |
+          version="$(ruby -ryaml -e 'puts YAML.load_file(".speakeasy/gen.yaml").fetch("cli").fetch("version").to_s')"
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::Release tag ${GITHUB_REF_NAME} does not match .speakeasy/gen.yaml cli.version ${version}"
+            exit 1
+          fi
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@111c56156bcc6918c056dbef52164cfa583dc549 # v5.2.0
         id: import_gpg
