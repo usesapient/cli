@@ -45,3 +45,9 @@ Based on:
 - Check for CLI upgrades before opening the bare-command explorer.
 ### Generated
 - [cli v0.4.8] .
+
+## 2026-05-23 12:35:50
+### Changes
+- Accept the legacy `SAPIENT_API_KEY` environment variable as an API key alias.
+### Generated
+- [cli v0.4.9] .

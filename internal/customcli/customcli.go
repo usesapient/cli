@@ -15,6 +15,11 @@ import (
 	"golang.org/x/term"
 )
 
+const (
+	legacyAPIKeyEnv    = "SAPIENT_API_KEY"
+	canonicalAPIKeyEnv = "SAPIENT_SAPIENT_API_KEY_AUTH"
+)
+
 type commandMove struct {
 	From []string
 	To   []string
@@ -54,6 +59,8 @@ var commandMoves = []commandMove{
 // NewRootCommand builds the generated Speakeasy command tree and applies the
 // Sapient-specific resource grouping without editing generated files.
 func NewRootCommand() (*cobra.Command, error) {
+	installEnvCompatibilityAliases()
+
 	root, err := generatedcli.NewRootCommand()
 	if err != nil {
 		return nil, err
@@ -85,6 +92,15 @@ func Execute() error {
 	}
 	runUpdateCheck(os.Args)
 	return nil
+}
+
+func installEnvCompatibilityAliases() {
+	if os.Getenv(canonicalAPIKeyEnv) != "" {
+		return
+	}
+	if value := os.Getenv(legacyAPIKeyEnv); value != "" {
+		_ = os.Setenv(canonicalAPIKeyEnv, value)
+	}
 }
 
 func Shape(root *cobra.Command) error {
