@@ -6,9 +6,33 @@ import (
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
+type Tag string
+
+const (
+	TagCitedPages    Tag = "cited_pages"
+	TagOpportunities Tag = "opportunities"
+	TagAll           Tag = "all"
+)
+
+func (e Tag) ToPointer() *Tag {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *Tag) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "cited_pages", "opportunities", "all":
+			return true
+		}
+	}
+	return false
+}
+
 type PromptActionablesResponse struct {
 	StartDate        string                    `json:"start_date"`
 	EndDate          string                    `json:"end_date"`
+	Tag              *Tag                      `default:"all" json:"tag"`
 	Opportunities    []PublicPromptOpportunity `json:"opportunities,omitzero"`
 	OpportunityCount int64                     `json:"opportunity_count"`
 	CitedPages       []PublicCitedPage         `json:"cited_pages,omitzero"`
@@ -39,6 +63,13 @@ func (p *PromptActionablesResponse) GetEndDate() string {
 		return ""
 	}
 	return p.EndDate
+}
+
+func (p *PromptActionablesResponse) GetTag() *Tag {
+	if p == nil {
+		return nil
+	}
+	return p.Tag
 }
 
 func (p *PromptActionablesResponse) GetOpportunities() []PublicPromptOpportunity {

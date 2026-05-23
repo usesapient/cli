@@ -448,6 +448,21 @@
             }
           },
           {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "cited_pages",
+                "opportunities",
+                "all"
+              ],
+              "type": "string",
+              "default": "all",
+              "title": "Tag"
+            }
+          },
+          {
             "name": "category",
             "in": "query",
             "required": false,
@@ -737,111 +752,31 @@
         "x-stainless-method": "prompts.delete"
       }
     },
-    "/v1/api-performance/results": {
+    "/v1/api-performance/targets": {
       "get": {
         "tags": [
           "api-performance"
         ],
-        "summary": "Retrieve Results",
-        "operationId": "api_performance_results_retrieve",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
-          {
-            "name": "integration_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Integration Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 200,
-              "minimum": 1,
-              "default": 20,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "include_docs_audit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false,
-              "title": "Include Docs Audit"
-            }
-          },
-          {
-            "name": "docs_audit_limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 1000,
-              "minimum": 1,
-              "default": 500,
-              "title": "Docs Audit Limit"
-            }
-          }
-        ],
+        "summary": "List Targets",
+        "operationId": "api_performance_targets_list",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceResultsResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/PublicApiPerformanceTargetsResponse"
                 }
               }
             }
           }
         },
-        "x-stainless-method": "api_performance.results.retrieve"
+        "security": [
+          {
+            "SapientApiKeyAuth": []
+          }
+        ],
+        "x-stainless-method": "api_performance.targets.list"
       }
     },
     "/v1/api-performance/runs": {
@@ -2932,6 +2867,16 @@
             ],
             "title": "Endpoint"
           },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EvalRunSource"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "eval_type": {
             "anyOf": [
               {
@@ -3135,6 +3080,46 @@
         ],
         "title": "EvalRunResponse"
       },
+      "EvalRunSource": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "title": "EvalRunSource"
+      },
       "EvalRunSummary": {
         "properties": {
           "id": {
@@ -3155,6 +3140,16 @@
               }
             ],
             "title": "Endpoint"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EvalRunSource"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "eval_type": {
             "anyOf": [
@@ -3467,6 +3462,16 @@
           "end_date": {
             "type": "string",
             "title": "End Date"
+          },
+          "tag": {
+            "type": "string",
+            "enum": [
+              "cited_pages",
+              "opportunities",
+              "all"
+            ],
+            "title": "Tag",
+            "default": "all"
           },
           "opportunities": {
             "items": {
@@ -3926,45 +3931,83 @@
         ],
         "title": "PublicApiPerformanceActionsResponse"
       },
-      "PublicApiPerformanceResultsResponse": {
+      "PublicApiPerformanceCodingAgent": {
         "properties": {
-          "brand_id": {
+          "id": {
             "type": "string",
-            "title": "Brand Id"
+            "title": "Id"
           },
-          "latest_runs": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Latest Runs"
+          "label": {
+            "type": "string",
+            "title": "Label"
           },
-          "failure_analysis": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Failure Analysis"
+          "platform": {
+            "type": "string",
+            "title": "Platform"
           },
-          "docs_audit": {
+          "cost_estimate_per_eval": {
+            "type": "number",
+            "title": "Cost Estimate Per Eval"
+          },
+          "default_model_id": {
             "anyOf": [
               {
-                "additionalProperties": true,
-                "type": "object"
+                "type": "string"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Docs Audit"
+            "title": "Default Model Id"
           },
-          "meta": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Meta"
+          "target": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PublicApiPerformanceTargetSpec"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "models": {
+            "items": {
+              "$ref": "#/components/schemas/PublicApiPerformanceCodingAgentModel"
+            },
+            "type": "array",
+            "title": "Models"
           }
         },
         "type": "object",
         "required": [
-          "brand_id"
+          "id",
+          "label",
+          "platform",
+          "cost_estimate_per_eval"
         ],
-        "title": "PublicApiPerformanceResultsResponse"
+        "title": "PublicApiPerformanceCodingAgent"
+      },
+      "PublicApiPerformanceCodingAgentModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "target": {
+            "$ref": "#/components/schemas/PublicApiPerformanceTargetSpec"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "target"
+        ],
+        "title": "PublicApiPerformanceCodingAgentModel"
       },
       "PublicApiPerformanceSkill": {
         "properties": {
@@ -4184,6 +4227,113 @@
           "data"
         ],
         "title": "PublicApiPerformanceSourcesResponse"
+      },
+      "PublicApiPerformanceTargetSpec": {
+        "properties": {
+          "target_type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "agent"
+            ],
+            "title": "Target Type"
+          },
+          "execution_platform": {
+            "type": "string",
+            "title": "Execution Platform"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_type",
+          "execution_platform",
+          "model_id"
+        ],
+        "title": "PublicApiPerformanceTargetSpec"
+      },
+      "PublicApiPerformanceTargetsResponse": {
+        "properties": {
+          "text_models": {
+            "items": {
+              "$ref": "#/components/schemas/PublicApiPerformanceTextModel"
+            },
+            "type": "array",
+            "title": "Text Models"
+          },
+          "coding_agents": {
+            "items": {
+              "$ref": "#/components/schemas/PublicApiPerformanceCodingAgent"
+            },
+            "type": "array",
+            "title": "Coding Agents"
+          },
+          "frequencies": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "daily",
+                "every_other_day",
+                "weekly",
+                "manual"
+              ]
+            },
+            "type": "array",
+            "title": "Frequencies"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text_models",
+          "coding_agents",
+          "frequencies"
+        ],
+        "title": "PublicApiPerformanceTargetsResponse"
+      },
+      "PublicApiPerformanceTextModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "cost_per_1m_input": {
+            "type": "number",
+            "title": "Cost Per 1M Input"
+          },
+          "cost_per_1m_output": {
+            "type": "number",
+            "title": "Cost Per 1M Output"
+          },
+          "target": {
+            "$ref": "#/components/schemas/PublicApiPerformanceTargetSpec"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "platform",
+          "cost_per_1m_input",
+          "cost_per_1m_output",
+          "target"
+        ],
+        "title": "PublicApiPerformanceTextModel"
       },
       "PublicCitedPage": {
         "properties": {

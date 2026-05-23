@@ -26,7 +26,7 @@ func initApiPerformanceRunsRetrieveCmd(parent *cobra.Command) error {
 		Long:    "Retrieve Eval Run",
 		Example: "  sapient api-performance runs-retrieve --run-id <id>",
 		RunE:    runApiPerformanceRunsRetrieveCmd,
-		Aliases: []string{"rre"},
+		Aliases: []string{"rr"},
 	}
 	flagutil.RegisterFlags(cmd, apiPerformanceRunsRetrieveCmdMeta)
 	if err := flagutil.ValidateMeta[operations.APIPerformanceRunsRetrieveRequest](apiPerformanceRunsRetrieveCmdMeta); err != nil {

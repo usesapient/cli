@@ -21,7 +21,7 @@ func InitApiPerformanceRoot(parent *cobra.Command) error {
 		Aliases: []string{"ap"},
 	}
 
-	if err := initApiPerformanceResultsRetrieveCmd(ApiPerformanceCmd); err != nil {
+	if err := initApiPerformanceTargetsListCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
 

@@ -13,7 +13,7 @@ import (
 // which propagates the value here (see cmd/sapient/main.go):
 //
 //	go build -ldflags "-X main.version=x.y.z" ./cmd/sapient
-var Version = "0.5.2"
+var Version = "0.5.3"
 
 // BuildTime is optionally set at build time via ldflags targeting the main package.
 var BuildTime string

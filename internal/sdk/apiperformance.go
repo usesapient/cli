@@ -30,8 +30,8 @@ func newAPIPerformance(rootSDK *Sapient, sdkConfig config.SDKConfiguration, hook
 	}
 }
 
-// APIPerformanceResultsRetrieve - Retrieve Results
-func (s *APIPerformance) APIPerformanceResultsRetrieve(ctx context.Context, request *operations.APIPerformanceResultsRetrieveRequest, opts ...operations.Option) (*operations.APIPerformanceResultsRetrieveResponse, error) {
+// APIPerformanceTargetsList - List Targets
+func (s *APIPerformance) APIPerformanceTargetsList(ctx context.Context, opts ...operations.Option) (*operations.APIPerformanceTargetsListResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -50,7 +50,7 @@ func (s *APIPerformance) APIPerformanceResultsRetrieve(ctx context.Context, requ
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := url.JoinPath(baseURL, "/v1/api-performance/results")
+	opURL, err := url.JoinPath(baseURL, "/v1/api-performance/targets")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -60,7 +60,7 @@ func (s *APIPerformance) APIPerformanceResultsRetrieve(ctx context.Context, requ
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "api_performance_results_retrieve",
+		OperationID:      "api_performance_targets_list",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -81,10 +81,6 @@ func (s *APIPerformance) APIPerformanceResultsRetrieve(ctx context.Context, requ
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -123,7 +119,7 @@ func (s *APIPerformance) APIPerformanceResultsRetrieve(ctx context.Context, requ
 		}
 	}
 
-	res := &operations.APIPerformanceResultsRetrieveResponse{
+	res := &operations.APIPerformanceTargetsListResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -140,38 +136,13 @@ func (s *APIPerformance) APIPerformanceResultsRetrieve(ctx context.Context, requ
 					return nil, err
 				}
 
-				var out components.PublicAPIPerformanceResultsResponse
+				var out components.PublicAPIPerformanceTargetsResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.PublicAPIPerformanceResultsResponse = &out
+				res.PublicAPIPerformanceTargetsResponse = &out
 			}
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKDefaultError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 422:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out sdkerrors.HTTPValidationError
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
-			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
