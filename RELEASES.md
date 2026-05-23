@@ -27,3 +27,9 @@ Based on:
 - Add a Homebrew formula test for the installed sapient binary.
 ### Generated
 - [cli v0.4.4] .
+
+## 2026-05-23 07:45:00
+### Changes
+- Keep the root usage schema version aligned with the runtime CLI version.
+### Generated
+- [cli v0.4.5] .

@@ -23,6 +23,7 @@ var rootCmd *cobra.Command
 // NewRootCommand creates and returns the root command.
 // This is exported for testing purposes to allow in-process command execution.
 func NewRootCommand() (*cobra.Command, error) {
+	usage.Version = Version
 	cobra.AddTemplateFunc("groupedFlagUsages", groupedFlagUsages)
 	cobra.AddTemplateFunc("groupedGlobalFlagUsages", groupedGlobalFlagUsages)
 	rootCmd := &cobra.Command{
