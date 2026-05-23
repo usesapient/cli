@@ -33,7 +33,7 @@ var commandMoves = []commandMove{
 	{From: []string{"prompts", "config-retrieve"}, To: []string{"prompts", "config", "retrieve"}},
 	{From: []string{"prompts", "actions-list"}, To: []string{"prompts", "actions", "list"}},
 
-	{From: []string{"api-performance", "results-retrieve"}, To: []string{"api-performance", "results", "retrieve"}},
+	{From: []string{"api-performance", "targets-list"}, To: []string{"api-performance", "targets", "list"}},
 	{From: []string{"api-performance", "runs-list"}, To: []string{"api-performance", "runs", "list"}},
 	{From: []string{"api-performance", "runs-retrieve"}, To: []string{"api-performance", "runs", "retrieve"}},
 	{From: []string{"api-performance", "config-retrieve"}, To: []string{"api-performance", "config", "retrieve"}},

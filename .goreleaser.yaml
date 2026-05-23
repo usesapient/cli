@@ -7,7 +7,7 @@ before:
 
 builds:
   - id: sapient
-    main: ./cmd/sapient
+    main: ./cmd/sapient-shaped
     binary: sapient
     env:
       - CGO_ENABLED=0
@@ -46,11 +46,14 @@ brews:
       owner: usesapient
       name: homebrew-tools
       branch: main
-    token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Formula
     homepage: "https://github.com/usesapient/cli"
     description: "Sapient Public API: Public API for Sapient CLI and external integrations."
     install: |
       bin.install "sapient"
+    test: |
+      system "#{bin}/sapient", "version"
 
 release:
   github:
