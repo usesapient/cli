@@ -39,3 +39,9 @@ Based on:
 - Add shaped command grouping and upgrade notifications.
 ### Generated
 - [cli v0.4.7] .
+
+## 2026-05-23 12:02:18
+### Changes
+- Check for CLI upgrades before opening the bare-command explorer.
+### Generated
+- [cli v0.4.8] .

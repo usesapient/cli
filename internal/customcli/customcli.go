@@ -74,6 +74,9 @@ func Execute() error {
 
 	output.InitAgentMode(root)
 	if shouldAutoExplore() {
+		if runUpdateCheck(os.Args) {
+			return nil
+		}
 		return runExplorer(root)
 	}
 

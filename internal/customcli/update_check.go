@@ -38,26 +38,25 @@ type updateCheckCache struct {
 	NotifiedAt    time.Time `json:"notified_at,omitempty"`
 }
 
-func runUpdateCheck(args []string) {
+func runUpdateCheck(args []string) bool {
 	if shouldSkipUpdateCheck(args) {
-		return
+		return false
 	}
 
 	cachePath, err := updateCheckCachePath()
 	if err != nil {
-		return
+		return false
 	}
 
 	now := updateCheckNow()
 	cached, ok := readUpdateCheckCache(cachePath)
 	if ok && now.Sub(cached.CheckedAt) < updateCheckInterval {
-		writeUpdateNotificationIfNeeded(cachePath, cached, now)
-		return
+		return writeUpdateNotificationIfNeeded(cachePath, cached, now)
 	}
 
 	latestVersion, err := fetchLatestReleaseVersion(context.Background())
 	if err != nil {
-		return
+		return false
 	}
 
 	nextCache := updateCheckCache{
@@ -67,7 +66,7 @@ func runUpdateCheck(args []string) {
 	if ok && cached.LatestVersion == latestVersion {
 		nextCache.NotifiedAt = cached.NotifiedAt
 	}
-	writeUpdateNotificationIfNeeded(cachePath, nextCache, now)
+	return writeUpdateNotificationIfNeeded(cachePath, nextCache, now)
 }
 
 func shouldSkipUpdateCheck(args []string) bool {
@@ -156,15 +155,17 @@ func writeUpdateCheckCache(path string, cached updateCheckCache) {
 	_ = os.WriteFile(path, data, 0644)
 }
 
-func writeUpdateNotificationIfNeeded(path string, cached updateCheckCache, now time.Time) {
+func writeUpdateNotificationIfNeeded(path string, cached updateCheckCache, now time.Time) bool {
 	if !cached.NotifiedAt.IsZero() && now.Sub(cached.NotifiedAt) < updateCheckInterval {
 		writeUpdateCheckCache(path, cached)
-		return
+		return false
 	}
-	if writeUpdateNotification(cached.LatestVersion) {
+	notified := writeUpdateNotification(cached.LatestVersion)
+	if notified {
 		cached.NotifiedAt = now
 	}
 	writeUpdateCheckCache(path, cached)
+	return notified
 }
 
 func writeUpdateNotification(latestVersion string) bool {

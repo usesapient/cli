@@ -77,8 +77,9 @@ func TestRunUpdateCheckUsesFreshCacheWithoutNetwork(t *testing.T) {
 		}),
 	}
 
-	runUpdateCheck([]string{"sapient", "status", "get"})
+	notified := runUpdateCheck([]string{"sapient", "status", "get"})
 
+	require.True(t, notified)
 	require.Contains(t, stderr.String(), "A new Sapient CLI version is available: "+generatedcli.Version+" -> 9.9.9")
 	require.Contains(t, stderr.String(), "Update with: brew upgrade sapient")
 	cached, ok := readUpdateCheckCache(cachePath)
@@ -101,8 +102,9 @@ func TestRunUpdateCheckDoesNotRepeatFreshCacheNotification(t *testing.T) {
 		}),
 	}
 
-	runUpdateCheck([]string{"sapient", "status", "get"})
+	notified := runUpdateCheck([]string{"sapient", "status", "get"})
 
+	require.False(t, notified)
 	require.Empty(t, stderr.String())
 }
 
@@ -128,9 +130,10 @@ func TestRunUpdateCheckRefreshesStaleCache(t *testing.T) {
 		}),
 	}
 
-	runUpdateCheck([]string{"sapient", "status", "get"})
+	notified := runUpdateCheck([]string{"sapient", "status", "get"})
 
 	require.True(t, requested)
+	require.True(t, notified)
 	require.Contains(t, stderr.String(), generatedcli.Version+" -> 9.9.9")
 	cached, ok := readUpdateCheckCache(cachePath)
 	require.True(t, ok)
@@ -149,8 +152,9 @@ func TestRunUpdateCheckSkipsWhenDisabled(t *testing.T) {
 		}),
 	}
 
-	runUpdateCheck([]string{"sapient", "status", "get"})
+	notified := runUpdateCheck([]string{"sapient", "status", "get"})
 
+	require.False(t, notified)
 	require.Empty(t, stderr.String())
 }
 
@@ -164,8 +168,9 @@ func TestRunUpdateCheckSkipsInCI(t *testing.T) {
 		}),
 	}
 
-	runUpdateCheck([]string{"sapient", "status", "get"})
+	notified := runUpdateCheck([]string{"sapient", "status", "get"})
 
+	require.False(t, notified)
 	require.Empty(t, stderr.String())
 }
 
@@ -179,17 +184,17 @@ func TestRunUpdateCheckSkipsNonTTYAndUtilityCommands(t *testing.T) {
 	}
 
 	updateCheckIsTerminal = func() bool { return false }
-	runUpdateCheck([]string{"sapient", "status", "get"})
+	require.False(t, runUpdateCheck([]string{"sapient", "status", "get"}))
 	updateCheckIsTerminal = func() bool { return true }
-	runUpdateCheck([]string{"sapient", "version"})
-	runUpdateCheck([]string{"sapient", "--version"})
-	runUpdateCheck([]string{"sapient", "completion", "zsh"})
-	runUpdateCheck([]string{"sapient", "__complete", "prompts"})
-	runUpdateCheck([]string{"sapient", "@completion", "zsh"})
-	runUpdateCheck([]string{"sapient", "@manpages"})
-	runUpdateCheck([]string{"sapient", "--usage"})
-	runUpdateCheck([]string{"sapient", "status", "get", "--help"})
-	runUpdateCheck([]string{"sapient", "status", "get", "--agent-mode"})
+	require.False(t, runUpdateCheck([]string{"sapient", "version"}))
+	require.False(t, runUpdateCheck([]string{"sapient", "--version"}))
+	require.False(t, runUpdateCheck([]string{"sapient", "completion", "zsh"}))
+	require.False(t, runUpdateCheck([]string{"sapient", "__complete", "prompts"}))
+	require.False(t, runUpdateCheck([]string{"sapient", "@completion", "zsh"}))
+	require.False(t, runUpdateCheck([]string{"sapient", "@manpages"}))
+	require.False(t, runUpdateCheck([]string{"sapient", "--usage"}))
+	require.False(t, runUpdateCheck([]string{"sapient", "status", "get", "--help"}))
+	require.False(t, runUpdateCheck([]string{"sapient", "status", "get", "--agent-mode"}))
 
 	require.Empty(t, stderr.String())
 }
@@ -208,8 +213,9 @@ func TestRunUpdateCheckDoesNotNotifyForSameOlderOrInvalidVersion(t *testing.T) {
 				}),
 			}
 
-			runUpdateCheck([]string{"sapient", "status", "get"})
+			notified := runUpdateCheck([]string{"sapient", "status", "get"})
 
+			require.False(t, notified)
 			require.Empty(t, stderr.String())
 		})
 	}
