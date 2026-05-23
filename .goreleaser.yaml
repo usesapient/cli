@@ -46,14 +46,11 @@ brews:
       owner: usesapient
       name: homebrew-tools
       branch: main
-      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-    directory: Formula
+    token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     homepage: "https://github.com/usesapient/cli"
     description: "Sapient Public API: Public API for Sapient CLI and external integrations."
     install: |
       bin.install "sapient"
-    test: |
-      system "#{bin}/sapient", "version"
 
 release:
   github:

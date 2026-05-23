@@ -1,3582 +1,2080 @@
-{
-  "openapi": "3.1.0",
-  "info": {
-    "title": "Sapient Public API",
-    "description": "Public API for Sapient CLI and external integrations.",
-    "version": "1.0.0",
-    "x-sapient-cli-generation-check": "2026-05-23"
-  },
-  "servers": [
-    {
-      "url": "https://api-public.usesapient.com",
-      "description": "Production"
-    }
-  ],
-  "paths": {
-    "/v1/status": {
-      "get": {
-        "tags": [
-          "status"
-        ],
-        "summary": "Get Status",
-        "operationId": "status_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/auth/status": {
-      "get": {
-        "tags": [
-          "status"
-        ],
-        "summary": "Get Auth Status",
-        "operationId": "auth_status_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/prompts": {
-      "get": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "List Prompts",
-        "operationId": "prompts_list",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "topic_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Topic Id"
-            }
-          },
-          {
-            "name": "is_active",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Is Active"
-            }
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "pattern": "^(active|inactive|archived)$"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Status"
-            }
-          },
-          {
-            "name": "include_archived",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false,
-              "title": "Include Archived"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListPromptsResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "Create Prompt",
-        "operationId": "prompts_create",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePublicPromptRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicPrompt"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/prompts/topics": {
-      "get": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "List Topics",
-        "operationId": "prompts_topics_list",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/PublicPromptTopic"
-                  },
-                  "type": "array",
-                  "title": "Response Prompts Topics List"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "Create Topic",
-        "operationId": "prompts_topics_create",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePromptTopicRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicPromptTopic"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/prompts/topics/{topic_id}": {
-      "patch": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "Update Topic",
-        "operationId": "prompts_topics_update",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "topic_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Topic Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePromptTopicRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicPromptTopic"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "Delete Topic",
-        "operationId": "prompts_topics_delete",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "topic_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Topic Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicOkResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/prompts/platforms": {
-      "get": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "List Platforms",
-        "operationId": "prompts_platforms_list",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/PublicPromptPlatformCatalogItem"
-                  },
-                  "type": "array",
-                  "title": "Response Prompts Platforms List"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/prompts/estimate-cost": {
-      "get": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "Estimate Prompt Cost",
-        "operationId": "prompts_estimate_cost",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicPromptCostEstimateResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/prompts/{prompt_id}": {
-      "get": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "Retrieve Prompt",
-        "operationId": "prompts_retrieve",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "prompt_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Prompt Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicPrompt"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "Update Prompt",
-        "operationId": "prompts_update",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "prompt_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Prompt Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePublicPromptRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicPrompt"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "Delete Prompt",
-        "operationId": "prompts_delete",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "prompt_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Prompt Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicOkResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/api-performance/platforms": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "List Platforms",
-        "operationId": "api_performance_platforms_list",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformancePlatformsResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/api-performance/platforms/estimate-cost": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Estimate Platform Cost",
-        "operationId": "api_performance_platforms_estimate_cost",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicCostEstimateResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/api-performance/interfaces": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "List Interfaces",
-        "operationId": "api_performance_interfaces_list",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceInterfacesResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/api-performance/evaluation-config": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Retrieve Evaluation Config",
-        "operationId": "api_performance_evaluation_config_retrieve",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "interface_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Interface Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceEvaluationConfig"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Update Evaluation Config",
-        "operationId": "api_performance_evaluation_config_update",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePublicApiPerformanceEvaluationConfigRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceEvaluationConfig"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/api-performance/operations": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "List Operations",
-        "operationId": "api_performance_operations_list",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "category_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Category Id"
-            }
-          },
-          {
-            "name": "interface_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Interface Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PublicApiPerformanceOperation"
-                  },
-                  "title": "Response Api Performance Operations List"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Create Operation",
-        "operationId": "api_performance_operations_create",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePublicApiPerformanceOperationRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceOperation"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/api-performance/operations/{operation_id}": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Retrieve Operation",
-        "operationId": "api_performance_operations_retrieve",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "operation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Operation Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceOperation"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Update Operation",
-        "operationId": "api_performance_operations_update",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "operation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Operation Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePublicApiPerformanceOperationRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceOperation"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Delete Operation",
-        "operationId": "api_performance_operations_delete",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "operation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Operation Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicOkResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/api-performance/operations/{operation_id}/prompts": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "List Operation Prompts",
-        "operationId": "api_performance_operation_prompts_list",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "operation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Operation Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PublicOperationPrompt"
-                  },
-                  "title": "Response Api Performance Operation Prompts List"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Create Operation Prompt",
-        "operationId": "api_performance_operation_prompts_create",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "operation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Operation Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePublicOperationPromptRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicOperationPrompt"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/api-performance/runs": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "List Operation Runs",
-        "operationId": "api_performance_runs_list",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "operation_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 1,
-              "title": "Operation Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 200,
-              "minimum": 1,
-              "default": 20,
-              "title": "Limit"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceRunsResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/api-performance/runs/{run_id}": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Retrieve Run",
-        "operationId": "api_performance_runs_retrieve",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "run_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Run Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceRunResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/api-performance/prompts/{prompt_id}": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Retrieve Operation Prompt",
-        "operationId": "api_performance_prompts_retrieve",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "prompt_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Prompt Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicOperationPrompt"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Update Operation Prompt",
-        "operationId": "api_performance_prompts_update",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "prompt_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Prompt Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePublicOperationPromptRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicOperationPrompt"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Delete Operation Prompt",
-        "operationId": "api_performance_prompts_delete",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "prompt_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Prompt Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicOkResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/api-performance/use-cases": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "List Use Cases",
-        "operationId": "api_performance_use_cases_list",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/PublicApiPerformanceUseCase"
-                  },
-                  "type": "array",
-                  "title": "Response Api Performance Use Cases List"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Create Use Case",
-        "operationId": "api_performance_use_cases_create",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePublicApiPerformanceUseCaseRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceUseCase"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/api-performance/use-cases/{use_case_id}": {
-      "get": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Retrieve Use Case",
-        "operationId": "api_performance_use_cases_retrieve",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "use_case_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Use Case Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceUseCase"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Update Use Case",
-        "operationId": "api_performance_use_cases_update",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "use_case_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Use Case Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePublicApiPerformanceUseCaseRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicApiPerformanceUseCase"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "api-performance"
-        ],
-        "summary": "Delete Use Case",
-        "operationId": "api_performance_use_cases_delete",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "use_case_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Use Case Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicOkResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "CreatePromptTopicRequest": {
-        "properties": {
-          "name": {
-            "type": "string",
-            "maxLength": 120,
-            "minLength": 1,
-            "title": "Name"
-          }
-        },
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "title": "CreatePromptTopicRequest"
-      },
-      "CreatePublicApiPerformanceOperationRequest": {
-        "properties": {
-          "method": {
-            "type": "string",
-            "maxLength": 20,
-            "minLength": 1,
-            "title": "Method"
-          },
-          "path": {
-            "type": "string",
-            "minLength": 1,
-            "title": "Path"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          },
-          "category_name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 120
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Category Name"
-          },
-          "category_slug": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 120
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Category Slug"
-          },
-          "openapi_operation_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Openapi Operation Id"
-          },
-          "interface_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Interface Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "method",
-          "path"
-        ],
-        "title": "CreatePublicApiPerformanceOperationRequest"
-      },
-      "CreatePublicApiPerformanceUseCaseRequest": {
-        "properties": {
-          "prompt": {
-            "type": "string",
-            "minLength": 1,
-            "title": "Prompt"
-          },
-          "category_name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 120
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Category Name"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          }
-        },
-        "type": "object",
-        "required": [
-          "prompt"
-        ],
-        "title": "CreatePublicApiPerformanceUseCaseRequest"
-      },
-      "CreatePublicOperationPromptRequest": {
-        "properties": {
-          "prompt": {
-            "type": "string",
-            "minLength": 1,
-            "title": "Prompt"
-          },
-          "eval_type": {
-            "type": "string",
-            "maxLength": 80,
-            "minLength": 1,
-            "title": "Eval Type",
-            "default": "integration"
-          },
-          "expected_behavior": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Expected Behavior"
-          },
-          "graders": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "type": "array",
-            "title": "Graders"
-          },
-          "reference_answer": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reference Answer"
-          }
-        },
-        "type": "object",
-        "required": [
-          "prompt"
-        ],
-        "title": "CreatePublicOperationPromptRequest"
-      },
-      "CreatePublicPromptRequest": {
-        "properties": {
-          "topic_id": {
-            "type": "string",
-            "title": "Topic Id"
-          },
-          "text": {
-            "type": "string",
-            "minLength": 1,
-            "title": "Text"
-          },
-          "platform_ids": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Platform Ids"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "topic_id",
-          "text"
-        ],
-        "title": "CreatePublicPromptRequest"
-      },
-      "HTTPValidationError": {
-        "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array",
-            "title": "Detail"
-          }
-        },
-        "type": "object",
-        "title": "HTTPValidationError"
-      },
-      "ListPromptsResponse": {
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/PublicPrompt"
-            },
-            "type": "array",
-            "title": "Data"
-          },
-          "count": {
-            "type": "integer",
-            "title": "Count"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data",
-          "count"
-        ],
-        "title": "ListPromptsResponse"
-      },
-      "PublicApiPerformanceCategory": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "slug": {
-            "type": "string",
-            "title": "Slug"
-          },
-          "sort_order": {
-            "type": "integer",
-            "title": "Sort Order",
-            "default": 0
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "slug"
-        ],
-        "title": "PublicApiPerformanceCategory"
-      },
-      "PublicApiPerformanceEvaluationConfig": {
-        "properties": {
-          "platforms": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Platforms"
-          },
-          "operation_ids": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Operation Ids"
-          },
-          "use_case_ids": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Use Case Ids"
-          },
-          "eval_types": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Eval Types"
-          },
-          "env_var_keys": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Env Var Keys"
-          },
-          "api_base_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Api Base Url"
-          },
-          "framework": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Framework"
-          }
-        },
-        "type": "object",
-        "required": [
-          "operation_ids"
-        ],
-        "title": "PublicApiPerformanceEvaluationConfig"
-      },
-      "PublicApiPerformanceInterface": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "type": {
-            "type": "string",
-            "title": "Type"
-          },
-          "label": {
-            "type": "string",
-            "title": "Label"
-          },
-          "operation_count": {
-            "type": "integer",
-            "title": "Operation Count",
-            "default": 0
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Created At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "type",
-          "label"
-        ],
-        "title": "PublicApiPerformanceInterface"
-      },
-      "PublicApiPerformanceInterfacesResponse": {
-        "properties": {
-          "interfaces": {
-            "items": {
-              "$ref": "#/components/schemas/PublicApiPerformanceInterface"
-            },
-            "type": "array",
-            "title": "Interfaces"
-          }
-        },
-        "type": "object",
-        "required": [
-          "interfaces"
-        ],
-        "title": "PublicApiPerformanceInterfacesResponse"
-      },
-      "PublicApiPerformanceOperation": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "method": {
-            "type": "string",
-            "title": "Method"
-          },
-          "path": {
-            "type": "string",
-            "title": "Path"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          },
-          "category": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PublicApiPerformanceCategory"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "openapi_operation_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Openapi Operation Id"
-          },
-          "interface_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Interface Id"
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Created At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "method",
-          "path"
-        ],
-        "title": "PublicApiPerformanceOperation"
-      },
-      "PublicApiPerformancePlatform": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "label": {
-            "type": "string",
-            "title": "Label"
-          },
-          "provider": {
-            "type": "string",
-            "title": "Provider"
-          },
-          "type": {
-            "type": "string",
-            "title": "Type"
-          },
-          "credits_per_eval": {
-            "type": "integer",
-            "title": "Credits Per Eval"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "label",
-          "provider",
-          "type",
-          "credits_per_eval"
-        ],
-        "title": "PublicApiPerformancePlatform"
-      },
-      "PublicApiPerformancePlatformsResponse": {
-        "properties": {
-          "text_platforms": {
-            "items": {
-              "$ref": "#/components/schemas/PublicApiPerformancePlatform"
-            },
-            "type": "array",
-            "title": "Text Platforms"
-          },
-          "agent_platforms": {
-            "items": {
-              "$ref": "#/components/schemas/PublicApiPerformancePlatform"
-            },
-            "type": "array",
-            "title": "Agent Platforms"
-          }
-        },
-        "type": "object",
-        "required": [
-          "text_platforms",
-          "agent_platforms"
-        ],
-        "title": "PublicApiPerformancePlatformsResponse"
-      },
-      "PublicApiPerformanceRun": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "eval_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Eval Id"
-          },
-          "eval_type": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Eval Type"
-          },
-          "prompt": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Prompt"
-          },
-          "expected_behavior": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Expected Behavior"
-          },
-          "graders": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "type": "array",
-            "title": "Graders"
-          },
-          "reference_answer": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reference Answer"
-          },
-          "platform": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Platform"
-          },
-          "model": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Model"
-          },
-          "model_type": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Model Type"
-          },
-          "passed": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Passed"
-          },
-          "score": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Score"
-          },
-          "failure_reasons": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Failure Reasons"
-          },
-          "error_message": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Error Message"
-          },
-          "latency_ms": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Latency Ms"
-          },
-          "tokens_used": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tokens Used"
-          },
-          "run_date": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Run Date"
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Created At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id"
-        ],
-        "title": "PublicApiPerformanceRun"
-      },
-      "PublicApiPerformanceRunDetail": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "eval_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Eval Id"
-          },
-          "eval_type": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Eval Type"
-          },
-          "prompt": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Prompt"
-          },
-          "expected_behavior": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Expected Behavior"
-          },
-          "graders": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "type": "array",
-            "title": "Graders"
-          },
-          "reference_answer": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reference Answer"
-          },
-          "platform": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Platform"
-          },
-          "model": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Model"
-          },
-          "model_type": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Model Type"
-          },
-          "passed": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Passed"
-          },
-          "score": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Score"
-          },
-          "failure_reasons": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Failure Reasons"
-          },
-          "error_message": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Error Message"
-          },
-          "latency_ms": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Latency Ms"
-          },
-          "tokens_used": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tokens Used"
-          },
-          "run_date": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Run Date"
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Created At"
-          },
-          "raw_response": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Raw Response"
-          },
-          "grader_results": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Grader Results"
-          },
-          "api_call_log": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Api Call Log"
-          },
-          "tool_calls": {
-            "anyOf": [
-              {
-                "items": {
-                  "additionalProperties": true,
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tool Calls"
-          },
-          "conversation_turns": {
-            "anyOf": [
-              {
-                "items": {
-                  "additionalProperties": true,
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Conversation Turns"
-          },
-          "generated_files": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Generated Files"
-          },
-          "execution_stdout": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Execution Stdout"
-          },
-          "execution_stderr": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Execution Stderr"
-          },
-          "exit_code": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Exit Code"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id"
-        ],
-        "title": "PublicApiPerformanceRunDetail"
-      },
-      "PublicApiPerformanceRunResponse": {
-        "properties": {
-          "operation": {
-            "$ref": "#/components/schemas/PublicApiPerformanceOperation"
-          },
-          "data": {
-            "$ref": "#/components/schemas/PublicApiPerformanceRunDetail"
-          }
-        },
-        "type": "object",
-        "required": [
-          "operation",
-          "data"
-        ],
-        "title": "PublicApiPerformanceRunResponse"
-      },
-      "PublicApiPerformanceRunsResponse": {
-        "properties": {
-          "operation": {
-            "$ref": "#/components/schemas/PublicApiPerformanceOperation"
-          },
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/PublicApiPerformanceRun"
-            },
-            "type": "array",
-            "title": "Data"
-          },
-          "meta": {
-            "$ref": "#/components/schemas/PublicListMeta"
-          }
-        },
-        "type": "object",
-        "required": [
-          "operation",
-          "data",
-          "meta"
-        ],
-        "title": "PublicApiPerformanceRunsResponse"
-      },
-      "PublicApiPerformanceUseCase": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "prompt": {
-            "type": "string",
-            "title": "Prompt"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          },
-          "category": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PublicApiPerformanceCategory"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Created At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "prompt"
-        ],
-        "title": "PublicApiPerformanceUseCase"
-      },
-      "PublicCostEstimateResponse": {
-        "properties": {
-          "estimates": {
-            "additionalProperties": {
-              "$ref": "#/components/schemas/PublicPlatformCreditEstimate"
-            },
-            "type": "object",
-            "title": "Estimates"
-          },
-          "total_credits": {
-            "type": "integer",
-            "title": "Total Credits"
-          }
-        },
-        "type": "object",
-        "required": [
-          "estimates",
-          "total_credits"
-        ],
-        "title": "PublicCostEstimateResponse"
-      },
-      "PublicListMeta": {
-        "properties": {
-          "limit": {
-            "type": "integer",
-            "title": "Limit"
-          },
-          "count": {
-            "type": "integer",
-            "title": "Count"
-          }
-        },
-        "type": "object",
-        "required": [
-          "limit",
-          "count"
-        ],
-        "title": "PublicListMeta"
-      },
-      "PublicOkResponse": {
-        "properties": {
-          "ok": {
-            "type": "boolean",
-            "title": "Ok"
-          }
-        },
-        "type": "object",
-        "required": [
-          "ok"
-        ],
-        "title": "PublicOkResponse"
-      },
-      "PublicOperationPrompt": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "operation_id": {
-            "type": "string",
-            "title": "Operation Id"
-          },
-          "eval_type": {
-            "type": "string",
-            "title": "Eval Type"
-          },
-          "prompt": {
-            "type": "string",
-            "title": "Prompt"
-          },
-          "expected_behavior": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Expected Behavior"
-          },
-          "graders": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "type": "array",
-            "title": "Graders"
-          },
-          "reference_answer": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reference Answer"
-          },
-          "enabled": {
-            "type": "boolean",
-            "title": "Enabled",
-            "default": true
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Created At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "operation_id",
-          "eval_type",
-          "prompt"
-        ],
-        "title": "PublicOperationPrompt"
-      },
-      "PublicPlatformCreditEstimate": {
-        "properties": {
-          "credits_per_eval": {
-            "type": "integer",
-            "title": "Credits Per Eval"
-          },
-          "eval_count": {
-            "type": "integer",
-            "title": "Eval Count"
-          },
-          "total_credits": {
-            "type": "integer",
-            "title": "Total Credits"
-          }
-        },
-        "type": "object",
-        "required": [
-          "credits_per_eval",
-          "eval_count",
-          "total_credits"
-        ],
-        "title": "PublicPlatformCreditEstimate"
-      },
-      "PublicPrompt": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "topic_id": {
-            "type": "string",
-            "title": "Topic Id"
-          },
-          "text": {
-            "type": "string",
-            "title": "Text"
-          },
-          "language_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Language Id"
-          },
-          "region_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Region Id"
-          },
-          "is_active": {
-            "type": "boolean",
-            "title": "Is Active",
-            "default": true
-          },
-          "status": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "active",
-                  "inactive",
-                  "archived"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Status"
-          },
-          "topic": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PublicPromptTopic"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "platforms": {
-            "items": {
-              "$ref": "#/components/schemas/PublicPromptPlatform"
-            },
-            "type": "array",
-            "title": "Platforms"
-          },
-          "tags": {
-            "items": {
-              "$ref": "#/components/schemas/PublicPromptTag"
-            },
-            "type": "array",
-            "title": "Tags"
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Created At"
-          },
-          "updated_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Updated At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "topic_id",
-          "text"
-        ],
-        "title": "PublicPrompt"
-      },
-      "PublicPromptCostEstimateResponse": {
-        "properties": {
-          "estimates": {
-            "additionalProperties": {
-              "$ref": "#/components/schemas/PublicPromptPlatformCostEstimate"
-            },
-            "type": "object",
-            "title": "Estimates"
-          },
-          "total_credits": {
-            "type": "integer",
-            "title": "Total Credits"
-          }
-        },
-        "type": "object",
-        "required": [
-          "estimates",
-          "total_credits"
-        ],
-        "title": "PublicPromptCostEstimateResponse"
-      },
-      "PublicPromptPlatform": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "title": "PublicPromptPlatform"
-      },
-      "PublicPromptPlatformCatalogItem": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "model": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Model"
-          },
-          "credits_per_prompt": {
-            "type": "integer",
-            "title": "Credits Per Prompt"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "credits_per_prompt"
-        ],
-        "title": "PublicPromptPlatformCatalogItem"
-      },
-      "PublicPromptPlatformCostEstimate": {
-        "properties": {
-          "credits_per_prompt": {
-            "type": "integer",
-            "title": "Credits Per Prompt"
-          },
-          "prompt_count": {
-            "type": "integer",
-            "title": "Prompt Count"
-          },
-          "total_credits": {
-            "type": "integer",
-            "title": "Total Credits"
-          }
-        },
-        "type": "object",
-        "required": [
-          "credits_per_prompt",
-          "prompt_count",
-          "total_credits"
-        ],
-        "title": "PublicPromptPlatformCostEstimate"
-      },
-      "PublicPromptTag": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Created At"
-          },
-          "updated_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Updated At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "title": "PublicPromptTag"
-      },
-      "PublicPromptTopic": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Created At"
-          },
-          "updated_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Updated At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "title": "PublicPromptTopic"
-      },
-      "UpdatePromptTopicRequest": {
-        "properties": {
-          "name": {
-            "type": "string",
-            "maxLength": 120,
-            "minLength": 1,
-            "title": "Name"
-          }
-        },
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "title": "UpdatePromptTopicRequest"
-      },
-      "UpdatePublicApiPerformanceEvaluationConfigRequest": {
-        "properties": {
-          "platforms": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Platforms"
-          },
-          "operation_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Operation Ids"
-          },
-          "use_case_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Use Case Ids"
-          },
-          "eval_types": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Eval Types"
-          },
-          "env_vars": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "type": "string"
-                },
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Env Vars"
-          },
-          "interface_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Interface Id"
-          },
-          "api_base_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Api Base Url"
-          },
-          "framework": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Framework"
-          }
-        },
-        "type": "object",
-        "title": "UpdatePublicApiPerformanceEvaluationConfigRequest"
-      },
-      "UpdatePublicApiPerformanceOperationRequest": {
-        "properties": {
-          "method": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 20,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Method"
-          },
-          "path": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Path"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          },
-          "category_name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 120
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Category Name"
-          },
-          "category_slug": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 120
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Category Slug"
-          },
-          "openapi_operation_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Openapi Operation Id"
-          },
-          "interface_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Interface Id"
-          }
-        },
-        "type": "object",
-        "title": "UpdatePublicApiPerformanceOperationRequest"
-      },
-      "UpdatePublicApiPerformanceUseCaseRequest": {
-        "properties": {
-          "prompt": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Prompt"
-          },
-          "category_name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 120
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Category Name"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          }
-        },
-        "type": "object",
-        "title": "UpdatePublicApiPerformanceUseCaseRequest"
-      },
-      "UpdatePublicOperationPromptRequest": {
-        "properties": {
-          "prompt": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Prompt"
-          },
-          "expected_behavior": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Expected Behavior"
-          },
-          "graders": {
-            "anyOf": [
-              {
-                "items": {
-                  "additionalProperties": true,
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Graders"
-          },
-          "reference_answer": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reference Answer"
-          },
-          "enabled": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Enabled"
-          }
-        },
-        "type": "object",
-        "title": "UpdatePublicOperationPromptRequest"
-      },
-      "UpdatePublicPromptRequest": {
-        "properties": {
-          "text": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Text"
-          },
-          "topic_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Topic Id"
-          },
-          "platform_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Platform Ids"
-          },
-          "is_active": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Is Active"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "UpdatePublicPromptRequest"
-      },
-      "ValidationError": {
-        "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
-          },
-          "msg": {
-            "type": "string",
-            "title": "Message"
-          },
-          "type": {
-            "type": "string",
-            "title": "Error Type"
-          }
-        },
-        "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "title": "ValidationError"
-      }
-    },
-    "securitySchemes": {
-      "SapientApiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "X-Sapient-Api-Key"
-      }
-    }
-  }
-}
+openapi: "3.1.0"
+info:
+  title: "Sapient Public API"
+  description: "Public API for Sapient CLI and external integrations."
+  version: "1.0.0"
+  x-sapient-cli-generation-check: "2026-05-23"
+servers:
+  - url: "https://api-public.usesapient.com"
+    description: "Production"
+paths:
+  /v1/status:
+    get:
+      tags:
+        - "status"
+      summary: "Get Status"
+      operationId: "status_get"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema: {}
+  /v1/auth/status:
+    get:
+      tags:
+        - "status"
+      summary: "Get Auth Status"
+      operationId: "auth_status_get"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema: {}
+      security:
+        - SapientApiKeyAuth: []
+  /v1/prompts:
+    get:
+      tags:
+        - "prompts"
+      summary: "List Prompts"
+      operationId: "prompts_list"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "topic_id"
+          in: "query"
+          required: false
+          schema:
+            anyOf:
+              - type: "string"
+              - type: "null"
+            title: "Topic Id"
+        - name: "is_active"
+          in: "query"
+          required: false
+          schema:
+            anyOf:
+              - type: "boolean"
+              - type: "null"
+            title: "Is Active"
+        - name: "status"
+          in: "query"
+          required: false
+          schema:
+            anyOf:
+              - type: "string"
+                pattern: "^(active|inactive|archived)$"
+              - type: "null"
+            title: "Status"
+        - name: "include_archived"
+          in: "query"
+          required: false
+          schema:
+            type: "boolean"
+            default: false
+            title: "Include Archived"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPromptsResponse"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    post:
+      tags:
+        - "prompts"
+      summary: "Create Prompt"
+      operationId: "prompts_create"
+      security:
+        - SapientApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePublicPromptRequest"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicPrompt"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/prompts/topics:
+    get:
+      tags:
+        - "prompts"
+      summary: "List Topics"
+      operationId: "prompts_topics_list"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PublicPromptTopic"
+                type: "array"
+                title: "Response Prompts Topics List"
+      security:
+        - SapientApiKeyAuth: []
+    post:
+      tags:
+        - "prompts"
+      summary: "Create Topic"
+      operationId: "prompts_topics_create"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePromptTopicRequest"
+        required: true
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicPromptTopic"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+      security:
+        - SapientApiKeyAuth: []
+  /v1/prompts/topics/{topic_id}:
+    patch:
+      tags:
+        - "prompts"
+      summary: "Update Topic"
+      operationId: "prompts_topics_update"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "topic_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Topic Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePromptTopicRequest"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicPromptTopic"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    delete:
+      tags:
+        - "prompts"
+      summary: "Delete Topic"
+      operationId: "prompts_topics_delete"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "topic_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Topic Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicOkResponse"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/prompts/platforms:
+    get:
+      tags:
+        - "prompts"
+      summary: "List Platforms"
+      operationId: "prompts_platforms_list"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PublicPromptPlatformCatalogItem"
+                type: "array"
+                title: "Response Prompts Platforms List"
+      security:
+        - SapientApiKeyAuth: []
+  /v1/prompts/estimate-cost:
+    get:
+      tags:
+        - "prompts"
+      summary: "Estimate Prompt Cost"
+      operationId: "prompts_estimate_cost"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicPromptCostEstimateResponse"
+      security:
+        - SapientApiKeyAuth: []
+  /v1/prompts/{prompt_id}:
+    get:
+      tags:
+        - "prompts"
+      summary: "Retrieve Prompt"
+      operationId: "prompts_retrieve"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "prompt_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Prompt Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicPrompt"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    patch:
+      tags:
+        - "prompts"
+      summary: "Update Prompt"
+      operationId: "prompts_update"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "prompt_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Prompt Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePublicPromptRequest"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicPrompt"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    delete:
+      tags:
+        - "prompts"
+      summary: "Delete Prompt"
+      operationId: "prompts_delete"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "prompt_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Prompt Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicOkResponse"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/api-performance/platforms:
+    get:
+      tags:
+        - "api-performance"
+      summary: "List Platforms"
+      operationId: "api_performance_platforms_list"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformancePlatformsResponse"
+      security:
+        - SapientApiKeyAuth: []
+  /v1/api-performance/platforms/estimate-cost:
+    get:
+      tags:
+        - "api-performance"
+      summary: "Estimate Platform Cost"
+      operationId: "api_performance_platforms_estimate_cost"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicCostEstimateResponse"
+      security:
+        - SapientApiKeyAuth: []
+  /v1/api-performance/interfaces:
+    get:
+      tags:
+        - "api-performance"
+      summary: "List Interfaces"
+      operationId: "api_performance_interfaces_list"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceInterfacesResponse"
+      security:
+        - SapientApiKeyAuth: []
+  /v1/api-performance/evaluation-config:
+    get:
+      tags:
+        - "api-performance"
+      summary: "Retrieve Evaluation Config"
+      operationId: "api_performance_evaluation_config_retrieve"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "interface_id"
+          in: "query"
+          required: false
+          schema:
+            anyOf:
+              - type: "string"
+              - type: "null"
+            title: "Interface Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceEvaluationConfig"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    put:
+      tags:
+        - "api-performance"
+      summary: "Update Evaluation Config"
+      operationId: "api_performance_evaluation_config_update"
+      security:
+        - SapientApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePublicApiPerformanceEvaluationConfigRequest"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceEvaluationConfig"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/api-performance/operations:
+    get:
+      tags:
+        - "api-performance"
+      summary: "List Operations"
+      operationId: "api_performance_operations_list"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "category_id"
+          in: "query"
+          required: false
+          schema:
+            anyOf:
+              - type: "string"
+              - type: "null"
+            title: "Category Id"
+        - name: "interface_id"
+          in: "query"
+          required: false
+          schema:
+            anyOf:
+              - type: "string"
+              - type: "null"
+            title: "Interface Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/PublicApiPerformanceOperation"
+                title: "Response Api Performance Operations List"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    post:
+      tags:
+        - "api-performance"
+      summary: "Create Operation"
+      operationId: "api_performance_operations_create"
+      security:
+        - SapientApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePublicApiPerformanceOperationRequest"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceOperation"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/api-performance/operations/{operation_id}:
+    get:
+      tags:
+        - "api-performance"
+      summary: "Retrieve Operation"
+      operationId: "api_performance_operations_retrieve"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "operation_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Operation Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceOperation"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    patch:
+      tags:
+        - "api-performance"
+      summary: "Update Operation"
+      operationId: "api_performance_operations_update"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "operation_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Operation Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePublicApiPerformanceOperationRequest"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceOperation"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    delete:
+      tags:
+        - "api-performance"
+      summary: "Delete Operation"
+      operationId: "api_performance_operations_delete"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "operation_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Operation Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicOkResponse"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/api-performance/operations/{operation_id}/prompts:
+    get:
+      tags:
+        - "api-performance"
+      summary: "List Operation Prompts"
+      operationId: "api_performance_operation_prompts_list"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "operation_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Operation Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/PublicOperationPrompt"
+                title: "Response Api Performance Operation Prompts List"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    post:
+      tags:
+        - "api-performance"
+      summary: "Create Operation Prompt"
+      operationId: "api_performance_operation_prompts_create"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "operation_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Operation Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePublicOperationPromptRequest"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicOperationPrompt"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/api-performance/runs:
+    get:
+      tags:
+        - "api-performance"
+      summary: "List Operation Runs"
+      operationId: "api_performance_runs_list"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "operation_id"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+            minLength: 1
+            title: "Operation Id"
+        - name: "limit"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            maximum: 200
+            minimum: 1
+            default: 20
+            title: "Limit"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceRunsResponse"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/api-performance/runs/{run_id}:
+    get:
+      tags:
+        - "api-performance"
+      summary: "Retrieve Run"
+      operationId: "api_performance_runs_retrieve"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Run Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceRunResponse"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/api-performance/prompts/{prompt_id}:
+    get:
+      tags:
+        - "api-performance"
+      summary: "Retrieve Operation Prompt"
+      operationId: "api_performance_prompts_retrieve"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "prompt_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Prompt Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicOperationPrompt"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    patch:
+      tags:
+        - "api-performance"
+      summary: "Update Operation Prompt"
+      operationId: "api_performance_prompts_update"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "prompt_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Prompt Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePublicOperationPromptRequest"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicOperationPrompt"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    delete:
+      tags:
+        - "api-performance"
+      summary: "Delete Operation Prompt"
+      operationId: "api_performance_prompts_delete"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "prompt_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Prompt Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicOkResponse"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /v1/api-performance/use-cases:
+    get:
+      tags:
+        - "api-performance"
+      summary: "List Use Cases"
+      operationId: "api_performance_use_cases_list"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PublicApiPerformanceUseCase"
+                type: "array"
+                title: "Response Api Performance Use Cases List"
+      security:
+        - SapientApiKeyAuth: []
+    post:
+      tags:
+        - "api-performance"
+      summary: "Create Use Case"
+      operationId: "api_performance_use_cases_create"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePublicApiPerformanceUseCaseRequest"
+        required: true
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceUseCase"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+      security:
+        - SapientApiKeyAuth: []
+  /v1/api-performance/use-cases/{use_case_id}:
+    get:
+      tags:
+        - "api-performance"
+      summary: "Retrieve Use Case"
+      operationId: "api_performance_use_cases_retrieve"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "use_case_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Use Case Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceUseCase"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    patch:
+      tags:
+        - "api-performance"
+      summary: "Update Use Case"
+      operationId: "api_performance_use_cases_update"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "use_case_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Use Case Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePublicApiPerformanceUseCaseRequest"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicApiPerformanceUseCase"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    delete:
+      tags:
+        - "api-performance"
+      summary: "Delete Use Case"
+      operationId: "api_performance_use_cases_delete"
+      security:
+        - SapientApiKeyAuth: []
+      parameters:
+        - name: "use_case_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            title: "Use Case Id"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicOkResponse"
+        "422":
+          description: "Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    CreatePromptTopicRequest:
+      properties:
+        name:
+          type: "string"
+          maxLength: 120
+          minLength: 1
+          title: "Name"
+      type: "object"
+      required:
+        - "name"
+      title: "CreatePromptTopicRequest"
+    CreatePublicApiPerformanceOperationRequest:
+      properties:
+        method:
+          type: "string"
+          maxLength: 20
+          minLength: 1
+          title: "Method"
+        path:
+          type: "string"
+          minLength: 1
+          title: "Path"
+        description:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Description"
+        category_name:
+          anyOf:
+            - type: "string"
+              maxLength: 120
+            - type: "null"
+          title: "Category Name"
+        category_slug:
+          anyOf:
+            - type: "string"
+              maxLength: 120
+            - type: "null"
+          title: "Category Slug"
+        openapi_operation_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Openapi Operation Id"
+        interface_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Interface Id"
+      type: "object"
+      required:
+        - "method"
+        - "path"
+      title: "CreatePublicApiPerformanceOperationRequest"
+    CreatePublicApiPerformanceUseCaseRequest:
+      properties:
+        prompt:
+          type: "string"
+          minLength: 1
+          title: "Prompt"
+        category_name:
+          anyOf:
+            - type: "string"
+              maxLength: 120
+            - type: "null"
+          title: "Category Name"
+        description:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Description"
+      type: "object"
+      required:
+        - "prompt"
+      title: "CreatePublicApiPerformanceUseCaseRequest"
+    CreatePublicOperationPromptRequest:
+      properties:
+        prompt:
+          type: "string"
+          minLength: 1
+          title: "Prompt"
+        eval_type:
+          type: "string"
+          maxLength: 80
+          minLength: 1
+          title: "Eval Type"
+          default: "integration"
+        expected_behavior:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Expected Behavior"
+        graders:
+          items:
+            additionalProperties: true
+            type: "object"
+          type: "array"
+          title: "Graders"
+        reference_answer:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Reference Answer"
+      type: "object"
+      required:
+        - "prompt"
+      title: "CreatePublicOperationPromptRequest"
+    CreatePublicPromptRequest:
+      properties:
+        topic_id:
+          type: "string"
+          title: "Topic Id"
+        text:
+          type: "string"
+          minLength: 1
+          title: "Text"
+        platform_ids:
+          items:
+            type: "string"
+          type: "array"
+          title: "Platform Ids"
+      additionalProperties: false
+      type: "object"
+      required:
+        - "topic_id"
+        - "text"
+      title: "CreatePublicPromptRequest"
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: "#/components/schemas/ValidationError"
+          type: "array"
+          title: "Detail"
+      type: "object"
+      title: "HTTPValidationError"
+    ListPromptsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PublicPrompt"
+          type: "array"
+          title: "Data"
+        count:
+          type: "integer"
+          title: "Count"
+      type: "object"
+      required:
+        - "data"
+        - "count"
+      title: "ListPromptsResponse"
+    PublicApiPerformanceCategory:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        name:
+          type: "string"
+          title: "Name"
+        slug:
+          type: "string"
+          title: "Slug"
+        sort_order:
+          type: "integer"
+          title: "Sort Order"
+          default: 0
+      type: "object"
+      required:
+        - "id"
+        - "name"
+        - "slug"
+      title: "PublicApiPerformanceCategory"
+    PublicApiPerformanceEvaluationConfig:
+      properties:
+        platforms:
+          items:
+            type: "string"
+          type: "array"
+          title: "Platforms"
+        operation_ids:
+          items:
+            type: "string"
+          type: "array"
+          title: "Operation Ids"
+        use_case_ids:
+          items:
+            type: "string"
+          type: "array"
+          title: "Use Case Ids"
+        eval_types:
+          items:
+            type: "string"
+          type: "array"
+          title: "Eval Types"
+        env_var_keys:
+          items:
+            type: "string"
+          type: "array"
+          title: "Env Var Keys"
+        api_base_url:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Api Base Url"
+        framework:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Framework"
+      type: "object"
+      required:
+        - "operation_ids"
+      title: "PublicApiPerformanceEvaluationConfig"
+    PublicApiPerformanceInterface:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        type:
+          type: "string"
+          title: "Type"
+        label:
+          type: "string"
+          title: "Label"
+        operation_count:
+          type: "integer"
+          title: "Operation Count"
+          default: 0
+        created_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Created At"
+      type: "object"
+      required:
+        - "id"
+        - "type"
+        - "label"
+      title: "PublicApiPerformanceInterface"
+    PublicApiPerformanceInterfacesResponse:
+      properties:
+        interfaces:
+          items:
+            $ref: "#/components/schemas/PublicApiPerformanceInterface"
+          type: "array"
+          title: "Interfaces"
+      type: "object"
+      required:
+        - "interfaces"
+      title: "PublicApiPerformanceInterfacesResponse"
+    PublicApiPerformanceOperation:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        method:
+          type: "string"
+          title: "Method"
+        path:
+          type: "string"
+          title: "Path"
+        description:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Description"
+        category:
+          anyOf:
+            - $ref: "#/components/schemas/PublicApiPerformanceCategory"
+            - type: "null"
+        openapi_operation_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Openapi Operation Id"
+        interface_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Interface Id"
+        created_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Created At"
+      type: "object"
+      required:
+        - "id"
+        - "method"
+        - "path"
+      title: "PublicApiPerformanceOperation"
+    PublicApiPerformancePlatform:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        label:
+          type: "string"
+          title: "Label"
+        provider:
+          type: "string"
+          title: "Provider"
+        type:
+          type: "string"
+          title: "Type"
+        credits_per_eval:
+          type: "integer"
+          title: "Credits Per Eval"
+      type: "object"
+      required:
+        - "id"
+        - "label"
+        - "provider"
+        - "type"
+        - "credits_per_eval"
+      title: "PublicApiPerformancePlatform"
+    PublicApiPerformancePlatformsResponse:
+      properties:
+        text_platforms:
+          items:
+            $ref: "#/components/schemas/PublicApiPerformancePlatform"
+          type: "array"
+          title: "Text Platforms"
+        agent_platforms:
+          items:
+            $ref: "#/components/schemas/PublicApiPerformancePlatform"
+          type: "array"
+          title: "Agent Platforms"
+      type: "object"
+      required:
+        - "text_platforms"
+        - "agent_platforms"
+      title: "PublicApiPerformancePlatformsResponse"
+    PublicApiPerformanceRun:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        eval_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Eval Id"
+        eval_type:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Eval Type"
+        prompt:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Prompt"
+        expected_behavior:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Expected Behavior"
+        graders:
+          items:
+            additionalProperties: true
+            type: "object"
+          type: "array"
+          title: "Graders"
+        reference_answer:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Reference Answer"
+        platform:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Platform"
+        model:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Model"
+        model_type:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Model Type"
+        passed:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Passed"
+        score:
+          anyOf:
+            - type: "number"
+            - type: "null"
+          title: "Score"
+        failure_reasons:
+          anyOf:
+            - items:
+                type: "string"
+              type: "array"
+            - type: "null"
+          title: "Failure Reasons"
+        error_message:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Error Message"
+        latency_ms:
+          anyOf:
+            - type: "integer"
+            - type: "null"
+          title: "Latency Ms"
+        tokens_used:
+          anyOf:
+            - type: "integer"
+            - type: "null"
+          title: "Tokens Used"
+        run_date:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Run Date"
+        created_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Created At"
+      type: "object"
+      required:
+        - "id"
+      title: "PublicApiPerformanceRun"
+    PublicApiPerformanceRunDetail:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        eval_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Eval Id"
+        eval_type:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Eval Type"
+        prompt:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Prompt"
+        expected_behavior:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Expected Behavior"
+        graders:
+          items:
+            additionalProperties: true
+            type: "object"
+          type: "array"
+          title: "Graders"
+        reference_answer:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Reference Answer"
+        platform:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Platform"
+        model:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Model"
+        model_type:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Model Type"
+        passed:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Passed"
+        score:
+          anyOf:
+            - type: "number"
+            - type: "null"
+          title: "Score"
+        failure_reasons:
+          anyOf:
+            - items:
+                type: "string"
+              type: "array"
+            - type: "null"
+          title: "Failure Reasons"
+        error_message:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Error Message"
+        latency_ms:
+          anyOf:
+            - type: "integer"
+            - type: "null"
+          title: "Latency Ms"
+        tokens_used:
+          anyOf:
+            - type: "integer"
+            - type: "null"
+          title: "Tokens Used"
+        run_date:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Run Date"
+        created_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Created At"
+        raw_response:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Raw Response"
+        grader_results:
+          anyOf:
+            - additionalProperties: true
+              type: "object"
+            - type: "null"
+          title: "Grader Results"
+        api_call_log:
+          anyOf:
+            - additionalProperties: true
+              type: "object"
+            - type: "null"
+          title: "Api Call Log"
+        tool_calls:
+          anyOf:
+            - items:
+                additionalProperties: true
+                type: "object"
+              type: "array"
+            - type: "null"
+          title: "Tool Calls"
+        conversation_turns:
+          anyOf:
+            - items:
+                additionalProperties: true
+                type: "object"
+              type: "array"
+            - type: "null"
+          title: "Conversation Turns"
+        generated_files:
+          anyOf:
+            - additionalProperties: true
+              type: "object"
+            - type: "null"
+          title: "Generated Files"
+        execution_stdout:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Execution Stdout"
+        execution_stderr:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Execution Stderr"
+        exit_code:
+          anyOf:
+            - type: "integer"
+            - type: "null"
+          title: "Exit Code"
+      type: "object"
+      required:
+        - "id"
+      title: "PublicApiPerformanceRunDetail"
+    PublicApiPerformanceRunResponse:
+      properties:
+        operation:
+          $ref: "#/components/schemas/PublicApiPerformanceOperation"
+        data:
+          $ref: "#/components/schemas/PublicApiPerformanceRunDetail"
+      type: "object"
+      required:
+        - "operation"
+        - "data"
+      title: "PublicApiPerformanceRunResponse"
+    PublicApiPerformanceRunsResponse:
+      properties:
+        operation:
+          $ref: "#/components/schemas/PublicApiPerformanceOperation"
+        data:
+          items:
+            $ref: "#/components/schemas/PublicApiPerformanceRun"
+          type: "array"
+          title: "Data"
+        meta:
+          $ref: "#/components/schemas/PublicListMeta"
+      type: "object"
+      required:
+        - "operation"
+        - "data"
+        - "meta"
+      title: "PublicApiPerformanceRunsResponse"
+    PublicApiPerformanceUseCase:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        prompt:
+          type: "string"
+          title: "Prompt"
+        description:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Description"
+        category:
+          anyOf:
+            - $ref: "#/components/schemas/PublicApiPerformanceCategory"
+            - type: "null"
+        created_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Created At"
+      type: "object"
+      required:
+        - "id"
+        - "prompt"
+      title: "PublicApiPerformanceUseCase"
+    PublicCostEstimateResponse:
+      properties:
+        estimates:
+          additionalProperties:
+            $ref: "#/components/schemas/PublicPlatformCreditEstimate"
+          type: "object"
+          title: "Estimates"
+        total_credits:
+          type: "integer"
+          title: "Total Credits"
+      type: "object"
+      required:
+        - "estimates"
+        - "total_credits"
+      title: "PublicCostEstimateResponse"
+    PublicListMeta:
+      properties:
+        limit:
+          type: "integer"
+          title: "Limit"
+        count:
+          type: "integer"
+          title: "Count"
+      type: "object"
+      required:
+        - "limit"
+        - "count"
+      title: "PublicListMeta"
+    PublicOkResponse:
+      properties:
+        ok:
+          type: "boolean"
+          title: "Ok"
+      type: "object"
+      required:
+        - "ok"
+      title: "PublicOkResponse"
+    PublicOperationPrompt:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        operation_id:
+          type: "string"
+          title: "Operation Id"
+        eval_type:
+          type: "string"
+          title: "Eval Type"
+        prompt:
+          type: "string"
+          title: "Prompt"
+        expected_behavior:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Expected Behavior"
+        graders:
+          items:
+            additionalProperties: true
+            type: "object"
+          type: "array"
+          title: "Graders"
+        reference_answer:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Reference Answer"
+        enabled:
+          type: "boolean"
+          title: "Enabled"
+          default: true
+        created_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Created At"
+      type: "object"
+      required:
+        - "id"
+        - "operation_id"
+        - "eval_type"
+        - "prompt"
+      title: "PublicOperationPrompt"
+    PublicPlatformCreditEstimate:
+      properties:
+        credits_per_eval:
+          type: "integer"
+          title: "Credits Per Eval"
+        eval_count:
+          type: "integer"
+          title: "Eval Count"
+        total_credits:
+          type: "integer"
+          title: "Total Credits"
+      type: "object"
+      required:
+        - "credits_per_eval"
+        - "eval_count"
+        - "total_credits"
+      title: "PublicPlatformCreditEstimate"
+    PublicPrompt:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        topic_id:
+          type: "string"
+          title: "Topic Id"
+        text:
+          type: "string"
+          title: "Text"
+        language_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Language Id"
+        region_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Region Id"
+        is_active:
+          type: "boolean"
+          title: "Is Active"
+          default: true
+        status:
+          anyOf:
+            - type: "string"
+              enum:
+                - "active"
+                - "inactive"
+                - "archived"
+            - type: "null"
+          title: "Status"
+        topic:
+          anyOf:
+            - $ref: "#/components/schemas/PublicPromptTopic"
+            - type: "null"
+        platforms:
+          items:
+            $ref: "#/components/schemas/PublicPromptPlatform"
+          type: "array"
+          title: "Platforms"
+        tags:
+          items:
+            $ref: "#/components/schemas/PublicPromptTag"
+          type: "array"
+          title: "Tags"
+        created_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Created At"
+        updated_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Updated At"
+      type: "object"
+      required:
+        - "id"
+        - "topic_id"
+        - "text"
+      title: "PublicPrompt"
+    PublicPromptCostEstimateResponse:
+      properties:
+        estimates:
+          additionalProperties:
+            $ref: "#/components/schemas/PublicPromptPlatformCostEstimate"
+          type: "object"
+          title: "Estimates"
+        total_credits:
+          type: "integer"
+          title: "Total Credits"
+      type: "object"
+      required:
+        - "estimates"
+        - "total_credits"
+      title: "PublicPromptCostEstimateResponse"
+    PublicPromptPlatform:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        name:
+          type: "string"
+          title: "Name"
+      type: "object"
+      required:
+        - "id"
+        - "name"
+      title: "PublicPromptPlatform"
+    PublicPromptPlatformCatalogItem:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        name:
+          type: "string"
+          title: "Name"
+        model:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Model"
+        credits_per_prompt:
+          type: "integer"
+          title: "Credits Per Prompt"
+      type: "object"
+      required:
+        - "id"
+        - "name"
+        - "credits_per_prompt"
+      title: "PublicPromptPlatformCatalogItem"
+    PublicPromptPlatformCostEstimate:
+      properties:
+        credits_per_prompt:
+          type: "integer"
+          title: "Credits Per Prompt"
+        prompt_count:
+          type: "integer"
+          title: "Prompt Count"
+        total_credits:
+          type: "integer"
+          title: "Total Credits"
+      type: "object"
+      required:
+        - "credits_per_prompt"
+        - "prompt_count"
+        - "total_credits"
+      title: "PublicPromptPlatformCostEstimate"
+    PublicPromptTag:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        name:
+          type: "string"
+          title: "Name"
+        created_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Created At"
+        updated_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Updated At"
+      type: "object"
+      required:
+        - "id"
+        - "name"
+      title: "PublicPromptTag"
+    PublicPromptTopic:
+      properties:
+        id:
+          type: "string"
+          title: "Id"
+        name:
+          type: "string"
+          title: "Name"
+        created_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Created At"
+        updated_at:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Updated At"
+      type: "object"
+      required:
+        - "id"
+        - "name"
+      title: "PublicPromptTopic"
+    UpdatePromptTopicRequest:
+      properties:
+        name:
+          type: "string"
+          maxLength: 120
+          minLength: 1
+          title: "Name"
+      type: "object"
+      required:
+        - "name"
+      title: "UpdatePromptTopicRequest"
+    UpdatePublicApiPerformanceEvaluationConfigRequest:
+      properties:
+        platforms:
+          anyOf:
+            - items:
+                type: "string"
+              type: "array"
+            - type: "null"
+          title: "Platforms"
+        operation_ids:
+          anyOf:
+            - items:
+                type: "string"
+              type: "array"
+            - type: "null"
+          title: "Operation Ids"
+        use_case_ids:
+          anyOf:
+            - items:
+                type: "string"
+              type: "array"
+            - type: "null"
+          title: "Use Case Ids"
+        eval_types:
+          anyOf:
+            - items:
+                type: "string"
+              type: "array"
+            - type: "null"
+          title: "Eval Types"
+        env_vars:
+          anyOf:
+            - additionalProperties:
+                type: "string"
+              type: "object"
+            - type: "null"
+          title: "Env Vars"
+        interface_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Interface Id"
+        api_base_url:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Api Base Url"
+        framework:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Framework"
+      type: "object"
+      title: "UpdatePublicApiPerformanceEvaluationConfigRequest"
+    UpdatePublicApiPerformanceOperationRequest:
+      properties:
+        method:
+          anyOf:
+            - type: "string"
+              maxLength: 20
+              minLength: 1
+            - type: "null"
+          title: "Method"
+        path:
+          anyOf:
+            - type: "string"
+              minLength: 1
+            - type: "null"
+          title: "Path"
+        description:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Description"
+        category_name:
+          anyOf:
+            - type: "string"
+              maxLength: 120
+            - type: "null"
+          title: "Category Name"
+        category_slug:
+          anyOf:
+            - type: "string"
+              maxLength: 120
+            - type: "null"
+          title: "Category Slug"
+        openapi_operation_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Openapi Operation Id"
+        interface_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Interface Id"
+      type: "object"
+      title: "UpdatePublicApiPerformanceOperationRequest"
+    UpdatePublicApiPerformanceUseCaseRequest:
+      properties:
+        prompt:
+          anyOf:
+            - type: "string"
+              minLength: 1
+            - type: "null"
+          title: "Prompt"
+        category_name:
+          anyOf:
+            - type: "string"
+              maxLength: 120
+            - type: "null"
+          title: "Category Name"
+        description:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Description"
+      type: "object"
+      title: "UpdatePublicApiPerformanceUseCaseRequest"
+    UpdatePublicOperationPromptRequest:
+      properties:
+        prompt:
+          anyOf:
+            - type: "string"
+              minLength: 1
+            - type: "null"
+          title: "Prompt"
+        expected_behavior:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Expected Behavior"
+        graders:
+          anyOf:
+            - items:
+                additionalProperties: true
+                type: "object"
+              type: "array"
+            - type: "null"
+          title: "Graders"
+        reference_answer:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Reference Answer"
+        enabled:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Enabled"
+      type: "object"
+      title: "UpdatePublicOperationPromptRequest"
+    UpdatePublicPromptRequest:
+      properties:
+        text:
+          anyOf:
+            - type: "string"
+              minLength: 1
+            - type: "null"
+          title: "Text"
+        topic_id:
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Topic Id"
+        platform_ids:
+          anyOf:
+            - items:
+                type: "string"
+              type: "array"
+            - type: "null"
+          title: "Platform Ids"
+        is_active:
+          anyOf:
+            - type: "boolean"
+            - type: "null"
+          title: "Is Active"
+      additionalProperties: false
+      type: "object"
+      title: "UpdatePublicPromptRequest"
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: "string"
+              - type: "integer"
+          type: "array"
+          title: "Location"
+        msg:
+          type: "string"
+          title: "Message"
+        type:
+          type: "string"
+          title: "Error Type"
+      type: "object"
+      required:
+        - "loc"
+        - "msg"
+        - "type"
+      title: "ValidationError"
+  securitySchemes:
+    SapientApiKeyAuth:
+      type: "apiKey"
+      in: "header"
+      name: "X-Sapient-Api-Key"

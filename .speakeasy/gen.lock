@@ -5,14 +5,14 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.764.1
   generationVersion: 2.885.1
-  releaseVersion: 0.4.5
-  configChecksum: f4b278fc652a7b1846ddeaa68d1aab32
+  releaseVersion: 0.4.6
+  configChecksum: cc45a25ac1c293fb1295ef2c3cbed86f
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
 persistentEdits:
-  generation_id: 7da6f079-8afd-4dba-ae01-75e6694eaa7e
-  pristine_commit_hash: 3f167347284eed536ead1a067c2fd9fbe15dc04b
-  pristine_tree_hash: 92c4dddcfa126d29a2881650c484ec6540bf1739
+  generation_id: 946e4123-e272-4fab-8dd7-04a2bd863634
+  pristine_commit_hash: 37eee1bb88bce447546dcc2ab188d4d105349eb2
+  pristine_tree_hash: 3a87ebc1806b46b5164c291ba440cb76a10435da
 features:
   cli:
     constsAndDefaults: 0.0.0
@@ -48,8 +48,8 @@ trackedFiles:
     pristine_git_object: 6811933ec0d75fbd4c86189fab59b5c8cb8b1c5c
   go.mod:
     id: c47645c391ad
-    last_write_checksum: sha1:f90230fcfbc7e148d6d7682052eac7624604b630
-    pristine_git_object: a467c1cf7beace5dec904b85c547111a3185949a
+    last_write_checksum: sha1:0a841a777ff0ab38f8b8ff1097cc953eda0cd997
+    pristine_git_object: ebb9ccbf8026d506ee63de21d963a91a7d11ecea
   internal/cli/apiperformance/apiperformanceevaluationconfigretrieve.go:
     id: 3e074d1da66f
     last_write_checksum: sha1:fff737eef95d1272d6b32410fa1f08d4112a3a60
@@ -220,8 +220,8 @@ trackedFiles:
     pristine_git_object: d52242fa325a1904a2a0a842907e68ca19ab7ca4
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:aaef2e68877b7b3add541760b1e989e60685dc15
-    pristine_git_object: e8cd385443ef84e90b6732c8ad616737ab704e38
+    last_write_checksum: sha1:ac12f1e535efe68ed85b2a06e64dd21a4a7e61a2
+    pristine_git_object: 4327a4dc77bc7ae0ff404a6f96e0264485779e5d
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:411c938a4b1868eb0578a59418ef52a1f043743f
@@ -712,8 +712,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:16c5daa5b9970f6ec4dc6cd424a826b6fdc8a0ac
-    pristine_git_object: 68acc6ea3973deeba18e67d50ff265c2b4487474
+    last_write_checksum: sha1:60c5827cf0c86f86f3b562c4b9c66bdd56e5313f
+    pristine_git_object: a6df46928465104b90d1b641a4ad5a7be53455e7
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:b0a1bedf23991a0556075344feb3515385c45a2b
