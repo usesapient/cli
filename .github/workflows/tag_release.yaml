@@ -17,7 +17,8 @@ jobs:
   tag:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.CLI_GITHUB_TOKEN }}
+      GH_TOKEN: ${{ github.token }}
+      TAG_PUSH_TOKEN: ${{ secrets.CLI_GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -48,7 +49,7 @@ jobs:
 
       - name: Verify release token
         run: |
-          if [ -z "${GH_TOKEN:-}" ]; then
+          if [ -z "${TAG_PUSH_TOKEN:-}" ]; then
             echo "::error::CLI_GITHUB_TOKEN is required so the pushed tag triggers the Release workflow"
             exit 1
           fi
@@ -76,7 +77,7 @@ jobs:
           tag="${{ steps.version.outputs.tag }}"
           git fetch --tags origin
           if git ls-remote --exit-code --tags origin "refs/tags/${tag}" >/dev/null 2>&1; then
-            if gh release view "${tag}" >/dev/null 2>&1; then
+            if gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${tag}" >/dev/null 2>&1; then
               echo "Release ${tag} already exists; nothing to tag."
               exit 0
             fi
