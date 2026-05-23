@@ -81,7 +81,7 @@ func TestRunUpdateCheckUsesFreshCacheWithoutNetwork(t *testing.T) {
 
 	require.True(t, notified)
 	require.Contains(t, stderr.String(), "A new Sapient CLI version is available: "+generatedcli.Version+" -> 9.9.9")
-	require.Contains(t, stderr.String(), "Update with: brew upgrade sapient")
+	require.Contains(t, stderr.String(), "Update with: brew update && brew upgrade sapient")
 	cached, ok := readUpdateCheckCache(cachePath)
 	require.True(t, ok)
 	require.Equal(t, updateCheckNow(), cached.NotifiedAt)

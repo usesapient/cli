@@ -175,7 +175,7 @@ func writeUpdateNotification(latestVersion string) bool {
 	}
 	fmt.Fprintf(
 		updateCheckErrWriter,
-		"A new Sapient CLI version is available: %s -> %s\nUpdate with: brew upgrade sapient\n",
+		"A new Sapient CLI version is available: %s -> %s\nUpdate with: brew update && brew upgrade sapient\n",
 		generatedcli.Version,
 		latestVersion,
 	)

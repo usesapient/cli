@@ -32,7 +32,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 cli:
-  version: 0.5.3
+  version: 0.5.4
   additionalDependencies: {}
   cliName: sapient
   distribution:
