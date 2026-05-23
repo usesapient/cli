@@ -177,41 +177,44 @@ Configuration is stored in `~/.config/sapient/config.yaml`.
 ### [prompts](docs/sapient_prompts.md)
 
 * [`list`](docs/sapient_prompts_list.md) - List Prompts
-* [`create`](docs/sapient_prompts_create.md) - Create Prompt
-* [`topics-list`](docs/sapient_prompts_topics-list.md) - List Topics
+* [`create`](docs/sapient_prompts_create.md) - Create Prompts
+* [`config-retrieve`](docs/sapient_prompts_config-retrieve.md) - Retrieve Prompt Config
 * [`topics-create`](docs/sapient_prompts_topics-create.md) - Create Topic
 * [`topics-update`](docs/sapient_prompts_topics-update.md) - Update Topic
 * [`topics-delete`](docs/sapient_prompts_topics-delete.md) - Delete Topic
-* [`platforms-list`](docs/sapient_prompts_platforms-list.md) - List Platforms
-* [`estimate-cost`](docs/sapient_prompts_estimate-cost.md) - Estimate Prompt Cost
+* [`actions-list`](docs/sapient_prompts_actions-list.md) - List Prompt Actionables
 * [`retrieve`](docs/sapient_prompts_retrieve.md) - Retrieve Prompt
 * [`update`](docs/sapient_prompts_update.md) - Update Prompt
 * [`delete`](docs/sapient_prompts_delete.md) - Delete Prompt
 
 ### [api-performance](docs/sapient_api-performance.md)
 
-* [`platforms-list`](docs/sapient_api-performance_platforms-list.md) - List Platforms
-* [`platforms-estimate-cost`](docs/sapient_api-performance_platforms-estimate-cost.md) - Estimate Platform Cost
-* [`interfaces-list`](docs/sapient_api-performance_interfaces-list.md) - List Interfaces
-* [`evaluation-config-retrieve`](docs/sapient_api-performance_evaluation-config-retrieve.md) - Retrieve Evaluation Config
-* [`evaluation-config-update`](docs/sapient_api-performance_evaluation-config-update.md) - Update Evaluation Config
-* [`operations-list`](docs/sapient_api-performance_operations-list.md) - List Operations
-* [`operations-create`](docs/sapient_api-performance_operations-create.md) - Create Operation
-* [`operations-retrieve`](docs/sapient_api-performance_operations-retrieve.md) - Retrieve Operation
-* [`operations-update`](docs/sapient_api-performance_operations-update.md) - Update Operation
-* [`operations-delete`](docs/sapient_api-performance_operations-delete.md) - Delete Operation
-* [`operation-prompts-list`](docs/sapient_api-performance_operation-prompts-list.md) - List Operation Prompts
-* [`operation-prompts-create`](docs/sapient_api-performance_operation-prompts-create.md) - Create Operation Prompt
-* [`runs-list`](docs/sapient_api-performance_runs-list.md) - List Operation Runs
-* [`runs-retrieve`](docs/sapient_api-performance_runs-retrieve.md) - Retrieve Run
-* [`prompts-retrieve`](docs/sapient_api-performance_prompts-retrieve.md) - Retrieve Operation Prompt
-* [`prompts-update`](docs/sapient_api-performance_prompts-update.md) - Update Operation Prompt
-* [`prompts-delete`](docs/sapient_api-performance_prompts-delete.md) - Delete Operation Prompt
-* [`use-cases-list`](docs/sapient_api-performance_use-cases-list.md) - List Use Cases
-* [`use-cases-create`](docs/sapient_api-performance_use-cases-create.md) - Create Use Case
-* [`use-cases-retrieve`](docs/sapient_api-performance_use-cases-retrieve.md) - Retrieve Use Case
-* [`use-cases-update`](docs/sapient_api-performance_use-cases-update.md) - Update Use Case
-* [`use-cases-delete`](docs/sapient_api-performance_use-cases-delete.md) - Delete Use Case
+* [`results-retrieve`](docs/sapient_api-performance_results-retrieve.md) - Retrieve Results
+* [`runs-list`](docs/sapient_api-performance_runs-list.md) - List Eval Runs
+* [`runs-retrieve`](docs/sapient_api-performance_runs-retrieve.md) - Retrieve Eval Run
+* [`diagnose`](docs/sapient_api-performance_diagnose.md) - Diagnose Eval Runs
+* [`config-retrieve`](docs/sapient_api-performance_config-retrieve.md) - Retrieve Eval Config
+* [`config-update`](docs/sapient_api-performance_config-update.md) - Update Eval Config
+* [`sources-list`](docs/sapient_api-performance_sources-list.md) - List Sources
+* [`skills-list`](docs/sapient_api-performance_skills-list.md) - List Skills
+* [`evals-list`](docs/sapient_api-performance_evals-list.md) - List Eval Definitions
+* [`evals-retrieve`](docs/sapient_api-performance_evals-retrieve.md) - Retrieve Eval Definition
+* [`evals-update`](docs/sapient_api-performance_evals-update.md) - Update Eval Definition
+* [`custom-evals-list`](docs/sapient_api-performance_custom-evals-list.md) - List Custom Evals
+* [`custom-evals-create`](docs/sapient_api-performance_custom-evals-create.md) - Create Custom Eval
+* [`custom-evals-retrieve`](docs/sapient_api-performance_custom-evals-retrieve.md) - Retrieve Custom Eval
+* [`custom-evals-update`](docs/sapient_api-performance_custom-evals-update.md) - Update Custom Eval
+* [`custom-evals-delete`](docs/sapient_api-performance_custom-evals-delete.md) - Delete Custom Eval
+* [`starter-projects-list`](docs/sapient_api-performance_starter-projects-list.md) - List Starter Projects
+* [`starter-projects-create`](docs/sapient_api-performance_starter-projects-create.md) - Create Starter Project
+* [`starter-projects-retrieve`](docs/sapient_api-performance_starter-projects-retrieve.md) - Retrieve Starter Project
+* [`starter-projects-update`](docs/sapient_api-performance_starter-projects-update.md) - Update Starter Project
+* [`starter-projects-delete`](docs/sapient_api-performance_starter-projects-delete.md) - Delete Starter Project
+* [`actions-list`](docs/sapient_api-performance_actions-list.md) - List Actions
+* [`actions-refresh`](docs/sapient_api-performance_actions-refresh.md) - Refresh Actions
+* [`actions-retrieve`](docs/sapient_api-performance_actions-retrieve.md) - Retrieve Action
+* [`actions-update`](docs/sapient_api-performance_actions-update.md) - Update Action
+* [`actions-verify`](docs/sapient_api-performance_actions-verify.md) - Verify Action
 
 </details>
 <!-- End Available Commands [operations] -->

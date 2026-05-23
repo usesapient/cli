@@ -16,22 +16,20 @@ import (
 )
 
 var promptsCreateCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "topic-id", FieldPath: "TopicID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "text", FieldPath: "Text", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "platform-ids", Shorthand: "p", FieldPath: "PlatformIds", Kind: flagutil.FlagKindStringArray, Optional: true, Description: "list of values"},
+	{FlagName: "prompts", Shorthand: "p", FieldPath: "Prompts", Kind: flagutil.FlagKindJSON, Required: true, Annotations: `json:"prompts"`, Description: "[required]"},
 }
 
 // initPromptsCreateCmd initializes the prompts-create command.
 func initPromptsCreateCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "create",
-		Short:   "Create Prompt",
-		Long:    "Create Prompt",
-		Example: "  sapient prompts create --topic-id <id> --text <value>",
+		Short:   "Create Prompts",
+		Long:    "Create Prompts",
+		Example: "  sapient prompts create --prompts '[{\"topic_id\":\"<id>\",\"text\":\"<value>\"}]'",
 		RunE:    runPromptsCreateCmd,
 	}
 	flagutil.RegisterFlags(cmd, promptsCreateCmdMeta)
-	if err := flagutil.ValidateMeta[components.CreatePublicPromptRequest](promptsCreateCmdMeta); err != nil {
+	if err := flagutil.ValidateMeta[components.CreatePublicPromptsBatchRequest](promptsCreateCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for prompts-create: %w", err)
 	}
 	cmd.Flags().String("body", "", "Request body as JSON (alternative to individual flags). Can also be provided via stdin.")
@@ -49,7 +47,7 @@ func runPromptsCreateCmd(cmd *cobra.Command, args []string) error {
 			return err
 		}
 	}
-	request, err := flagutil.BuildRequest[components.CreatePublicPromptRequest](cmd, promptsCreateCmdMeta, "", "body")
+	request, err := flagutil.BuildRequest[components.CreatePublicPromptsBatchRequest](cmd, promptsCreateCmdMeta, "", "body")
 	if err != nil {
 		return err
 	}

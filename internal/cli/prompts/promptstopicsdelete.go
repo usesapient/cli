@@ -16,6 +16,7 @@ import (
 
 var promptsTopicsDeleteCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "topic-id", Shorthand: "t", FieldPath: "TopicID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
+	{FlagName: "archive-prompts", Shorthand: "a", FieldPath: "ArchivePrompts", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "boolean flag"},
 }
 
 // initPromptsTopicsDeleteCmd initializes the prompts-topics-delete command.

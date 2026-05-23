@@ -22,11 +22,11 @@ var apiPerformanceRunsRetrieveCmdMeta = []flagutil.FlagMeta{
 func initApiPerformanceRunsRetrieveCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "runs-retrieve",
-		Short:   "Retrieve Run",
-		Long:    "Retrieve Run",
+		Short:   "Retrieve Eval Run",
+		Long:    "Retrieve Eval Run",
 		Example: "  sapient api-performance runs-retrieve --run-id <id>",
 		RunE:    runApiPerformanceRunsRetrieveCmd,
-		Aliases: []string{"rr"},
+		Aliases: []string{"rre"},
 	}
 	flagutil.RegisterFlags(cmd, apiPerformanceRunsRetrieveCmdMeta)
 	if err := flagutil.ValidateMeta[operations.APIPerformanceRunsRetrieveRequest](apiPerformanceRunsRetrieveCmdMeta); err != nil {
