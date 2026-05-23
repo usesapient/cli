@@ -5,7 +5,7 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.764.1
   generationVersion: 2.885.1
-  releaseVersion: 0.5.5
+  releaseVersion: 0.5.6
   configChecksum: 2acb01c1984700fbfc49c1bf0edfc087
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
@@ -234,7 +234,7 @@ trackedFiles:
   internal/cli/version.go:
     id: 7b0665492f72
     last_write_checksum: sha1:11884feac8d7d610bc5ab187f0c455ed16d2c4b9
-    pristine_git_object: 36c2b81a9d4926b9c9f01f6cb1f088a65451f81f
+    pristine_git_object: bd08f78e159fe3b96ecda564341f2a1627082f0f
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:f0b47f0b4083f9abafc5df2e9123f3f7f85299de

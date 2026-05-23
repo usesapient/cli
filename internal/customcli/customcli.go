@@ -19,6 +19,9 @@ const (
 	simpleCLIAPIKeyEnv = "CLI_API_KEY"
 	legacyAPIKeyEnv    = "SAPIENT_API_KEY"
 	canonicalAPIKeyEnv = "CLI_SAPIENT_API_KEY_AUTH"
+
+	cliShortDescription = "Manage Sapient prompts, custom evals, and API Performance"
+	cliLongDescription  = "Manage Sapient prompts, custom evals, and API Performance from the command line."
 )
 
 type commandMove struct {
@@ -69,6 +72,7 @@ func NewRootCommand() (*cobra.Command, error) {
 	if err != nil {
 		return nil, err
 	}
+	applyCLIMetadata(root)
 	if err := Shape(root); err != nil {
 		return nil, err
 	}
@@ -133,6 +137,11 @@ func Shape(root *cobra.Command) error {
 		destParent.AddCommand(cmd)
 	}
 	return nil
+}
+
+func applyCLIMetadata(root *cobra.Command) {
+	root.Short = cliShortDescription
+	root.Long = cliLongDescription
 }
 
 func RejectPositionalArgs(root *cobra.Command) {
