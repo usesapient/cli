@@ -33,3 +33,9 @@ Based on:
 - Keep the root usage schema version aligned with the runtime CLI version.
 ### Generated
 - [cli v0.4.5] .
+
+## 2026-05-23 11:42:11
+### Changes
+- Add shaped command grouping and upgrade notifications.
+### Generated
+- [cli v0.4.7] .

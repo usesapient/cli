@@ -77,7 +77,11 @@ func Execute() error {
 		return runExplorer(root)
 	}
 
-	return root.Execute()
+	if err := root.Execute(); err != nil {
+		return err
+	}
+	runUpdateCheck(os.Args)
+	return nil
 }
 
 func Shape(root *cobra.Command) error {
