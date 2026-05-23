@@ -1,10 +1,25 @@
 package customcli
 
 import (
+	"bytes"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 )
+
+func TestNewRootCommandUsesCLIMetadata(t *testing.T) {
+	root, err := NewRootCommand()
+	require.NoError(t, err)
+
+	require.Equal(t, cliShortDescription, root.Short)
+	require.Equal(t, cliLongDescription, root.Long)
+	require.NotContains(t, root.Short, "Sapient Public API")
+
+	var usage bytes.Buffer
+	require.NoError(t, EmitUsage(root, root, &usage))
+	require.Contains(t, usage.String(), `about "`+cliShortDescription+`"`)
+	require.NotContains(t, usage.String(), "Sapient Public API")
+}
 
 func TestNewRootCommandShapesCurrentGeneratedCommands(t *testing.T) {
 	root, err := NewRootCommand()

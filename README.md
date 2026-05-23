@@ -1,6 +1,6 @@
 # sapient
 
-Command-line interface for the *Sapient Public* API.
+Command-line interface for Sapient.
 
 [![Built by Speakeasy](https://img.shields.io/badge/Built_by-SPEAKEASY-374151?style=for-the-badge&labelColor=f3f4f6)](https://www.speakeasy.com/?utm_source=github-com/usesapient/cli&utm_campaign=cli)
 [![License: MIT](https://img.shields.io/badge/LICENSE_//_MIT-3b5bdb?style=for-the-badge&labelColor=eff6ff)](https://opensource.org/licenses/MIT)
@@ -8,7 +8,7 @@ Command-line interface for the *Sapient Public* API.
 <!-- Start Summary [summary] -->
 ## Summary
 
-Sapient Public API: Public API for Sapient CLI and external integrations.
+Manage Sapient prompts, custom evals, and API Performance.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
