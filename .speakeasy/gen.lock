@@ -234,7 +234,7 @@ trackedFiles:
   internal/cli/version.go:
     id: 7b0665492f72
     last_write_checksum: sha1:765c52a5fcfd8dcb9fc049306ae8ec7e80320c0a
-    pristine_git_object: 46fbd9b2fe094c24096560298a0c62b0bfcd503b
+    pristine_git_object: 7222fde522fc1cc8ed3551747a03b2b63b385e89
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:025da574178f65f9f5f0b398d089b307b4a67907
