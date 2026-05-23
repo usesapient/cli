@@ -3,7 +3,8 @@
   "info": {
     "title": "Sapient Public API",
     "description": "Public API for Sapient CLI and external integrations.",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-sapient-cli-generation-check": "2026-05-23"
   },
   "servers": [
     {

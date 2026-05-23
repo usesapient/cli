@@ -9,8 +9,8 @@ sources:
             - 1.0.0
     sapient-public-api:
         sourceNamespace: sapient-public-api
-        sourceRevisionDigest: sha256:cdcc72a004b9c08ba0e71cbaa089e45da1fbcfd60d26fc689db2773ec7d89348
-        sourceBlobDigest: sha256:a4d2c0597fffa50eb503a4b56bd3ed2b55fac4f90adeb524fa06f0fc08f745d7
+        sourceRevisionDigest: sha256:754de61d3d8b9e661fea804a9b4ef15bf56677f4084ada203c9d44fa6c48e5a3
+        sourceBlobDigest: sha256:b73889126e3ace5a6569b1c07715e8c720484e3c3cfadc4203ea47e8c36e4b43
         tags:
             - latest
             - 1.0.0
@@ -18,8 +18,8 @@ targets:
     sapient:
         source: sapient-public-api
         sourceNamespace: sapient-public-api
-        sourceRevisionDigest: sha256:cdcc72a004b9c08ba0e71cbaa089e45da1fbcfd60d26fc689db2773ec7d89348
-        sourceBlobDigest: sha256:a4d2c0597fffa50eb503a4b56bd3ed2b55fac4f90adeb524fa06f0fc08f745d7
+        sourceRevisionDigest: sha256:754de61d3d8b9e661fea804a9b4ef15bf56677f4084ada203c9d44fa6c48e5a3
+        sourceBlobDigest: sha256:b73889126e3ace5a6569b1c07715e8c720484e3c3cfadc4203ea47e8c36e4b43
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
