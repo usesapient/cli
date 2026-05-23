@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: b4e9b595-9805-48d3-93ca-ae7b2d7fd331
 management:
-  docChecksum: 4754c62b5c348a3972851324a2b50a95
+  docChecksum: 5aa1386f5191729071f7659506787f6c
   docVersion: 1.0.0
   speakeasyVersion: 1.764.1
   generationVersion: 2.885.1
-  releaseVersion: 0.4.1
-  configChecksum: 2d345eb9202878c08e73566403a06d12
+  releaseVersion: 0.4.2
+  configChecksum: f4b278fc652a7b1846ddeaa68d1aab32
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
 persistentEdits:
-  generation_id: 1137da7e-b476-44ed-a907-9a1cab36faf1
-  pristine_commit_hash: f93d75adcf6740d0418382928ed39a9b3314e556
-  pristine_tree_hash: 3939f8d4342887938630a0c2486da4bf390dee94
+  generation_id: 7da6f079-8afd-4dba-ae01-75e6694eaa7e
+  pristine_commit_hash: 3f167347284eed536ead1a067c2fd9fbe15dc04b
+  pristine_tree_hash: 92c4dddcfa126d29a2881650c484ec6540bf1739
 features:
   cli:
     constsAndDefaults: 0.0.0
@@ -220,8 +220,8 @@ trackedFiles:
     pristine_git_object: d52242fa325a1904a2a0a842907e68ca19ab7ca4
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:d94eaafd7fff09d97b6705ed9e5c0116d7630d1f
-    pristine_git_object: ee470bc883cb48865fe680bf8df9b712cffc3e79
+    last_write_checksum: sha1:aaef2e68877b7b3add541760b1e989e60685dc15
+    pristine_git_object: e8cd385443ef84e90b6732c8ad616737ab704e38
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:411c938a4b1868eb0578a59418ef52a1f043743f
@@ -712,8 +712,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:822abbb03d693464bad661285dc939fd92fc34c6
-    pristine_git_object: 56b3e04c3d6b9bde28ac0a9c2ce858da16c0335c
+    last_write_checksum: sha1:16c5daa5b9970f6ec4dc6cd424a826b6fdc8a0ac
+    pristine_git_object: 68acc6ea3973deeba18e67d50ff265c2b4487474
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:b0a1bedf23991a0556075344feb3515385c45a2b
