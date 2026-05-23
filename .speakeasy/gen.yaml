@@ -37,8 +37,8 @@ cli:
   cliName: sapient
   distribution:
     homebrew:
-      enabled: false
-      tap: ""
+      enabled: true
+      tap: usesapient/homebrew-tools
     nfpm:
       enabled: false
       formats: deb,rpm
@@ -53,7 +53,7 @@ cli:
       repositoryOwner: ""
   enableCustomCodeRegions: false
   envVarPrefix: CLI
-  generateRelease: false
+  generateRelease: true
   imports:
     option: openapi
     paths:
