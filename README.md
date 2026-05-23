@@ -135,7 +135,7 @@ Set credentials via environment variables:
 
 | Variable | Description |
 |----------|-------------|
-| `SAPIENT_SAPIENT_API_KEY_AUTH` | API Key |
+| `CLI_SAPIENT_API_KEY_AUTH` | API Key |
 
 ### 3. OS Keychain (recommended for workstations)
 

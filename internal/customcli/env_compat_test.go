@@ -19,7 +19,18 @@ func TestInstallEnvCompatibilityAliasesCopiesLegacyAPIKey(t *testing.T) {
 	require.Equal(t, "legacy-secret", os.Getenv(canonicalAPIKeyEnv))
 }
 
+func TestInstallEnvCompatibilityAliasesCopiesSimpleCLIAPIKey(t *testing.T) {
+	t.Setenv(simpleCLIAPIKeyEnv, "simple-cli-secret")
+	t.Setenv(legacyAPIKeyEnv, "legacy-secret")
+	t.Setenv(canonicalAPIKeyEnv, "")
+
+	installEnvCompatibilityAliases()
+
+	require.Equal(t, "simple-cli-secret", os.Getenv(canonicalAPIKeyEnv))
+}
+
 func TestInstallEnvCompatibilityAliasesKeepsCanonicalAPIKey(t *testing.T) {
+	t.Setenv(simpleCLIAPIKeyEnv, "simple-cli-secret")
 	t.Setenv(legacyAPIKeyEnv, "legacy-secret")
 	t.Setenv(canonicalAPIKeyEnv, "canonical-secret")
 

@@ -51,3 +51,9 @@ Based on:
 - Accept the legacy `SAPIENT_API_KEY` environment variable as an API key alias.
 ### Generated
 - [cli v0.4.9] .
+
+## 2026-05-23 13:08:19
+### Changes
+- Change the generated CLI environment variable prefix from `SAPIENT` to `CLI`.
+### Generated
+- [cli v0.4.10] .

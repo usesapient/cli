@@ -46,7 +46,7 @@ Use the configure command for both authentication and global parameters.`,
 
 Sources are shown as:
   [flag]    - Set via command line flag
-  [env]     - Set via environment variable (SAPIENT_*)
+  [env]     - Set via environment variable (CLI_*)
   [keyring] - Set via OS keychain (stored by login/configure command)
   [config]  - Set via config file (~/.config/sapient/config.yaml)
   [unset]   - Not configured
@@ -75,7 +75,7 @@ func runAuthLoginCmd(cmd *cobra.Command, args []string) error {
 			"auth_login_blocked",
 			"the 'auth login' command is interactive and cannot be used in agent mode",
 			[]string{
-				fmt.Sprintf("Set credentials via environment variables (prefix: %s_)", "SAPIENT"),
+				fmt.Sprintf("Set credentials via environment variables (prefix: %s_)", "CLI"),
 				"Pass credentials directly as CLI flags for each command",
 				fmt.Sprintf("Run '%s auth whoami' to verify current authentication", "sapient"),
 			},

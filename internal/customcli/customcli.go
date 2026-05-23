@@ -16,8 +16,9 @@ import (
 )
 
 const (
+	simpleCLIAPIKeyEnv = "CLI_API_KEY"
 	legacyAPIKeyEnv    = "SAPIENT_API_KEY"
-	canonicalAPIKeyEnv = "SAPIENT_SAPIENT_API_KEY_AUTH"
+	canonicalAPIKeyEnv = "CLI_SAPIENT_API_KEY_AUTH"
 )
 
 type commandMove struct {
@@ -96,6 +97,10 @@ func Execute() error {
 
 func installEnvCompatibilityAliases() {
 	if os.Getenv(canonicalAPIKeyEnv) != "" {
+		return
+	}
+	if value := os.Getenv(simpleCLIAPIKeyEnv); value != "" {
+		_ = os.Setenv(canonicalAPIKeyEnv, value)
 		return
 	}
 	if value := os.Getenv(legacyAPIKeyEnv); value != "" {

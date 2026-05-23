@@ -8,8 +8,8 @@
 #   Invoke-WebRequest -Uri https://raw.githubusercontent.com/usesapient/cli/main/scripts/install.ps1 -UseBasicParsing | Invoke-Expression
 #
 # Options:
-#   $env:SAPIENT_INSTALL_DIR - Installation directory (default: $env:LOCALAPPDATA\Programs\sapient)
-#   $env:SAPIENT_VERSION     - Specific version to install (default: latest)
+#   $env:CLI_INSTALL_DIR - Installation directory (default: $env:LOCALAPPDATA\Programs\sapient)
+#   $env:CLI_VERSION     - Specific version to install (default: latest)
 #
 
 [CmdletBinding()]
@@ -21,8 +21,8 @@ $ErrorActionPreference = 'Stop'
 $Repo = "usesapient/cli"
 $BinaryName = "sapient.exe"
 $DefaultInstallDir = Join-Path $env:LOCALAPPDATA "Programs\sapient"
-$InstallDir = if ($env:SAPIENT_INSTALL_DIR) { $env:SAPIENT_INSTALL_DIR } else { $DefaultInstallDir }
-$Version = if ($env:SAPIENT_VERSION) { $env:SAPIENT_VERSION } else { "latest" }
+$InstallDir = if ($env:CLI_INSTALL_DIR) { $env:CLI_INSTALL_DIR } else { $DefaultInstallDir }
+$Version = if ($env:CLI_VERSION) { $env:CLI_VERSION } else { "latest" }
 
 # Helper functions
 function Write-ColorOutput {

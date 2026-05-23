@@ -41,7 +41,7 @@ func NewRootCommand() (*cobra.Command, error) {
 			if usage.UsageRequested(cmd) {
 				return nil
 			}
-			if err := config.Init("sapient", "SAPIENT"); err != nil {
+			if err := config.Init("sapient", "CLI"); err != nil {
 				return err
 			}
 			output.InitAgentMode(cmd)
