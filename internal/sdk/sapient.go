@@ -3,7 +3,7 @@
 
 package sdk
 
-// Generated from OpenAPI doc version 1.0.0 and generator version 2.885.1
+// Generated from OpenAPI doc version 1.0.0 and generator version 2.886.0
 
 import (
 	"context"
@@ -54,6 +54,7 @@ type Sapient struct {
 	SDKVersion     string
 	Status         *Status
 	Prompts        *Prompts
+	EvalRuns       *EvalRuns
 	APIPerformance *APIPerformance
 
 	sdkConfiguration config.SDKConfiguration
@@ -132,7 +133,7 @@ func New(opts ...SDKOption) *Sapient {
 	sdk := &Sapient{
 		SDKVersion: "0.0.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 0.0.1 2.885.1 1.0.0 github.com/usesapient/cli/internal/sdk",
+			UserAgent:  "speakeasy-sdk/go 0.0.1 2.886.0 1.0.0 github.com/usesapient/cli/internal/sdk",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -150,6 +151,7 @@ func New(opts ...SDKOption) *Sapient {
 
 	sdk.Status = newStatus(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Prompts = newPrompts(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.EvalRuns = newEvalRuns(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.APIPerformance = newAPIPerformance(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk

@@ -8,7 +8,7 @@ Command-line interface for Sapient.
 <!-- Start Summary [summary] -->
 ## Summary
 
-Manage Sapient prompts, custom evals, and API Performance.
+Sapient Public API: Public API for Sapient CLI and external integrations.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -187,6 +187,11 @@ Configuration is stored in `~/.config/sapient/config.yaml`.
 * [`update`](docs/sapient_prompts_update.md) - Update Prompt
 * [`delete`](docs/sapient_prompts_delete.md) - Delete Prompt
 
+### [eval-runs](docs/sapient_eval-runs.md)
+
+* [`create`](docs/sapient_eval-runs_create.md) - Create Eval Run
+* [`retrieve`](docs/sapient_eval-runs_retrieve.md) - Retrieve Eval Run
+
 ### [api-performance](docs/sapient_api-performance.md)
 
 * [`targets-list`](docs/sapient_api-performance_targets-list.md) - List Targets
@@ -202,6 +207,7 @@ Configuration is stored in `~/.config/sapient/config.yaml`.
 * [`evals-update`](docs/sapient_api-performance_evals-update.md) - Update Eval Definition
 * [`custom-evals-list`](docs/sapient_api-performance_custom-evals-list.md) - List Custom Evals
 * [`custom-evals-create`](docs/sapient_api-performance_custom-evals-create.md) - Create Custom Eval
+* [`custom-evals-history-list`](docs/sapient_api-performance_custom-evals-history-list.md) - List Custom Eval History
 * [`custom-evals-retrieve`](docs/sapient_api-performance_custom-evals-retrieve.md) - Retrieve Custom Eval
 * [`custom-evals-update`](docs/sapient_api-performance_custom-evals-update.md) - Update Custom Eval
 * [`custom-evals-delete`](docs/sapient_api-performance_custom-evals-delete.md) - Delete Custom Eval

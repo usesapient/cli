@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/usesapient/cli/internal/cli/apiperformance"
+	"github.com/usesapient/cli/internal/cli/evalruns"
 	"github.com/usesapient/cli/internal/cli/prompts"
 	"github.com/usesapient/cli/internal/cli/status"
 	"github.com/usesapient/cli/internal/config"
@@ -54,6 +55,9 @@ func NewRootCommand() (*cobra.Command, error) {
 	}
 	if err := prompts.InitPromptsRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init prompts: %w", err)
+	}
+	if err := evalruns.InitEvalRunsRoot(rootCmd); err != nil {
+		return nil, fmt.Errorf("init eval-runs: %w", err)
 	}
 	if err := apiperformance.InitApiPerformanceRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init api-performance: %w", err)
