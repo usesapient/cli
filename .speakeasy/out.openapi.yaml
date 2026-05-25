@@ -752,6 +752,177 @@
         "x-stainless-method": "prompts.delete"
       }
     },
+    "/v1/eval-runs": {
+      "post": {
+        "tags": [
+          "eval-runs"
+        ],
+        "summary": "Create Eval Run",
+        "description": "Start a durable eval run and return the parent job ID to poll.\n\nFor prompt evals, provide explicit `targets` to override the configured\nprompt targets, or omit `targets` to use the organization's configured\nscheduled prompt targets. For API Performance evals, explicit `targets` or\n`models` override the stored configuration; when omitted, Sapient uses\nconfigured scheduled targets or legacy configured models. Custom eval runs\nuse `custom_eval_ids` when provided, otherwise the configured custom eval\nset for the brand.\n\nEvery run is queued through the durable job queue. The response `id` is the\n`eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`.",
+        "operationId": "eval_runs_create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/PublicPromptEvalRunRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PublicApiPerformanceEvalRunRequest"
+                  }
+                ],
+                "title": "Request",
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "prompts": "#/components/schemas/PublicPromptEvalRunRequest",
+                    "api_performance": "#/components/schemas/PublicApiPerformanceEvalRunRequest"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicEvalRunResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is valid, but Sapient could not determine what to run from either the request payload or saved configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "missing_prompt_targets": {
+                    "summary": "No configured prompt targets",
+                    "value": {
+                      "detail": "No configured prompt targets were found for this organization. Configure prompt targets first or include targets in the request."
+                    }
+                  },
+                  "missing_api_performance_targets": {
+                    "summary": "No configured API Performance targets",
+                    "value": {
+                      "detail": "No configured API Performance targets or models were found for cli. Configure eval targets for this source or include targets/models in the request."
+                    }
+                  },
+                  "missing_custom_eval_ids": {
+                    "summary": "No configured custom evals",
+                    "value": {
+                      "detail": "No custom eval IDs were provided and no configured custom evals were found for this brand. Configure custom evals or include custom_eval_ids in the request."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "SapientApiKeyAuth": []
+          }
+        ],
+        "x-stainless-method": "eval_runs.create"
+      }
+    },
+    "/v1/eval-runs/{eval_run_id}": {
+      "get": {
+        "tags": [
+          "eval-runs"
+        ],
+        "summary": "Retrieve Eval Run",
+        "description": "Retrieve status and progress for a durable eval run.\n\nThe `eval_run_id` is the `id` returned by `POST /v1/eval-runs`. Progress is\ncomputed from the parent job, its dispatch, and child jobs when dispatch\nfanout has started.",
+        "operationId": "eval_runs_retrieve",
+        "security": [
+          {
+            "SapientApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "eval_run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Eval Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicEvalRunResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The eval run does not exist or is not visible to this API key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "detail"
+                  ]
+                },
+                "example": {
+                  "detail": "Eval run not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-stainless-method": "eval_runs.retrieve"
+      }
+    },
     "/v1/api-performance/targets": {
       "get": {
         "tags": [
@@ -1673,6 +1844,254 @@
           }
         },
         "x-stainless-method": "api_performance.custom_evals.create"
+      }
+    },
+    "/v1/api-performance/custom-evals/history": {
+      "get": {
+        "tags": [
+          "api-performance"
+        ],
+        "summary": "List Custom Eval History",
+        "description": "List custom eval history rows for a brand.\n\nUse `custom_eval_id` to retrieve the evaluated run history for one custom\neval prompt. The public API hides infrastructure-error rows, matching the\nnon-admin dashboard behavior.",
+        "operationId": "api_performance_custom_evals_history_list",
+        "security": [
+          {
+            "SapientApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "brand",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
+              "title": "Brand"
+            },
+            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
+          },
+          {
+            "name": "custom_eval_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom eval ID to filter history rows.",
+              "title": "Custom Eval Id"
+            },
+            "description": "Optional custom eval ID to filter history rows."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 200,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search"
+            }
+          },
+          {
+            "name": "result_filter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "all",
+                "passed",
+                "failed"
+              ],
+              "type": "string",
+              "default": "all",
+              "title": "Result Filter"
+            }
+          },
+          {
+            "name": "target_key",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Target Key"
+            }
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Category Id"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "time",
+                "use_case",
+                "target",
+                "result",
+                "score",
+                "tool_calls",
+                "latency"
+              ],
+              "type": "string",
+              "default": "time",
+              "title": "Sort By"
+            }
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "default": "desc",
+              "title": "Sort Dir"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicCustomEvalHistoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is valid, but the brand selector is ambiguous.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "ambiguous_brand": {
+                    "summary": "Multiple brands available",
+                    "value": {
+                      "detail": "Multiple brands are available for this organization; pass brand to select one"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The selected brand was not found for this API key's organization.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "detail"
+                  ]
+                },
+                "examples": {
+                  "brand_not_found": {
+                    "summary": "Brand not found",
+                    "value": {
+                      "detail": "Company not found for this organization: Acme"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-stainless-method": "api_performance.custom_evals.history.list"
       }
     },
     "/v1/api-performance/custom-evals/{custom_eval_id}": {
@@ -4009,6 +4428,217 @@
         ],
         "title": "PublicApiPerformanceCodingAgentModel"
       },
+      "PublicApiPerformanceEvalRunRequest": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "api_performance",
+            "title": "Type"
+          },
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "rest_api",
+              "sdk",
+              "cli",
+              "custom_evals"
+            ],
+            "title": "Source Type"
+          },
+          "brand": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand",
+            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
+          },
+          "integration_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Integration Id"
+          },
+          "models": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Models",
+            "description": "Legacy flat model selection. Prefer targets."
+          },
+          "targets": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PublicApiPerformanceEvalRunTarget"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Targets",
+            "description": "Explicit text/agent targets to run."
+          },
+          "categories": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Categories"
+          },
+          "endpoint_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Endpoint Ids"
+          },
+          "endpoint_paths": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Endpoint Paths",
+            "description": "Optional METHOD:path filters, such as GET:/v1/items."
+          },
+          "custom_eval_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Custom Eval Ids",
+            "description": "Custom eval IDs. Used only when source_type is custom_evals."
+          },
+          "eval_types": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eval Types"
+          },
+          "env_profile_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Env Profile Ids"
+          },
+          "eval_overrides": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eval Overrides"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "source_type"
+        ],
+        "title": "PublicApiPerformanceEvalRunRequest"
+      },
+      "PublicApiPerformanceEvalRunTarget": {
+        "properties": {
+          "target_type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "agent"
+            ],
+            "title": "Target Type"
+          },
+          "execution_platform": {
+            "type": "string",
+            "title": "Execution Platform"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_type",
+          "execution_platform",
+          "model_id"
+        ],
+        "title": "PublicApiPerformanceEvalRunTarget"
+      },
       "PublicApiPerformanceSkill": {
         "properties": {
           "id": {
@@ -4588,6 +5218,324 @@
           "prompt"
         ],
         "title": "PublicCustomEval"
+      },
+      "PublicCustomEvalHistoryCategory": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "sort_order": {
+            "type": "integer",
+            "title": "Sort Order",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "slug"
+        ],
+        "title": "PublicCustomEvalHistoryCategory"
+      },
+      "PublicCustomEvalHistoryEndpoint": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "prompt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prompt"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PublicCustomEvalHistoryCategory"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "title": "PublicCustomEvalHistoryEndpoint"
+      },
+      "PublicCustomEvalHistoryFacets": {
+        "properties": {
+          "targets": {
+            "items": {
+              "$ref": "#/components/schemas/PublicCustomEvalHistoryFilterOption"
+            },
+            "type": "array",
+            "title": "Targets"
+          },
+          "categories": {
+            "items": {
+              "$ref": "#/components/schemas/PublicCustomEvalHistoryFilterOption"
+            },
+            "type": "array",
+            "title": "Categories"
+          }
+        },
+        "type": "object",
+        "title": "PublicCustomEvalHistoryFacets"
+      },
+      "PublicCustomEvalHistoryFilterOption": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "value",
+          "label",
+          "count"
+        ],
+        "title": "PublicCustomEvalHistoryFilterOption"
+      },
+      "PublicCustomEvalHistoryResponse": {
+        "properties": {
+          "runs": {
+            "items": {
+              "$ref": "#/components/schemas/PublicCustomEvalHistoryRun"
+            },
+            "type": "array",
+            "title": "Runs"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset"
+          },
+          "hide_infra_errors": {
+            "type": "boolean",
+            "title": "Hide Infra Errors",
+            "default": true
+          },
+          "facets": {
+            "$ref": "#/components/schemas/PublicCustomEvalHistoryFacets"
+          }
+        },
+        "type": "object",
+        "required": [
+          "runs",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "PublicCustomEvalHistoryResponse"
+      },
+      "PublicCustomEvalHistoryRun": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "endpoint": {
+            "$ref": "#/components/schemas/PublicCustomEvalHistoryEndpoint"
+          },
+          "target_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Key"
+          },
+          "eval_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eval Type"
+          },
+          "prompt_sent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prompt Sent"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "model_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Type"
+          },
+          "platform": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Platform"
+          },
+          "passed": {
+            "type": "boolean",
+            "title": "Passed"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms"
+          },
+          "tool_call_count": {
+            "type": "integer",
+            "title": "Tool Call Count"
+          },
+          "error_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Message"
+          },
+          "is_infra_error": {
+            "type": "boolean",
+            "title": "Is Infra Error",
+            "default": false
+          },
+          "run_at": {
+            "type": "string",
+            "title": "Run At"
+          },
+          "harness_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Harness Label"
+          },
+          "model_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Label"
+          },
+          "run_context_sent": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Run Context Sent"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "endpoint",
+          "passed",
+          "tool_call_count",
+          "run_at"
+        ],
+        "title": "PublicCustomEvalHistoryRun"
       },
       "PublicCustomEvalRequest": {
         "properties": {
@@ -5449,6 +6397,214 @@
         ],
         "title": "PublicEvalEnvProfileSummary"
       },
+      "PublicEvalRunProgress": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "queued": {
+            "type": "integer",
+            "title": "Queued",
+            "default": 0
+          },
+          "running": {
+            "type": "integer",
+            "title": "Running",
+            "default": 0
+          },
+          "completed": {
+            "type": "integer",
+            "title": "Completed",
+            "default": 0
+          },
+          "failed": {
+            "type": "integer",
+            "title": "Failed",
+            "default": 0
+          },
+          "cancelled": {
+            "type": "integer",
+            "title": "Cancelled",
+            "default": 0
+          },
+          "interrupted": {
+            "type": "integer",
+            "title": "Interrupted",
+            "default": 0
+          },
+          "percent": {
+            "type": "number",
+            "title": "Percent",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PublicEvalRunProgress"
+      },
+      "PublicEvalRunResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "prompts",
+              "api_performance"
+            ],
+            "title": "Type"
+          },
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "prompts",
+              "rest_api",
+              "sdk",
+              "cli",
+              "custom_evals"
+            ],
+            "title": "Source Type"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "running",
+                  "summarizing",
+                  "completed",
+                  "failed",
+                  "cancelled",
+                  "interrupted"
+                ]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Status"
+          },
+          "stage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stage"
+          },
+          "dispatch_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dispatch Id"
+          },
+          "progress": {
+            "$ref": "#/components/schemas/PublicEvalRunProgress"
+          },
+          "estimated_cost": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimated Cost"
+          },
+          "eval_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eval Count"
+          },
+          "model_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Count"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "job_id",
+          "type",
+          "source_type",
+          "status"
+        ],
+        "title": "PublicEvalRunResponse"
+      },
       "PublicListMeta": {
         "properties": {
           "limit": {
@@ -5691,6 +6847,104 @@
         },
         "type": "object",
         "title": "PublicPromptDefaults"
+      },
+      "PublicPromptEvalRunRequest": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "prompts",
+            "title": "Type"
+          },
+          "prompt_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prompt Ids",
+            "description": "Prompt IDs to run. Omit to run all active prompts."
+          },
+          "targets": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PublicPromptEvalRunTarget"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Targets",
+            "description": "Explicit prompt targets. Omit to use configured scheduled prompt targets."
+          },
+          "force": {
+            "type": "boolean",
+            "title": "Force",
+            "description": "If true, re-run even when the prompt/platform/model has already run today.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "title": "PublicPromptEvalRunRequest"
+      },
+      "PublicPromptEvalRunTarget": {
+        "properties": {
+          "target_kind": {
+            "type": "string",
+            "enum": [
+              "answer_engine",
+              "coding_agent"
+            ],
+            "title": "Target Kind"
+          },
+          "execution_platform": {
+            "type": "string",
+            "title": "Execution Platform"
+          },
+          "prompt_platform_id": {
+            "type": "string",
+            "title": "Prompt Platform Id"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "prompt_topic_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prompt Topic Id"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_kind",
+          "execution_platform",
+          "prompt_platform_id",
+          "model_id"
+        ],
+        "title": "PublicPromptEvalRunTarget"
       },
       "PublicPromptLanguage": {
         "properties": {

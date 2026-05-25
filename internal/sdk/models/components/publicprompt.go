@@ -8,20 +8,20 @@ import (
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
-type Status string
+type PublicPromptStatus string
 
 const (
-	StatusActive   Status = "active"
-	StatusInactive Status = "inactive"
-	StatusArchived Status = "archived"
+	PublicPromptStatusActive   PublicPromptStatus = "active"
+	PublicPromptStatusInactive PublicPromptStatus = "inactive"
+	PublicPromptStatusArchived PublicPromptStatus = "archived"
 )
 
-func (e Status) ToPointer() *Status {
+func (e PublicPromptStatus) ToPointer() *PublicPromptStatus {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *Status) IsExact() bool {
+func (e *PublicPromptStatus) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "active", "inactive", "archived":
@@ -32,18 +32,18 @@ func (e *Status) IsExact() bool {
 }
 
 type PublicPrompt struct {
-	ID         string                                               `json:"id"`
-	TopicID    string                                               `json:"topic_id"`
-	Text       string                                               `json:"text"`
-	LanguageID optionalnullable.OptionalNullable[string]            `json:"language_id,omitzero"`
-	RegionID   optionalnullable.OptionalNullable[string]            `json:"region_id,omitzero"`
-	IsActive   *bool                                                `default:"true" json:"is_active"`
-	Status     optionalnullable.OptionalNullable[Status]            `json:"status,omitzero"`
-	Topic      optionalnullable.OptionalNullable[PublicPromptTopic] `json:"topic,omitzero"`
-	Platforms  []PublicPromptPlatform                               `json:"platforms,omitzero"`
-	Tags       []PublicPromptTag                                    `json:"tags,omitzero"`
-	CreatedAt  optionalnullable.OptionalNullable[string]            `json:"created_at,omitzero"`
-	UpdatedAt  optionalnullable.OptionalNullable[string]            `json:"updated_at,omitzero"`
+	ID         string                                                `json:"id"`
+	TopicID    string                                                `json:"topic_id"`
+	Text       string                                                `json:"text"`
+	LanguageID optionalnullable.OptionalNullable[string]             `json:"language_id,omitzero"`
+	RegionID   optionalnullable.OptionalNullable[string]             `json:"region_id,omitzero"`
+	IsActive   *bool                                                 `default:"true" json:"is_active"`
+	Status     optionalnullable.OptionalNullable[PublicPromptStatus] `json:"status,omitzero"`
+	Topic      optionalnullable.OptionalNullable[PublicPromptTopic]  `json:"topic,omitzero"`
+	Platforms  []PublicPromptPlatform                                `json:"platforms,omitzero"`
+	Tags       []PublicPromptTag                                     `json:"tags,omitzero"`
+	CreatedAt  optionalnullable.OptionalNullable[string]             `json:"created_at,omitzero"`
+	UpdatedAt  optionalnullable.OptionalNullable[string]             `json:"updated_at,omitzero"`
 }
 
 func (p PublicPrompt) MarshalJSON() ([]byte, error) {
@@ -99,7 +99,7 @@ func (p *PublicPrompt) GetIsActive() *bool {
 	return p.IsActive
 }
 
-func (p *PublicPrompt) GetStatus() optionalnullable.OptionalNullable[Status] {
+func (p *PublicPrompt) GetStatus() optionalnullable.OptionalNullable[PublicPromptStatus] {
 	if p == nil {
 		return nil
 	}
