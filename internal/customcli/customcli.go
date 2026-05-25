@@ -48,6 +48,7 @@ var commandMoves = []commandMove{
 	{From: []string{"api-performance", "evals-update"}, To: []string{"api-performance", "evals", "update"}},
 	{From: []string{"api-performance", "custom-evals-list"}, To: []string{"api-performance", "custom-evals", "list"}},
 	{From: []string{"api-performance", "custom-evals-create"}, To: []string{"api-performance", "custom-evals", "create"}},
+	{From: []string{"api-performance", "custom-evals-history-list"}, To: []string{"api-performance", "custom-evals", "history", "list"}},
 	{From: []string{"api-performance", "custom-evals-retrieve"}, To: []string{"api-performance", "custom-evals", "retrieve"}},
 	{From: []string{"api-performance", "custom-evals-update"}, To: []string{"api-performance", "custom-evals", "update"}},
 	{From: []string{"api-performance", "custom-evals-delete"}, To: []string{"api-performance", "custom-evals", "delete"}},
