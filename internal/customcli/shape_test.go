@@ -33,6 +33,7 @@ func TestNewRootCommandShapesCurrentGeneratedCommands(t *testing.T) {
 		{"api-performance", "config", "update"},
 		{"api-performance", "evals", "update"},
 		{"api-performance", "custom-evals", "create"},
+		{"api-performance", "custom-evals", "history", "list"},
 		{"api-performance", "starter-projects", "list"},
 		{"api-performance", "actions", "verify"},
 	} {
@@ -50,6 +51,7 @@ func TestNewRootCommandRemovesFlattenedGeneratedCommands(t *testing.T) {
 		{"prompts", "actions-list"},
 		{"api-performance", "targets-list"},
 		{"api-performance", "custom-evals-create"},
+		{"api-performance", "custom-evals-history-list"},
 		{"api-performance", "starter-projects-list"},
 		{"api-performance", "actions-verify"},
 	} {
