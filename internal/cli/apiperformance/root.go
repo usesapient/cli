@@ -74,6 +74,10 @@ func InitApiPerformanceRoot(parent *cobra.Command) error {
 		return err
 	}
 
+	if err := initApiPerformanceCustomEvalsHistoryListCmd(ApiPerformanceCmd); err != nil {
+		return err
+	}
+
 	if err := initApiPerformanceCustomEvalsRetrieveCmd(ApiPerformanceCmd); err != nil {
 		return err
 	}
