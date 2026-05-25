@@ -5,14 +5,14 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.765.0
   generationVersion: 2.886.0
-  releaseVersion: 0.5.7
-  configChecksum: eed548efce6ad69fbc4cf492e2d07744
+  releaseVersion: 0.5.8
+  configChecksum: a97d13a0e18eb3685c68f30f1589c482
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
 persistentEdits:
-  generation_id: 7aba9c30-6be9-48a3-8da1-52bdff0f271f
-  pristine_commit_hash: bc58d03e8b458f1692c22ac1af6fc6528dad3622
-  pristine_tree_hash: f1724d9f91759777ae15c7558e7346f95861c41e
+  generation_id: c44c2d9d-ae3d-49c5-864d-66e9455be3fe
+  pristine_commit_hash: 6d2da80570e1cf7e6df366c2774390945b12e59e
+  pristine_tree_hash: 03aedcfbf7aa3090ec0226ff823ce1589628e2c0
 features:
   cli:
     additionalProperties: 0.0.0
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: 82e627c3269cd3715e02ec7e11be0e41f22a3b01
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:0a8ddd0882e37a7bfa4c0410ab0aa01da3c607a8
-    pristine_git_object: 5419f43bf91a63f1ce9ee31b8f9d77295be5937a
+    last_write_checksum: sha1:429591db81031578c4741bbe869ca999b968e8b4
+    pristine_git_object: fba7c4e4d4849c0bd8ff0a36d181c73995e1dc0a
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:f0b47f0b4083f9abafc5df2e9123f3f7f85299de
@@ -949,8 +949,8 @@ trackedFiles:
     pristine_git_object: 7e1f465c87ec82286f5efb5c1be95501ba0a1cc8
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:819b6cd5ee0b1097d6fb2cc96b21dd7843ec321b
-    pristine_git_object: 86bd03922d67e0e7c566c56fce915ba17c04745e
+    last_write_checksum: sha1:314f1e801c1b8f5a98eaabea62be2cc9e0a45cfb
+    pristine_git_object: bb250b57bae60a0941982185f5be708fa170cda8
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:cd01d45cc8eab10459eeefec295916709ef6d678
@@ -1609,8 +1609,3 @@ examples:
         "422":
           application/json: {}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Cli SDK Changes:
-  * `Sapient.EvalRuns.EvalRunsCreate()`: **Added**
-  * `Sapient.EvalRuns.EvalRunsRetrieve()`: **Added**
-  * `Sapient.ApiPerformance.ApiPerformanceCustomEvalsHistoryList()`: **Added**
