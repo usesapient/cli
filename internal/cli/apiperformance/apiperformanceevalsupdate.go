@@ -17,13 +17,11 @@ import (
 
 var apiPerformanceEvalsUpdateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "eval-id", FieldPath: "EvalID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
 	{FlagName: "custom-prompt", FieldPath: "Body.CustomPrompt", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"custom_prompt,omitempty"`, Description: "string value"},
 	{FlagName: "expected-behavior", FieldPath: "Body.ExpectedBehavior", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"expected_behavior,omitempty"`, Description: "string value"},
 	{FlagName: "starting-project-id", FieldPath: "Body.StartingProjectID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"starting_project_id,omitempty"`, Description: "Starting project to clone before running the eval. Empty string clears it."},
-	{FlagName: "include-brand-docs", FieldPath: "Body.IncludeBrandDocs", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"include_brand_docs,omitempty"`, Description: "Legacy docs flag. Prefer docs_mode."},
 	{FlagName: "docs-mode", FieldPath: "Body.DocsMode", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"docs_mode,omitempty"`, Description: "Docs behavior for this eval: default, include, or exclude. (options: default, include, exclude)"},
-	{FlagName: "include-env-vars", FieldPath: "Body.IncludeEnvVars", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"include_env_vars,omitempty"`, Description: "Include configured environment variable names in the eval prompt."},
+	{FlagName: "include-env-vars", Shorthand: "i", FieldPath: "Body.IncludeEnvVars", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"include_env_vars,omitempty"`, Description: "Include configured environment variable names in the eval prompt."},
 	{FlagName: "env-profile-ids", FieldPath: "Body.EnvProfileIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"env_profile_ids,omitempty"`, Description: "Environment profile IDs to use for this eval. Empty list clears the selection."},
 	{FlagName: "model-ids", FieldPath: "Body.ModelIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"model_ids,omitempty"`, Description: "Model IDs to use for this eval. Empty list uses the config-level models."},
 	{FlagName: "compare-skills", FieldPath: "Body.CompareSkills", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"compare_skills,omitempty"`, Description: "boolean flag"},

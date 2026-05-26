@@ -40,8 +40,6 @@ func (e *PublicStartingProjectFramework) IsExact() bool {
 
 type PublicStartingProject struct {
 	ID            string                                    `json:"id"`
-	OrgID         string                                    `json:"org_id"`
-	BrandID       string                                    `json:"brand_id"`
 	IntegrationID optionalnullable.OptionalNullable[string] `json:"integration_id,omitzero"`
 	Name          string                                    `json:"name"`
 	RepoURL       string                                    `json:"repo_url"`
@@ -70,20 +68,6 @@ func (p *PublicStartingProject) GetID() string {
 		return ""
 	}
 	return p.ID
-}
-
-func (p *PublicStartingProject) GetOrgID() string {
-	if p == nil {
-		return ""
-	}
-	return p.OrgID
-}
-
-func (p *PublicStartingProject) GetBrandID() string {
-	if p == nil {
-		return ""
-	}
-	return p.BrandID
 }
 
 func (p *PublicStartingProject) GetIntegrationID() optionalnullable.OptionalNullable[string] {

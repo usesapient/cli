@@ -56,8 +56,6 @@ func (e *PublicAPIEvalTargetFrequency) IsExact() bool {
 
 type PublicAPIEvalTarget struct {
 	ID                optionalnullable.OptionalNullable[string] `json:"id,omitzero"`
-	OrgID             optionalnullable.OptionalNullable[string] `json:"org_id,omitzero"`
-	BrandID           optionalnullable.OptionalNullable[string] `json:"brand_id,omitzero"`
 	IntegrationID     optionalnullable.OptionalNullable[string] `json:"integration_id,omitzero"`
 	TargetType        PublicAPIEvalTargetTargetType             `json:"target_type"`
 	ExecutionPlatform string                                    `json:"execution_platform"`
@@ -88,20 +86,6 @@ func (p *PublicAPIEvalTarget) GetID() optionalnullable.OptionalNullable[string] 
 		return nil
 	}
 	return p.ID
-}
-
-func (p *PublicAPIEvalTarget) GetOrgID() optionalnullable.OptionalNullable[string] {
-	if p == nil {
-		return nil
-	}
-	return p.OrgID
-}
-
-func (p *PublicAPIEvalTarget) GetBrandID() optionalnullable.OptionalNullable[string] {
-	if p == nil {
-		return nil
-	}
-	return p.BrandID
 }
 
 func (p *PublicAPIEvalTarget) GetIntegrationID() optionalnullable.OptionalNullable[string] {

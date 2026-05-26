@@ -108,8 +108,6 @@ func (e *SortDir) UnmarshalJSON(data []byte) error {
 }
 
 type APIPerformanceCustomEvalsHistoryListRequest struct {
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
 	// Optional custom eval ID to filter history rows.
 	CustomEvalID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=custom_eval_id"`
 	Limit        *int64                                    `default:"25" queryParam:"style=form,explode=true,name=limit"`
@@ -131,13 +129,6 @@ func (a *APIPerformanceCustomEvalsHistoryListRequest) UnmarshalJSON(data []byte)
 		return err
 	}
 	return nil
-}
-
-func (a *APIPerformanceCustomEvalsHistoryListRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
 }
 
 func (a *APIPerformanceCustomEvalsHistoryListRequest) GetCustomEvalID() optionalnullable.OptionalNullable[string] {

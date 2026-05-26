@@ -5,14 +5,11 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceCustomEvalsDeleteRequest struct {
 	CustomEvalID string `pathParam:"style=simple,explode=false,name=custom_eval_id"`
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
 }
 
 func (a *APIPerformanceCustomEvalsDeleteRequest) GetCustomEvalID() string {
@@ -20,13 +17,6 @@ func (a *APIPerformanceCustomEvalsDeleteRequest) GetCustomEvalID() string {
 		return ""
 	}
 	return a.CustomEvalID
-}
-
-func (a *APIPerformanceCustomEvalsDeleteRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
 }
 
 type APIPerformanceCustomEvalsDeleteResponse struct {

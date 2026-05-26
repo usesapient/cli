@@ -10,8 +10,6 @@ import (
 )
 
 type APIPerformanceConfigRetrieveRequest struct {
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand         optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
 	IntegrationID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=integration_id"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	configScope optionalnullable.OptionalNullable[string] `const:"custom_evals" queryParam:"style=form,explode=true,name=config_scope"`
@@ -26,13 +24,6 @@ func (a *APIPerformanceConfigRetrieveRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (a *APIPerformanceConfigRetrieveRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
 }
 
 func (a *APIPerformanceConfigRetrieveRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {

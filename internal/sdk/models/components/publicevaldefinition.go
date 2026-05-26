@@ -62,7 +62,6 @@ type PublicEvalDefinition struct {
 	CustomPrompt      optionalnullable.OptionalNullable[string] `json:"custom_prompt,omitzero"`
 	ExpectedBehavior  optionalnullable.OptionalNullable[string] `json:"expected_behavior,omitzero"`
 	StartingProjectID optionalnullable.OptionalNullable[string] `json:"starting_project_id,omitzero"`
-	IncludeBrandDocs  *bool                                     `default:"false" json:"include_brand_docs"`
 	DocsMode          *PublicEvalDefinitionDocsMode             `default:"default" json:"docs_mode"`
 	IncludeEnvVars    *bool                                     `default:"true" json:"include_env_vars"`
 	EnvProfileIds     []string                                  `json:"env_profile_ids,omitzero"`
@@ -134,13 +133,6 @@ func (p *PublicEvalDefinition) GetStartingProjectID() optionalnullable.OptionalN
 		return nil
 	}
 	return p.StartingProjectID
-}
-
-func (p *PublicEvalDefinition) GetIncludeBrandDocs() *bool {
-	if p == nil {
-		return nil
-	}
-	return p.IncludeBrandDocs
 }
 
 func (p *PublicEvalDefinition) GetDocsMode() *PublicEvalDefinitionDocsMode {

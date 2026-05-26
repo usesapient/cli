@@ -758,7 +758,7 @@
           "eval-runs"
         ],
         "summary": "Create Eval Run",
-        "description": "Start a durable eval run and return the parent job ID to poll.\n\nFor prompt evals, provide explicit `targets` to override the configured\nprompt targets, or omit `targets` to use the organization's configured\nscheduled prompt targets. For API Performance evals, explicit `targets` or\n`models` override the stored configuration; when omitted, Sapient uses\nconfigured scheduled targets or legacy configured models. Custom eval runs\nuse `custom_eval_ids` when provided, otherwise the configured custom eval\nset for the brand.\n\nEvery run is queued through the durable job queue. The response `id` is the\n`eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`.",
+        "description": "Start a durable eval run and return the parent job ID to poll.\n\nFor prompt evals, provide explicit `targets` to override the configured\nprompt targets, or omit `targets` to use the organization's configured\nscheduled prompt targets. For API Performance evals, explicit `targets` or\n`models` override the stored configuration; when omitted, Sapient uses\nconfigured scheduled targets or legacy configured models. Custom eval runs\nuse `custom_eval_ids` when provided, otherwise the configured custom eval\nset for the organization.\n\nEvery run is queued through the durable job queue. The response `id` is the\n`eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`.",
         "operationId": "eval_runs_create",
         "requestBody": {
           "content": {
@@ -827,7 +827,7 @@
                   "missing_custom_eval_ids": {
                     "summary": "No configured custom evals",
                     "value": {
-                      "detail": "No custom eval IDs were provided and no configured custom evals were found for this brand. Configure custom evals or include custom_eval_ids in the request."
+                      "detail": "No custom eval IDs were provided and no configured custom evals were found for this organization. Configure custom evals or include custom_eval_ids in the request."
                     }
                   }
                 }
@@ -964,24 +964,6 @@
         ],
         "parameters": [
           {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
-          {
             "name": "since",
             "in": "query",
             "required": false,
@@ -1090,40 +1072,15 @@
         ],
         "summary": "Diagnose Eval Runs",
         "operationId": "api_performance_diagnose",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/DiagnoseEvalRunsRequest"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -1147,6 +1104,11 @@
             }
           }
         },
+        "security": [
+          {
+            "SapientApiKeyAuth": []
+          }
+        ],
         "x-stainless-method": "api_performance.diagnose"
       }
     },
@@ -1163,24 +1125,6 @@
           }
         ],
         "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
           {
             "name": "integration_id",
             "in": "query",
@@ -1250,26 +1194,6 @@
             "SapientApiKeyAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1319,24 +1243,6 @@
         ],
         "parameters": [
           {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
-          {
             "name": "include_system",
             "in": "query",
             "required": false,
@@ -1385,24 +1291,6 @@
           }
         ],
         "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
           {
             "name": "integration_id",
             "in": "query",
@@ -1509,24 +1397,6 @@
         ],
         "parameters": [
           {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
-          {
             "name": "integration_id",
             "in": "query",
             "required": false,
@@ -1605,24 +1475,6 @@
               "type": "string",
               "title": "Eval Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "responses": {
@@ -1669,24 +1521,6 @@
               "type": "string",
               "title": "Eval Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "requestBody": {
@@ -1731,31 +1565,6 @@
         ],
         "summary": "List Custom Evals",
         "operationId": "api_performance_custom_evals_list",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1766,18 +1575,13 @@
                 }
               }
             }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
           }
         },
+        "security": [
+          {
+            "SapientApiKeyAuth": []
+          }
+        ],
         "x-stainless-method": "api_performance.custom_evals.list"
       },
       "post": {
@@ -1786,40 +1590,15 @@
         ],
         "summary": "Create Custom Eval",
         "operationId": "api_performance_custom_evals_create",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PublicCustomEvalRequest"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -1843,6 +1622,11 @@
             }
           }
         },
+        "security": [
+          {
+            "SapientApiKeyAuth": []
+          }
+        ],
         "x-stainless-method": "api_performance.custom_evals.create"
       }
     },
@@ -1852,7 +1636,7 @@
           "api-performance"
         ],
         "summary": "List Custom Eval History",
-        "description": "List custom eval history rows for a brand.\n\nUse `custom_eval_id` to retrieve the evaluated run history for one custom\neval prompt. The public API hides infrastructure-error rows, matching the\nnon-admin dashboard behavior.",
+        "description": "List custom eval history rows for the organization.\n\nUse `custom_eval_id` to retrieve the evaluated run history for one custom\neval prompt. The public API hides infrastructure-error rows, matching the\nnon-admin dashboard behavior.",
         "operationId": "api_performance_custom_evals_history_list",
         "security": [
           {
@@ -1860,24 +1644,6 @@
           }
         ],
         "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
           {
             "name": "custom_eval_id",
             "in": "query",
@@ -2028,34 +1794,8 @@
               }
             }
           },
-          "400": {
-            "description": "The request is valid, but the brand selector is ambiguous.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "detail": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "detail"
-                  ]
-                },
-                "examples": {
-                  "ambiguous_brand": {
-                    "summary": "Multiple brands available",
-                    "value": {
-                      "detail": "Multiple brands are available for this organization; pass brand to select one"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "404": {
-            "description": "The selected brand was not found for this API key's organization.",
+            "description": "The organization does not have a configured API Performance scope.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2070,10 +1810,10 @@
                   ]
                 },
                 "examples": {
-                  "brand_not_found": {
-                    "summary": "Brand not found",
+                  "organization_not_configured": {
+                    "summary": "Organization configuration not found",
                     "value": {
-                      "detail": "Company not found for this organization: Acme"
+                      "detail": "Configured API Performance scope not found for this organization"
                     }
                   }
                 }
@@ -2115,24 +1855,6 @@
               "type": "string",
               "title": "Custom Eval Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "responses": {
@@ -2179,24 +1901,6 @@
               "type": "string",
               "title": "Custom Eval Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "requestBody": {
@@ -2253,24 +1957,6 @@
               "type": "string",
               "title": "Custom Eval Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "responses": {
@@ -2311,24 +1997,6 @@
           }
         ],
         "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
           {
             "name": "integration_id",
             "in": "query",
@@ -2379,26 +2047,6 @@
         "security": [
           {
             "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "requestBody": {
@@ -2457,24 +2105,6 @@
               "type": "string",
               "title": "Starter Project Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "responses": {
@@ -2521,24 +2151,6 @@
               "type": "string",
               "title": "Starter Project Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "requestBody": {
@@ -2595,24 +2207,6 @@
               "type": "string",
               "title": "Starter Project Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "responses": {
@@ -2653,24 +2247,6 @@
           }
         ],
         "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
           {
             "name": "integration_id",
             "in": "query",
@@ -2780,40 +2356,15 @@
         ],
         "summary": "Refresh Actions",
         "operationId": "api_performance_actions_refresh",
-        "security": [
-          {
-            "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PublicRefreshActionsRequest"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -2837,6 +2388,11 @@
             }
           }
         },
+        "security": [
+          {
+            "SapientApiKeyAuth": []
+          }
+        ],
         "x-stainless-method": "api_performance.actions.refresh"
       }
     },
@@ -2861,24 +2417,6 @@
               "type": "string",
               "title": "Action Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           },
           {
             "name": "include_prompt",
@@ -2935,24 +2473,6 @@
               "type": "string",
               "title": "Action Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "requestBody": {
@@ -3011,24 +2531,6 @@
               "type": "string",
               "title": "Action Id"
             }
-          },
-          {
-            "name": "brand",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.",
-              "title": "Brand"
-            },
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           }
         ],
         "responses": {
@@ -3121,18 +2623,6 @@
       },
       "DiagnoseEvalRunsRequest": {
         "properties": {
-          "company": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Company",
-            "description": "Optional company name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
-          },
           "since": {
             "type": "string",
             "title": "Since",
@@ -3988,28 +3478,6 @@
             ],
             "title": "Id"
           },
-          "org_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Org Id"
-          },
-          "brand_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Brand Id"
-          },
           "integration_id": {
             "anyOf": [
               {
@@ -4133,10 +3601,6 @@
           "id": {
             "type": "string",
             "title": "Id"
-          },
-          "brand_id": {
-            "type": "string",
-            "title": "Brand Id"
           },
           "integration_id": {
             "anyOf": [
@@ -4311,7 +3775,6 @@
         "type": "object",
         "required": [
           "id",
-          "brand_id",
           "action_type",
           "status",
           "priority",
@@ -4444,18 +3907,6 @@
               "custom_evals"
             ],
             "title": "Source Type"
-          },
-          "brand": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Brand",
-            "description": "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."
           },
           "integration_id": {
             "anyOf": [
@@ -4649,10 +4100,6 @@
             "type": "string",
             "title": "Source Id"
           },
-          "brand_id": {
-            "type": "string",
-            "title": "Brand Id"
-          },
           "integration_id": {
             "anyOf": [
               {
@@ -4754,7 +4201,6 @@
         "required": [
           "id",
           "source_id",
-          "brand_id",
           "slug",
           "name",
           "path",
@@ -5034,23 +4480,6 @@
       },
       "PublicCompany": {
         "properties": {
-          "org_brand_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Org Brand Id",
-            "description": "Organization-scoped brand relationship ID."
-          },
-          "brand_id": {
-            "type": "string",
-            "title": "Brand Id",
-            "description": "Sapient brand ID."
-          },
           "name": {
             "type": "string",
             "title": "Name"
@@ -5091,7 +4520,6 @@
         },
         "type": "object",
         "required": [
-          "brand_id",
           "name"
         ],
         "title": "PublicCompany"
@@ -5101,10 +4529,6 @@
           "id": {
             "type": "string",
             "title": "Id"
-          },
-          "brand_id": {
-            "type": "string",
-            "title": "Brand Id"
           },
           "prompt": {
             "type": "string",
@@ -5214,7 +4638,6 @@
         "type": "object",
         "required": [
           "id",
-          "brand_id",
           "prompt"
         ],
         "title": "PublicCustomEval"
@@ -5587,7 +5010,7 @@
               }
             ],
             "title": "Competitor",
-            "description": "Competitor brand ID to render this custom eval against."
+            "description": "Competitor ID to render this custom eval against."
           },
           "prompt_competitor_group": {
             "anyOf": [
@@ -6054,11 +5477,6 @@
             ],
             "title": "Starting Project Id"
           },
-          "include_brand_docs": {
-            "type": "boolean",
-            "title": "Include Brand Docs",
-            "default": false
-          },
           "docs_mode": {
             "type": "string",
             "enum": [
@@ -6174,18 +5592,6 @@
             ],
             "title": "Starting Project Id",
             "description": "Starting project to clone before running the eval. Empty string clears it."
-          },
-          "include_brand_docs": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Include Brand Docs",
-            "description": "Legacy docs flag. Prefer docs_mode."
           },
           "docs_mode": {
             "anyOf": [
@@ -7246,14 +6652,6 @@
             "type": "string",
             "title": "Id"
           },
-          "org_id": {
-            "type": "string",
-            "title": "Org Id"
-          },
-          "brand_id": {
-            "type": "string",
-            "title": "Brand Id"
-          },
           "integration_id": {
             "anyOf": [
               {
@@ -7336,8 +6734,6 @@
         "type": "object",
         "required": [
           "id",
-          "org_id",
-          "brand_id",
           "name",
           "repo_url",
           "ref",

@@ -16,7 +16,6 @@ import (
 )
 
 var apiPerformanceRunsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
 	{FlagName: "since", Shorthand: "s", FieldPath: "Since", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=since"`, Description: "string value"},
 	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 20, Description: "integer value"},
 }

@@ -40,7 +40,7 @@ func newEvalRuns(rootSDK *Sapient, sdkConfig config.SDKConfiguration, hooks *hoo
 // `models` override the stored configuration; when omitted, Sapient uses
 // configured scheduled targets or legacy configured models. Custom eval runs
 // use `custom_eval_ids` when provided, otherwise the configured custom eval
-// set for the brand.
+// set for the organization.
 //
 // Every run is queued through the durable job queue. The response `id` is the
 // `eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`.
@@ -178,7 +178,7 @@ func (s *EvalRuns) EvalRunsCreate(ctx context.Context, request operations.EvalRu
 				return nil, err
 			}
 
-			var out sdkerrors.EvalRunsCreateBadRequestError
+			var out sdkerrors.BadRequestError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

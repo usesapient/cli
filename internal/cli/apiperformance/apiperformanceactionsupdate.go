@@ -17,7 +17,6 @@ import (
 
 var apiPerformanceActionsUpdateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "action-id", Shorthand: "a", FieldPath: "ActionID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
 	{FlagName: "status", Shorthand: "s", FieldPath: "Body.Status", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"status,omitempty"`, Description: "string value"},
 	{FlagName: "owner-user-id", FieldPath: "Body.OwnerUserID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"owner_user_id,omitempty"`, Description: "string value"},
 	{FlagName: "ignored-reason", Shorthand: "i", FieldPath: "Body.IgnoredReason", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"ignored_reason,omitempty"`, Description: "string value"},

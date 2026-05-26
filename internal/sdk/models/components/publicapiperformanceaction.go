@@ -10,7 +10,6 @@ import (
 
 type PublicAPIPerformanceAction struct {
 	ID                   string                                    `json:"id"`
-	BrandID              string                                    `json:"brand_id"`
 	IntegrationID        optionalnullable.OptionalNullable[string] `json:"integration_id,omitzero"`
 	ActionType           string                                    `json:"action_type"`
 	Status               string                                    `json:"status"`
@@ -53,13 +52,6 @@ func (p *PublicAPIPerformanceAction) GetID() string {
 		return ""
 	}
 	return p.ID
-}
-
-func (p *PublicAPIPerformanceAction) GetBrandID() string {
-	if p == nil {
-		return ""
-	}
-	return p.BrandID
 }
 
 func (p *PublicAPIPerformanceAction) GetIntegrationID() optionalnullable.OptionalNullable[string] {

@@ -5,14 +5,11 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceSourcesListRequest struct {
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand         optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
-	IncludeSystem *bool                                     `default:"false" queryParam:"style=form,explode=true,name=include_system"`
+	IncludeSystem *bool `default:"false" queryParam:"style=form,explode=true,name=include_system"`
 }
 
 func (a APIPerformanceSourcesListRequest) MarshalJSON() ([]byte, error) {
@@ -24,13 +21,6 @@ func (a *APIPerformanceSourcesListRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (a *APIPerformanceSourcesListRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
 }
 
 func (a *APIPerformanceSourcesListRequest) GetIncludeSystem() *bool {

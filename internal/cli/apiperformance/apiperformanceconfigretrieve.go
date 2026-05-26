@@ -16,7 +16,6 @@ import (
 )
 
 var apiPerformanceConfigRetrieveCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
 	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=integration_id"`, Description: "string value"},
 }
 
