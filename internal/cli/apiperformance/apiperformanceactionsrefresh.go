@@ -11,14 +11,14 @@ import (
 	"github.com/usesapient/cli/internal/interactive"
 	"github.com/usesapient/cli/internal/output"
 	"github.com/usesapient/cli/internal/sdk"
+	"github.com/usesapient/cli/internal/sdk/models/components"
 	"github.com/usesapient/cli/internal/sdk/models/operations"
 	"github.com/usesapient/cli/internal/usage"
 )
 
 var apiPerformanceActionsRefreshCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "Body.IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"integration_id,omitempty"`, Description: "string value"},
-	{FlagName: "force", Shorthand: "f", FieldPath: "Body.Force", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "boolean flag"},
+	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"integration_id,omitempty"`, Description: "string value"},
+	{FlagName: "force", Shorthand: "f", FieldPath: "Force", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "boolean flag"},
 }
 
 // initApiPerformanceActionsRefreshCmd initializes the api-performance-actions-refresh command.
@@ -32,7 +32,7 @@ func initApiPerformanceActionsRefreshCmd(parent *cobra.Command) error {
 		Aliases: []string{"ar"},
 	}
 	flagutil.RegisterFlags(cmd, apiPerformanceActionsRefreshCmdMeta)
-	if err := flagutil.ValidateMeta[operations.APIPerformanceActionsRefreshRequest](apiPerformanceActionsRefreshCmdMeta); err != nil {
+	if err := flagutil.ValidateMeta[components.PublicRefreshActionsRequest](apiPerformanceActionsRefreshCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for api-performance-actions-refresh: %w", err)
 	}
 	cmd.Flags().String("body", "", "Request body as JSON (alternative to individual flags). Can also be provided via stdin.")
@@ -50,7 +50,7 @@ func runApiPerformanceActionsRefreshCmd(cmd *cobra.Command, args []string) error
 			return err
 		}
 	}
-	req, err := flagutil.BuildRequest[operations.APIPerformanceActionsRefreshRequest](cmd, apiPerformanceActionsRefreshCmdMeta, "Body", "body")
+	request, err := flagutil.BuildRequest[components.PublicRefreshActionsRequest](cmd, apiPerformanceActionsRefreshCmdMeta, "", "body")
 	if err != nil {
 		return err
 	}
@@ -73,7 +73,7 @@ func runApiPerformanceActionsRefreshCmd(cmd *cobra.Command, args []string) error
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.APIPerformance.APIPerformanceActionsRefresh(cmd.Context(), *req, sdkOpts...)
+	res, err := s.APIPerformance.APIPerformanceActionsRefresh(cmd.Context(), *request, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

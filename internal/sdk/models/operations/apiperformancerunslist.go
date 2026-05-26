@@ -10,8 +10,6 @@ import (
 )
 
 type APIPerformanceRunsListRequest struct {
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
 	Since optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=since"`
 	Limit *int64                                    `default:"20" queryParam:"style=form,explode=true,name=limit"`
 }
@@ -25,13 +23,6 @@ func (a *APIPerformanceRunsListRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (a *APIPerformanceRunsListRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
 }
 
 func (a *APIPerformanceRunsListRequest) GetSince() optionalnullable.OptionalNullable[string] {

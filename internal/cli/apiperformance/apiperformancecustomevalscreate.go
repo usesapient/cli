@@ -11,19 +11,19 @@ import (
 	"github.com/usesapient/cli/internal/interactive"
 	"github.com/usesapient/cli/internal/output"
 	"github.com/usesapient/cli/internal/sdk"
+	"github.com/usesapient/cli/internal/sdk/models/components"
 	"github.com/usesapient/cli/internal/sdk/models/operations"
 	"github.com/usesapient/cli/internal/usage"
 )
 
 var apiPerformanceCustomEvalsCreateCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
-	{FlagName: "prompt", FieldPath: "Body.Prompt", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "prompt-template", FieldPath: "Body.PromptTemplate", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"prompt_template,omitempty"`, Description: "Optional template used to render prompt before storing. Available variables: Company name { {company_name} }; Company domain { {company_domain} }."},
-	{FlagName: "category-name", FieldPath: "Body.CategoryName", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"category_name,omitempty"`, Description: "string value"},
-	{FlagName: "description", FieldPath: "Body.Description", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"description,omitempty"`, Description: "string value"},
-	{FlagName: "competitor", FieldPath: "Body.Competitor", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"competitor,omitempty"`, Description: "Competitor brand ID to render this custom eval against."},
-	{FlagName: "prompt-competitor-group", FieldPath: "Body.PromptCompetitorGroup", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"prompt_competitor_group,omitempty"`, Description: "Base custom eval ID that this competitor variant belongs to."},
-	{FlagName: "eval", Shorthand: "e", FieldPath: "Body.Eval", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"eval,omitempty"`, Description: "JSON object"},
+	{FlagName: "prompt", FieldPath: "Prompt", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
+	{FlagName: "prompt-template", FieldPath: "PromptTemplate", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"prompt_template,omitempty"`, Description: "Optional template used to render prompt before storing. Available variables: Company name { {company_name} }; Company domain { {company_domain} }."},
+	{FlagName: "category-name", FieldPath: "CategoryName", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"category_name,omitempty"`, Description: "string value"},
+	{FlagName: "description", FieldPath: "Description", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"description,omitempty"`, Description: "string value"},
+	{FlagName: "competitor", FieldPath: "Competitor", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"competitor,omitempty"`, Description: "Competitor ID to render this custom eval against."},
+	{FlagName: "prompt-competitor-group", FieldPath: "PromptCompetitorGroup", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"prompt_competitor_group,omitempty"`, Description: "Base custom eval ID that this competitor variant belongs to."},
+	{FlagName: "eval", Shorthand: "e", FieldPath: "Eval", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"eval,omitempty"`, Description: "JSON object"},
 }
 
 // initApiPerformanceCustomEvalsCreateCmd initializes the api-performance-custom-evals-create command.
@@ -37,7 +37,7 @@ func initApiPerformanceCustomEvalsCreateCmd(parent *cobra.Command) error {
 		Aliases: []string{"cec"},
 	}
 	flagutil.RegisterFlags(cmd, apiPerformanceCustomEvalsCreateCmdMeta)
-	if err := flagutil.ValidateMeta[operations.APIPerformanceCustomEvalsCreateRequest](apiPerformanceCustomEvalsCreateCmdMeta); err != nil {
+	if err := flagutil.ValidateMeta[components.PublicCustomEvalRequest](apiPerformanceCustomEvalsCreateCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for api-performance-custom-evals-create: %w", err)
 	}
 	cmd.Flags().String("body", "", "Request body as JSON (alternative to individual flags). Can also be provided via stdin.")
@@ -55,7 +55,7 @@ func runApiPerformanceCustomEvalsCreateCmd(cmd *cobra.Command, args []string) er
 			return err
 		}
 	}
-	req, err := flagutil.BuildRequest[operations.APIPerformanceCustomEvalsCreateRequest](cmd, apiPerformanceCustomEvalsCreateCmdMeta, "Body", "body")
+	request, err := flagutil.BuildRequest[components.PublicCustomEvalRequest](cmd, apiPerformanceCustomEvalsCreateCmdMeta, "", "body")
 	if err != nil {
 		return err
 	}
@@ -78,7 +78,7 @@ func runApiPerformanceCustomEvalsCreateCmd(cmd *cobra.Command, args []string) er
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.APIPerformance.APIPerformanceCustomEvalsCreate(cmd.Context(), *req, sdkOpts...)
+	res, err := s.APIPerformance.APIPerformanceCustomEvalsCreate(cmd.Context(), *request, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

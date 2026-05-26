@@ -8,15 +8,15 @@ import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
 )
 
-// EvalRunsCreateBadRequestError - The request is valid, but Sapient could not determine what to run from either the request payload or saved configuration.
-type EvalRunsCreateBadRequestError struct {
+// BadRequestError - The request is valid, but Sapient could not determine what to run from either the request payload or saved configuration.
+type BadRequestError struct {
 	Detail   string                  `json:"detail"`
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 
-var _ error = &EvalRunsCreateBadRequestError{}
+var _ error = &BadRequestError{}
 
-func (e *EvalRunsCreateBadRequestError) Error() string {
+func (e *BadRequestError) Error() string {
 	data, _ := json.Marshal(e)
 	return string(data)
 }

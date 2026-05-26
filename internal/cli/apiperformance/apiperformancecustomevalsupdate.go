@@ -17,7 +17,6 @@ import (
 
 var apiPerformanceCustomEvalsUpdateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "custom-eval-id", FieldPath: "CustomEvalID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
 	{FlagName: "prompt", FieldPath: "Body.Prompt", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"prompt,omitempty"`, Description: "string value"},
 	{FlagName: "prompt-template", FieldPath: "Body.PromptTemplate", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"prompt_template,omitempty"`, Description: "Optional template used to render prompt before storing. Available variables: Company name { {company_name} }; Company domain { {company_domain} }."},
 	{FlagName: "category-name", FieldPath: "Body.CategoryName", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"category_name,omitempty"`, Description: "string value"},

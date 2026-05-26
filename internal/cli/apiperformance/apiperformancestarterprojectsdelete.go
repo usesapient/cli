@@ -17,7 +17,6 @@ import (
 
 var apiPerformanceStarterProjectsDeleteCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "starter-project-id", Shorthand: "s", FieldPath: "StarterProjectID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
 }
 
 // initApiPerformanceStarterProjectsDeleteCmd initializes the api-performance-starter-projects-delete command.

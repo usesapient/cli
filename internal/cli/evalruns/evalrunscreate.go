@@ -19,7 +19,7 @@ func initEvalRunsCreateCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "create",
 		Short:   "Create Eval Run",
-		Long:    "Start a durable eval run and return the parent job ID to poll.\n\nFor prompt evals, provide explicit `targets` to override the configured\nprompt targets, or omit `targets` to use the organization's configured\nscheduled prompt targets. For API Performance evals, explicit `targets` or\n`models` override the stored configuration; when omitted, Sapient uses\nconfigured scheduled targets or legacy configured models. Custom eval runs\nuse `custom_eval_ids` when provided, otherwise the configured custom eval\nset for the brand.\n\nEvery run is queued through the durable job queue. The response `id` is the\n`eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`.",
+		Long:    "Start a durable eval run and return the parent job ID to poll.\n\nFor prompt evals, provide explicit `targets` to override the configured\nprompt targets, or omit `targets` to use the organization's configured\nscheduled prompt targets. For API Performance evals, explicit `targets` or\n`models` override the stored configuration; when omitted, Sapient uses\nconfigured scheduled targets or legacy configured models. Custom eval runs\nuse `custom_eval_ids` when provided, otherwise the configured custom eval\nset for the organization.\n\nEvery run is queued through the durable job queue. The response `id` is the\n`eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`.",
 		Example: "  sapient eval-runs create --request '{\"type\":\"api_performance\",\"source_type\":\"cli\"}'",
 		RunE:    runEvalRunsCreateCmd,
 	}

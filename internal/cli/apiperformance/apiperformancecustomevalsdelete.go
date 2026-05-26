@@ -17,7 +17,6 @@ import (
 
 var apiPerformanceCustomEvalsDeleteCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "custom-eval-id", Shorthand: "c", FieldPath: "CustomEvalID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
 }
 
 // initApiPerformanceCustomEvalsDeleteCmd initializes the api-performance-custom-evals-delete command.

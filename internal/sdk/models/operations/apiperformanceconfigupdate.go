@@ -5,29 +5,8 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
-
-type APIPerformanceConfigUpdateRequest struct {
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
-	Body  components.PublicEvalConfigUpdateRequest  `request:"mediaType=application/json"`
-}
-
-func (a *APIPerformanceConfigUpdateRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
-}
-
-func (a *APIPerformanceConfigUpdateRequest) GetBody() components.PublicEvalConfigUpdateRequest {
-	if a == nil {
-		return components.PublicEvalConfigUpdateRequest{}
-	}
-	return a.Body
-}
 
 type APIPerformanceConfigUpdateResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

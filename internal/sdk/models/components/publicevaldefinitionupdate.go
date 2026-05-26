@@ -73,8 +73,6 @@ type PublicEvalDefinitionUpdate struct {
 	ExpectedBehavior optionalnullable.OptionalNullable[string] `json:"expected_behavior,omitzero"`
 	// Starting project to clone before running the eval. Empty string clears it.
 	StartingProjectID optionalnullable.OptionalNullable[string] `json:"starting_project_id,omitzero"`
-	// Legacy docs flag. Prefer docs_mode.
-	IncludeBrandDocs optionalnullable.OptionalNullable[bool] `json:"include_brand_docs,omitzero"`
 	// Docs behavior for this eval: default, include, or exclude.
 	DocsMode optionalnullable.OptionalNullable[PublicEvalDefinitionUpdateDocsMode] `json:"docs_mode,omitzero"`
 	// Include configured environment variable names in the eval prompt.
@@ -122,13 +120,6 @@ func (p *PublicEvalDefinitionUpdate) GetStartingProjectID() optionalnullable.Opt
 		return nil
 	}
 	return p.StartingProjectID
-}
-
-func (p *PublicEvalDefinitionUpdate) GetIncludeBrandDocs() optionalnullable.OptionalNullable[bool] {
-	if p == nil {
-		return nil
-	}
-	return p.IncludeBrandDocs
 }
 
 func (p *PublicEvalDefinitionUpdate) GetDocsMode() optionalnullable.OptionalNullable[PublicEvalDefinitionUpdateDocsMode] {

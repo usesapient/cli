@@ -5,29 +5,8 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
-
-type APIPerformanceCustomEvalsCreateRequest struct {
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
-	Body  components.PublicCustomEvalRequest        `request:"mediaType=application/json"`
-}
-
-func (a *APIPerformanceCustomEvalsCreateRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
-}
-
-func (a *APIPerformanceCustomEvalsCreateRequest) GetBody() components.PublicCustomEvalRequest {
-	if a == nil {
-		return components.PublicCustomEvalRequest{}
-	}
-	return a.Body
-}
 
 type APIPerformanceCustomEvalsCreateResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

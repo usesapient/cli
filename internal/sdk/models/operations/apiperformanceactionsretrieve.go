@@ -5,15 +5,12 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceActionsRetrieveRequest struct {
-	ActionID string `pathParam:"style=simple,explode=false,name=action_id"`
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand         optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
-	IncludePrompt *bool                                     `default:"false" queryParam:"style=form,explode=true,name=include_prompt"`
+	ActionID      string `pathParam:"style=simple,explode=false,name=action_id"`
+	IncludePrompt *bool  `default:"false" queryParam:"style=form,explode=true,name=include_prompt"`
 }
 
 func (a APIPerformanceActionsRetrieveRequest) MarshalJSON() ([]byte, error) {
@@ -32,13 +29,6 @@ func (a *APIPerformanceActionsRetrieveRequest) GetActionID() string {
 		return ""
 	}
 	return a.ActionID
-}
-
-func (a *APIPerformanceActionsRetrieveRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
 }
 
 func (a *APIPerformanceActionsRetrieveRequest) GetIncludePrompt() *bool {

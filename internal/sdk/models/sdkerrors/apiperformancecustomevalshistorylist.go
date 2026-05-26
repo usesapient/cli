@@ -8,7 +8,7 @@ import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
 )
 
-// APIPerformanceCustomEvalsHistoryListNotFoundError - The selected brand was not found for this API key's organization.
+// APIPerformanceCustomEvalsHistoryListNotFoundError - The organization does not have a configured API Performance scope.
 type APIPerformanceCustomEvalsHistoryListNotFoundError struct {
 	Detail   string                  `json:"detail"`
 	HTTPMeta components.HTTPMetadata `json:"-"`
@@ -17,19 +17,6 @@ type APIPerformanceCustomEvalsHistoryListNotFoundError struct {
 var _ error = &APIPerformanceCustomEvalsHistoryListNotFoundError{}
 
 func (e *APIPerformanceCustomEvalsHistoryListNotFoundError) Error() string {
-	data, _ := json.Marshal(e)
-	return string(data)
-}
-
-// APIPerformanceCustomEvalsHistoryListBadRequestError - The request is valid, but the brand selector is ambiguous.
-type APIPerformanceCustomEvalsHistoryListBadRequestError struct {
-	Detail   string                  `json:"detail"`
-	HTTPMeta components.HTTPMetadata `json:"-"`
-}
-
-var _ error = &APIPerformanceCustomEvalsHistoryListBadRequestError{}
-
-func (e *APIPerformanceCustomEvalsHistoryListBadRequestError) Error() string {
 	data, _ := json.Marshal(e)
 	return string(data)
 }

@@ -16,7 +16,6 @@ import (
 )
 
 var apiPerformanceCustomEvalsHistoryListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
 	{FlagName: "custom-eval-id", FieldPath: "CustomEvalID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=custom_eval_id"`, Description: "Optional custom eval ID to filter history rows."},
 	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 25, Description: "integer value"},
 	{FlagName: "offset", FieldPath: "Offset", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, Description: "integer value"},
@@ -33,7 +32,7 @@ func initApiPerformanceCustomEvalsHistoryListCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "custom-evals-history-list",
 		Short:   "List Custom Eval History",
-		Long:    "List custom eval history rows for a brand.\n\nUse `custom_eval_id` to retrieve the evaluated run history for one custom\neval prompt. The public API hides infrastructure-error rows, matching the\nnon-admin dashboard behavior.",
+		Long:    "List custom eval history rows for the organization.\n\nUse `custom_eval_id` to retrieve the evaluated run history for one custom\neval prompt. The public API hides infrastructure-error rows, matching the\nnon-admin dashboard behavior.",
 		Example: "  sapient api-performance custom-evals-history-list",
 		RunE:    runApiPerformanceCustomEvalsHistoryListCmd,
 		Aliases: []string{"cehl"},

@@ -17,7 +17,6 @@ import (
 
 var apiPerformanceStarterProjectsUpdateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "starter-project-id", FieldPath: "StarterProjectID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
 	{FlagName: "name", Shorthand: "n", FieldPath: "Body.Name", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"name,omitempty"`, Description: "string value"},
 	{FlagName: "repo-url", FieldPath: "Body.RepoURL", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"repo_url,omitempty"`, Description: "string value"},
 	{FlagName: "ref", FieldPath: "Body.Ref", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"ref,omitempty"`, Description: "string value"},

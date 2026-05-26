@@ -14,7 +14,7 @@ type PublicCustomEvalRequest struct {
 	PromptTemplate optionalnullable.OptionalNullable[string] `json:"prompt_template,omitzero"`
 	CategoryName   optionalnullable.OptionalNullable[string] `json:"category_name,omitzero"`
 	Description    optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
-	// Competitor brand ID to render this custom eval against.
+	// Competitor ID to render this custom eval against.
 	Competitor optionalnullable.OptionalNullable[string] `json:"competitor,omitzero"`
 	// Base custom eval ID that this competitor variant belongs to.
 	PromptCompetitorGroup optionalnullable.OptionalNullable[string]                     `json:"prompt_competitor_group,omitzero"`

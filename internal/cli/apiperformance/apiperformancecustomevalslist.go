@@ -4,20 +4,13 @@
 package apiperformance
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/usesapient/cli/internal/client"
-	"github.com/usesapient/cli/internal/flagutil"
-	"github.com/usesapient/cli/internal/interactive"
 	"github.com/usesapient/cli/internal/output"
 	"github.com/usesapient/cli/internal/sdk"
 	"github.com/usesapient/cli/internal/sdk/models/operations"
 	"github.com/usesapient/cli/internal/usage"
 )
-
-var apiPerformanceCustomEvalsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
-}
 
 // initApiPerformanceCustomEvalsListCmd initializes the api-performance-custom-evals-list command.
 func initApiPerformanceCustomEvalsListCmd(parent *cobra.Command) error {
@@ -29,10 +22,6 @@ func initApiPerformanceCustomEvalsListCmd(parent *cobra.Command) error {
 		RunE:    runApiPerformanceCustomEvalsListCmd,
 		Aliases: []string{"cel"},
 	}
-	flagutil.RegisterFlags(cmd, apiPerformanceCustomEvalsListCmdMeta)
-	if err := flagutil.ValidateMeta[operations.APIPerformanceCustomEvalsListRequest](apiPerformanceCustomEvalsListCmdMeta); err != nil {
-		return fmt.Errorf("invalid metadata for api-performance-custom-evals-list: %w", err)
-	}
 	parent.AddCommand(cmd)
 	return nil
 }
@@ -41,15 +30,6 @@ func initApiPerformanceCustomEvalsListCmd(parent *cobra.Command) error {
 func runApiPerformanceCustomEvalsListCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	if interactive.ShouldPrompt(cmd, apiPerformanceCustomEvalsListCmdMeta) {
-		if err := interactive.PromptAndSetFlags(cmd, apiPerformanceCustomEvalsListCmdMeta); err != nil {
-			return err
-		}
-	}
-	req, err := flagutil.BuildRequest[operations.APIPerformanceCustomEvalsListRequest](cmd, apiPerformanceCustomEvalsListCmdMeta, "", "")
-	if err != nil {
-		return err
 	}
 	s, err := client.NewClient(cmd)
 	if err != nil {
@@ -70,7 +50,7 @@ func runApiPerformanceCustomEvalsListCmd(cmd *cobra.Command, args []string) erro
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.APIPerformance.APIPerformanceCustomEvalsList(cmd.Context(), req, sdkOpts...)
+	res, err := s.APIPerformance.APIPerformanceCustomEvalsList(cmd.Context(), sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}
