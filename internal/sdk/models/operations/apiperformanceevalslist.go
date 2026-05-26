@@ -10,17 +10,8 @@ import (
 )
 
 type APIPerformanceEvalsListRequest struct {
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand         optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
 	IntegrationID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=integration_id"`
 	Enabled       optionalnullable.OptionalNullable[bool]   `queryParam:"style=form,explode=true,name=enabled"`
-}
-
-func (a *APIPerformanceEvalsListRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
 }
 
 func (a *APIPerformanceEvalsListRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {

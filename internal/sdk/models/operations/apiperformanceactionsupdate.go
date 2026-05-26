@@ -5,15 +5,12 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceActionsUpdateRequest struct {
-	ActionID string `pathParam:"style=simple,explode=false,name=action_id"`
-	// Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Brand optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=brand"`
-	Body  components.PublicUpdateActionRequest      `request:"mediaType=application/json"`
+	ActionID string                               `pathParam:"style=simple,explode=false,name=action_id"`
+	Body     components.PublicUpdateActionRequest `request:"mediaType=application/json"`
 }
 
 func (a *APIPerformanceActionsUpdateRequest) GetActionID() string {
@@ -21,13 +18,6 @@ func (a *APIPerformanceActionsUpdateRequest) GetActionID() string {
 		return ""
 	}
 	return a.ActionID
-}
-
-func (a *APIPerformanceActionsUpdateRequest) GetBrand() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.Brand
 }
 
 func (a *APIPerformanceActionsUpdateRequest) GetBody() components.PublicUpdateActionRequest {

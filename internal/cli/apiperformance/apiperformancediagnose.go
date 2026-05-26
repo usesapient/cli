@@ -11,17 +11,16 @@ import (
 	"github.com/usesapient/cli/internal/interactive"
 	"github.com/usesapient/cli/internal/output"
 	"github.com/usesapient/cli/internal/sdk"
+	"github.com/usesapient/cli/internal/sdk/models/components"
 	"github.com/usesapient/cli/internal/sdk/models/operations"
 	"github.com/usesapient/cli/internal/usage"
 )
 
 var apiPerformanceDiagnoseCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
-	{FlagName: "company", Shorthand: "c", FieldPath: "Body.Company", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"company,omitempty"`, Description: "Optional company name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
-	{FlagName: "since", Shorthand: "s", FieldPath: "Body.Since", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "20d", Description: "Lookback window, such as 20d, 72h, or an ISO timestamp."},
-	{FlagName: "format-param", Shorthand: "f", FieldPath: "Body.Format", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "json", EnumValues: []string{"json", "markdown", "md"}, Description: "Report format to include in the response. (options: json, markdown, md)"},
-	{FlagName: "include-examples", Shorthand: "i", FieldPath: "Body.IncludeExamples", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "boolean flag"},
-	{FlagName: "max-examples", Shorthand: "m", FieldPath: "Body.MaxExamples", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 10, Description: "integer value"},
+	{FlagName: "since", Shorthand: "s", FieldPath: "Since", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "20d", Description: "Lookback window, such as 20d, 72h, or an ISO timestamp."},
+	{FlagName: "format-param", Shorthand: "f", FieldPath: "Format", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "json", EnumValues: []string{"json", "markdown", "md"}, Description: "Report format to include in the response. (options: json, markdown, md)"},
+	{FlagName: "include-examples", Shorthand: "i", FieldPath: "IncludeExamples", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "boolean flag"},
+	{FlagName: "max-examples", Shorthand: "m", FieldPath: "MaxExamples", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 10, Description: "integer value"},
 }
 
 // initApiPerformanceDiagnoseCmd initializes the api-performance-diagnose command.
@@ -34,7 +33,7 @@ func initApiPerformanceDiagnoseCmd(parent *cobra.Command) error {
 		RunE:    runApiPerformanceDiagnoseCmd,
 	}
 	flagutil.RegisterFlags(cmd, apiPerformanceDiagnoseCmdMeta)
-	if err := flagutil.ValidateMeta[operations.APIPerformanceDiagnoseRequest](apiPerformanceDiagnoseCmdMeta); err != nil {
+	if err := flagutil.ValidateMeta[components.DiagnoseEvalRunsRequest](apiPerformanceDiagnoseCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for api-performance-diagnose: %w", err)
 	}
 	cmd.Flags().String("body", "", "Request body as JSON (alternative to individual flags). Can also be provided via stdin.")
@@ -52,7 +51,7 @@ func runApiPerformanceDiagnoseCmd(cmd *cobra.Command, args []string) error {
 			return err
 		}
 	}
-	req, err := flagutil.BuildRequest[operations.APIPerformanceDiagnoseRequest](cmd, apiPerformanceDiagnoseCmdMeta, "Body", "body")
+	request, err := flagutil.BuildRequest[components.DiagnoseEvalRunsRequest](cmd, apiPerformanceDiagnoseCmdMeta, "", "body")
 	if err != nil {
 		return err
 	}
@@ -75,7 +74,7 @@ func runApiPerformanceDiagnoseCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.APIPerformance.APIPerformanceDiagnose(cmd.Context(), *req, sdkOpts...)
+	res, err := s.APIPerformance.APIPerformanceDiagnose(cmd.Context(), *request, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

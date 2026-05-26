@@ -9,9 +9,8 @@ import (
 )
 
 type PublicCustomEval struct {
-	ID      string `json:"id"`
-	BrandID string `json:"brand_id"`
-	Prompt  string `json:"prompt"`
+	ID     string `json:"id"`
+	Prompt string `json:"prompt"`
 	// Template used to render prompt before storing. Available variables: Company name {{company_name}}; Company domain {{company_domain}}.
 	PromptTemplate        optionalnullable.OptionalNullable[string]               `json:"prompt_template,omitzero"`
 	Description           optionalnullable.OptionalNullable[string]               `json:"description,omitzero"`
@@ -40,13 +39,6 @@ func (p *PublicCustomEval) GetID() string {
 		return ""
 	}
 	return p.ID
-}
-
-func (p *PublicCustomEval) GetBrandID() string {
-	if p == nil {
-		return ""
-	}
-	return p.BrandID
 }
 
 func (p *PublicCustomEval) GetPrompt() string {

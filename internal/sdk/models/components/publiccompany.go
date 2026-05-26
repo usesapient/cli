@@ -8,28 +8,10 @@ import (
 )
 
 type PublicCompany struct {
-	// Organization-scoped brand relationship ID.
-	OrgBrandID optionalnullable.OptionalNullable[string] `json:"org_brand_id,omitzero"`
-	// Sapient brand ID.
-	BrandID      string                                    `json:"brand_id"`
 	Name         string                                    `json:"name"`
 	Domain       optionalnullable.OptionalNullable[string] `json:"domain,omitzero"`
 	LogoURL      optionalnullable.OptionalNullable[string] `json:"logo_url,omitzero"`
 	Relationship optionalnullable.OptionalNullable[string] `json:"relationship,omitzero"`
-}
-
-func (p *PublicCompany) GetOrgBrandID() optionalnullable.OptionalNullable[string] {
-	if p == nil {
-		return nil
-	}
-	return p.OrgBrandID
-}
-
-func (p *PublicCompany) GetBrandID() string {
-	if p == nil {
-		return ""
-	}
-	return p.BrandID
 }
 
 func (p *PublicCompany) GetName() string {

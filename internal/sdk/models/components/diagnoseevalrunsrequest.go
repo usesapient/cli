@@ -6,7 +6,6 @@ package components
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
@@ -41,8 +40,6 @@ func (e *Format) UnmarshalJSON(data []byte) error {
 }
 
 type DiagnoseEvalRunsRequest struct {
-	// Optional company name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand.
-	Company optionalnullable.OptionalNullable[string] `json:"company,omitzero"`
 	// Lookback window, such as 20d, 72h, or an ISO timestamp.
 	Since *string `default:"20d" json:"since"`
 	// Report format to include in the response.
@@ -60,13 +57,6 @@ func (d *DiagnoseEvalRunsRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (d *DiagnoseEvalRunsRequest) GetCompany() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.Company
 }
 
 func (d *DiagnoseEvalRunsRequest) GetSince() *string {

@@ -11,20 +11,20 @@ import (
 	"github.com/usesapient/cli/internal/interactive"
 	"github.com/usesapient/cli/internal/output"
 	"github.com/usesapient/cli/internal/sdk"
+	"github.com/usesapient/cli/internal/sdk/models/components"
 	"github.com/usesapient/cli/internal/sdk/models/operations"
 	"github.com/usesapient/cli/internal/usage"
 )
 
 var apiPerformanceStarterProjectsCreateCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "brand", Shorthand: "b", FieldPath: "Brand", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=brand"`, Description: "Optional brand name, domain, brand ID, or org brand ID. Omit when the API key resolves to one brand."},
-	{FlagName: "name", Shorthand: "n", FieldPath: "Body.Name", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "repo-url", FieldPath: "Body.RepoURL", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "ref", FieldPath: "Body.Ref", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "main", Description: "string value"},
-	{FlagName: "subdir", Shorthand: "s", FieldPath: "Body.Subdir", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "", Description: "string value"},
-	{FlagName: "install-steps", FieldPath: "Body.InstallSteps", Kind: flagutil.FlagKindStringArray, Optional: true, Description: "list of values"},
-	{FlagName: "integration-id", FieldPath: "Body.IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"integration_id,omitempty"`, Description: "string value"},
-	{FlagName: "framework", Shorthand: "f", FieldPath: "Body.Framework", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "custom", EnumValues: []string{"fastify", "nuxt", "express", "spa-js", "angular", "react", "fastapi", "vite", "nextjs", "custom"}, Description: "options: fastify, nuxt, express, spa-js, angular, react, fastapi, vite, nextjs, custom"},
-	{FlagName: "enabled", Shorthand: "e", FieldPath: "Body.Enabled", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "boolean flag"},
+	{FlagName: "name", Shorthand: "n", FieldPath: "Name", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
+	{FlagName: "repo-url", FieldPath: "RepoURL", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
+	{FlagName: "ref", FieldPath: "Ref", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "main", Description: "string value"},
+	{FlagName: "subdir", Shorthand: "s", FieldPath: "Subdir", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "", Description: "string value"},
+	{FlagName: "install-steps", FieldPath: "InstallSteps", Kind: flagutil.FlagKindStringArray, Optional: true, Description: "list of values"},
+	{FlagName: "integration-id", FieldPath: "IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"integration_id,omitempty"`, Description: "string value"},
+	{FlagName: "framework", Shorthand: "f", FieldPath: "Framework", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "custom", EnumValues: []string{"fastify", "nuxt", "express", "spa-js", "angular", "react", "fastapi", "vite", "nextjs", "custom"}, Description: "options: fastify, nuxt, express, spa-js, angular, react, fastapi, vite, nextjs, custom"},
+	{FlagName: "enabled", Shorthand: "e", FieldPath: "Enabled", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "boolean flag"},
 }
 
 // initApiPerformanceStarterProjectsCreateCmd initializes the api-performance-starter-projects-create command.
@@ -38,7 +38,7 @@ func initApiPerformanceStarterProjectsCreateCmd(parent *cobra.Command) error {
 		Aliases: []string{"spc"},
 	}
 	flagutil.RegisterFlags(cmd, apiPerformanceStarterProjectsCreateCmdMeta)
-	if err := flagutil.ValidateMeta[operations.APIPerformanceStarterProjectsCreateRequest](apiPerformanceStarterProjectsCreateCmdMeta); err != nil {
+	if err := flagutil.ValidateMeta[components.PublicStartingProjectRequest](apiPerformanceStarterProjectsCreateCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for api-performance-starter-projects-create: %w", err)
 	}
 	cmd.Flags().String("body", "", "Request body as JSON (alternative to individual flags). Can also be provided via stdin.")
@@ -56,7 +56,7 @@ func runApiPerformanceStarterProjectsCreateCmd(cmd *cobra.Command, args []string
 			return err
 		}
 	}
-	req, err := flagutil.BuildRequest[operations.APIPerformanceStarterProjectsCreateRequest](cmd, apiPerformanceStarterProjectsCreateCmdMeta, "Body", "body")
+	request, err := flagutil.BuildRequest[components.PublicStartingProjectRequest](cmd, apiPerformanceStarterProjectsCreateCmdMeta, "", "body")
 	if err != nil {
 		return err
 	}
@@ -79,7 +79,7 @@ func runApiPerformanceStarterProjectsCreateCmd(cmd *cobra.Command, args []string
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.APIPerformance.APIPerformanceStarterProjectsCreate(cmd.Context(), *req, sdkOpts...)
+	res, err := s.APIPerformance.APIPerformanceStarterProjectsCreate(cmd.Context(), *request, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

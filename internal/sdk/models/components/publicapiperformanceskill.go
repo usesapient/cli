@@ -11,7 +11,6 @@ import (
 type PublicAPIPerformanceSkill struct {
 	ID             string                                            `json:"id"`
 	SourceID       string                                            `json:"source_id"`
-	BrandID        string                                            `json:"brand_id"`
 	IntegrationID  optionalnullable.OptionalNullable[string]         `json:"integration_id,omitzero"`
 	Slug           string                                            `json:"slug"`
 	Name           string                                            `json:"name"`
@@ -50,13 +49,6 @@ func (p *PublicAPIPerformanceSkill) GetSourceID() string {
 		return ""
 	}
 	return p.SourceID
-}
-
-func (p *PublicAPIPerformanceSkill) GetBrandID() string {
-	if p == nil {
-		return ""
-	}
-	return p.BrandID
 }
 
 func (p *PublicAPIPerformanceSkill) GetIntegrationID() optionalnullable.OptionalNullable[string] {

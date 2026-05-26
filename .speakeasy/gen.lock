@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: b4e9b595-9805-48d3-93ca-ae7b2d7fd331
 management:
-  docChecksum: 96466fa28af2612699b61b8a55439aab
+  docChecksum: 707cdd6a6e45bba2e80f0710d5c7a6af
   docVersion: 1.0.0
-  speakeasyVersion: 1.765.0
-  generationVersion: 2.886.0
-  releaseVersion: 0.5.8
-  configChecksum: a97d13a0e18eb3685c68f30f1589c482
+  speakeasyVersion: 1.765.1
+  generationVersion: 2.886.1
+  releaseVersion: 0.5.9
+  configChecksum: 24db54a688196a7a5dde187e9a6687f9
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
 persistentEdits:
-  generation_id: c44c2d9d-ae3d-49c5-864d-66e9455be3fe
-  pristine_commit_hash: 6d2da80570e1cf7e6df366c2774390945b12e59e
-  pristine_tree_hash: 03aedcfbf7aa3090ec0226ff823ce1589628e2c0
+  generation_id: cce79eb9-35ed-44ae-a188-205d42fcd3a9
+  pristine_commit_hash: df4a4d63c3f60f301fa829be43a7d5f11e5780c5
+  pristine_tree_hash: 52e0d93763094a17f6a1d89bead035caa6991f52
 features:
   cli:
     additionalProperties: 0.0.0
@@ -53,108 +53,108 @@ trackedFiles:
     pristine_git_object: a467c1cf7beace5dec904b85c547111a3185949a
   internal/cli/apiperformance/apiperformanceactionslist.go:
     id: 75cc9490af28
-    last_write_checksum: sha1:1581940f1a6e276e1faa9af077fea34f8334596e
-    pristine_git_object: bced591d2e43890e68ccdfa0ae9570b667becf2b
+    last_write_checksum: sha1:5a16975875d475f709d61dbeee21af2870ad70d2
+    pristine_git_object: 4a4d1e630bc06404290d771016900a83fdf47e85
   internal/cli/apiperformance/apiperformanceactionsrefresh.go:
     id: e74a92d1bb0c
-    last_write_checksum: sha1:243875a32441a2cf72eb6ab764a533ff4e32673b
-    pristine_git_object: cb1c40746a8b1671ae84dd8c6ed36e87f5ae387f
+    last_write_checksum: sha1:928b3cd3fdb84cf4bc16d8b16fd462e2fb019fcf
+    pristine_git_object: 0e44283f37b7169532c2c058ea2f6d4c03cd5e8e
   internal/cli/apiperformance/apiperformanceactionsretrieve.go:
     id: 86d33dc33d31
-    last_write_checksum: sha1:3bca3493dce8e9680fbeb9bd30ef494930eb4d41
-    pristine_git_object: c827cd755cbbf1ee311a5d25daff62d6dec6b77d
+    last_write_checksum: sha1:1fa13c1bb23a2f051b1505ce5d5716ff5ecdabd1
+    pristine_git_object: 3511110a07202428137e05d4ba570d8cb7e9f1f9
   internal/cli/apiperformance/apiperformanceactionsupdate.go:
     id: f1feffce9540
-    last_write_checksum: sha1:ee5b47f5540cb3f1a87ed66d2f83d880580974d8
-    pristine_git_object: a5c883867889bc57d63cfef25b763091d805304d
+    last_write_checksum: sha1:46d97995ecb6aa7bd32c0bd01c1ce51168db70a1
+    pristine_git_object: 091bb58a4ca8e1784e9ed05462177cde1c8d2381
   internal/cli/apiperformance/apiperformanceactionsverify.go:
     id: d5ec214ea332
-    last_write_checksum: sha1:eb1ae241b7c14c89757448aeae4c820d95c3ad06
-    pristine_git_object: 44a951c468e16f8a5f50cba9b4ddea3e79cc3274
+    last_write_checksum: sha1:5b8e058351069e16916196b7df89cd954766ef3f
+    pristine_git_object: a1ec56ed7be872ce5d0844598bf273b698e5e752
   internal/cli/apiperformance/apiperformanceconfigretrieve.go:
     id: 27710f4dde8c
-    last_write_checksum: sha1:d266fc86e294dc7d0005cada1577d73dcbbc4b53
-    pristine_git_object: e78881f18a0d60791a6ac6fe1b56b030809e3a86
+    last_write_checksum: sha1:223440e41733b2dad51b62e873a941fb5a2e8590
+    pristine_git_object: 6d8ed9cc36313d677fcd5e17711b0e29257b76e9
   internal/cli/apiperformance/apiperformanceconfigupdate.go:
     id: 8cb5d4db1c6b
-    last_write_checksum: sha1:7dfcbc384fb3833c0924549af42d8cf0885617a4
-    pristine_git_object: 42b6f31e37266e8fc162916eedbed7edc3860a5e
+    last_write_checksum: sha1:7ead4561685c0603104cd68c0875a1b992575b21
+    pristine_git_object: 03bfe1b8a1411254ba06b95f7272f7856ad2ae5c
   internal/cli/apiperformance/apiperformancecustomevalscreate.go:
     id: e6b84c97ed38
-    last_write_checksum: sha1:e07bef395a7372c95c963f32914c40a02f122ac1
-    pristine_git_object: 4818585de831d2d9cd6e0136c366423c1521f4ae
+    last_write_checksum: sha1:655f7be6e488cc9281c19c745a481564c2e05ea6
+    pristine_git_object: 9254231de58df8f79cc8304e14bf5605a4800423
   internal/cli/apiperformance/apiperformancecustomevalsdelete.go:
     id: b536318d4da0
-    last_write_checksum: sha1:cc927cf7e833d96837eeb04576db363d367307f8
-    pristine_git_object: e2cb08df12b0424236be2c65c9c7b0fa71fcf94a
+    last_write_checksum: sha1:76fa2bc312956f12ba13303ca2b7478c68eae616
+    pristine_git_object: bc155439a775f36e2f78ee8de579c88b63bc9dc8
   internal/cli/apiperformance/apiperformancecustomevalshistorylist.go:
     id: 7885e4048435
-    last_write_checksum: sha1:1de92d6434f6716275067ad95f6d2f4f13db4888
-    pristine_git_object: eb7c1186e6181cd20457520b560fa7320647efec
+    last_write_checksum: sha1:09f054b4b85cf0258483a6e63e85eb29d1cc1773
+    pristine_git_object: 1c4f39c614790f5478f8a516f45cc6dfc3e86d06
   internal/cli/apiperformance/apiperformancecustomevalslist.go:
     id: 60592906c462
-    last_write_checksum: sha1:9a288f2df60d4c810399d1893239d4c4dd2cc6a9
-    pristine_git_object: 0ff2a05b19edd19592a15658d3846e2381917fe7
+    last_write_checksum: sha1:de6fa3b89d1b05dc5aa3f527f919e37bbe14a035
+    pristine_git_object: e79096640c168f74af8fcb89501609732783887a
   internal/cli/apiperformance/apiperformancecustomevalsretrieve.go:
     id: 22a6302c003e
-    last_write_checksum: sha1:aed3d4cd379c2e4ee63c138a430a3bac460f5020
-    pristine_git_object: 57d092ea892708deefd1776fa63fcd84781f22ee
+    last_write_checksum: sha1:c7a8efaaa0cbadec2aa4d5dc94a03139d2e6ddcb
+    pristine_git_object: 750b86d6e0ee31ddeab40abda0102e7144a28a5b
   internal/cli/apiperformance/apiperformancecustomevalsupdate.go:
     id: e77b554a0ce2
-    last_write_checksum: sha1:d5f93e73460b0abc4f05304f9fd6b88ce9853162
-    pristine_git_object: 021f0c61687d2a2393e2a7cf0b809a73ab98bc2e
+    last_write_checksum: sha1:ec41c9a88dee935d402513b57d2c0f5967bc2bad
+    pristine_git_object: ffd9164424ef1229737e04ef597b9c2177aef60e
   internal/cli/apiperformance/apiperformancediagnose.go:
     id: 4f07a933a0c9
-    last_write_checksum: sha1:6dd5028a65ba1193e4a8e574d88c6ac9c83c07e4
-    pristine_git_object: 4d00481956fd281e54ef9baaac064b0f568fb60f
+    last_write_checksum: sha1:e0ab75b66aab50b973d5b81f4ccceb10608b8140
+    pristine_git_object: 9faf230939c48b6648129e793c7ce820924b5ec0
   internal/cli/apiperformance/apiperformanceevalslist.go:
     id: b9a0d38173bb
-    last_write_checksum: sha1:7eed80da8c3249c4d8bf2598a0a726aac6cf6f39
-    pristine_git_object: eb91a47a9372ee4cecc5e751e660411a36f31ba6
+    last_write_checksum: sha1:713da741311e44fcbdcdda3cfcae6371fd7e829d
+    pristine_git_object: 24b9e0b2184eb0da84423bb9379fa8304a186a17
   internal/cli/apiperformance/apiperformanceevalsretrieve.go:
     id: 107b64098961
-    last_write_checksum: sha1:0b912c60dade8eaa67d9cc636b59f52cbed83641
-    pristine_git_object: 76e7437a42b94338c740b0ab4b41445e55ba9e39
+    last_write_checksum: sha1:1d1f0e585c14e096aaf0fd54ec2307e2db1b1bb4
+    pristine_git_object: 13138360738e2abddc846a0b3d87e9098881b57f
   internal/cli/apiperformance/apiperformanceevalsupdate.go:
     id: 7760166dee6d
-    last_write_checksum: sha1:844b3bc77c3327f6862980391abbb76e5c731ec9
-    pristine_git_object: ba682a0ac537c49bedce7e2163f5be168b05cd51
+    last_write_checksum: sha1:5d3badf9e7e9fbdfa313bdbeb74562a00aa72bf0
+    pristine_git_object: e363eab381527c427a040bff8f84eaefc718f474
   internal/cli/apiperformance/apiperformancerunslist.go:
     id: b15ac59dd8ae
-    last_write_checksum: sha1:c0e03d1c02bb70b6a63ff700a0ca83b377093116
-    pristine_git_object: 9efca57923df464ba5965916642f16a99dc14a8b
+    last_write_checksum: sha1:551e3278b13d6a48ed66ddba33be13a52aaa4b20
+    pristine_git_object: 328ed2d6b7553c855e148de955aa7f4b15d09d16
   internal/cli/apiperformance/apiperformancerunsretrieve.go:
     id: bc53a60aba36
     last_write_checksum: sha1:520bc0a64384b2be622ea410909f69a9b02c0014
     pristine_git_object: a84ffada1eaae24eca17e8f1982622682f2397fd
   internal/cli/apiperformance/apiperformanceskillslist.go:
     id: 82b17f84f279
-    last_write_checksum: sha1:9a7e4dca99b00f7e223ebc739789e930bb0db5df
-    pristine_git_object: 2cbec521d1407e874cad64c832a1a75da01a45e5
+    last_write_checksum: sha1:f16fd6a5804428f48bf25b13a04b09bf89364beb
+    pristine_git_object: e3401c4161ef87e8b299e6b88fddce48e7139eff
   internal/cli/apiperformance/apiperformancesourceslist.go:
     id: 3ff06ac6da8b
-    last_write_checksum: sha1:3307a9d444fb9397ce36982b8b75956ea0f15ebf
-    pristine_git_object: b7849583746a83e3a16329bf687009aa8c6468fd
+    last_write_checksum: sha1:378a7e4527b53a970e0ca6a82579d4aa09594531
+    pristine_git_object: e2e37c7f265cfac371432e3278f6e869dda64427
   internal/cli/apiperformance/apiperformancestarterprojectscreate.go:
     id: 70f0265ef553
-    last_write_checksum: sha1:210b73b8a53489db0d4d8acebb000b775ad2a4b9
-    pristine_git_object: cb4a45e50afd867e585d7b98e02faa1ee90db2a9
+    last_write_checksum: sha1:52c80348a7c48079ae2bb36511a23487a2b846f9
+    pristine_git_object: bfb1370e08d76b73ced9c4a4cfba4f43a1993cc7
   internal/cli/apiperformance/apiperformancestarterprojectsdelete.go:
     id: db642485fd59
-    last_write_checksum: sha1:8d1570658ade916484c9b56ea79f4a5081488aec
-    pristine_git_object: 3cda8dface8cefab19845a83876f01d647a7819b
+    last_write_checksum: sha1:413803bad45eec85a3041b4bffa18b5cf92e9a55
+    pristine_git_object: bfbe519bc2eaf181059051aec85404a1b19a412d
   internal/cli/apiperformance/apiperformancestarterprojectslist.go:
     id: ede62ba4979f
-    last_write_checksum: sha1:dbe02ca055651ad193adb868e94d790062abc4b9
-    pristine_git_object: 163e103653230b12453f909871209c93114fae68
+    last_write_checksum: sha1:3267de80383562f25b04b6d29eaaed73c49c828d
+    pristine_git_object: 8d7fbfc68bdf8ff21d02c60fcb02dc5bad733270
   internal/cli/apiperformance/apiperformancestarterprojectsretrieve.go:
     id: b23ec0ec8f44
-    last_write_checksum: sha1:1b7ae7431314625f1a4f9a9bdb7e0bbbae9f721b
-    pristine_git_object: 5cab0a094ead74cb8a87c253bc511d2c5c635a3e
+    last_write_checksum: sha1:828183f4de94633a61b1c09ffc9c70fee769d249
+    pristine_git_object: 8b1a6bc100a5562e6d2d2f7b2ba2e4a1283787dc
   internal/cli/apiperformance/apiperformancestarterprojectsupdate.go:
     id: "247958547369"
-    last_write_checksum: sha1:fc75c30dbf13bfd9cf0f1fbc69e98259a58219ac
-    pristine_git_object: 12916c09118153acec0ef0cadf81dcd0cdaa15fa
+    last_write_checksum: sha1:e0adc90797ea836892f848ecc02472364fa33933
+    pristine_git_object: 5d850473fc772b415f658a68771d908adc3b0d03
   internal/cli/apiperformance/apiperformancetargetslist.go:
     id: da8ad1e71961
     last_write_checksum: sha1:9577b4ac76329402ba41c7da13541ddc49dc5d1a
@@ -173,8 +173,8 @@ trackedFiles:
     pristine_git_object: 970d202a484c1a7c4487c706a8c147018003d6fd
   internal/cli/evalruns/evalrunscreate.go:
     id: a77f3446358b
-    last_write_checksum: sha1:e99aa93ab04f6e281ccfbc591c1eca12b976fc0c
-    pristine_git_object: 0b1c48a1cec6b018ba0588e81fadf3fc641a889e
+    last_write_checksum: sha1:aaf3eaf64842e9b3cf092b00653feb8ca473bfa9
+    pristine_git_object: c7840fc375c81067ad5eb757abd678bc7ccb7327
   internal/cli/evalruns/evalrunsretrieve.go:
     id: ca67a2312595
     last_write_checksum: sha1:162d9b0b94d792389c98fea78adb850344ac8b35
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: 82e627c3269cd3715e02ec7e11be0e41f22a3b01
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:429591db81031578c4741bbe869ca999b968e8b4
-    pristine_git_object: fba7c4e4d4849c0bd8ff0a36d181c73995e1dc0a
+    last_write_checksum: sha1:82bdf6d77f14116f50dddf86f4f8505309ac2a11
+    pristine_git_object: 7c0e55360059614401e09e48e7a8f08e2383007b
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:f0b47f0b4083f9abafc5df2e9123f3f7f85299de
@@ -325,12 +325,12 @@ trackedFiles:
     pristine_git_object: e6a994416d0f527912d2d272e2583458f4fc9bcb
   internal/sdk/apiperformance.go:
     id: 0bf8e5ded747
-    last_write_checksum: sha1:ed5d3ab73951aa20645df8598f0d33a0fd12a7fd
-    pristine_git_object: 5a99372ff89cf504cc11f1266c7f3e0dd3a82276
+    last_write_checksum: sha1:6099d2053bbcf0db03da1c95d00648ca73ce3e24
+    pristine_git_object: 30cdde25e032eb21aca62ec02a3346296f181801
   internal/sdk/evalruns.go:
     id: 874d949a40ad
-    last_write_checksum: sha1:e3570111766b3946a8474997bc4c50f8a1fd900b
-    pristine_git_object: b1ffda71713c05f9e8b4f08531337568a4f41ca9
+    last_write_checksum: sha1:6cc27314a18ed41ace541ca2d0707a44848af832
+    pristine_git_object: e5b088a09d031b5a46e9b41531f43f951da0f2a0
   internal/sdk/models/components/createprompttopicrequest.go:
     id: 8842dce398f6
     last_write_checksum: sha1:ff2ed1c23c56655676adfe7d4b9246d3f2076700
@@ -345,8 +345,8 @@ trackedFiles:
     pristine_git_object: ac9da58f7f4a79b0326ba3079d7c4af321be23e9
   internal/sdk/models/components/diagnoseevalrunsrequest.go:
     id: b9e389f989fe
-    last_write_checksum: sha1:f09506b4bcd7de63716191d82264a878acb2030a
-    pristine_git_object: a4ad3d6b7b11371db0103365eeb4f48e382639f5
+    last_write_checksum: sha1:0af712f7950273eac0a8278f5970e6a7a1b3a229
+    pristine_git_object: 13967dc69712928b4357dd699285490dbf9d069a
   internal/sdk/models/components/diagnoseevalrunsresponse.go:
     id: 5a6617453064
     last_write_checksum: sha1:f95cb0c91e5d7b058cbbcfff2ef6c6f42da0aed7
@@ -405,12 +405,12 @@ trackedFiles:
     pristine_git_object: 9a3000d7ae83ebc9091e26d95be37e2ce31b4f27
   internal/sdk/models/components/publicapievaltarget.go:
     id: 9613ce70d7cf
-    last_write_checksum: sha1:620297d10d67e48d0087f6c84ae67e7c8cb491d1
-    pristine_git_object: ada4d18e67f42329218adbcaa5238b6e56abc6ba
+    last_write_checksum: sha1:772ea361ae8b6423b96010c56de2c02cf0ccd94d
+    pristine_git_object: b4927d031097364119c1676a634c2e848f8d9498
   internal/sdk/models/components/publicapiperformanceaction.go:
     id: a571cef5c2cf
-    last_write_checksum: sha1:1aee09ef26b71a587f0c714e5782e342d3b2d2d1
-    pristine_git_object: 9b6ba1b9610cb1980d564094089c06269330c54b
+    last_write_checksum: sha1:0699585125c2d17c52c84672cf618cae0e5d4050
+    pristine_git_object: a1e1c93ee6411c8ea9c30a5965a9ba18c21a9800
   internal/sdk/models/components/publicapiperformanceactionsresponse.go:
     id: a22063570d1e
     last_write_checksum: sha1:506f111dcc1deda08b794f9840643fc03580f074
@@ -425,16 +425,16 @@ trackedFiles:
     pristine_git_object: 0a020ae8ccfb03b8c9283bb538a45a1c1f5e96ac
   internal/sdk/models/components/publicapiperformanceevalrunrequest.go:
     id: 72acbbc4dfdf
-    last_write_checksum: sha1:9fe4cabb3ae46e1dd987fb16048cb595a4c5b784
-    pristine_git_object: 6448dd4882a5b234fb0b4d621314f0333abbbfbd
+    last_write_checksum: sha1:86dbc5ec551f3feddb60d45c73287297ec0960eb
+    pristine_git_object: eaccbee0ce2d9ace10d34615cba43f4715b8ccdd
   internal/sdk/models/components/publicapiperformanceevalruntarget.go:
     id: df0bc5da6abb
     last_write_checksum: sha1:de8f360d381fa5d94540ff6cf2981bdc88a528e0
     pristine_git_object: a9cf2f370e309fc121abbea62496bd2805095ce6
   internal/sdk/models/components/publicapiperformanceskill.go:
     id: a5868b2f1064
-    last_write_checksum: sha1:6dc709715b34b37358ac7998fd29484bbd3b09f7
-    pristine_git_object: 8dc286c7dc943d1df32fbcbd949a7a9bd01930ae
+    last_write_checksum: sha1:d65fe2b296717e9f34a3c618c9ef0a7cfb33f8d8
+    pristine_git_object: cb9e0e6a76dea2e00b2afbc116aa3f24ce8db585
   internal/sdk/models/components/publicapiperformanceskillsresponse.go:
     id: ace1cd775074
     last_write_checksum: sha1:bda7a9fd67cf619204c34b4708afc3c5eb10415c
@@ -465,12 +465,12 @@ trackedFiles:
     pristine_git_object: 8379bf4f99b2ee7af56d34b0234a91145dc75e04
   internal/sdk/models/components/publiccompany.go:
     id: ffc9e25d1940
-    last_write_checksum: sha1:1048715eb92577a47bfe4d1f76529b7a98b571c0
-    pristine_git_object: bb1dd494632224744b5d28f80f58e0b79df87549
+    last_write_checksum: sha1:a807dc54281045691fa36f051395d3a59a113aa5
+    pristine_git_object: c638e17cf138d00e8c9cf5ef9573c4297e45c230
   internal/sdk/models/components/publiccustomeval.go:
     id: a205ccb6a735
-    last_write_checksum: sha1:f3a91de564b3583fab06e76a3f39bfdb8a984d39
-    pristine_git_object: 7635ca7546e0b8521a9ff7cb8d7441adbbc26b4f
+    last_write_checksum: sha1:a2ddb7bdca767c0494007a89c31aef90c27519b3
+    pristine_git_object: a65eb0172c2465fade8db9a3b668271af30b2e83
   internal/sdk/models/components/publiccustomevalhistorycategory.go:
     id: d27c394b1c85
     last_write_checksum: sha1:496800f801002621db05c158b38c8a07a863b62a
@@ -497,8 +497,8 @@ trackedFiles:
     pristine_git_object: 89e4713733611d3e2ee62e38b3f5372919f5f79d
   internal/sdk/models/components/publiccustomevalrequest.go:
     id: 73a096a43366
-    last_write_checksum: sha1:190d084e253e871b72ad5817ad3c3fcccb9c80d4
-    pristine_git_object: c77859fad6275372af0642ec10416b748ad06d1d
+    last_write_checksum: sha1:e930d4e95b1a85cd661a94ffb07cc1c676468c17
+    pristine_git_object: 85f15c87e9ba1b30c800c07bbccd3344c648cd82
   internal/sdk/models/components/publiccustomevalsresponse.go:
     id: 975efc51b2ee
     last_write_checksum: sha1:a9676282ef7b4b66fb5be66b392b0a99d21a1547
@@ -521,16 +521,16 @@ trackedFiles:
     pristine_git_object: 436e2b8d04ce2b27ac7ee4879a64faf69425b5d2
   internal/sdk/models/components/publicevaldefinition.go:
     id: 42158b072be5
-    last_write_checksum: sha1:82745e0f9b45dec7a34b76d45978bc9084e0983e
-    pristine_git_object: c0df57d340b708e4881fd1e58c1e8dbf2e083cc5
+    last_write_checksum: sha1:bcd389a54411e4b2b5bbe39122731acbb220d975
+    pristine_git_object: d63df7713f323739ba8a5938aa83b69b7ff5e7e6
   internal/sdk/models/components/publicevaldefinitionsresponse.go:
     id: a9b23ee1a45e
     last_write_checksum: sha1:b600cbf457ef528cd39d743bb21df2f9e47165b2
     pristine_git_object: 2d17c1b4ad7b9c5149918ff3203bc8070cb0c5a8
   internal/sdk/models/components/publicevaldefinitionupdate.go:
     id: 7e2939d620c0
-    last_write_checksum: sha1:b445368d8a464736e9466b38308b6a570b2fc948
-    pristine_git_object: 5a1b04630e8f0058230c12099764c70602bce339
+    last_write_checksum: sha1:47fa3ad7b20c0e5bcaf48290c1598009622c0b77
+    pristine_git_object: d433e422b6c526a1f9fdf0a5e96dbd4d104d8b32
   internal/sdk/models/components/publicevalenvprofilerequest.go:
     id: e5e2f4155536
     last_write_checksum: sha1:00d9c6bf5862bca42736f22a9f6a243567c3d513
@@ -617,8 +617,8 @@ trackedFiles:
     pristine_git_object: 7674c3b004c615aaacea007c85f857d60e54c05d
   internal/sdk/models/components/publicstartingproject.go:
     id: a5390c8f64a7
-    last_write_checksum: sha1:fec45aeed6966c06bf5f4836d207df6ae0abe276
-    pristine_git_object: de1e9a749d95a5b7139d58b333f8b41ea0614b56
+    last_write_checksum: sha1:380f0dd7b5df8c484ff2e0443b4a0dce30f3803c
+    pristine_git_object: f999e6b94294c4836524434f624e531b22092b74
   internal/sdk/models/components/publicstartingprojectrequest.go:
     id: 3782ae640c67
     last_write_checksum: sha1:d59364802103ee6d5fe0457d368ce9fd4a2c572c
@@ -657,108 +657,108 @@ trackedFiles:
     pristine_git_object: 749b69ec97f0aed8133616a8b405b4633b24f414
   internal/sdk/models/operations/apiperformanceactionslist.go:
     id: a3a703515a60
-    last_write_checksum: sha1:6d6cad992737be0cf4c30704228a0b04390d914b
-    pristine_git_object: cc5253d9e93e0a55d9a8813aba612e05c7f670fe
+    last_write_checksum: sha1:0eef8cdaf1b76c5c9306e3d1a82dd0672ef46e92
+    pristine_git_object: 1df1048b2131a3432e338eaea04b58e2ee5d692f
   internal/sdk/models/operations/apiperformanceactionsrefresh.go:
     id: c4609903a67b
-    last_write_checksum: sha1:1af29d27d3dcec12b064ab4441bc64e4255edae7
-    pristine_git_object: 220b7d3cf9666bdf6b6b3072864555d188dda589
+    last_write_checksum: sha1:6889bd9bd6e0fe4cbbf0e8ea6cf985b4ca9e7143
+    pristine_git_object: 253053293d3dbee4fa21a457a8837490887104cc
   internal/sdk/models/operations/apiperformanceactionsretrieve.go:
     id: 6674ba1b3cdf
-    last_write_checksum: sha1:47d2d6f4fe0918386bb01dedce010ef4bc726ae0
-    pristine_git_object: e27e36ffdb06d68f0d58556742457896caaf10ff
+    last_write_checksum: sha1:f0b2bca72906c88d73e5eb9d07ca60595b1a9fcd
+    pristine_git_object: 548f32eae26b13cb24aaf19b685b67d669724077
   internal/sdk/models/operations/apiperformanceactionsupdate.go:
     id: fdbd3778e511
-    last_write_checksum: sha1:6d274e67aa595c178798a4b26c2a51fffd4e91c9
-    pristine_git_object: efd9caa5f4f833cf8d360e8ddb37ff6bbb46032e
+    last_write_checksum: sha1:758a9c9fdeade4be09e1529896fb68df3376ffa4
+    pristine_git_object: 5a75d052c19ca033f5c1b24f94c37089c52d3e7c
   internal/sdk/models/operations/apiperformanceactionsverify.go:
     id: 2d06fc5a1984
-    last_write_checksum: sha1:3a51b0eff628dd65090cdc6db11304c573b2902f
-    pristine_git_object: b457c8bab6461ae3e151c2da8f898178918d0468
+    last_write_checksum: sha1:35d0c9317bec739ded692fe2b10eb4e1d0b90871
+    pristine_git_object: e73b4d8b7c8a5b4abb14a5072196fece2d5cceca
   internal/sdk/models/operations/apiperformanceconfigretrieve.go:
     id: 5af9b0d95688
-    last_write_checksum: sha1:19ada4c267dd0a631bd7461895b13a9b5a9f9fe4
-    pristine_git_object: 0393a1aab97b6a47321f3e265b76fb8d9c669485
+    last_write_checksum: sha1:6cfcaed5c5b0e6b02b1bcf883369aa235e56be64
+    pristine_git_object: eecf5a53cbcff524502a10d7664ba4de12be8702
   internal/sdk/models/operations/apiperformanceconfigupdate.go:
     id: 1ee776e0bd7e
-    last_write_checksum: sha1:4620a87b2d31950c519fb669cedc96e39ec5ec80
-    pristine_git_object: d993acbc8dab7a668824ce88e1a4b031a573ac98
+    last_write_checksum: sha1:a6f69d8ebecf29fc23339cf90ba031dc61091959
+    pristine_git_object: bee1b8d0dd3f9f8a331a381635df0230d6ca74ed
   internal/sdk/models/operations/apiperformancecustomevalscreate.go:
     id: efc9033f24bc
-    last_write_checksum: sha1:8f4addbbeeee9b4c0c7a2c6d3e7b66db7ee06241
-    pristine_git_object: b4c4e877982666fac32881fe4562fa624c581b86
+    last_write_checksum: sha1:ee12bcdf99821491ebbf50e3f1c9dda3be5ea70c
+    pristine_git_object: e90cce2ddda2edce27cc1e4f6bdb807bfc854732
   internal/sdk/models/operations/apiperformancecustomevalsdelete.go:
     id: d6d3ef7d5d08
-    last_write_checksum: sha1:6cd3e131f22421644a2b8ef9c77434cf56c382d2
-    pristine_git_object: 05aa2936a4655747ee7cd6cf38c9bf66855373bc
+    last_write_checksum: sha1:a291d4abd579d4eb12d0d8f487ec15d7e3052a93
+    pristine_git_object: a8eed12dbd5651405c962082ff68d0d5d73a2c66
   internal/sdk/models/operations/apiperformancecustomevalshistorylist.go:
     id: 4cb16361df10
-    last_write_checksum: sha1:36e685e7de71bf7dc6a1693c239f6edf13252674
-    pristine_git_object: 6426812c7158e0babab497066a633b74a0c0a907
+    last_write_checksum: sha1:e2abae1308d1d9ff1b994a5bc34a74b030eff9b2
+    pristine_git_object: 1fb2731540db87fb4011e70f73c1c28f42c05de3
   internal/sdk/models/operations/apiperformancecustomevalslist.go:
     id: 0cba5727a218
-    last_write_checksum: sha1:9912dcc3e2a4e308285739aca9eb6d5e0bc40417
-    pristine_git_object: dc3ca087e81c1274a33b51225a087fcc5e0d50ee
+    last_write_checksum: sha1:edfbd50cc4cc033c0acb06788637a5a08b092549
+    pristine_git_object: 53a7fc5bb9770c4709e8c439cc581341468c50fc
   internal/sdk/models/operations/apiperformancecustomevalsretrieve.go:
     id: 25e31bb6f23c
-    last_write_checksum: sha1:c7e489b1f2bbd963f595bdd064987270504d95de
-    pristine_git_object: b113e7d9a79b9614c922aa108b77f19667e8fc65
+    last_write_checksum: sha1:080fe2bf2c0a7ea05814bad90f327e5e82acec2a
+    pristine_git_object: 6379c796860de33f20aaaedf4fc9701d1f6025a9
   internal/sdk/models/operations/apiperformancecustomevalsupdate.go:
     id: 824f98a1c22c
-    last_write_checksum: sha1:9785d4e9e0c8dd65e5b36d275df3b04f31f0a444
-    pristine_git_object: acd8392205c87ad8a79c52c693a419a04259417a
+    last_write_checksum: sha1:d75c726f531a975ef8c446682f990a2250291a27
+    pristine_git_object: dd1ed37364df969c1bd44e8db8931f318b9bf622
   internal/sdk/models/operations/apiperformancediagnose.go:
     id: a7b6a3311d80
-    last_write_checksum: sha1:496f0972c7b7197ab94555b801700c55f41141cb
-    pristine_git_object: 5e2823bde0af91bdecf4aea24112937f841172bd
+    last_write_checksum: sha1:57409a9a97aa31533bbe349faf29a47e2130bc52
+    pristine_git_object: 6b1d20e597b8f163f52ab98010f03975f1badb99
   internal/sdk/models/operations/apiperformanceevalslist.go:
     id: 930852ff5e4d
-    last_write_checksum: sha1:269086dd3d87302d6cb981cfb39e394b2b12bb33
-    pristine_git_object: ef87f536949a47fb3bbf5ad83a0204c41e3a28ea
+    last_write_checksum: sha1:5e6eba4447f14bd1aa1f25cf9e9e6b8244a3d1a6
+    pristine_git_object: 7cee2babbe9664c2114086c299f413ec7d4c77a7
   internal/sdk/models/operations/apiperformanceevalsretrieve.go:
     id: cc0aa3542015
-    last_write_checksum: sha1:1ed77ffe44daf3a4d7228044a6b6e2d1b84774fb
-    pristine_git_object: 9f98d1da441d53ecf1cb66dfcac07ca56a89cbb7
+    last_write_checksum: sha1:4be242d92384ac08e1190801f07d339be1236766
+    pristine_git_object: 25851bce15cf37fdc9d116795e134a88f89d475e
   internal/sdk/models/operations/apiperformanceevalsupdate.go:
     id: 8ae8b68aa14b
-    last_write_checksum: sha1:ce5c66409412e8509b313bca487e64d3645836f3
-    pristine_git_object: 407e2075e6b420ad63c4589a6c4f8e61e9ba6e09
+    last_write_checksum: sha1:ef5880ee97b331843f6aa8ad9de7b92469b4c223
+    pristine_git_object: 4c172c7e4b1bb15d4e8f4eebf75cdb53856e1a31
   internal/sdk/models/operations/apiperformancerunslist.go:
     id: c13036392fe0
-    last_write_checksum: sha1:d6fd0423186fd07422941761d77cb48ae65d03ec
-    pristine_git_object: a37ea4a48b932cb9981297a48c8f3d2a597ca040
+    last_write_checksum: sha1:4ccc7fd8e271941af6fa04927e365b571dda6771
+    pristine_git_object: 795eda820e5aab9b34608242a02ddcb8b267399d
   internal/sdk/models/operations/apiperformancerunsretrieve.go:
     id: 6d41c6e0f6f0
     last_write_checksum: sha1:5dfee79296a3618dce5331a6714591b07baca565
     pristine_git_object: 61a316320773b1e505857276ed0d1a271ce8dd8a
   internal/sdk/models/operations/apiperformanceskillslist.go:
     id: 94d59fe037b7
-    last_write_checksum: sha1:396e5642916b75d4f2a026d2f95b7cde923bbaa5
-    pristine_git_object: a5305908722b3dab0cc325dbd59cb46dedaf4d5a
+    last_write_checksum: sha1:14b5598f45e25ce12b2ad46dc80bae853fbd68bc
+    pristine_git_object: 63ef1f8dc02ac1c41c4cccd8bab871715662edc0
   internal/sdk/models/operations/apiperformancesourceslist.go:
     id: e079b53f3093
-    last_write_checksum: sha1:73ef47e1f1f90814bf620fdcdd07705ac388c28b
-    pristine_git_object: b365b1a3ac6674473423c741668b2e34f7cbee93
+    last_write_checksum: sha1:ab132ee7670cd3a68c93c37ef3c361bc0f18ec61
+    pristine_git_object: e6207e54f16b25639bbbd0f089a74c50bb5ae689
   internal/sdk/models/operations/apiperformancestarterprojectscreate.go:
     id: cd2ca97b099c
-    last_write_checksum: sha1:2505da3fcdd96b3ec9dd06f85e2225992192fa61
-    pristine_git_object: 383878ec3fb5c47c617fb459cbb3cb51972ff086
+    last_write_checksum: sha1:d921facad826c51b23844966ce10434d1d139e4a
+    pristine_git_object: cb01c36d93173957fc23244851444d93f8e872ee
   internal/sdk/models/operations/apiperformancestarterprojectsdelete.go:
     id: bdd86456350a
-    last_write_checksum: sha1:759ddae0e245788c125e054d47628d679be21567
-    pristine_git_object: 4034261ee40e672814f311e0a08cefb1d963050b
+    last_write_checksum: sha1:7f995c7bb1e2ad16667b82c1e7eb577eecf51281
+    pristine_git_object: 5a48ae5d5ddd27517d3ee8cad850a6bcd262073e
   internal/sdk/models/operations/apiperformancestarterprojectslist.go:
     id: 4b0aba362351
-    last_write_checksum: sha1:b704288d8e58074d80ab4c4a373f3211d85a39a9
-    pristine_git_object: fca59ce90c691cbc5bd524cb7d1e48c932cffb44
+    last_write_checksum: sha1:be6cc885264f22b78d7f3e11f3069fc2ecdb33a0
+    pristine_git_object: 3652b0ab1347aa65fb1c9cbd12bf92dba1f10784
   internal/sdk/models/operations/apiperformancestarterprojectsretrieve.go:
     id: f96094ee9e71
-    last_write_checksum: sha1:247e9188f8b4ca81e1950b5d33137cbb0d92241b
-    pristine_git_object: 5a33f272860c201c60cba8b30e0a38a63556ed05
+    last_write_checksum: sha1:00393a3953641646715f69a24acc08d602b4a16c
+    pristine_git_object: bd4c90aeab85a8925919bf89c5c1da0958f05f6a
   internal/sdk/models/operations/apiperformancestarterprojectsupdate.go:
     id: f812bee932ba
-    last_write_checksum: sha1:b9a0bf9090af6307f3248e0b2b53334fe7235466
-    pristine_git_object: 3b0be90094bf535d4377ddde3c955841ff43471d
+    last_write_checksum: sha1:d874e982d75f9c4a791c5192304dea9eefe614ec
+    pristine_git_object: e90706f409858b9694d499611d41c0ea9cef43da
   internal/sdk/models/operations/apiperformancetargetslist.go:
     id: ada9f7108d29
     last_write_checksum: sha1:e96c39dcee2c5435cb64f4e1081b83287656c764
@@ -825,12 +825,12 @@ trackedFiles:
     pristine_git_object: 562a3b9a38e2b67ff0e7f847f5779bfc8054f38d
   internal/sdk/models/sdkerrors/apiperformancecustomevalshistorylist.go:
     id: 3ad6eee62ce1
-    last_write_checksum: sha1:99191e8957a55466c18c2900ecc8237f8424f26d
-    pristine_git_object: 387091eb0149528b175b275e12b37d9221b74f66
+    last_write_checksum: sha1:633b5f784c2898dedf888c3c5e9e2a9d97a31f15
+    pristine_git_object: b13d90d00d4636782ba7a5d8a4c06e0dcfdc4708
   internal/sdk/models/sdkerrors/evalrunscreate.go:
     id: cba981290205
-    last_write_checksum: sha1:fd9884b635a24869e8c21c719c15fe8fb6e67415
-    pristine_git_object: d5efb4442cb68ae11da0089162487d4add002152
+    last_write_checksum: sha1:806b33e4d546540ea16a04b855d39c68981ea002
+    pristine_git_object: 19291ee0e05bc36d32e64e2d90720fe467470eb1
   internal/sdk/models/sdkerrors/evalrunsretrieve.go:
     id: db8efaf83683
     last_write_checksum: sha1:2f1d4f18dd8e8fee3f61b1a732cc9546aecaa36c
@@ -861,8 +861,8 @@ trackedFiles:
     pristine_git_object: c9fb2a2267b398e2bcabbb199d6636ef8887d004
   internal/sdk/sapient.go:
     id: f4b8245f5509
-    last_write_checksum: sha1:a0d7029ab400a2495ad9704c82ad4734b982657b
-    pristine_git_object: d6a67ca6b62d579673ea66b741f58871083faae2
+    last_write_checksum: sha1:19ef320bb6bfed71da40cddc3b2aa080c40d20f0
+    pristine_git_object: f21a7bec6d90cfcbc008c5fdcec1b56af58a9f7d
   internal/sdk/sdkinternal/config/sdkconfiguration.go:
     id: f175ab9b0273
     last_write_checksum: sha1:88a84e6aaba26dccbd5d780f6434f88d292c5ce9
@@ -949,8 +949,8 @@ trackedFiles:
     pristine_git_object: 7e1f465c87ec82286f5efb5c1be95501ba0a1cc8
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:314f1e801c1b8f5a98eaabea62be2cc9e0a45cfb
-    pristine_git_object: bb250b57bae60a0941982185f5be708fa170cda8
+    last_write_checksum: sha1:f529b3f2da170c251f65f79dff75793b122cade1
+    pristine_git_object: 5bd0517b2e199d2e1b00828f7cd15c61debef146
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:cd01d45cc8eab10459eeefec295916709ef6d678
@@ -1178,7 +1178,7 @@ examples:
           limit: 20
       responses:
         "200":
-          application/json: {"company": {"brand_id": "<id>", "name": "<value>"}, "data": [{"id": "<id>"}], "meta": {"limit": 723134, "count": 581210}}
+          application/json: {"company": {"name": "<value>"}, "data": [{"id": "<id>"}], "meta": {"limit": 723134, "count": 581210}}
         "422":
           application/json: {}
   api_performance_runs_retrieve:
@@ -1305,7 +1305,7 @@ examples:
         application/json: {"since": "20d", "format": "json", "include_examples": true, "max_examples": 10}
       responses:
         "200":
-          application/json: {"company": {"brand_id": "<id>", "name": "<value>"}, "since": "<value>", "summary": {"total_runs": 0, "failed_runs": 0, "passed_runs": 0}, "failure_analysis": {"total_runs": 0, "failed_runs": 0}}
+          application/json: {"company": {"name": "<value>"}, "since": "<value>", "summary": {"total_runs": 0, "failed_runs": 0, "passed_runs": 0}, "failure_analysis": {"total_runs": 0, "failed_runs": 0}}
         "422":
           application/json: {}
   api_performance_config_retrieve:
@@ -1348,7 +1348,7 @@ examples:
     speakeasy-default-api-performance-evals-list:
       responses:
         "200":
-          application/json: {"data": [{"id": "<id>", "endpoint_id": "<id>", "eval_type": "<value>", "include_brand_docs": false, "docs_mode": "default", "include_env_vars": true, "compare_skills": false, "skills_mode": "none", "skills_enabled": false, "mcp_enabled": false, "enabled": true}]}
+          application/json: {"data": [{"id": "<id>", "endpoint_id": "<id>", "eval_type": "<value>", "docs_mode": "default", "include_env_vars": true, "compare_skills": false, "skills_mode": "none", "skills_enabled": false, "mcp_enabled": false, "enabled": true}]}
         "422":
           application/json: {}
   api_performance_evals_retrieve:
@@ -1358,7 +1358,7 @@ examples:
           eval_id: "<id>"
       responses:
         "200":
-          application/json: {"id": "<id>", "endpoint_id": "<id>", "eval_type": "<value>", "include_brand_docs": false, "docs_mode": "default", "include_env_vars": true, "compare_skills": false, "skills_mode": "none", "skills_enabled": false, "mcp_enabled": false, "enabled": true}
+          application/json: {"id": "<id>", "endpoint_id": "<id>", "eval_type": "<value>", "docs_mode": "default", "include_env_vars": true, "compare_skills": false, "skills_mode": "none", "skills_enabled": false, "mcp_enabled": false, "enabled": true}
         "422":
           application/json: {}
   api_performance_evals_update:
@@ -1370,14 +1370,14 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<id>", "endpoint_id": "<id>", "eval_type": "<value>", "include_brand_docs": false, "docs_mode": "default", "include_env_vars": true, "compare_skills": false, "skills_mode": "none", "skills_enabled": false, "mcp_enabled": false, "enabled": true}
+          application/json: {"id": "<id>", "endpoint_id": "<id>", "eval_type": "<value>", "docs_mode": "default", "include_env_vars": true, "compare_skills": false, "skills_mode": "none", "skills_enabled": false, "mcp_enabled": false, "enabled": true}
         "422":
           application/json: {}
   api_performance_custom_evals_list:
     speakeasy-default-api-performance-custom-evals-list:
       responses:
         "200":
-          application/json: {"data": [{"id": "<id>", "brand_id": "<id>", "prompt": "<value>"}]}
+          application/json: {"data": [{"id": "<id>", "prompt": "<value>"}]}
         "422":
           application/json: {}
   api_performance_custom_evals_create:
@@ -1386,7 +1386,7 @@ examples:
         application/json: {"prompt": "<value>"}
       responses:
         "200":
-          application/json: {"id": "<id>", "brand_id": "<id>", "prompt": "<value>"}
+          application/json: {"id": "<id>", "prompt": "<value>"}
         "422":
           application/json: {}
   api_performance_custom_evals_retrieve:
@@ -1396,7 +1396,7 @@ examples:
           custom_eval_id: "<id>"
       responses:
         "200":
-          application/json: {"id": "<id>", "brand_id": "<id>", "prompt": "<value>"}
+          application/json: {"id": "<id>", "prompt": "<value>"}
         "422":
           application/json: {}
   api_performance_custom_evals_update:
@@ -1408,7 +1408,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<id>", "brand_id": "<id>", "prompt": "<value>"}
+          application/json: {"id": "<id>", "prompt": "<value>"}
         "422":
           application/json: {}
   api_performance_custom_evals_delete:
@@ -1418,14 +1418,14 @@ examples:
           custom_eval_id: "<id>"
       responses:
         "200":
-          application/json: {"id": "<id>", "brand_id": "<id>", "prompt": "<value>"}
+          application/json: {"id": "<id>", "prompt": "<value>"}
         "422":
           application/json: {}
   api_performance_starter_projects_list:
     speakeasy-default-api-performance-starter-projects-list:
       responses:
         "200":
-          application/json: {"data": [{"id": "<id>", "org_id": "<id>", "brand_id": "<id>", "name": "<value>", "repo_url": "https://actual-tenement.biz/", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": true}]}
+          application/json: {"data": [{"id": "<id>", "name": "<value>", "repo_url": "https://actual-tenement.biz/", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": true}]}
         "422":
           application/json: {}
   api_performance_starter_projects_create:
@@ -1434,7 +1434,7 @@ examples:
         application/json: {"name": "<value>", "repo_url": "https://aggressive-procurement.org/", "ref": "main", "subdir": "", "framework": "custom", "enabled": true}
       responses:
         "200":
-          application/json: {"id": "<id>", "org_id": "<id>", "brand_id": "<id>", "name": "<value>", "repo_url": "https://bouncy-footrest.info/", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": false}
+          application/json: {"id": "<id>", "name": "<value>", "repo_url": "https://bouncy-footrest.info/", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": false}
         "422":
           application/json: {}
   api_performance_starter_projects_retrieve:
@@ -1444,7 +1444,7 @@ examples:
           starter_project_id: "<id>"
       responses:
         "200":
-          application/json: {"id": "<id>", "org_id": "<id>", "brand_id": "<id>", "name": "<value>", "repo_url": "https://pale-jet.info", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": false}
+          application/json: {"id": "<id>", "name": "<value>", "repo_url": "https://pale-jet.info", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": false}
         "422":
           application/json: {}
   api_performance_starter_projects_update:
@@ -1456,7 +1456,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<id>", "org_id": "<id>", "brand_id": "<id>", "name": "<value>", "repo_url": "https://cheap-executor.com/", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": false}
+          application/json: {"id": "<id>", "name": "<value>", "repo_url": "https://cheap-executor.com/", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": false}
         "422":
           application/json: {}
   api_performance_starter_projects_delete:
@@ -1466,7 +1466,7 @@ examples:
           starter_project_id: "<id>"
       responses:
         "200":
-          application/json: {"id": "<id>", "org_id": "<id>", "brand_id": "<id>", "name": "<value>", "repo_url": "https://immediate-gripper.info", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": false}
+          application/json: {"id": "<id>", "name": "<value>", "repo_url": "https://immediate-gripper.info", "ref": "<value>", "subdir": "", "framework": "custom", "enabled": false}
         "422":
           application/json: {}
   api_performance_actions_list:
@@ -1476,7 +1476,7 @@ examples:
           limit: 100
       responses:
         "200":
-          application/json: {"data": [{"id": "<id>", "brand_id": "<id>", "action_type": "<value>", "status": "<value>", "priority": "<value>", "confidence": 3336.22, "effort": "<value>", "title": "<value>", "description": "eek upbeat luck possession less weatherize", "source": "<value>", "fingerprint": "<value>"}]}
+          application/json: {"data": [{"id": "<id>", "action_type": "<value>", "status": "<value>", "priority": "<value>", "confidence": 3336.22, "effort": "<value>", "title": "<value>", "description": "eek upbeat luck possession less weatherize", "source": "<value>", "fingerprint": "<value>", "brand_id": "<id>"}]}
         "422":
           application/json: {}
   api_performance_actions_refresh:
@@ -1497,7 +1497,7 @@ examples:
           include_prompt: false
       responses:
         "200":
-          application/json: {"data": {"id": "<id>", "brand_id": "<id>", "action_type": "<value>", "status": "<value>", "priority": "<value>", "confidence": 3320.53, "effort": "<value>", "title": "<value>", "description": "as drat yieldingly cod er empty badly before furthermore reproachfully", "source": "<value>", "fingerprint": "<value>"}}
+          application/json: {"data": {"id": "<id>", "action_type": "<value>", "status": "<value>", "priority": "<value>", "confidence": 3320.53, "effort": "<value>", "title": "<value>", "description": "as drat yieldingly cod er empty badly before furthermore reproachfully", "source": "<value>", "fingerprint": "<value>"}}
         "422":
           application/json: {}
   api_performance_actions_update:
@@ -1509,7 +1509,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"data": {"id": "<id>", "brand_id": "<id>", "action_type": "<value>", "status": "<value>", "priority": "<value>", "confidence": 4422.14, "effort": "<value>", "title": "<value>", "description": "afford helplessly given", "source": "<value>", "fingerprint": "<value>"}}
+          application/json: {"data": {"id": "<id>", "action_type": "<value>", "status": "<value>", "priority": "<value>", "confidence": 4422.14, "effort": "<value>", "title": "<value>", "description": "afford helplessly given", "source": "<value>", "fingerprint": "<value>"}}
         "422":
           application/json: {}
   api_performance_actions_verify:
@@ -1545,7 +1545,7 @@ examples:
         application/json: {"type": "prompts", "force": false}
       responses:
         "400":
-          application/json: {"detail": "No custom eval IDs were provided and no configured custom evals were found for this brand. Configure custom evals or include custom_eval_ids in the request."}
+          application/json: {"detail": "No custom eval IDs were provided and no configured custom evals were found for this organization. Configure custom evals or include custom_eval_ids in the request."}
     speakeasy-default-eval-runs-create:
       requestBody:
         application/json: {"type": "api_performance", "source_type": "cli"}
@@ -1608,4 +1608,16 @@ examples:
           application/json: {"detail": "<value>"}
         "422":
           application/json: {}
+    organization_not_configured:
+      parameters:
+        query:
+          limit: 25
+          offset: 0
+          result_filter: "all"
+          sort_by: "time"
+          sort_dir: "desc"
+      responses:
+        "404":
+          application/json: {"detail": "Configured API Performance scope not found for this organization"}
 examplesVersion: 1.0.2
+releaseNotes: "## Cli SDK Changes:\n* `Sapient.EvalRuns.EvalRunsCreate()`: \n  *  `request.Request.union(api_performance).Brand` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceRunsList()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.Company` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceDiagnose()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response.Company` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceConfigRetrieve()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.Targets[]` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceConfigUpdate()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response.Targets[]` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceSourcesList()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceSkillsList()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.Data[].BrandId` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceEvalsList()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.Data[].IncludeBrandDocs` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceEvalsRetrieve()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.IncludeBrandDocs` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceEvalsUpdate()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response.IncludeBrandDocs` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsList()`: \n  *  `request.Request` **Removed** (Breaking ⚠️)\n  *  `response.Data[]` **Changed** (Breaking ⚠️)\n  *  `error.status[422]` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsCreate()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsHistoryList()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `error.status[400]` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsRetrieve()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsUpdate()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsDelete()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsList()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.Data[]` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsCreate()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsRetrieve()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsUpdate()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsDelete()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsList()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.Data[].BrandId` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsRefresh()`:  `request.Request` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsRetrieve()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.Data.BrandId` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsUpdate()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.Data.BrandId` **Removed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsVerify()`: \n  *  `request.Request.Brand` **Removed** (Breaking ⚠️)\n  *  `response.Action.BrandId` **Removed** (Breaking ⚠️)\n"

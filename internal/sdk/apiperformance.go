@@ -518,7 +518,7 @@ func (s *APIPerformance) APIPerformanceRunsRetrieve(ctx context.Context, request
 }
 
 // APIPerformanceDiagnose - Diagnose Eval Runs
-func (s *APIPerformance) APIPerformanceDiagnose(ctx context.Context, request operations.APIPerformanceDiagnoseRequest, opts ...operations.Option) (*operations.APIPerformanceDiagnoseResponse, error) {
+func (s *APIPerformance) APIPerformanceDiagnose(ctx context.Context, request components.DiagnoseEvalRunsRequest, opts ...operations.Option) (*operations.APIPerformanceDiagnoseResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -550,7 +550,7 @@ func (s *APIPerformance) APIPerformanceDiagnose(ctx context.Context, request ope
 		OperationID:      "api_performance_diagnose",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -574,10 +574,6 @@ func (s *APIPerformance) APIPerformanceDiagnose(ctx context.Context, request ope
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
@@ -871,7 +867,7 @@ func (s *APIPerformance) APIPerformanceConfigRetrieve(ctx context.Context, reque
 }
 
 // APIPerformanceConfigUpdate - Update Eval Config
-func (s *APIPerformance) APIPerformanceConfigUpdate(ctx context.Context, request operations.APIPerformanceConfigUpdateRequest, opts ...operations.Option) (*operations.APIPerformanceConfigUpdateResponse, error) {
+func (s *APIPerformance) APIPerformanceConfigUpdate(ctx context.Context, request components.PublicEvalConfigUpdateRequest, opts ...operations.Option) (*operations.APIPerformanceConfigUpdateResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -903,7 +899,7 @@ func (s *APIPerformance) APIPerformanceConfigUpdate(ctx context.Context, request
 		OperationID:      "api_performance_config_update",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -927,10 +923,6 @@ func (s *APIPerformance) APIPerformanceConfigUpdate(ctx context.Context, request
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
@@ -1621,10 +1613,6 @@ func (s *APIPerformance) APIPerformanceEvalsRetrieve(ctx context.Context, reques
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -1801,10 +1789,6 @@ func (s *APIPerformance) APIPerformanceEvalsUpdate(ctx context.Context, request 
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -1923,7 +1907,7 @@ func (s *APIPerformance) APIPerformanceEvalsUpdate(ctx context.Context, request 
 }
 
 // APIPerformanceCustomEvalsList - List Custom Evals
-func (s *APIPerformance) APIPerformanceCustomEvalsList(ctx context.Context, request *operations.APIPerformanceCustomEvalsListRequest, opts ...operations.Option) (*operations.APIPerformanceCustomEvalsListResponse, error) {
+func (s *APIPerformance) APIPerformanceCustomEvalsList(ctx context.Context, opts ...operations.Option) (*operations.APIPerformanceCustomEvalsListResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -1973,10 +1957,6 @@ func (s *APIPerformance) APIPerformanceCustomEvalsList(ctx context.Context, requ
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2046,31 +2026,6 @@ func (s *APIPerformance) APIPerformanceCustomEvalsList(ctx context.Context, requ
 			}
 			return nil, sdkerrors.NewSDKDefaultError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
-	case httpRes.StatusCode == 422:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out sdkerrors.HTTPValidationError
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKDefaultError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -2096,7 +2051,7 @@ func (s *APIPerformance) APIPerformanceCustomEvalsList(ctx context.Context, requ
 }
 
 // APIPerformanceCustomEvalsCreate - Create Custom Eval
-func (s *APIPerformance) APIPerformanceCustomEvalsCreate(ctx context.Context, request operations.APIPerformanceCustomEvalsCreateRequest, opts ...operations.Option) (*operations.APIPerformanceCustomEvalsCreateResponse, error) {
+func (s *APIPerformance) APIPerformanceCustomEvalsCreate(ctx context.Context, request components.PublicCustomEvalRequest, opts ...operations.Option) (*operations.APIPerformanceCustomEvalsCreateResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -2128,7 +2083,7 @@ func (s *APIPerformance) APIPerformanceCustomEvalsCreate(ctx context.Context, re
 		OperationID:      "api_performance_custom_evals_create",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -2152,10 +2107,6 @@ func (s *APIPerformance) APIPerformanceCustomEvalsCreate(ctx context.Context, re
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
@@ -2276,7 +2227,7 @@ func (s *APIPerformance) APIPerformanceCustomEvalsCreate(ctx context.Context, re
 }
 
 // APIPerformanceCustomEvalsHistoryList - List Custom Eval History
-// List custom eval history rows for a brand.
+// List custom eval history rows for the organization.
 //
 // Use `custom_eval_id` to retrieve the evaluated run history for one custom
 // eval prompt. The public API hides infrastructure-error rows, matching the
@@ -2397,31 +2348,6 @@ func (s *APIPerformance) APIPerformanceCustomEvalsHistoryList(ctx context.Contex
 
 				res.PublicCustomEvalHistoryResponse = &out
 			}
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKDefaultError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 400:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out sdkerrors.APIPerformanceCustomEvalsHistoryListBadRequestError
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
-			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2554,10 +2480,6 @@ func (s *APIPerformance) APIPerformanceCustomEvalsRetrieve(ctx context.Context, 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2735,10 +2657,6 @@ func (s *APIPerformance) APIPerformanceCustomEvalsUpdate(ctx context.Context, re
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -2907,10 +2825,6 @@ func (s *APIPerformance) APIPerformanceCustomEvalsDelete(ctx context.Context, re
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3203,7 +3117,7 @@ func (s *APIPerformance) APIPerformanceStarterProjectsList(ctx context.Context, 
 }
 
 // APIPerformanceStarterProjectsCreate - Create Starter Project
-func (s *APIPerformance) APIPerformanceStarterProjectsCreate(ctx context.Context, request operations.APIPerformanceStarterProjectsCreateRequest, opts ...operations.Option) (*operations.APIPerformanceStarterProjectsCreateResponse, error) {
+func (s *APIPerformance) APIPerformanceStarterProjectsCreate(ctx context.Context, request components.PublicStartingProjectRequest, opts ...operations.Option) (*operations.APIPerformanceStarterProjectsCreateResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -3235,7 +3149,7 @@ func (s *APIPerformance) APIPerformanceStarterProjectsCreate(ctx context.Context
 		OperationID:      "api_performance_starter_projects_create",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -3259,10 +3173,6 @@ func (s *APIPerformance) APIPerformanceStarterProjectsCreate(ctx context.Context
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
@@ -3433,10 +3343,6 @@ func (s *APIPerformance) APIPerformanceStarterProjectsRetrieve(ctx context.Conte
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3614,10 +3520,6 @@ func (s *APIPerformance) APIPerformanceStarterProjectsUpdate(ctx context.Context
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -3786,10 +3688,6 @@ func (s *APIPerformance) APIPerformanceStarterProjectsDelete(ctx context.Context
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4082,7 +3980,7 @@ func (s *APIPerformance) APIPerformanceActionsList(ctx context.Context, request 
 }
 
 // APIPerformanceActionsRefresh - Refresh Actions
-func (s *APIPerformance) APIPerformanceActionsRefresh(ctx context.Context, request operations.APIPerformanceActionsRefreshRequest, opts ...operations.Option) (*operations.APIPerformanceActionsRefreshResponse, error) {
+func (s *APIPerformance) APIPerformanceActionsRefresh(ctx context.Context, request components.PublicRefreshActionsRequest, opts ...operations.Option) (*operations.APIPerformanceActionsRefreshResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -4114,7 +4012,7 @@ func (s *APIPerformance) APIPerformanceActionsRefresh(ctx context.Context, reque
 		OperationID:      "api_performance_actions_refresh",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -4138,10 +4036,6 @@ func (s *APIPerformance) APIPerformanceActionsRefresh(ctx context.Context, reque
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
@@ -4493,10 +4387,6 @@ func (s *APIPerformance) APIPerformanceActionsUpdate(ctx context.Context, reques
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -4665,10 +4555,6 @@ func (s *APIPerformance) APIPerformanceActionsVerify(ctx context.Context, reques
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

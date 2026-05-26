@@ -3,7 +3,7 @@
 
 package sdk
 
-// Generated from OpenAPI doc version 1.0.0 and generator version 2.886.0
+// Generated from OpenAPI doc version 1.0.0 and generator version 2.886.1
 
 import (
 	"context"
@@ -133,7 +133,7 @@ func New(opts ...SDKOption) *Sapient {
 	sdk := &Sapient{
 		SDKVersion: "0.0.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 0.0.1 2.886.0 1.0.0 github.com/usesapient/cli/internal/sdk",
+			UserAgent:  "speakeasy-sdk/go 0.0.1 2.886.1 1.0.0 github.com/usesapient/cli/internal/sdk",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
