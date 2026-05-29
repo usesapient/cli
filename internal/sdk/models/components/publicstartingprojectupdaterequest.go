@@ -61,14 +61,14 @@ func (e *PublicStartingProjectUpdateRequestFramework) UnmarshalJSON(data []byte)
 }
 
 type PublicStartingProjectUpdateRequest struct {
-	Name          optionalnullable.OptionalNullable[string]                                      `json:"name,omitzero"`
-	RepoURL       optionalnullable.OptionalNullable[string]                                      `json:"repo_url,omitzero"`
-	Ref           optionalnullable.OptionalNullable[string]                                      `json:"ref,omitzero"`
-	Subdir        optionalnullable.OptionalNullable[string]                                      `json:"subdir,omitzero"`
-	InstallSteps  optionalnullable.OptionalNullable[[]string]                                    `json:"install_steps,omitzero"`
-	IntegrationID optionalnullable.OptionalNullable[string]                                      `json:"integration_id,omitzero"`
-	Framework     optionalnullable.OptionalNullable[PublicStartingProjectUpdateRequestFramework] `json:"framework,omitzero"`
-	Enabled       optionalnullable.OptionalNullable[bool]                                        `json:"enabled,omitzero"`
+	Name          *string                                      `json:"name,omitzero"`
+	RepoURL       *string                                      `json:"repo_url,omitzero"`
+	Ref           *string                                      `json:"ref,omitzero"`
+	Subdir        *string                                      `json:"subdir,omitzero"`
+	InstallSteps  optionalnullable.OptionalNullable[[]string]  `json:"install_steps,omitzero"`
+	IntegrationID *string                                      `json:"integration_id,omitzero"`
+	Framework     *PublicStartingProjectUpdateRequestFramework `json:"framework,omitzero"`
+	Enabled       *bool                                        `json:"enabled,omitzero"`
 }
 
 func (p PublicStartingProjectUpdateRequest) MarshalJSON() ([]byte, error) {
@@ -82,28 +82,28 @@ func (p *PublicStartingProjectUpdateRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PublicStartingProjectUpdateRequest) GetName() optionalnullable.OptionalNullable[string] {
+func (p *PublicStartingProjectUpdateRequest) GetName() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Name
 }
 
-func (p *PublicStartingProjectUpdateRequest) GetRepoURL() optionalnullable.OptionalNullable[string] {
+func (p *PublicStartingProjectUpdateRequest) GetRepoURL() *string {
 	if p == nil {
 		return nil
 	}
 	return p.RepoURL
 }
 
-func (p *PublicStartingProjectUpdateRequest) GetRef() optionalnullable.OptionalNullable[string] {
+func (p *PublicStartingProjectUpdateRequest) GetRef() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Ref
 }
 
-func (p *PublicStartingProjectUpdateRequest) GetSubdir() optionalnullable.OptionalNullable[string] {
+func (p *PublicStartingProjectUpdateRequest) GetSubdir() *string {
 	if p == nil {
 		return nil
 	}
@@ -117,21 +117,21 @@ func (p *PublicStartingProjectUpdateRequest) GetInstallSteps() optionalnullable.
 	return p.InstallSteps
 }
 
-func (p *PublicStartingProjectUpdateRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (p *PublicStartingProjectUpdateRequest) GetIntegrationID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.IntegrationID
 }
 
-func (p *PublicStartingProjectUpdateRequest) GetFramework() optionalnullable.OptionalNullable[PublicStartingProjectUpdateRequestFramework] {
+func (p *PublicStartingProjectUpdateRequest) GetFramework() *PublicStartingProjectUpdateRequestFramework {
 	if p == nil {
 		return nil
 	}
 	return p.Framework
 }
 
-func (p *PublicStartingProjectUpdateRequest) GetEnabled() optionalnullable.OptionalNullable[bool] {
+func (p *PublicStartingProjectUpdateRequest) GetEnabled() *bool {
 	if p == nil {
 		return nil
 	}

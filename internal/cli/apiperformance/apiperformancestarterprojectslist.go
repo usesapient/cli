@@ -16,7 +16,7 @@ import (
 )
 
 var apiPerformanceStarterProjectsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=integration_id"`, Description: "string value"},
+	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 }
 
 // initApiPerformanceStarterProjectsListCmd initializes the api-performance-starter-projects-list command.

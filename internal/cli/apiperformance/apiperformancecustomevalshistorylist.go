@@ -16,13 +16,13 @@ import (
 )
 
 var apiPerformanceCustomEvalsHistoryListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "custom-eval-id", FieldPath: "CustomEvalID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=custom_eval_id"`, Description: "Optional custom eval ID to filter history rows."},
+	{FlagName: "custom-eval-id", FieldPath: "CustomEvalID", Kind: flagutil.FlagKindString, Optional: true, Description: "Optional custom eval ID to filter history rows."},
 	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 25, Description: "integer value"},
 	{FlagName: "offset", FieldPath: "Offset", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, Description: "integer value"},
-	{FlagName: "search", FieldPath: "Search", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=search"`, Description: "string value"},
+	{FlagName: "search", FieldPath: "Search", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "result-filter", Shorthand: "r", FieldPath: "ResultFilter", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "all", EnumValues: []string{"all", "passed", "failed"}, Description: "options: all, passed, failed"},
-	{FlagName: "target-key", Shorthand: "t", FieldPath: "TargetKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=target_key"`, Description: "string value"},
-	{FlagName: "category-id", FieldPath: "CategoryID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=category_id"`, Description: "string value"},
+	{FlagName: "target-key", Shorthand: "t", FieldPath: "TargetKey", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "category-id", FieldPath: "CategoryID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "sort-by", FieldPath: "SortBy", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "time", EnumValues: []string{"time", "use_case", "target", "result", "score", "tool_calls", "latency"}, Description: "options: time, use_case, target, result, score, tool_calls, latency"},
 	{FlagName: "sort-dir", FieldPath: "SortDir", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "desc", EnumValues: []string{"asc", "desc"}, Description: "options: asc, desc"},
 }

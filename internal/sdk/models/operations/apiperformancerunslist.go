@@ -5,13 +5,12 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceRunsListRequest struct {
-	Since optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=since"`
-	Limit *int64                                    `default:"20" queryParam:"style=form,explode=true,name=limit"`
+	Since *string `queryParam:"style=form,explode=true,name=since"`
+	Limit *int64  `default:"20" queryParam:"style=form,explode=true,name=limit"`
 }
 
 func (a APIPerformanceRunsListRequest) MarshalJSON() ([]byte, error) {
@@ -25,7 +24,7 @@ func (a *APIPerformanceRunsListRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *APIPerformanceRunsListRequest) GetSince() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceRunsListRequest) GetSince() *string {
 	if a == nil {
 		return nil
 	}

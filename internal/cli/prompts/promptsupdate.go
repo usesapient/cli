@@ -17,10 +17,10 @@ import (
 
 var promptsUpdateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "prompt-id", FieldPath: "PromptID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "text", FieldPath: "Body.Text", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"text,omitempty"`, Description: "string value"},
-	{FlagName: "topic-id", FieldPath: "Body.TopicID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"topic_id,omitempty"`, Description: "string value"},
+	{FlagName: "text", FieldPath: "Body.Text", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "topic-id", FieldPath: "Body.TopicID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "platform-ids", FieldPath: "Body.PlatformIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"platform_ids,omitempty"`, Description: "list of values"},
-	{FlagName: "is-active", Shorthand: "i", FieldPath: "Body.IsActive", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"is_active,omitempty"`, Description: "boolean flag"},
+	{FlagName: "is-active", Shorthand: "i", FieldPath: "Body.IsActive", Kind: flagutil.FlagKindBool, Optional: true, Description: "boolean flag"},
 }
 
 // initPromptsUpdateCmd initializes the prompts-update command.

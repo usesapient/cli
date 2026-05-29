@@ -16,10 +16,10 @@ import (
 )
 
 var apiPerformanceSkillsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=integration_id"`, Description: "string value"},
-	{FlagName: "source-id", FieldPath: "SourceID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=source_id"`, Description: "string value"},
-	{FlagName: "enabled", Shorthand: "e", FieldPath: "Enabled", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=enabled"`, Description: "boolean flag"},
-	{FlagName: "stale", FieldPath: "Stale", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=stale"`, Description: "boolean flag"},
+	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "source-id", FieldPath: "SourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "enabled", Shorthand: "e", FieldPath: "Enabled", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "boolean flag"},
+	{FlagName: "stale", FieldPath: "Stale", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "boolean flag"},
 }
 
 // initApiPerformanceSkillsListCmd initializes the api-performance-skills-list command.

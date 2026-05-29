@@ -9,13 +9,13 @@ import (
 )
 
 type PublicCustomEvalUpdateRequest struct {
-	Prompt optionalnullable.OptionalNullable[string] `json:"prompt,omitzero"`
+	Prompt *string `json:"prompt,omitzero"`
 	// Optional template used to render prompt before storing. Available variables: Company name {{company_name}}; Company domain {{company_domain}}.
-	PromptTemplate        optionalnullable.OptionalNullable[string]                     `json:"prompt_template,omitzero"`
-	CategoryName          optionalnullable.OptionalNullable[string]                     `json:"category_name,omitzero"`
-	Description           optionalnullable.OptionalNullable[string]                     `json:"description,omitzero"`
-	Competitor            optionalnullable.OptionalNullable[string]                     `json:"competitor,omitzero"`
-	PromptCompetitorGroup optionalnullable.OptionalNullable[string]                     `json:"prompt_competitor_group,omitzero"`
+	PromptTemplate        *string                                                       `json:"prompt_template,omitzero"`
+	CategoryName          *string                                                       `json:"category_name,omitzero"`
+	Description           *string                                                       `json:"description,omitzero"`
+	Competitor            *string                                                       `json:"competitor,omitzero"`
+	PromptCompetitorGroup *string                                                       `json:"prompt_competitor_group,omitzero"`
 	Eval                  optionalnullable.OptionalNullable[PublicEvalDefinitionUpdate] `json:"eval,omitzero"`
 }
 
@@ -30,42 +30,42 @@ func (p *PublicCustomEvalUpdateRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PublicCustomEvalUpdateRequest) GetPrompt() optionalnullable.OptionalNullable[string] {
+func (p *PublicCustomEvalUpdateRequest) GetPrompt() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Prompt
 }
 
-func (p *PublicCustomEvalUpdateRequest) GetPromptTemplate() optionalnullable.OptionalNullable[string] {
+func (p *PublicCustomEvalUpdateRequest) GetPromptTemplate() *string {
 	if p == nil {
 		return nil
 	}
 	return p.PromptTemplate
 }
 
-func (p *PublicCustomEvalUpdateRequest) GetCategoryName() optionalnullable.OptionalNullable[string] {
+func (p *PublicCustomEvalUpdateRequest) GetCategoryName() *string {
 	if p == nil {
 		return nil
 	}
 	return p.CategoryName
 }
 
-func (p *PublicCustomEvalUpdateRequest) GetDescription() optionalnullable.OptionalNullable[string] {
+func (p *PublicCustomEvalUpdateRequest) GetDescription() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Description
 }
 
-func (p *PublicCustomEvalUpdateRequest) GetCompetitor() optionalnullable.OptionalNullable[string] {
+func (p *PublicCustomEvalUpdateRequest) GetCompetitor() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Competitor
 }
 
-func (p *PublicCustomEvalUpdateRequest) GetPromptCompetitorGroup() optionalnullable.OptionalNullable[string] {
+func (p *PublicCustomEvalUpdateRequest) GetPromptCompetitorGroup() *string {
 	if p == nil {
 		return nil
 	}

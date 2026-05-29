@@ -5,15 +5,14 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceStarterProjectsListRequest struct {
-	IntegrationID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=integration_id"`
+	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
 }
 
-func (a *APIPerformanceStarterProjectsListRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceStarterProjectsListRequest) GetIntegrationID() *string {
 	if a == nil {
 		return nil
 	}

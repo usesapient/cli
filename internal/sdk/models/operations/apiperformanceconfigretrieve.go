@@ -5,14 +5,14 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
+	"github.com/usesapient/cli/internal/sdk/types"
 )
 
 type APIPerformanceConfigRetrieveRequest struct {
-	IntegrationID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=integration_id"`
+	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	configScope optionalnullable.OptionalNullable[string] `const:"custom_evals" queryParam:"style=form,explode=true,name=config_scope"`
+	configScope *string `const:"custom_evals" queryParam:"style=form,explode=true,name=config_scope"`
 }
 
 func (a APIPerformanceConfigRetrieveRequest) MarshalJSON() ([]byte, error) {
@@ -26,16 +26,15 @@ func (a *APIPerformanceConfigRetrieveRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *APIPerformanceConfigRetrieveRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceConfigRetrieveRequest) GetIntegrationID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.IntegrationID
 }
 
-func (a *APIPerformanceConfigRetrieveRequest) GetConfigScope() optionalnullable.OptionalNullable[string] {
-	var tmp string = "custom_evals"
-	return optionalnullable.From[string](&tmp)
+func (a *APIPerformanceConfigRetrieveRequest) GetConfigScope() *string {
+	return types.Pointer("custom_evals")
 }
 
 type APIPerformanceConfigRetrieveResponse struct {

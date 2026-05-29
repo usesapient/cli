@@ -5,15 +5,14 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type PromptsListRequest struct {
-	TopicID         optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=topic_id"`
-	IsActive        optionalnullable.OptionalNullable[bool]   `queryParam:"style=form,explode=true,name=is_active"`
-	Status          optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=status"`
-	IncludeArchived *bool                                     `default:"false" queryParam:"style=form,explode=true,name=include_archived"`
+	TopicID         *string `queryParam:"style=form,explode=true,name=topic_id"`
+	IsActive        *bool   `queryParam:"style=form,explode=true,name=is_active"`
+	Status          *string `queryParam:"style=form,explode=true,name=status"`
+	IncludeArchived *bool   `default:"false" queryParam:"style=form,explode=true,name=include_archived"`
 }
 
 func (p PromptsListRequest) MarshalJSON() ([]byte, error) {
@@ -27,21 +26,21 @@ func (p *PromptsListRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PromptsListRequest) GetTopicID() optionalnullable.OptionalNullable[string] {
+func (p *PromptsListRequest) GetTopicID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.TopicID
 }
 
-func (p *PromptsListRequest) GetIsActive() optionalnullable.OptionalNullable[bool] {
+func (p *PromptsListRequest) GetIsActive() *bool {
 	if p == nil {
 		return nil
 	}
 	return p.IsActive
 }
 
-func (p *PromptsListRequest) GetStatus() optionalnullable.OptionalNullable[string] {
+func (p *PromptsListRequest) GetStatus() *string {
 	if p == nil {
 		return nil
 	}
