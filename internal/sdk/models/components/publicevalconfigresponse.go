@@ -11,7 +11,7 @@ import (
 type PublicEvalConfigResponse struct {
 	Models                        []string                                  `json:"models"`
 	Targets                       []PublicAPIEvalTarget                     `json:"targets,omitzero"`
-	EndpointIds                   []string                                  `json:"endpoint_ids"`
+	OperationIds                  []string                                  `json:"operation_ids"`
 	CustomEvalIds                 []string                                  `json:"custom_eval_ids,omitzero"`
 	EnvVars                       map[string]string                         `json:"env_vars,omitzero"`
 	EnvProfiles                   []PublicEvalEnvProfileSummary             `json:"env_profiles,omitzero"`
@@ -45,11 +45,11 @@ func (p *PublicEvalConfigResponse) GetTargets() []PublicAPIEvalTarget {
 	return p.Targets
 }
 
-func (p *PublicEvalConfigResponse) GetEndpointIds() []string {
+func (p *PublicEvalConfigResponse) GetOperationIds() []string {
 	if p == nil {
 		return []string{}
 	}
-	return p.EndpointIds
+	return p.OperationIds
 }
 
 func (p *PublicEvalConfigResponse) GetCustomEvalIds() []string {

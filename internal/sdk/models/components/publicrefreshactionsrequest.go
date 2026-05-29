@@ -8,8 +8,8 @@ import (
 )
 
 type PublicRefreshActionsRequest struct {
-	IntegrationID *string `json:"integration_id,omitzero"`
-	Force         *bool   `default:"false" json:"force"`
+	SourceID *string `json:"source_id,omitzero"`
+	Force    *bool   `default:"false" json:"force"`
 }
 
 func (p PublicRefreshActionsRequest) MarshalJSON() ([]byte, error) {
@@ -23,11 +23,11 @@ func (p *PublicRefreshActionsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PublicRefreshActionsRequest) GetIntegrationID() *string {
+func (p *PublicRefreshActionsRequest) GetSourceID() *string {
 	if p == nil {
 		return nil
 	}
-	return p.IntegrationID
+	return p.SourceID
 }
 
 func (p *PublicRefreshActionsRequest) GetForce() *bool {

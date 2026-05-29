@@ -13,12 +13,12 @@ type PublicEvalConfigUpdateRequest struct {
 	Models optionalnullable.OptionalNullable[[]string] `json:"models,omitzero"`
 	// Scheduled text/agent targets. Use frequency='manual' to keep a target available but unscheduled.
 	Targets             optionalnullable.OptionalNullable[[]PublicAPIEvalTarget]         `json:"targets,omitzero"`
-	EndpointIds         optionalnullable.OptionalNullable[[]string]                      `json:"endpoint_ids,omitzero"`
+	OperationIds        optionalnullable.OptionalNullable[[]string]                      `json:"operation_ids,omitzero"`
 	CustomEvalIds       optionalnullable.OptionalNullable[[]string]                      `json:"custom_eval_ids,omitzero"`
 	EnvVars             optionalnullable.OptionalNullable[map[string]string]             `json:"env_vars,omitzero"`
 	EnvProfiles         optionalnullable.OptionalNullable[[]PublicEvalEnvProfileRequest] `json:"env_profiles,omitzero"`
 	DefaultEnvProfileID *string                                                          `json:"default_env_profile_id,omitzero"`
-	IntegrationID       *string                                                          `json:"integration_id,omitzero"`
+	SourceID            *string                                                          `json:"source_id,omitzero"`
 	APIBaseURL          *string                                                          `json:"api_base_url,omitzero"`
 }
 
@@ -47,11 +47,11 @@ func (p *PublicEvalConfigUpdateRequest) GetTargets() optionalnullable.OptionalNu
 	return p.Targets
 }
 
-func (p *PublicEvalConfigUpdateRequest) GetEndpointIds() optionalnullable.OptionalNullable[[]string] {
+func (p *PublicEvalConfigUpdateRequest) GetOperationIds() optionalnullable.OptionalNullable[[]string] {
 	if p == nil {
 		return nil
 	}
-	return p.EndpointIds
+	return p.OperationIds
 }
 
 func (p *PublicEvalConfigUpdateRequest) GetCustomEvalIds() optionalnullable.OptionalNullable[[]string] {
@@ -82,11 +82,11 @@ func (p *PublicEvalConfigUpdateRequest) GetDefaultEnvProfileID() *string {
 	return p.DefaultEnvProfileID
 }
 
-func (p *PublicEvalConfigUpdateRequest) GetIntegrationID() *string {
+func (p *PublicEvalConfigUpdateRequest) GetSourceID() *string {
 	if p == nil {
 		return nil
 	}
-	return p.IntegrationID
+	return p.SourceID
 }
 
 func (p *PublicEvalConfigUpdateRequest) GetAPIBaseURL() *string {

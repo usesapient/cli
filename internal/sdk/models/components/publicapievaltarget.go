@@ -56,7 +56,7 @@ func (e *PublicAPIEvalTargetFrequency) IsExact() bool {
 
 type PublicAPIEvalTarget struct {
 	ID                optionalnullable.OptionalNullable[string] `json:"id,omitzero"`
-	IntegrationID     optionalnullable.OptionalNullable[string] `json:"integration_id,omitzero"`
+	SourceID          optionalnullable.OptionalNullable[string] `json:"source_id,omitzero"`
 	TargetType        PublicAPIEvalTargetTargetType             `json:"target_type"`
 	ExecutionPlatform string                                    `json:"execution_platform"`
 	ModelID           string                                    `json:"model_id"`
@@ -88,11 +88,11 @@ func (p *PublicAPIEvalTarget) GetID() optionalnullable.OptionalNullable[string] 
 	return p.ID
 }
 
-func (p *PublicAPIEvalTarget) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (p *PublicAPIEvalTarget) GetSourceID() optionalnullable.OptionalNullable[string] {
 	if p == nil {
 		return nil
 	}
-	return p.IntegrationID
+	return p.SourceID
 }
 
 func (p *PublicAPIEvalTarget) GetTargetType() PublicAPIEvalTargetTargetType {

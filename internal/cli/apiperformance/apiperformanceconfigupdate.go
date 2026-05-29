@@ -18,12 +18,12 @@ import (
 var apiPerformanceConfigUpdateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "models", Shorthand: "m", FieldPath: "Body.Models", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"models,omitempty"`, Description: "Legacy flat model selection. Prefer targets for v0.3.0."},
 	{FlagName: "targets", Shorthand: "t", FieldPath: "Body.Targets", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"targets,omitempty"`, Description: "Scheduled text/agent targets. Use frequency='manual' to keep a target available but unscheduled."},
-	{FlagName: "endpoint-ids", FieldPath: "Body.EndpointIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"endpoint_ids,omitempty"`, Description: "list of values"},
+	{FlagName: "operation-ids", FieldPath: "Body.OperationIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"operation_ids,omitempty"`, Description: "list of values"},
 	{FlagName: "custom-eval-ids", Shorthand: "c", FieldPath: "Body.CustomEvalIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"custom_eval_ids,omitempty"`, Description: "list of values"},
 	{FlagName: "env-vars", FieldPath: "Body.EnvVars", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"env_vars,omitempty"`, Description: "value"},
 	{FlagName: "env-profiles", FieldPath: "Body.EnvProfiles", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"env_profiles,omitempty"`, Description: "list of values"},
 	{FlagName: "default-env-profile-id", FieldPath: "Body.DefaultEnvProfileID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "Body.IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "source-id", Shorthand: "s", FieldPath: "Body.SourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "api-base-url", Shorthand: "a", FieldPath: "Body.APIBaseURL", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 }
 

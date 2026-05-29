@@ -16,8 +16,8 @@ import (
 )
 
 var apiPerformanceActionsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
-	{FlagName: "status", Shorthand: "s", FieldPath: "Status", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "source-id", FieldPath: "SourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "status", FieldPath: "Status", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "action-type", Shorthand: "a", FieldPath: "ActionType", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "priority", Shorthand: "p", FieldPath: "Priority", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 100, Description: "integer value"},

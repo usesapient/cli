@@ -61,14 +61,14 @@ func (e *PublicStartingProjectUpdateRequestFramework) UnmarshalJSON(data []byte)
 }
 
 type PublicStartingProjectUpdateRequest struct {
-	Name          *string                                      `json:"name,omitzero"`
-	RepoURL       *string                                      `json:"repo_url,omitzero"`
-	Ref           *string                                      `json:"ref,omitzero"`
-	Subdir        *string                                      `json:"subdir,omitzero"`
-	InstallSteps  optionalnullable.OptionalNullable[[]string]  `json:"install_steps,omitzero"`
-	IntegrationID *string                                      `json:"integration_id,omitzero"`
-	Framework     *PublicStartingProjectUpdateRequestFramework `json:"framework,omitzero"`
-	Enabled       *bool                                        `json:"enabled,omitzero"`
+	Name         *string                                      `json:"name,omitzero"`
+	RepoURL      *string                                      `json:"repo_url,omitzero"`
+	Ref          *string                                      `json:"ref,omitzero"`
+	Subdir       *string                                      `json:"subdir,omitzero"`
+	InstallSteps optionalnullable.OptionalNullable[[]string]  `json:"install_steps,omitzero"`
+	SourceID     *string                                      `json:"source_id,omitzero"`
+	Framework    *PublicStartingProjectUpdateRequestFramework `json:"framework,omitzero"`
+	Enabled      *bool                                        `json:"enabled,omitzero"`
 }
 
 func (p PublicStartingProjectUpdateRequest) MarshalJSON() ([]byte, error) {
@@ -117,11 +117,11 @@ func (p *PublicStartingProjectUpdateRequest) GetInstallSteps() optionalnullable.
 	return p.InstallSteps
 }
 
-func (p *PublicStartingProjectUpdateRequest) GetIntegrationID() *string {
+func (p *PublicStartingProjectUpdateRequest) GetSourceID() *string {
 	if p == nil {
 		return nil
 	}
-	return p.IntegrationID
+	return p.SourceID
 }
 
 func (p *PublicStartingProjectUpdateRequest) GetFramework() *PublicStartingProjectUpdateRequestFramework {

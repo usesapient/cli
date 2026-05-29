@@ -44,17 +44,21 @@ func (e *PublicAPIPerformanceEvalRunRequestSourceType) UnmarshalJSON(data []byte
 
 type PublicAPIPerformanceEvalRunRequest struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_         string                                       `const:"api_performance" json:"type"`
-	SourceType    PublicAPIPerformanceEvalRunRequestSourceType `json:"source_type"`
-	IntegrationID *string                                      `json:"integration_id,omitzero"`
+	type_      string                                       `const:"api_performance" json:"type"`
+	SourceType PublicAPIPerformanceEvalRunRequestSourceType `json:"source_type"`
+	// API Performance source ID from api-performance sources list. Required unless operation_ids, eval_ids, or source_type identify one source.
+	SourceID *string `json:"source_id,omitzero"`
 	// Legacy flat model selection. Prefer targets.
 	Models optionalnullable.OptionalNullable[[]string] `json:"models,omitzero"`
 	// Explicit text/agent targets to run.
-	Targets     optionalnullable.OptionalNullable[[]PublicAPIPerformanceEvalRunTarget] `json:"targets,omitzero"`
-	Categories  optionalnullable.OptionalNullable[[]string]                            `json:"categories,omitzero"`
-	EndpointIds optionalnullable.OptionalNullable[[]string]                            `json:"endpoint_ids,omitzero"`
+	Targets    optionalnullable.OptionalNullable[[]PublicAPIPerformanceEvalRunTarget] `json:"targets,omitzero"`
+	Categories optionalnullable.OptionalNullable[[]string]                            `json:"categories,omitzero"`
+	// API Performance operation IDs from api-performance evals list.
+	OperationIds optionalnullable.OptionalNullable[[]string] `json:"operation_ids,omitzero"`
 	// Optional METHOD:path filters, such as GET:/v1/items.
-	EndpointPaths optionalnullable.OptionalNullable[[]string] `json:"endpoint_paths,omitzero"`
+	OperationPaths optionalnullable.OptionalNullable[[]string] `json:"operation_paths,omitzero"`
+	// API Performance eval definition IDs from api-performance evals list.
+	EvalIds optionalnullable.OptionalNullable[[]string] `json:"eval_ids,omitzero"`
 	// Custom eval IDs. Used only when source_type is custom_evals.
 	CustomEvalIds optionalnullable.OptionalNullable[[]string]                  `json:"custom_eval_ids,omitzero"`
 	EvalTypes     optionalnullable.OptionalNullable[[]string]                  `json:"eval_types,omitzero"`
@@ -84,11 +88,11 @@ func (p *PublicAPIPerformanceEvalRunRequest) GetSourceType() PublicAPIPerformanc
 	return p.SourceType
 }
 
-func (p *PublicAPIPerformanceEvalRunRequest) GetIntegrationID() *string {
+func (p *PublicAPIPerformanceEvalRunRequest) GetSourceID() *string {
 	if p == nil {
 		return nil
 	}
-	return p.IntegrationID
+	return p.SourceID
 }
 
 func (p *PublicAPIPerformanceEvalRunRequest) GetModels() optionalnullable.OptionalNullable[[]string] {
@@ -112,18 +116,25 @@ func (p *PublicAPIPerformanceEvalRunRequest) GetCategories() optionalnullable.Op
 	return p.Categories
 }
 
-func (p *PublicAPIPerformanceEvalRunRequest) GetEndpointIds() optionalnullable.OptionalNullable[[]string] {
+func (p *PublicAPIPerformanceEvalRunRequest) GetOperationIds() optionalnullable.OptionalNullable[[]string] {
 	if p == nil {
 		return nil
 	}
-	return p.EndpointIds
+	return p.OperationIds
 }
 
-func (p *PublicAPIPerformanceEvalRunRequest) GetEndpointPaths() optionalnullable.OptionalNullable[[]string] {
+func (p *PublicAPIPerformanceEvalRunRequest) GetOperationPaths() optionalnullable.OptionalNullable[[]string] {
 	if p == nil {
 		return nil
 	}
-	return p.EndpointPaths
+	return p.OperationPaths
+}
+
+func (p *PublicAPIPerformanceEvalRunRequest) GetEvalIds() optionalnullable.OptionalNullable[[]string] {
+	if p == nil {
+		return nil
+	}
+	return p.EvalIds
 }
 
 func (p *PublicAPIPerformanceEvalRunRequest) GetCustomEvalIds() optionalnullable.OptionalNullable[[]string] {

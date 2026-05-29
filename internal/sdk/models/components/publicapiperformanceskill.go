@@ -10,8 +10,8 @@ import (
 
 type PublicAPIPerformanceSkill struct {
 	ID             string                                            `json:"id"`
-	SourceID       string                                            `json:"source_id"`
-	IntegrationID  optionalnullable.OptionalNullable[string]         `json:"integration_id,omitzero"`
+	SkillSourceID  string                                            `json:"skill_source_id"`
+	SourceID       optionalnullable.OptionalNullable[string]         `json:"source_id,omitzero"`
 	Slug           string                                            `json:"slug"`
 	Name           string                                            `json:"name"`
 	Description    optionalnullable.OptionalNullable[string]         `json:"description,omitzero"`
@@ -21,7 +21,7 @@ type PublicAPIPerformanceSkill struct {
 	Enabled        bool                                              `json:"enabled"`
 	Stale          bool                                              `json:"stale"`
 	Metadata       map[string]any                                    `json:"metadata,omitzero"`
-	Source         optionalnullable.OptionalNullable[map[string]any] `json:"source,omitzero"`
+	SkillSource    optionalnullable.OptionalNullable[map[string]any] `json:"skill_source,omitzero"`
 	CreatedAt      optionalnullable.OptionalNullable[string]         `json:"created_at,omitzero"`
 	UpdatedAt      optionalnullable.OptionalNullable[string]         `json:"updated_at,omitzero"`
 }
@@ -44,18 +44,18 @@ func (p *PublicAPIPerformanceSkill) GetID() string {
 	return p.ID
 }
 
-func (p *PublicAPIPerformanceSkill) GetSourceID() string {
+func (p *PublicAPIPerformanceSkill) GetSkillSourceID() string {
 	if p == nil {
 		return ""
 	}
-	return p.SourceID
+	return p.SkillSourceID
 }
 
-func (p *PublicAPIPerformanceSkill) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (p *PublicAPIPerformanceSkill) GetSourceID() optionalnullable.OptionalNullable[string] {
 	if p == nil {
 		return nil
 	}
-	return p.IntegrationID
+	return p.SourceID
 }
 
 func (p *PublicAPIPerformanceSkill) GetSlug() string {
@@ -121,11 +121,11 @@ func (p *PublicAPIPerformanceSkill) GetMetadata() map[string]any {
 	return p.Metadata
 }
 
-func (p *PublicAPIPerformanceSkill) GetSource() optionalnullable.OptionalNullable[map[string]any] {
+func (p *PublicAPIPerformanceSkill) GetSkillSource() optionalnullable.OptionalNullable[map[string]any] {
 	if p == nil {
 		return nil
 	}
-	return p.Source
+	return p.SkillSource
 }
 
 func (p *PublicAPIPerformanceSkill) GetCreatedAt() optionalnullable.OptionalNullable[string] {
