@@ -122,3 +122,9 @@ Based on:
 - Speakeasy CLI 1.768.2 (2.889.1) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [cli v0.5.11] .
+
+## 2026-05-29 19:08:00
+### Changes
+- Fix JSON, YAML, jq, and table output rendering for typed SDK responses.
+### Generated
+- [cli v0.5.12] .
