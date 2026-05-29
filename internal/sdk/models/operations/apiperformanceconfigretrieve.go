@@ -10,7 +10,7 @@ import (
 )
 
 type APIPerformanceConfigRetrieveRequest struct {
-	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
+	SourceID *string `queryParam:"style=form,explode=true,name=source_id"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	configScope *string `const:"custom_evals" queryParam:"style=form,explode=true,name=config_scope"`
 }
@@ -26,11 +26,11 @@ func (a *APIPerformanceConfigRetrieveRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *APIPerformanceConfigRetrieveRequest) GetIntegrationID() *string {
+func (a *APIPerformanceConfigRetrieveRequest) GetSourceID() *string {
 	if a == nil {
 		return nil
 	}
-	return a.IntegrationID
+	return a.SourceID
 }
 
 func (a *APIPerformanceConfigRetrieveRequest) GetConfigScope() *string {

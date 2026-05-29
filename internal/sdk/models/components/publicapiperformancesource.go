@@ -9,13 +9,13 @@ import (
 )
 
 type PublicAPIPerformanceSource struct {
-	ID            string                                    `json:"id"`
-	Type          string                                    `json:"type"`
-	Label         string                                    `json:"label"`
-	Metadata      map[string]any                            `json:"metadata,omitzero"`
-	Targets       []map[string]any                          `json:"targets,omitzero"`
-	EndpointCount *int64                                    `default:"0" json:"endpoint_count"`
-	CreatedAt     optionalnullable.OptionalNullable[string] `json:"created_at,omitzero"`
+	ID             string                                    `json:"id"`
+	Type           string                                    `json:"type"`
+	Label          string                                    `json:"label"`
+	Metadata       map[string]any                            `json:"metadata,omitzero"`
+	Targets        []map[string]any                          `json:"targets,omitzero"`
+	OperationCount *int64                                    `default:"0" json:"operation_count"`
+	CreatedAt      optionalnullable.OptionalNullable[string] `json:"created_at,omitzero"`
 }
 
 func (p PublicAPIPerformanceSource) MarshalJSON() ([]byte, error) {
@@ -64,11 +64,11 @@ func (p *PublicAPIPerformanceSource) GetTargets() []map[string]any {
 	return p.Targets
 }
 
-func (p *PublicAPIPerformanceSource) GetEndpointCount() *int64 {
+func (p *PublicAPIPerformanceSource) GetOperationCount() *int64 {
 	if p == nil {
 		return nil
 	}
-	return p.EndpointCount
+	return p.OperationCount
 }
 
 func (p *PublicAPIPerformanceSource) GetCreatedAt() optionalnullable.OptionalNullable[string] {

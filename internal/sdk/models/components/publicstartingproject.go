@@ -39,17 +39,17 @@ func (e *PublicStartingProjectFramework) IsExact() bool {
 }
 
 type PublicStartingProject struct {
-	ID            string                                    `json:"id"`
-	IntegrationID optionalnullable.OptionalNullable[string] `json:"integration_id,omitzero"`
-	Name          string                                    `json:"name"`
-	RepoURL       string                                    `json:"repo_url"`
-	Ref           string                                    `json:"ref"`
-	Subdir        *string                                   `default:"" json:"subdir"`
-	InstallSteps  []string                                  `json:"install_steps,omitzero"`
-	Framework     *PublicStartingProjectFramework           `default:"custom" json:"framework"`
-	Enabled       bool                                      `json:"enabled"`
-	CreatedAt     optionalnullable.OptionalNullable[string] `json:"created_at,omitzero"`
-	UpdatedAt     optionalnullable.OptionalNullable[string] `json:"updated_at,omitzero"`
+	ID           string                                    `json:"id"`
+	SourceID     optionalnullable.OptionalNullable[string] `json:"source_id,omitzero"`
+	Name         string                                    `json:"name"`
+	RepoURL      string                                    `json:"repo_url"`
+	Ref          string                                    `json:"ref"`
+	Subdir       *string                                   `default:"" json:"subdir"`
+	InstallSteps []string                                  `json:"install_steps,omitzero"`
+	Framework    *PublicStartingProjectFramework           `default:"custom" json:"framework"`
+	Enabled      bool                                      `json:"enabled"`
+	CreatedAt    optionalnullable.OptionalNullable[string] `json:"created_at,omitzero"`
+	UpdatedAt    optionalnullable.OptionalNullable[string] `json:"updated_at,omitzero"`
 }
 
 func (p PublicStartingProject) MarshalJSON() ([]byte, error) {
@@ -70,11 +70,11 @@ func (p *PublicStartingProject) GetID() string {
 	return p.ID
 }
 
-func (p *PublicStartingProject) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (p *PublicStartingProject) GetSourceID() optionalnullable.OptionalNullable[string] {
 	if p == nil {
 		return nil
 	}
-	return p.IntegrationID
+	return p.SourceID
 }
 
 func (p *PublicStartingProject) GetName() string {

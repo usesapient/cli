@@ -20,9 +20,9 @@ var apiPerformanceStarterProjectsCreateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "name", Shorthand: "n", FieldPath: "Name", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
 	{FlagName: "repo-url", FieldPath: "RepoURL", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
 	{FlagName: "ref", FieldPath: "Ref", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "main", Description: "string value"},
-	{FlagName: "subdir", Shorthand: "s", FieldPath: "Subdir", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "", Description: "string value"},
-	{FlagName: "install-steps", FieldPath: "InstallSteps", Kind: flagutil.FlagKindStringArray, Optional: true, Description: "list of values"},
-	{FlagName: "integration-id", FieldPath: "IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "subdir", FieldPath: "Subdir", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "", Description: "string value"},
+	{FlagName: "install-steps", Shorthand: "i", FieldPath: "InstallSteps", Kind: flagutil.FlagKindStringArray, Optional: true, Description: "list of values"},
+	{FlagName: "source-id", FieldPath: "SourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "framework", Shorthand: "f", FieldPath: "Framework", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "custom", EnumValues: []string{"fastify", "nuxt", "express", "spa-js", "angular", "react", "fastapi", "vite", "nextjs", "custom"}, Description: "options: fastify, nuxt, express, spa-js, angular, react, fastapi, vite, nextjs, custom"},
 	{FlagName: "enabled", Shorthand: "e", FieldPath: "Enabled", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "boolean flag"},
 }

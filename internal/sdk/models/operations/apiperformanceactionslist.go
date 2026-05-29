@@ -9,11 +9,11 @@ import (
 )
 
 type APIPerformanceActionsListRequest struct {
-	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
-	Status        *string `queryParam:"style=form,explode=true,name=status"`
-	ActionType    *string `queryParam:"style=form,explode=true,name=action_type"`
-	Priority      *string `queryParam:"style=form,explode=true,name=priority"`
-	Limit         *int64  `default:"100" queryParam:"style=form,explode=true,name=limit"`
+	SourceID   *string `queryParam:"style=form,explode=true,name=source_id"`
+	Status     *string `queryParam:"style=form,explode=true,name=status"`
+	ActionType *string `queryParam:"style=form,explode=true,name=action_type"`
+	Priority   *string `queryParam:"style=form,explode=true,name=priority"`
+	Limit      *int64  `default:"100" queryParam:"style=form,explode=true,name=limit"`
 }
 
 func (a APIPerformanceActionsListRequest) MarshalJSON() ([]byte, error) {
@@ -27,11 +27,11 @@ func (a *APIPerformanceActionsListRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *APIPerformanceActionsListRequest) GetIntegrationID() *string {
+func (a *APIPerformanceActionsListRequest) GetSourceID() *string {
 	if a == nil {
 		return nil
 	}
-	return a.IntegrationID
+	return a.SourceID
 }
 
 func (a *APIPerformanceActionsListRequest) GetStatus() *string {

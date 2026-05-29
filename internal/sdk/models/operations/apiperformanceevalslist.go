@@ -9,15 +9,15 @@ import (
 )
 
 type APIPerformanceEvalsListRequest struct {
-	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
-	Enabled       *bool   `queryParam:"style=form,explode=true,name=enabled"`
+	SourceID *string `queryParam:"style=form,explode=true,name=source_id"`
+	Enabled  *bool   `queryParam:"style=form,explode=true,name=enabled"`
 }
 
-func (a *APIPerformanceEvalsListRequest) GetIntegrationID() *string {
+func (a *APIPerformanceEvalsListRequest) GetSourceID() *string {
 	if a == nil {
 		return nil
 	}
-	return a.IntegrationID
+	return a.SourceID
 }
 
 func (a *APIPerformanceEvalsListRequest) GetEnabled() *bool {

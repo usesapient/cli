@@ -42,8 +42,16 @@ func newEvalRuns(rootSDK *Sapient, sdkConfig config.SDKConfiguration, hooks *hoo
 // use `custom_eval_ids` when provided, otherwise the configured custom eval
 // set for the organization.
 //
+// For API Performance source types backed by a source (`rest_api`, `sdk`, or
+// `cli`), provide `source_id` from `api-performance sources list`, or omit it
+// when `operation_ids`, `eval_ids`, or the requested `source_type` identify a
+// single source. `operation_ids` are Sapient API Performance operation IDs,
+// not OpenAPI operationId strings.
+//
 // Every run is queued through the durable job queue. The response `id` is the
-// `eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`.
+// `eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`. When Sapient can
+// determine the runnable work, the response also includes `dispatch_id` and
+// initial queued progress for the child jobs.
 func (s *EvalRuns) EvalRunsCreate(ctx context.Context, request operations.EvalRunsCreateRequest, opts ...operations.Option) (*operations.EvalRunsCreateResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -248,8 +256,7 @@ func (s *EvalRuns) EvalRunsCreate(ctx context.Context, request operations.EvalRu
 // Retrieve status and progress for a durable eval run.
 //
 // The `eval_run_id` is the `id` returned by `POST /v1/eval-runs`. Progress is
-// computed from the parent job, its dispatch, and child jobs when dispatch
-// fanout has started.
+// computed from the parent job, its dispatch, and child jobs.
 func (s *EvalRuns) EvalRunsRetrieve(ctx context.Context, request operations.EvalRunsRetrieveRequest, opts ...operations.Option) (*operations.EvalRunsRetrieveResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
