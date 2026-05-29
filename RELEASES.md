@@ -128,9 +128,3 @@ Based on:
 - Fix JSON, YAML, jq, and table output rendering for typed SDK responses.
 ### Generated
 - [cli v0.5.12] .
-
-## 2026-05-29 19:29:39
-### Changes
-- Regenerate the CLI contract from the public API OpenAPI schema with typed API Performance source metadata and redacted eval config fields.
-### Generated
-- [cli v0.5.13] .

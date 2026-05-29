@@ -13,10 +13,9 @@ type PublicEvalConfigResponse struct {
 	Targets                       []PublicAPIEvalTarget                     `json:"targets,omitzero"`
 	OperationIds                  []string                                  `json:"operation_ids"`
 	CustomEvalIds                 []string                                  `json:"custom_eval_ids,omitzero"`
-	EnvVarKeys                    []string                                  `json:"env_var_keys,omitzero"`
+	EnvVars                       map[string]string                         `json:"env_vars,omitzero"`
 	EnvProfiles                   []PublicEvalEnvProfileSummary             `json:"env_profiles,omitzero"`
 	DefaultEnvProfileID           optionalnullable.OptionalNullable[string] `json:"default_env_profile_id,omitzero"`
-	SourceID                      optionalnullable.OptionalNullable[string] `json:"source_id,omitzero"`
 	APIBaseURL                    optionalnullable.OptionalNullable[string] `json:"api_base_url,omitzero"`
 	CanConfigurePerModelSchedules *bool                                     `default:"false" json:"can_configure_per_model_schedules"`
 }
@@ -60,11 +59,11 @@ func (p *PublicEvalConfigResponse) GetCustomEvalIds() []string {
 	return p.CustomEvalIds
 }
 
-func (p *PublicEvalConfigResponse) GetEnvVarKeys() []string {
+func (p *PublicEvalConfigResponse) GetEnvVars() map[string]string {
 	if p == nil {
 		return nil
 	}
-	return p.EnvVarKeys
+	return p.EnvVars
 }
 
 func (p *PublicEvalConfigResponse) GetEnvProfiles() []PublicEvalEnvProfileSummary {
@@ -79,13 +78,6 @@ func (p *PublicEvalConfigResponse) GetDefaultEnvProfileID() optionalnullable.Opt
 		return nil
 	}
 	return p.DefaultEnvProfileID
-}
-
-func (p *PublicEvalConfigResponse) GetSourceID() optionalnullable.OptionalNullable[string] {
-	if p == nil {
-		return nil
-	}
-	return p.SourceID
 }
 
 func (p *PublicEvalConfigResponse) GetAPIBaseURL() optionalnullable.OptionalNullable[string] {
