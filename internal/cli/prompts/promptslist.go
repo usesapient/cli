@@ -16,9 +16,9 @@ import (
 )
 
 var promptsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "topic-id", Shorthand: "t", FieldPath: "TopicID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=topic_id"`, Description: "string value"},
-	{FlagName: "is-active", FieldPath: "IsActive", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=is_active"`, Description: "boolean flag"},
-	{FlagName: "status", Shorthand: "s", FieldPath: "Status", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=status"`, Description: "string value"},
+	{FlagName: "topic-id", Shorthand: "t", FieldPath: "TopicID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "is-active", FieldPath: "IsActive", Kind: flagutil.FlagKindBool, Optional: true, Description: "boolean flag"},
+	{FlagName: "status", Shorthand: "s", FieldPath: "Status", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "include-archived", FieldPath: "IncludeArchived", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "boolean flag"},
 }
 

@@ -5,16 +5,15 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceActionsListRequest struct {
-	IntegrationID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=integration_id"`
-	Status        optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=status"`
-	ActionType    optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=action_type"`
-	Priority      optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=priority"`
-	Limit         *int64                                    `default:"100" queryParam:"style=form,explode=true,name=limit"`
+	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
+	Status        *string `queryParam:"style=form,explode=true,name=status"`
+	ActionType    *string `queryParam:"style=form,explode=true,name=action_type"`
+	Priority      *string `queryParam:"style=form,explode=true,name=priority"`
+	Limit         *int64  `default:"100" queryParam:"style=form,explode=true,name=limit"`
 }
 
 func (a APIPerformanceActionsListRequest) MarshalJSON() ([]byte, error) {
@@ -28,28 +27,28 @@ func (a *APIPerformanceActionsListRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *APIPerformanceActionsListRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceActionsListRequest) GetIntegrationID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.IntegrationID
 }
 
-func (a *APIPerformanceActionsListRequest) GetStatus() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceActionsListRequest) GetStatus() *string {
 	if a == nil {
 		return nil
 	}
 	return a.Status
 }
 
-func (a *APIPerformanceActionsListRequest) GetActionType() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceActionsListRequest) GetActionType() *string {
 	if a == nil {
 		return nil
 	}
 	return a.ActionType
 }
 
-func (a *APIPerformanceActionsListRequest) GetPriority() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceActionsListRequest) GetPriority() *string {
 	if a == nil {
 		return nil
 	}

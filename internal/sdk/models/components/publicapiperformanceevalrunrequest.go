@@ -46,7 +46,7 @@ type PublicAPIPerformanceEvalRunRequest struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_         string                                       `const:"api_performance" json:"type"`
 	SourceType    PublicAPIPerformanceEvalRunRequestSourceType `json:"source_type"`
-	IntegrationID optionalnullable.OptionalNullable[string]    `json:"integration_id,omitzero"`
+	IntegrationID *string                                      `json:"integration_id,omitzero"`
 	// Legacy flat model selection. Prefer targets.
 	Models optionalnullable.OptionalNullable[[]string] `json:"models,omitzero"`
 	// Explicit text/agent targets to run.
@@ -84,7 +84,7 @@ func (p *PublicAPIPerformanceEvalRunRequest) GetSourceType() PublicAPIPerformanc
 	return p.SourceType
 }
 
-func (p *PublicAPIPerformanceEvalRunRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (p *PublicAPIPerformanceEvalRunRequest) GetIntegrationID() *string {
 	if p == nil {
 		return nil
 	}

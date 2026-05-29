@@ -6,7 +6,6 @@ package components
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
@@ -61,14 +60,14 @@ func (e *PublicStartingProjectRequestFramework) UnmarshalJSON(data []byte) error
 }
 
 type PublicStartingProjectRequest struct {
-	Name          string                                    `json:"name"`
-	RepoURL       string                                    `json:"repo_url"`
-	Ref           *string                                   `default:"main" json:"ref"`
-	Subdir        *string                                   `default:"" json:"subdir"`
-	InstallSteps  []string                                  `json:"install_steps,omitzero"`
-	IntegrationID optionalnullable.OptionalNullable[string] `json:"integration_id,omitzero"`
-	Framework     *PublicStartingProjectRequestFramework    `default:"custom" json:"framework"`
-	Enabled       *bool                                     `default:"true" json:"enabled"`
+	Name          string                                 `json:"name"`
+	RepoURL       string                                 `json:"repo_url"`
+	Ref           *string                                `default:"main" json:"ref"`
+	Subdir        *string                                `default:"" json:"subdir"`
+	InstallSteps  []string                               `json:"install_steps,omitzero"`
+	IntegrationID *string                                `json:"integration_id,omitzero"`
+	Framework     *PublicStartingProjectRequestFramework `default:"custom" json:"framework"`
+	Enabled       *bool                                  `default:"true" json:"enabled"`
 }
 
 func (p PublicStartingProjectRequest) MarshalJSON() ([]byte, error) {
@@ -117,7 +116,7 @@ func (p *PublicStartingProjectRequest) GetInstallSteps() []string {
 	return p.InstallSteps
 }
 
-func (p *PublicStartingProjectRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (p *PublicStartingProjectRequest) GetIntegrationID() *string {
 	if p == nil {
 		return nil
 	}

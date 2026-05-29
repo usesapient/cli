@@ -3,39 +3,35 @@
 
 package components
 
-import (
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
-)
-
 type PublicUpdateActionRequest struct {
-	Status        optionalnullable.OptionalNullable[string] `json:"status,omitzero"`
-	OwnerUserID   optionalnullable.OptionalNullable[string] `json:"owner_user_id,omitzero"`
-	IgnoredReason optionalnullable.OptionalNullable[string] `json:"ignored_reason,omitzero"`
-	Note          optionalnullable.OptionalNullable[string] `json:"note,omitzero"`
+	Status        *string `json:"status,omitzero"`
+	OwnerUserID   *string `json:"owner_user_id,omitzero"`
+	IgnoredReason *string `json:"ignored_reason,omitzero"`
+	Note          *string `json:"note,omitzero"`
 }
 
-func (p *PublicUpdateActionRequest) GetStatus() optionalnullable.OptionalNullable[string] {
+func (p *PublicUpdateActionRequest) GetStatus() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Status
 }
 
-func (p *PublicUpdateActionRequest) GetOwnerUserID() optionalnullable.OptionalNullable[string] {
+func (p *PublicUpdateActionRequest) GetOwnerUserID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.OwnerUserID
 }
 
-func (p *PublicUpdateActionRequest) GetIgnoredReason() optionalnullable.OptionalNullable[string] {
+func (p *PublicUpdateActionRequest) GetIgnoredReason() *string {
 	if p == nil {
 		return nil
 	}
 	return p.IgnoredReason
 }
 
-func (p *PublicUpdateActionRequest) GetNote() optionalnullable.OptionalNullable[string] {
+func (p *PublicUpdateActionRequest) GetNote() *string {
 	if p == nil {
 		return nil
 	}

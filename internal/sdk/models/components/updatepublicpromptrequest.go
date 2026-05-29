@@ -9,10 +9,10 @@ import (
 )
 
 type UpdatePublicPromptRequest struct {
-	Text        optionalnullable.OptionalNullable[string]   `json:"text,omitzero"`
-	TopicID     optionalnullable.OptionalNullable[string]   `json:"topic_id,omitzero"`
+	Text        *string                                     `json:"text,omitzero"`
+	TopicID     *string                                     `json:"topic_id,omitzero"`
 	PlatformIds optionalnullable.OptionalNullable[[]string] `json:"platform_ids,omitzero"`
-	IsActive    optionalnullable.OptionalNullable[bool]     `json:"is_active,omitzero"`
+	IsActive    *bool                                       `json:"is_active,omitzero"`
 }
 
 func (u UpdatePublicPromptRequest) MarshalJSON() ([]byte, error) {
@@ -26,14 +26,14 @@ func (u *UpdatePublicPromptRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (u *UpdatePublicPromptRequest) GetText() optionalnullable.OptionalNullable[string] {
+func (u *UpdatePublicPromptRequest) GetText() *string {
 	if u == nil {
 		return nil
 	}
 	return u.Text
 }
 
-func (u *UpdatePublicPromptRequest) GetTopicID() optionalnullable.OptionalNullable[string] {
+func (u *UpdatePublicPromptRequest) GetTopicID() *string {
 	if u == nil {
 		return nil
 	}
@@ -47,7 +47,7 @@ func (u *UpdatePublicPromptRequest) GetPlatformIds() optionalnullable.OptionalNu
 	return u.PlatformIds
 }
 
-func (u *UpdatePublicPromptRequest) GetIsActive() optionalnullable.OptionalNullable[bool] {
+func (u *UpdatePublicPromptRequest) GetIsActive() *bool {
 	if u == nil {
 		return nil
 	}

@@ -16,8 +16,8 @@ import (
 )
 
 var apiPerformanceEvalsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=integration_id"`, Description: "string value"},
-	{FlagName: "enabled", Shorthand: "e", FieldPath: "Enabled", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=enabled"`, Description: "boolean flag"},
+	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "enabled", Shorthand: "e", FieldPath: "Enabled", Kind: flagutil.FlagKindBool, Optional: true, Description: "boolean flag"},
 }
 
 // initApiPerformanceEvalsListCmd initializes the api-performance-evals-list command.

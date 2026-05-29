@@ -17,14 +17,14 @@ import (
 
 var apiPerformanceStarterProjectsUpdateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "starter-project-id", FieldPath: "StarterProjectID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "name", Shorthand: "n", FieldPath: "Body.Name", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"name,omitempty"`, Description: "string value"},
-	{FlagName: "repo-url", FieldPath: "Body.RepoURL", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"repo_url,omitempty"`, Description: "string value"},
-	{FlagName: "ref", FieldPath: "Body.Ref", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"ref,omitempty"`, Description: "string value"},
-	{FlagName: "subdir", FieldPath: "Body.Subdir", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"subdir,omitempty"`, Description: "string value"},
+	{FlagName: "name", Shorthand: "n", FieldPath: "Body.Name", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "repo-url", FieldPath: "Body.RepoURL", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "ref", FieldPath: "Body.Ref", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "subdir", FieldPath: "Body.Subdir", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "install-steps", FieldPath: "Body.InstallSteps", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"install_steps,omitempty"`, Description: "list of values"},
-	{FlagName: "integration-id", FieldPath: "Body.IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"integration_id,omitempty"`, Description: "string value"},
-	{FlagName: "framework", Shorthand: "f", FieldPath: "Body.Framework", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"framework,omitempty"`, Description: "options: fastify, nuxt, express, spa-js, angular, react, fastapi, vite, nextjs, custom"},
-	{FlagName: "enabled", Shorthand: "e", FieldPath: "Body.Enabled", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"enabled,omitempty"`, Description: "boolean flag"},
+	{FlagName: "integration-id", FieldPath: "Body.IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "framework", Shorthand: "f", FieldPath: "Body.Framework", Kind: flagutil.FlagKindEnum, Optional: true, EnumValues: []string{"fastify", "nuxt", "express", "spa-js", "angular", "react", "fastapi", "vite", "nextjs", "custom"}, Description: "options: fastify, nuxt, express, spa-js, angular, react, fastapi, vite, nextjs, custom"},
+	{FlagName: "enabled", Shorthand: "e", FieldPath: "Body.Enabled", Kind: flagutil.FlagKindBool, Optional: true, Description: "boolean flag"},
 }
 
 // initApiPerformanceStarterProjectsUpdateCmd initializes the api-performance-starter-projects-update command.

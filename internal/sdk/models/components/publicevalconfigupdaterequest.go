@@ -17,11 +17,9 @@ type PublicEvalConfigUpdateRequest struct {
 	CustomEvalIds       optionalnullable.OptionalNullable[[]string]                      `json:"custom_eval_ids,omitzero"`
 	EnvVars             optionalnullable.OptionalNullable[map[string]string]             `json:"env_vars,omitzero"`
 	EnvProfiles         optionalnullable.OptionalNullable[[]PublicEvalEnvProfileRequest] `json:"env_profiles,omitzero"`
-	DefaultEnvProfileID optionalnullable.OptionalNullable[string]                        `json:"default_env_profile_id,omitzero"`
-	IntegrationID       optionalnullable.OptionalNullable[string]                        `json:"integration_id,omitzero"`
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	configScope optionalnullable.OptionalNullable[string] `const:"custom_evals" json:"config_scope,omitzero"`
-	APIBaseURL  optionalnullable.OptionalNullable[string] `json:"api_base_url,omitzero"`
+	DefaultEnvProfileID *string                                                          `json:"default_env_profile_id,omitzero"`
+	IntegrationID       *string                                                          `json:"integration_id,omitzero"`
+	APIBaseURL          *string                                                          `json:"api_base_url,omitzero"`
 }
 
 func (p PublicEvalConfigUpdateRequest) MarshalJSON() ([]byte, error) {
@@ -77,26 +75,21 @@ func (p *PublicEvalConfigUpdateRequest) GetEnvProfiles() optionalnullable.Option
 	return p.EnvProfiles
 }
 
-func (p *PublicEvalConfigUpdateRequest) GetDefaultEnvProfileID() optionalnullable.OptionalNullable[string] {
+func (p *PublicEvalConfigUpdateRequest) GetDefaultEnvProfileID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.DefaultEnvProfileID
 }
 
-func (p *PublicEvalConfigUpdateRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (p *PublicEvalConfigUpdateRequest) GetIntegrationID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.IntegrationID
 }
 
-func (p *PublicEvalConfigUpdateRequest) GetConfigScope() optionalnullable.OptionalNullable[string] {
-	var tmp string = "custom_evals"
-	return optionalnullable.From[string](&tmp)
-}
-
-func (p *PublicEvalConfigUpdateRequest) GetAPIBaseURL() optionalnullable.OptionalNullable[string] {
+func (p *PublicEvalConfigUpdateRequest) GetAPIBaseURL() *string {
 	if p == nil {
 		return nil
 	}

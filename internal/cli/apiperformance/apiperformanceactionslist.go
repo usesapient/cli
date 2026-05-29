@@ -16,10 +16,10 @@ import (
 )
 
 var apiPerformanceActionsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=integration_id"`, Description: "string value"},
-	{FlagName: "status", Shorthand: "s", FieldPath: "Status", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=status"`, Description: "string value"},
-	{FlagName: "action-type", Shorthand: "a", FieldPath: "ActionType", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=action_type"`, Description: "string value"},
-	{FlagName: "priority", Shorthand: "p", FieldPath: "Priority", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=priority"`, Description: "string value"},
+	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "status", Shorthand: "s", FieldPath: "Status", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "action-type", Shorthand: "a", FieldPath: "ActionType", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "priority", Shorthand: "p", FieldPath: "Priority", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 100, Description: "integer value"},
 }
 
