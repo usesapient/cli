@@ -5,14 +5,14 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.768.2
   generationVersion: 2.889.1
-  releaseVersion: 0.5.12
-  configChecksum: 14ffbcb62dea95d7e51fc7d85a4f3c17
+  releaseVersion: 0.5.13
+  configChecksum: c96807c80002de1c3c556c33e3716f88
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
 persistentEdits:
-  generation_id: 95cb00ed-34a9-482d-a4c7-8814e1da2132
-  pristine_commit_hash: eebd4edc39e152251c811ef6e7a3f15899fe79db
-  pristine_tree_hash: 1a80fb0cadf185b3e3611dd576841c0211ac8539
+  generation_id: 81a36289-3b7f-4676-b61c-841df2dbe333
+  pristine_commit_hash: 53d6237ad9742a244d4ef588fc43ee077dd91457
+  pristine_tree_hash: 643640fb4801c3ed80e489bc01429e7e8019d77f
 features:
   cli:
     additionalProperties: 0.0.0
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: 82e627c3269cd3715e02ec7e11be0e41f22a3b01
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:6735eb578ff9f06082af1b8fc25bce7afdde5570
-    pristine_git_object: 18b1059331dec794504cb2fa487957f965710b64
+    last_write_checksum: sha1:85d3d7ac20e741f2ae8659f847a166d004987ce2
+    pristine_git_object: 132e9b854a18d8522587ed6212c9762a11e0599d
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:f0b47f0b4083f9abafc5df2e9123f3f7f85299de
@@ -957,8 +957,8 @@ trackedFiles:
     pristine_git_object: 7e1f465c87ec82286f5efb5c1be95501ba0a1cc8
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:84403357a0e58b003070a3056466e51650b24f7e
-    pristine_git_object: 2cb1d7641adc4f88bde6e376de8f147aef3f45d6
+    last_write_checksum: sha1:abf6bf40d7fe8fb403127b67f3f3c5f11c36d2bd
+    pristine_git_object: 7a4dd0ffff157285656dc1ad7a7ac111a07ceb00
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:cd01d45cc8eab10459eeefec295916709ef6d678
@@ -1641,8 +1641,3 @@ examples:
         "404":
           application/json: {"detail": "Configured API Performance scope not found for this organization"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Cli SDK Changes:
-  * `Sapient.ApiPerformance.ApiPerformanceConfigRetrieve()`:  `response` **Changed** (Breaking ⚠️)
-  * `Sapient.ApiPerformance.ApiPerformanceConfigUpdate()`:  `response` **Changed** (Breaking ⚠️)
-  * `Sapient.ApiPerformance.ApiPerformanceSourcesList()`:  `response.Data[]` **Changed** (Breaking ⚠️)
