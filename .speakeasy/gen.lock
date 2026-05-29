@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: b4e9b595-9805-48d3-93ca-ae7b2d7fd331
 management:
-  docChecksum: 92ac3d0bf911178cb4cb833a786b3f51
+  docChecksum: 1246968193be37b9452e24fa57e6f34d
   docVersion: 1.0.0
   speakeasyVersion: 1.768.2
   generationVersion: 2.889.1
-  releaseVersion: 0.5.13
-  configChecksum: 14ffbcb62dea95d7e51fc7d85a4f3c17
+  releaseVersion: 0.5.12
+  configChecksum: 9048f2b362766d29cd14cd92a88a56e5
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
 persistentEdits:
-  generation_id: e20f61d5-c917-430d-bb06-32d5567eadbf
-  pristine_commit_hash: 9a7cf2220d31db347b459ebd1d37aab3073a00f0
-  pristine_tree_hash: 643640fb4801c3ed80e489bc01429e7e8019d77f
+  generation_id: e2a31582-ded9-4d14-854f-ef0daf68161e
+  pristine_commit_hash: 28690ca96d61a85bf1c945560f91637252baebd4
+  pristine_tree_hash: baa79399bd7298c2c509def1d849665908c0a076
 features:
   cli:
     additionalProperties: 0.0.0
