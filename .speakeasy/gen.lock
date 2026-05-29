@@ -5,7 +5,7 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.768.2
   generationVersion: 2.889.1
-  releaseVersion: 0.5.11
+  releaseVersion: 0.5.12
   configChecksum: 9048f2b362766d29cd14cd92a88a56e5
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
