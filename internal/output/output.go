@@ -81,15 +81,16 @@ func printJSON(out io.Writer, data []byte, colorize bool) {
 	fmt.Fprintln(out, string(data))
 }
 
-// WantsRawJSON returns true when the user has requested JSON output format
-// (either --output-format=json or --jq is set), meaning the CLI should
-// prefer raw JSON passthrough over typed-struct marshaling.
+// WantsRawJSON returns whether generated commands should ask the SDK to skip
+// response deserialization for raw JSON passthrough.
+//
+// Keep this false for normal command output. Some generated SDK responses expose
+// an empty raw body after skip-deserialization, which leaves JSON/JQ users with
+// no body even though typed output has data. Result still supports raw bodies
+// when they are available, but generated commands should prefer typed responses
+// and let the output layer canonicalize them.
 func WantsRawJSON(cmd *cobra.Command) bool {
-	jqExpr, _ := flagutil.GetStringFlag(cmd, "jq")
-	if jqExpr != "" {
-		return true
-	}
-	return resolveOutputFormat(cmd) == "json"
+	return false
 }
 
 // PrepareCallOpts builds common SDK call options from CLI flags.
@@ -242,13 +243,21 @@ func Result(cmd *cobra.Command, res interface{}) error {
 
 	switch format {
 	case "json":
-		data, err := marshalJSON(content)
+		normalized, err := canonicalizeForOutput(content)
+		if err != nil {
+			return err
+		}
+		data, err := json.MarshalIndent(normalized, "", "  ")
 		if err != nil {
 			return err
 		}
 		printJSON(out, data, colorize)
 	case "yaml":
-		data, err := yaml.Marshal(content)
+		normalized, err := canonicalizeForOutput(content)
+		if err != nil {
+			return err
+		}
+		data, err := yaml.Marshal(normalized)
 		if err != nil {
 			return fmt.Errorf("failed to marshal response as YAML: %w", err)
 		}
@@ -258,7 +267,11 @@ func Result(cmd *cobra.Command, res interface{}) error {
 			return err
 		}
 	case "toon":
-		toonStr, err := gotoon.Encode(content)
+		normalized, err := canonicalizeForOutput(content)
+		if err != nil {
+			return err
+		}
+		toonStr, err := gotoon.Encode(normalized)
 		if err != nil {
 			return fmt.Errorf("failed to encode response as TOON: %w", err)
 		}
@@ -269,6 +282,24 @@ func Result(cmd *cobra.Command, res interface{}) error {
 		}
 	}
 	return nil
+}
+
+// canonicalizeForOutput converts generated SDK types into the public JSON shape
+// before machine-readable rendering. This strips Go-only wrappers such as
+// OptionalNullable and respects the generated SDK's custom JSON tags.
+func canonicalizeForOutput(content interface{}) (interface{}, error) {
+	if content == nil {
+		return nil, nil
+	}
+	data, err := marshalJSON(content)
+	if err != nil {
+		return nil, err
+	}
+	var parsed interface{}
+	if err := json.Unmarshal(data, &parsed); err != nil {
+		return nil, fmt.Errorf("failed to parse response JSON: %w", err)
+	}
+	return parsed, nil
 }
 
 // Error handles SDK errors, outputting structured JSON when --output-format=json,
@@ -632,16 +663,9 @@ func injectHeaders(data interface{}, headers http.Header) interface{} {
 // and outputs in the specified format. This is the common path for --include-headers
 // in json, yaml, toon, and jq output modes.
 func outputWithHeaders(out io.Writer, content interface{}, headers http.Header, format, jqExpr string, colorize bool) error {
-	// Marshal content to JSON for a uniform representation
-	var parsed interface{}
-	if content != nil {
-		data, err := marshalJSON(content)
-		if err != nil {
-			return err
-		}
-		if err := json.Unmarshal(data, &parsed); err != nil {
-			return err
-		}
+	parsed, err := canonicalizeForOutput(content)
+	if err != nil {
+		return err
 	}
 
 	merged := injectHeaders(parsed, headers)
@@ -743,7 +767,11 @@ func applyJqToRawJSON(out io.Writer, rawBody []byte, jqExpr string, colorize boo
 
 // applyJqToTyped applies a jq expression to typed content (non-raw path).
 func applyJqToTyped(out io.Writer, content interface{}, jqExpr string, colorize bool) error {
-	results, err := ApplyJqFilter(content, jqExpr)
+	normalized, err := canonicalizeForOutput(content)
+	if err != nil {
+		return err
+	}
+	results, err := ApplyJqFilter(normalized, jqExpr)
 	if err != nil {
 		return err
 	}
@@ -755,6 +783,23 @@ func applyJqToTyped(out io.Writer, content interface{}, jqExpr string, colorize 
 // For single structs, outputs a vertical key-value table.
 // Complex nested fields are skipped.
 func printTable(out io.Writer, content any) error {
+	if normalized, err := canonicalizeForOutput(content); err == nil {
+		content = normalized
+	} else if content == nil {
+		return err
+	}
+	if content == nil {
+		return fmt.Errorf("nil value, nothing to display as table")
+	}
+
+	if rows, ok := tableRows(content); ok {
+		return printGenericTableRows(out, rows)
+	}
+
+	if m, ok := content.(map[string]interface{}); ok {
+		return printGenericTableMap(out, m)
+	}
+
 	v := reflect.ValueOf(content)
 	for v.Kind() == reflect.Ptr || v.Kind() == reflect.Interface {
 		if v.IsNil() {
@@ -774,6 +819,146 @@ func printTable(out io.Writer, content any) error {
 		// Fallback: just print the value
 		fmt.Fprintln(out, v.Interface())
 		return nil
+	}
+}
+
+func tableRows(content any) ([]map[string]interface{}, bool) {
+	if m, ok := content.(map[string]interface{}); ok {
+		for _, key := range []string{"data", "items", "results"} {
+			if rows, ok := tableRows(m[key]); ok {
+				return rows, true
+			}
+		}
+		return nil, false
+	}
+
+	items, ok := content.([]interface{})
+	if !ok {
+		return nil, false
+	}
+	rows := make([]map[string]interface{}, 0, len(items))
+	for _, item := range items {
+		row, ok := item.(map[string]interface{})
+		if !ok {
+			return nil, false
+		}
+		rows = append(rows, row)
+	}
+	return rows, true
+}
+
+func printGenericTableRows(out io.Writer, rows []map[string]interface{}) error {
+	if len(rows) == 0 {
+		fmt.Fprintln(out, "(empty)")
+		return nil
+	}
+
+	cols := collectGenericTableColumns(rows)
+	if len(cols) == 0 {
+		return fmt.Errorf("no displayable columns found")
+	}
+
+	tw := newTabWriter(out)
+	headers := make([]string, len(cols))
+	for i, col := range cols {
+		headers[i] = strings.ToUpper(col)
+	}
+	fmt.Fprintln(tw, strings.Join(headers, "\t"))
+
+	for _, row := range rows {
+		vals := make([]string, len(cols))
+		for i, col := range cols {
+			vals[i] = formatGenericTableCell(row[col])
+		}
+		fmt.Fprintln(tw, strings.Join(vals, "\t"))
+	}
+	return tw.Flush()
+}
+
+func printGenericTableMap(out io.Writer, m map[string]interface{}) error {
+	tw := newTabWriter(out)
+	fmt.Fprintln(tw, "KEY\tVALUE")
+	keys := make([]string, 0, len(m))
+	for key, value := range m {
+		if isGenericTableScalar(value) {
+			keys = append(keys, key)
+		}
+	}
+	sort.Strings(keys)
+	for _, key := range keys {
+		fmt.Fprintf(tw, "%s\t%s\n", key, formatGenericTableCell(m[key]))
+	}
+	return tw.Flush()
+}
+
+func collectGenericTableColumns(rows []map[string]interface{}) []string {
+	seen := make(map[string]bool)
+	cols := make([]string, 0)
+	for _, row := range rows {
+		for key, value := range row {
+			if seen[key] || !isGenericTableScalar(value) {
+				continue
+			}
+			seen[key] = true
+			cols = append(cols, key)
+		}
+	}
+	sort.SliceStable(cols, func(i, j int) bool {
+		leftPriority := tableColumnPriority(cols[i])
+		rightPriority := tableColumnPriority(cols[j])
+		if leftPriority != rightPriority {
+			return leftPriority < rightPriority
+		}
+		return cols[i] < cols[j]
+	})
+	return cols
+}
+
+func tableColumnPriority(name string) int {
+	switch name {
+	case "id":
+		return 0
+	case "name", "label", "title":
+		return 1
+	case "type", "status":
+		return 2
+	case "source_id", "operation_id":
+		return 3
+	case "created_at", "updated_at":
+		return 9
+	default:
+		return 5
+	}
+}
+
+func isGenericTableScalar(value interface{}) bool {
+	switch v := value.(type) {
+	case nil, string, bool, float64, int, int64, uint64, json.Number:
+		return true
+	case []interface{}:
+		for _, item := range v {
+			if !isGenericTableScalar(item) {
+				return false
+			}
+		}
+		return true
+	default:
+		return false
+	}
+}
+
+func formatGenericTableCell(value interface{}) string {
+	switch v := value.(type) {
+	case nil:
+		return ""
+	case []interface{}:
+		parts := make([]string, len(v))
+		for i, item := range v {
+			parts[i] = formatGenericTableCell(item)
+		}
+		return strings.Join(parts, ", ")
+	default:
+		return fmt.Sprint(v)
 	}
 }
 
