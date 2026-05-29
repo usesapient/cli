@@ -5,39 +5,49 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceSkillsListRequest struct {
-	IntegrationID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=integration_id"`
-	SourceID      optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=source_id"`
-	Enabled       optionalnullable.OptionalNullable[bool]   `queryParam:"style=form,explode=true,name=enabled"`
-	Stale         optionalnullable.OptionalNullable[bool]   `queryParam:"style=form,explode=true,name=stale"`
+	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
+	SourceID      *string `queryParam:"style=form,explode=true,name=source_id"`
+	Enabled       *bool   `default:"true" queryParam:"style=form,explode=true,name=enabled"`
+	Stale         *bool   `default:"false" queryParam:"style=form,explode=true,name=stale"`
 }
 
-func (a *APIPerformanceSkillsListRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (a APIPerformanceSkillsListRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *APIPerformanceSkillsListRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (a *APIPerformanceSkillsListRequest) GetIntegrationID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.IntegrationID
 }
 
-func (a *APIPerformanceSkillsListRequest) GetSourceID() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceSkillsListRequest) GetSourceID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.SourceID
 }
 
-func (a *APIPerformanceSkillsListRequest) GetEnabled() optionalnullable.OptionalNullable[bool] {
+func (a *APIPerformanceSkillsListRequest) GetEnabled() *bool {
 	if a == nil {
 		return nil
 	}
 	return a.Enabled
 }
 
-func (a *APIPerformanceSkillsListRequest) GetStale() optionalnullable.OptionalNullable[bool] {
+func (a *APIPerformanceSkillsListRequest) GetStale() *bool {
 	if a == nil {
 		return nil
 	}

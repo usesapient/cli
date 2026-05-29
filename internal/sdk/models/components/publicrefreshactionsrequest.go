@@ -4,13 +4,12 @@
 package components
 
 import (
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type PublicRefreshActionsRequest struct {
-	IntegrationID optionalnullable.OptionalNullable[string] `json:"integration_id,omitzero"`
-	Force         *bool                                     `default:"false" json:"force"`
+	IntegrationID *string `json:"integration_id,omitzero"`
+	Force         *bool   `default:"false" json:"force"`
 }
 
 func (p PublicRefreshActionsRequest) MarshalJSON() ([]byte, error) {
@@ -24,7 +23,7 @@ func (p *PublicRefreshActionsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PublicRefreshActionsRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (p *PublicRefreshActionsRequest) GetIntegrationID() *string {
 	if p == nil {
 		return nil
 	}

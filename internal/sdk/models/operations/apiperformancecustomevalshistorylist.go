@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
@@ -109,15 +108,15 @@ func (e *SortDir) UnmarshalJSON(data []byte) error {
 
 type APIPerformanceCustomEvalsHistoryListRequest struct {
 	// Optional custom eval ID to filter history rows.
-	CustomEvalID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=custom_eval_id"`
-	Limit        *int64                                    `default:"25" queryParam:"style=form,explode=true,name=limit"`
-	Offset       *int64                                    `default:"0" queryParam:"style=form,explode=true,name=offset"`
-	Search       optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
-	ResultFilter *ResultFilter                             `default:"all" queryParam:"style=form,explode=true,name=result_filter"`
-	TargetKey    optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=target_key"`
-	CategoryID   optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=category_id"`
-	SortBy       *SortBy                                   `default:"time" queryParam:"style=form,explode=true,name=sort_by"`
-	SortDir      *SortDir                                  `default:"desc" queryParam:"style=form,explode=true,name=sort_dir"`
+	CustomEvalID *string       `queryParam:"style=form,explode=true,name=custom_eval_id"`
+	Limit        *int64        `default:"25" queryParam:"style=form,explode=true,name=limit"`
+	Offset       *int64        `default:"0" queryParam:"style=form,explode=true,name=offset"`
+	Search       *string       `queryParam:"style=form,explode=true,name=search"`
+	ResultFilter *ResultFilter `default:"all" queryParam:"style=form,explode=true,name=result_filter"`
+	TargetKey    *string       `queryParam:"style=form,explode=true,name=target_key"`
+	CategoryID   *string       `queryParam:"style=form,explode=true,name=category_id"`
+	SortBy       *SortBy       `default:"time" queryParam:"style=form,explode=true,name=sort_by"`
+	SortDir      *SortDir      `default:"desc" queryParam:"style=form,explode=true,name=sort_dir"`
 }
 
 func (a APIPerformanceCustomEvalsHistoryListRequest) MarshalJSON() ([]byte, error) {
@@ -131,7 +130,7 @@ func (a *APIPerformanceCustomEvalsHistoryListRequest) UnmarshalJSON(data []byte)
 	return nil
 }
 
-func (a *APIPerformanceCustomEvalsHistoryListRequest) GetCustomEvalID() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceCustomEvalsHistoryListRequest) GetCustomEvalID() *string {
 	if a == nil {
 		return nil
 	}
@@ -152,7 +151,7 @@ func (a *APIPerformanceCustomEvalsHistoryListRequest) GetOffset() *int64 {
 	return a.Offset
 }
 
-func (a *APIPerformanceCustomEvalsHistoryListRequest) GetSearch() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceCustomEvalsHistoryListRequest) GetSearch() *string {
 	if a == nil {
 		return nil
 	}
@@ -166,14 +165,14 @@ func (a *APIPerformanceCustomEvalsHistoryListRequest) GetResultFilter() *ResultF
 	return a.ResultFilter
 }
 
-func (a *APIPerformanceCustomEvalsHistoryListRequest) GetTargetKey() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceCustomEvalsHistoryListRequest) GetTargetKey() *string {
 	if a == nil {
 		return nil
 	}
 	return a.TargetKey
 }
 
-func (a *APIPerformanceCustomEvalsHistoryListRequest) GetCategoryID() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceCustomEvalsHistoryListRequest) GetCategoryID() *string {
 	if a == nil {
 		return nil
 	}

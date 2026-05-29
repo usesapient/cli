@@ -5,23 +5,22 @@ package operations
 
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
 type APIPerformanceEvalsListRequest struct {
-	IntegrationID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=integration_id"`
-	Enabled       optionalnullable.OptionalNullable[bool]   `queryParam:"style=form,explode=true,name=enabled"`
+	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
+	Enabled       *bool   `queryParam:"style=form,explode=true,name=enabled"`
 }
 
-func (a *APIPerformanceEvalsListRequest) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (a *APIPerformanceEvalsListRequest) GetIntegrationID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.IntegrationID
 }
 
-func (a *APIPerformanceEvalsListRequest) GetEnabled() optionalnullable.OptionalNullable[bool] {
+func (a *APIPerformanceEvalsListRequest) GetEnabled() *bool {
 	if a == nil {
 		return nil
 	}

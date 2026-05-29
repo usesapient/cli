@@ -17,19 +17,19 @@ import (
 
 var apiPerformanceEvalsUpdateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "eval-id", FieldPath: "EvalID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "custom-prompt", FieldPath: "Body.CustomPrompt", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"custom_prompt,omitempty"`, Description: "string value"},
-	{FlagName: "expected-behavior", FieldPath: "Body.ExpectedBehavior", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"expected_behavior,omitempty"`, Description: "string value"},
-	{FlagName: "starting-project-id", FieldPath: "Body.StartingProjectID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"starting_project_id,omitempty"`, Description: "Starting project to clone before running the eval. Empty string clears it."},
-	{FlagName: "docs-mode", FieldPath: "Body.DocsMode", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"docs_mode,omitempty"`, Description: "Docs behavior for this eval: default, include, or exclude. (options: default, include, exclude)"},
-	{FlagName: "include-env-vars", Shorthand: "i", FieldPath: "Body.IncludeEnvVars", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"include_env_vars,omitempty"`, Description: "Include configured environment variable names in the eval prompt."},
+	{FlagName: "custom-prompt", FieldPath: "Body.CustomPrompt", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "expected-behavior", FieldPath: "Body.ExpectedBehavior", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "starting-project-id", FieldPath: "Body.StartingProjectID", Kind: flagutil.FlagKindString, Optional: true, Description: "Starting project to clone before running the eval. Empty string clears it."},
+	{FlagName: "docs-mode", FieldPath: "Body.DocsMode", Kind: flagutil.FlagKindEnum, Optional: true, EnumValues: []string{"default", "include", "exclude"}, Description: "Docs behavior for this eval: default, include, or exclude. (options: default, include, exclude)"},
+	{FlagName: "include-env-vars", Shorthand: "i", FieldPath: "Body.IncludeEnvVars", Kind: flagutil.FlagKindBool, Optional: true, Description: "Include configured environment variable names in the eval prompt."},
 	{FlagName: "env-profile-ids", FieldPath: "Body.EnvProfileIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"env_profile_ids,omitempty"`, Description: "Environment profile IDs to use for this eval. Empty list clears the selection."},
 	{FlagName: "model-ids", FieldPath: "Body.ModelIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"model_ids,omitempty"`, Description: "Model IDs to use for this eval. Empty list uses the config-level models."},
-	{FlagName: "compare-skills", FieldPath: "Body.CompareSkills", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"compare_skills,omitempty"`, Description: "boolean flag"},
-	{FlagName: "skills-mode", FieldPath: "Body.SkillsMode", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"skills_mode,omitempty"`, Description: "options: none, all, selected"},
+	{FlagName: "compare-skills", FieldPath: "Body.CompareSkills", Kind: flagutil.FlagKindBool, Optional: true, Description: "boolean flag"},
+	{FlagName: "skills-mode", FieldPath: "Body.SkillsMode", Kind: flagutil.FlagKindEnum, Optional: true, EnumValues: []string{"none", "all", "selected"}, Description: "options: none, all, selected"},
 	{FlagName: "skill-ids", FieldPath: "Body.SkillIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"skill_ids,omitempty"`, Description: "Selected skill IDs. Used when skills_mode is selected."},
-	{FlagName: "mcp-enabled", FieldPath: "Body.McpEnabled", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"mcp_enabled,omitempty"`, Description: "boolean flag"},
+	{FlagName: "mcp-enabled", FieldPath: "Body.McpEnabled", Kind: flagutil.FlagKindBool, Optional: true, Description: "boolean flag"},
 	{FlagName: "run-context", Shorthand: "r", FieldPath: "Body.RunContext", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"run_context,omitempty"`, Description: "value"},
-	{FlagName: "enabled", FieldPath: "Body.Enabled", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"enabled,omitempty"`, Description: "boolean flag"},
+	{FlagName: "enabled", FieldPath: "Body.Enabled", Kind: flagutil.FlagKindBool, Optional: true, Description: "boolean flag"},
 }
 
 // initApiPerformanceEvalsUpdateCmd initializes the api-performance-evals-update command.

@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/usesapient/cli/internal/sdk/models/components"
-	"github.com/usesapient/cli/internal/sdk/optionalnullable"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
@@ -129,17 +128,17 @@ func (e *OpportunityType) UnmarshalJSON(data []byte) error {
 }
 
 type PromptsActionsListRequest struct {
-	Since             optionalnullable.OptionalNullable[string]          `queryParam:"style=form,explode=true,name=since"`
-	StartDate         optionalnullable.OptionalNullable[string]          `queryParam:"style=form,explode=true,name=start_date"`
-	EndDate           optionalnullable.OptionalNullable[string]          `queryParam:"style=form,explode=true,name=end_date"`
-	Tag               *Tag                                               `default:"all" queryParam:"style=form,explode=true,name=tag"`
-	Category          optionalnullable.OptionalNullable[Category]        `queryParam:"style=form,explode=true,name=category"`
-	OpportunityType   optionalnullable.OptionalNullable[OpportunityType] `queryParam:"style=form,explode=true,name=opportunity_type"`
-	TopicID           optionalnullable.OptionalNullable[string]          `queryParam:"style=form,explode=true,name=topic_id"`
-	PromptIds         optionalnullable.OptionalNullable[string]          `queryParam:"style=form,explode=true,name=prompt_ids"`
-	IncludeCitedPages *bool                                              `default:"true" queryParam:"style=form,explode=true,name=include_cited_pages"`
-	Limit             *int64                                             `default:"50" queryParam:"style=form,explode=true,name=limit"`
-	CitedPagesLimit   *int64                                             `default:"20" queryParam:"style=form,explode=true,name=cited_pages_limit"`
+	Since             *string          `queryParam:"style=form,explode=true,name=since"`
+	StartDate         *string          `queryParam:"style=form,explode=true,name=start_date"`
+	EndDate           *string          `queryParam:"style=form,explode=true,name=end_date"`
+	Tag               *Tag             `default:"all" queryParam:"style=form,explode=true,name=tag"`
+	Category          *Category        `queryParam:"style=form,explode=true,name=category"`
+	OpportunityType   *OpportunityType `queryParam:"style=form,explode=true,name=opportunity_type"`
+	TopicID           *string          `queryParam:"style=form,explode=true,name=topic_id"`
+	PromptIds         *string          `queryParam:"style=form,explode=true,name=prompt_ids"`
+	IncludeCitedPages *bool            `default:"true" queryParam:"style=form,explode=true,name=include_cited_pages"`
+	Limit             *int64           `default:"50" queryParam:"style=form,explode=true,name=limit"`
+	CitedPagesLimit   *int64           `default:"20" queryParam:"style=form,explode=true,name=cited_pages_limit"`
 }
 
 func (p PromptsActionsListRequest) MarshalJSON() ([]byte, error) {
@@ -153,21 +152,21 @@ func (p *PromptsActionsListRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PromptsActionsListRequest) GetSince() optionalnullable.OptionalNullable[string] {
+func (p *PromptsActionsListRequest) GetSince() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Since
 }
 
-func (p *PromptsActionsListRequest) GetStartDate() optionalnullable.OptionalNullable[string] {
+func (p *PromptsActionsListRequest) GetStartDate() *string {
 	if p == nil {
 		return nil
 	}
 	return p.StartDate
 }
 
-func (p *PromptsActionsListRequest) GetEndDate() optionalnullable.OptionalNullable[string] {
+func (p *PromptsActionsListRequest) GetEndDate() *string {
 	if p == nil {
 		return nil
 	}
@@ -181,28 +180,28 @@ func (p *PromptsActionsListRequest) GetTag() *Tag {
 	return p.Tag
 }
 
-func (p *PromptsActionsListRequest) GetCategory() optionalnullable.OptionalNullable[Category] {
+func (p *PromptsActionsListRequest) GetCategory() *Category {
 	if p == nil {
 		return nil
 	}
 	return p.Category
 }
 
-func (p *PromptsActionsListRequest) GetOpportunityType() optionalnullable.OptionalNullable[OpportunityType] {
+func (p *PromptsActionsListRequest) GetOpportunityType() *OpportunityType {
 	if p == nil {
 		return nil
 	}
 	return p.OpportunityType
 }
 
-func (p *PromptsActionsListRequest) GetTopicID() optionalnullable.OptionalNullable[string] {
+func (p *PromptsActionsListRequest) GetTopicID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.TopicID
 }
 
-func (p *PromptsActionsListRequest) GetPromptIds() optionalnullable.OptionalNullable[string] {
+func (p *PromptsActionsListRequest) GetPromptIds() *string {
 	if p == nil {
 		return nil
 	}

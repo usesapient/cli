@@ -17,10 +17,10 @@ import (
 
 var apiPerformanceActionsUpdateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "action-id", Shorthand: "a", FieldPath: "ActionID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "status", Shorthand: "s", FieldPath: "Body.Status", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"status,omitempty"`, Description: "string value"},
-	{FlagName: "owner-user-id", FieldPath: "Body.OwnerUserID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"owner_user_id,omitempty"`, Description: "string value"},
-	{FlagName: "ignored-reason", Shorthand: "i", FieldPath: "Body.IgnoredReason", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"ignored_reason,omitempty"`, Description: "string value"},
-	{FlagName: "note", Shorthand: "n", FieldPath: "Body.Note", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"note,omitempty"`, Description: "string value"},
+	{FlagName: "status", Shorthand: "s", FieldPath: "Body.Status", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "owner-user-id", FieldPath: "Body.OwnerUserID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "ignored-reason", Shorthand: "i", FieldPath: "Body.IgnoredReason", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "note", Shorthand: "n", FieldPath: "Body.Note", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 }
 
 // initApiPerformanceActionsUpdateCmd initializes the api-performance-actions-update command.

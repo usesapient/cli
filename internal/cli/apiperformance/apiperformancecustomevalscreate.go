@@ -18,11 +18,11 @@ import (
 
 var apiPerformanceCustomEvalsCreateCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "prompt", FieldPath: "Prompt", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
-	{FlagName: "prompt-template", FieldPath: "PromptTemplate", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"prompt_template,omitempty"`, Description: "Optional template used to render prompt before storing. Available variables: Company name { {company_name} }; Company domain { {company_domain} }."},
-	{FlagName: "category-name", FieldPath: "CategoryName", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"category_name,omitempty"`, Description: "string value"},
-	{FlagName: "description", FieldPath: "Description", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"description,omitempty"`, Description: "string value"},
-	{FlagName: "competitor", FieldPath: "Competitor", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"competitor,omitempty"`, Description: "Competitor ID to render this custom eval against."},
-	{FlagName: "prompt-competitor-group", FieldPath: "PromptCompetitorGroup", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"prompt_competitor_group,omitempty"`, Description: "Base custom eval ID that this competitor variant belongs to."},
+	{FlagName: "prompt-template", FieldPath: "PromptTemplate", Kind: flagutil.FlagKindString, Optional: true, Description: "Optional template used to render prompt before storing. Available variables: Company name { {company_name} }; Company domain { {company_domain} }."},
+	{FlagName: "category-name", FieldPath: "CategoryName", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "description", FieldPath: "Description", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "competitor", FieldPath: "Competitor", Kind: flagutil.FlagKindString, Optional: true, Description: "Competitor ID to render this custom eval against."},
+	{FlagName: "prompt-competitor-group", FieldPath: "PromptCompetitorGroup", Kind: flagutil.FlagKindString, Optional: true, Description: "Base custom eval ID that this competitor variant belongs to."},
 	{FlagName: "eval", Shorthand: "e", FieldPath: "Eval", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"eval,omitempty"`, Description: "JSON object"},
 }
 

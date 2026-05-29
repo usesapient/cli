@@ -73,14 +73,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Topic Id"
             }
           },
@@ -89,14 +82,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "boolean",
               "title": "Is Active"
             }
           },
@@ -105,15 +91,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "pattern": "^(active|inactive|archived)$"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
+              "pattern": "^(active|inactive|archived)$",
               "title": "Status"
             }
           },
@@ -404,14 +383,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Since"
             }
           },
@@ -420,14 +392,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Start Date"
             }
           },
@@ -436,14 +401,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "End Date"
             }
           },
@@ -467,20 +425,13 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "quick_wins",
-                    "growth",
-                    "refresh",
-                    "citations"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
+              "enum": [
+                "quick_wins",
+                "growth",
+                "refresh",
+                "citations"
               ],
+              "type": "string",
               "title": "Category"
             }
           },
@@ -489,28 +440,21 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "almost_winning",
-                    "negative_sentiment",
-                    "lost_wins",
-                    "competitor_gaps",
-                    "untapped_topics",
-                    "platform_blind_spots",
-                    "content_gaps",
-                    "declining_visibility",
-                    "volatile_visibility",
-                    "citation_gaps",
-                    "high_citation_sources",
-                    "listicle_targets"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
+              "enum": [
+                "almost_winning",
+                "negative_sentiment",
+                "lost_wins",
+                "competitor_gaps",
+                "untapped_topics",
+                "platform_blind_spots",
+                "content_gaps",
+                "declining_visibility",
+                "volatile_visibility",
+                "citation_gaps",
+                "high_citation_sources",
+                "listicle_targets"
               ],
+              "type": "string",
               "title": "Opportunity Type"
             }
           },
@@ -519,14 +463,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Topic Id"
             }
           },
@@ -535,14 +472,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Prompt Ids"
             }
           },
@@ -968,14 +898,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Since"
             }
           },
@@ -1130,14 +1053,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Integration Id"
             }
           },
@@ -1146,15 +1062,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "const": "custom_evals",
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "const": "custom_evals",
+              "type": "string",
               "title": "Config Scope"
             }
           }
@@ -1192,6 +1101,18 @@
         "security": [
           {
             "SapientApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "config_scope",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "const": "custom_evals",
+              "type": "string",
+              "title": "Config Scope"
+            }
           }
         ],
         "requestBody": {
@@ -1296,14 +1217,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Integration Id"
             }
           },
@@ -1312,14 +1226,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Source Id"
             }
           },
@@ -1328,14 +1235,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "boolean",
               "default": true,
               "title": "Enabled"
             }
@@ -1345,14 +1245,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "boolean",
               "default": false,
               "title": "Stale"
             }
@@ -1401,14 +1294,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Integration Id"
             }
           },
@@ -1417,14 +1303,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "boolean",
               "title": "Enabled"
             }
           }
@@ -1649,14 +1528,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "description": "Optional custom eval ID to filter history rows.",
               "title": "Custom Eval Id"
             },
@@ -1690,15 +1562,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 200
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
+              "maxLength": 200,
               "title": "Search"
             }
           },
@@ -1722,14 +1587,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Target Key"
             }
           },
@@ -1738,14 +1596,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Category Id"
             }
           },
@@ -2002,14 +1853,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Integration Id"
             }
           }
@@ -2252,14 +2096,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Integration Id"
             }
           },
@@ -2268,14 +2105,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Status"
             }
           },
@@ -2284,14 +2114,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Action Type"
             }
           },
@@ -2300,14 +2123,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "Priority"
             }
           },
@@ -3909,14 +3725,7 @@
             "title": "Source Type"
           },
           "integration_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Integration Id"
           },
           "models": {
@@ -4967,60 +4776,25 @@
             "title": "Prompt"
           },
           "prompt_template": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Prompt Template",
             "description": "Optional template used to render prompt before storing. Available variables: Company name {{company_name}}; Company domain {{company_domain}}."
           },
           "category_name": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Category Name"
           },
           "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Description"
           },
           "competitor": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Competitor",
             "description": "Competitor ID to render this custom eval against."
           },
           "prompt_competitor_group": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Prompt Competitor Group",
             "description": "Base custom eval ID that this competitor variant belongs to."
           },
@@ -5044,70 +4818,28 @@
       "PublicCustomEvalUpdateRequest": {
         "properties": {
           "prompt": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Prompt"
           },
           "prompt_template": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Prompt Template",
             "description": "Optional template used to render prompt before storing. Available variables: Company name {{company_name}}; Company domain {{company_domain}}."
           },
           "category_name": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Category Name"
           },
           "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Description"
           },
           "competitor": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Competitor"
           },
           "prompt_competitor_group": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Prompt Competitor Group"
           },
           "eval": {
@@ -5371,48 +5103,15 @@
             "title": "Env Profiles"
           },
           "default_env_profile_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Default Env Profile Id"
           },
           "integration_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Integration Id"
           },
-          "config_scope": {
-            "anyOf": [
-              {
-                "type": "string",
-                "const": "custom_evals"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Config Scope"
-          },
           "api_base_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Api Base Url"
           }
         },
@@ -5560,65 +5259,30 @@
       "PublicEvalDefinitionUpdate": {
         "properties": {
           "custom_prompt": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Custom Prompt"
           },
           "expected_behavior": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Expected Behavior"
           },
           "starting_project_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Starting Project Id",
             "description": "Starting project to clone before running the eval. Empty string clears it."
           },
           "docs_mode": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "default",
-                  "include",
-                  "exclude"
-                ]
-              },
-              {
-                "type": "null"
-              }
+            "type": "string",
+            "enum": [
+              "default",
+              "include",
+              "exclude"
             ],
             "title": "Docs Mode",
             "description": "Docs behavior for this eval: default, include, or exclude."
           },
           "include_env_vars": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "boolean",
             "title": "Include Env Vars",
             "description": "Include configured environment variable names in the eval prompt."
           },
@@ -5653,29 +5317,15 @@
             "description": "Model IDs to use for this eval. Empty list uses the config-level models."
           },
           "compare_skills": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "boolean",
             "title": "Compare Skills"
           },
           "skills_mode": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "none",
-                  "all",
-                  "selected"
-                ]
-              },
-              {
-                "type": "null"
-              }
+            "type": "string",
+            "enum": [
+              "none",
+              "all",
+              "selected"
             ],
             "title": "Skills Mode"
           },
@@ -5695,14 +5345,7 @@
             "description": "Selected skill IDs. Used when skills_mode is selected."
           },
           "mcp_enabled": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "boolean",
             "title": "Mcp Enabled"
           },
           "run_context": {
@@ -5718,14 +5361,7 @@
             "title": "Run Context"
           },
           "enabled": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "boolean",
             "title": "Enabled"
           }
         },
@@ -6599,14 +6235,7 @@
       "PublicRefreshActionsRequest": {
         "properties": {
           "integration_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Integration Id"
           },
           "force": {
@@ -6769,14 +6398,7 @@
             "title": "Install Steps"
           },
           "integration_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Integration Id"
           },
           "framework": {
@@ -6812,47 +6434,19 @@
       "PublicStartingProjectUpdateRequest": {
         "properties": {
           "name": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Name"
           },
           "repo_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Repo Url"
           },
           "ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Ref"
           },
           "subdir": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Subdir"
           },
           "install_steps": {
@@ -6870,48 +6464,27 @@
             "title": "Install Steps"
           },
           "integration_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Integration Id"
           },
           "framework": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "fastify",
-                  "nuxt",
-                  "express",
-                  "spa-js",
-                  "angular",
-                  "react",
-                  "fastapi",
-                  "vite",
-                  "nextjs",
-                  "custom"
-                ]
-              },
-              {
-                "type": "null"
-              }
+            "type": "string",
+            "enum": [
+              "fastify",
+              "nuxt",
+              "express",
+              "spa-js",
+              "angular",
+              "react",
+              "fastapi",
+              "vite",
+              "nextjs",
+              "custom"
             ],
             "title": "Framework"
           },
           "enabled": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "boolean",
             "title": "Enabled"
           }
         },
@@ -6942,47 +6515,19 @@
       "PublicUpdateActionRequest": {
         "properties": {
           "status": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Status"
           },
           "owner_user_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Owner User Id"
           },
           "ignored_reason": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Ignored Reason"
           },
           "note": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Note"
           }
         },
@@ -7042,26 +6587,12 @@
       "UpdatePublicPromptRequest": {
         "properties": {
           "text": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
+            "minLength": 1,
             "title": "Text"
           },
           "topic_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Topic Id"
           },
           "platform_ids": {
@@ -7079,14 +6610,7 @@
             "title": "Platform Ids"
           },
           "is_active": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "boolean",
             "title": "Is Active"
           }
         },

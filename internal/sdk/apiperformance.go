@@ -867,7 +867,7 @@ func (s *APIPerformance) APIPerformanceConfigRetrieve(ctx context.Context, reque
 }
 
 // APIPerformanceConfigUpdate - Update Eval Config
-func (s *APIPerformance) APIPerformanceConfigUpdate(ctx context.Context, request components.PublicEvalConfigUpdateRequest, opts ...operations.Option) (*operations.APIPerformanceConfigUpdateResponse, error) {
+func (s *APIPerformance) APIPerformanceConfigUpdate(ctx context.Context, request operations.APIPerformanceConfigUpdateRequest, opts ...operations.Option) (*operations.APIPerformanceConfigUpdateResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -899,7 +899,7 @@ func (s *APIPerformance) APIPerformanceConfigUpdate(ctx context.Context, request
 		OperationID:      "api_performance_config_update",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -923,6 +923,10 @@ func (s *APIPerformance) APIPerformanceConfigUpdate(ctx context.Context, request
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
+	}
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {

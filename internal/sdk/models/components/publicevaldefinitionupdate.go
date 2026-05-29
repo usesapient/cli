@@ -10,6 +10,7 @@ import (
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
 )
 
+// PublicEvalDefinitionUpdateDocsMode - Docs behavior for this eval: default, include, or exclude.
 type PublicEvalDefinitionUpdateDocsMode string
 
 const (
@@ -69,25 +70,25 @@ func (e *PublicEvalDefinitionUpdateSkillsMode) UnmarshalJSON(data []byte) error 
 }
 
 type PublicEvalDefinitionUpdate struct {
-	CustomPrompt     optionalnullable.OptionalNullable[string] `json:"custom_prompt,omitzero"`
-	ExpectedBehavior optionalnullable.OptionalNullable[string] `json:"expected_behavior,omitzero"`
+	CustomPrompt     *string `json:"custom_prompt,omitzero"`
+	ExpectedBehavior *string `json:"expected_behavior,omitzero"`
 	// Starting project to clone before running the eval. Empty string clears it.
-	StartingProjectID optionalnullable.OptionalNullable[string] `json:"starting_project_id,omitzero"`
+	StartingProjectID *string `json:"starting_project_id,omitzero"`
 	// Docs behavior for this eval: default, include, or exclude.
-	DocsMode optionalnullable.OptionalNullable[PublicEvalDefinitionUpdateDocsMode] `json:"docs_mode,omitzero"`
+	DocsMode *PublicEvalDefinitionUpdateDocsMode `json:"docs_mode,omitzero"`
 	// Include configured environment variable names in the eval prompt.
-	IncludeEnvVars optionalnullable.OptionalNullable[bool] `json:"include_env_vars,omitzero"`
+	IncludeEnvVars *bool `json:"include_env_vars,omitzero"`
 	// Environment profile IDs to use for this eval. Empty list clears the selection.
 	EnvProfileIds optionalnullable.OptionalNullable[[]string] `json:"env_profile_ids,omitzero"`
 	// Model IDs to use for this eval. Empty list uses the config-level models.
-	ModelIds      optionalnullable.OptionalNullable[[]string]                             `json:"model_ids,omitzero"`
-	CompareSkills optionalnullable.OptionalNullable[bool]                                 `json:"compare_skills,omitzero"`
-	SkillsMode    optionalnullable.OptionalNullable[PublicEvalDefinitionUpdateSkillsMode] `json:"skills_mode,omitzero"`
+	ModelIds      optionalnullable.OptionalNullable[[]string] `json:"model_ids,omitzero"`
+	CompareSkills *bool                                       `json:"compare_skills,omitzero"`
+	SkillsMode    *PublicEvalDefinitionUpdateSkillsMode       `json:"skills_mode,omitzero"`
 	// Selected skill IDs. Used when skills_mode is selected.
 	SkillIds   optionalnullable.OptionalNullable[[]string]       `json:"skill_ids,omitzero"`
-	McpEnabled optionalnullable.OptionalNullable[bool]           `json:"mcp_enabled,omitzero"`
+	McpEnabled *bool                                             `json:"mcp_enabled,omitzero"`
 	RunContext optionalnullable.OptionalNullable[map[string]any] `json:"run_context,omitzero"`
-	Enabled    optionalnullable.OptionalNullable[bool]           `json:"enabled,omitzero"`
+	Enabled    *bool                                             `json:"enabled,omitzero"`
 }
 
 func (p PublicEvalDefinitionUpdate) MarshalJSON() ([]byte, error) {
@@ -101,35 +102,35 @@ func (p *PublicEvalDefinitionUpdate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PublicEvalDefinitionUpdate) GetCustomPrompt() optionalnullable.OptionalNullable[string] {
+func (p *PublicEvalDefinitionUpdate) GetCustomPrompt() *string {
 	if p == nil {
 		return nil
 	}
 	return p.CustomPrompt
 }
 
-func (p *PublicEvalDefinitionUpdate) GetExpectedBehavior() optionalnullable.OptionalNullable[string] {
+func (p *PublicEvalDefinitionUpdate) GetExpectedBehavior() *string {
 	if p == nil {
 		return nil
 	}
 	return p.ExpectedBehavior
 }
 
-func (p *PublicEvalDefinitionUpdate) GetStartingProjectID() optionalnullable.OptionalNullable[string] {
+func (p *PublicEvalDefinitionUpdate) GetStartingProjectID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.StartingProjectID
 }
 
-func (p *PublicEvalDefinitionUpdate) GetDocsMode() optionalnullable.OptionalNullable[PublicEvalDefinitionUpdateDocsMode] {
+func (p *PublicEvalDefinitionUpdate) GetDocsMode() *PublicEvalDefinitionUpdateDocsMode {
 	if p == nil {
 		return nil
 	}
 	return p.DocsMode
 }
 
-func (p *PublicEvalDefinitionUpdate) GetIncludeEnvVars() optionalnullable.OptionalNullable[bool] {
+func (p *PublicEvalDefinitionUpdate) GetIncludeEnvVars() *bool {
 	if p == nil {
 		return nil
 	}
@@ -150,14 +151,14 @@ func (p *PublicEvalDefinitionUpdate) GetModelIds() optionalnullable.OptionalNull
 	return p.ModelIds
 }
 
-func (p *PublicEvalDefinitionUpdate) GetCompareSkills() optionalnullable.OptionalNullable[bool] {
+func (p *PublicEvalDefinitionUpdate) GetCompareSkills() *bool {
 	if p == nil {
 		return nil
 	}
 	return p.CompareSkills
 }
 
-func (p *PublicEvalDefinitionUpdate) GetSkillsMode() optionalnullable.OptionalNullable[PublicEvalDefinitionUpdateSkillsMode] {
+func (p *PublicEvalDefinitionUpdate) GetSkillsMode() *PublicEvalDefinitionUpdateSkillsMode {
 	if p == nil {
 		return nil
 	}
@@ -171,7 +172,7 @@ func (p *PublicEvalDefinitionUpdate) GetSkillIds() optionalnullable.OptionalNull
 	return p.SkillIds
 }
 
-func (p *PublicEvalDefinitionUpdate) GetMcpEnabled() optionalnullable.OptionalNullable[bool] {
+func (p *PublicEvalDefinitionUpdate) GetMcpEnabled() *bool {
 	if p == nil {
 		return nil
 	}
@@ -185,7 +186,7 @@ func (p *PublicEvalDefinitionUpdate) GetRunContext() optionalnullable.OptionalNu
 	return p.RunContext
 }
 
-func (p *PublicEvalDefinitionUpdate) GetEnabled() optionalnullable.OptionalNullable[bool] {
+func (p *PublicEvalDefinitionUpdate) GetEnabled() *bool {
 	if p == nil {
 		return nil
 	}
