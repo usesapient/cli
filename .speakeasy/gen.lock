@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: b4e9b595-9805-48d3-93ca-ae7b2d7fd331
 management:
-  docChecksum: 1246968193be37b9452e24fa57e6f34d
+  docChecksum: 92ac3d0bf911178cb4cb833a786b3f51
   docVersion: 1.0.0
   speakeasyVersion: 1.768.2
   generationVersion: 2.889.1
   releaseVersion: 0.5.12
-  configChecksum: 9048f2b362766d29cd14cd92a88a56e5
+  configChecksum: 14ffbcb62dea95d7e51fc7d85a4f3c17
   repoURL: https://github.com/usesapient/cli.git
   installationURL: https://github.com/usesapient/cli
 persistentEdits:
-  generation_id: e2a31582-ded9-4d14-854f-ef0daf68161e
-  pristine_commit_hash: 28690ca96d61a85bf1c945560f91637252baebd4
-  pristine_tree_hash: baa79399bd7298c2c509def1d849665908c0a076
+  generation_id: 95cb00ed-34a9-482d-a4c7-8814e1da2132
+  pristine_commit_hash: eebd4edc39e152251c811ef6e7a3f15899fe79db
+  pristine_tree_hash: 1a80fb0cadf185b3e3611dd576841c0211ac8539
 features:
   cli:
     additionalProperties: 0.0.0
@@ -249,8 +249,8 @@ trackedFiles:
     pristine_git_object: 82e627c3269cd3715e02ec7e11be0e41f22a3b01
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:fbd795a23f588cfaea6c03f25e7a3bae58492e94
-    pristine_git_object: 7ac1911a68b720b52553373592fc6adbebddde32
+    last_write_checksum: sha1:6735eb578ff9f06082af1b8fc25bce7afdde5570
+    pristine_git_object: 18b1059331dec794504cb2fa487957f965710b64
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:f0b47f0b4083f9abafc5df2e9123f3f7f85299de
@@ -441,8 +441,12 @@ trackedFiles:
     pristine_git_object: 3cc5039dc4f46f3ef402bcbf9682aafc1bd43c56
   internal/sdk/models/components/publicapiperformancesource.go:
     id: 942a60ca74e7
-    last_write_checksum: sha1:2d3993674f44ee8f1b2bab757644016059b5b104
-    pristine_git_object: 2f34e5e75769e93af5151cf2b861de2afa81a286
+    last_write_checksum: sha1:03733d0c8c8c1e775f8ba46d13f3dc091b87c8ad
+    pristine_git_object: 6bd77139e5febd92cabf2b0a83d62c82b9a76a38
+  internal/sdk/models/components/publicapiperformancesourcemetadata.go:
+    id: ec10a2c230a2
+    last_write_checksum: sha1:a2384abe0824f44e51e793991a9d1d0fa35cdf81
+    pristine_git_object: ea75ffaea96d8e5c29e60a19e5fcd4e5a81c6bf4
   internal/sdk/models/components/publicapiperformancesourceref.go:
     id: ddc459193e41
     last_write_checksum: sha1:96ebc23c4709e3f27c1d365f94d02617f483eae7
@@ -517,8 +521,8 @@ trackedFiles:
     pristine_git_object: 0005859a6a0878f5257c3273450e099543c1f002
   internal/sdk/models/components/publicevalconfigresponse.go:
     id: 1c2b8faa01bf
-    last_write_checksum: sha1:6f9a12688ebbb64a724b2eaedc7d3cfac1354015
-    pristine_git_object: 951a6ccd2c154ad90952a2ae0bf90be3b15f94d5
+    last_write_checksum: sha1:ad8cefe94f283e9b61bf47d677b41ac9a5795aed
+    pristine_git_object: 9454509f978c63713a745a930c726ef2f48ad824
   internal/sdk/models/components/publicevalconfigupdaterequest.go:
     id: f625c59e2bba
     last_write_checksum: sha1:d8c51cd2b0f033d291b1d137e02cfef75fe0d8a3
@@ -953,8 +957,8 @@ trackedFiles:
     pristine_git_object: 7e1f465c87ec82286f5efb5c1be95501ba0a1cc8
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:d70a7e126cad54f7544132314aa9882aa1e77e16
-    pristine_git_object: 057e9609672c623f9b00e80dd8848e3161fb02a1
+    last_write_checksum: sha1:84403357a0e58b003070a3056466e51650b24f7e
+    pristine_git_object: 2cb1d7641adc4f88bde6e376de8f147aef3f45d6
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:cd01d45cc8eab10459eeefec295916709ef6d678
@@ -1637,4 +1641,8 @@ examples:
         "404":
           application/json: {"detail": "Configured API Performance scope not found for this organization"}
 examplesVersion: 1.0.2
-releaseNotes: "## Cli SDK Changes:\n* `Sapient.EvalRuns.EvalRunsCreate()`: \n  *  `request.Request.union(api_performance)` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceConfigRetrieve()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceConfigUpdate()`: \n  *  `request.Request.Body` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceSourcesList()`:  `response.Data[]` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceSkillsList()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response.Data[]` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceEvalsList()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response.Data[]` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceEvalsRetrieve()`:  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceEvalsUpdate()`:  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsList()`:  `response.Data[].Eval` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsCreate()`:  `response.Eval` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsRetrieve()`:  `response.Eval` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsUpdate()`:  `response.Eval` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceCustomEvalsDelete()`:  `response.Eval` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsList()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response.Data[]` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsCreate()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsRetrieve()`:  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsUpdate()`: \n  *  `request.Request.Body` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceStarterProjectsDelete()`:  `response` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsList()`: \n  *  `request.Request` **Changed** (Breaking ⚠️)\n  *  `response.Data[]` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsRefresh()`:  `request.Request` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsRetrieve()`:  `response.Data` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsUpdate()`:  `response.Data` **Changed** (Breaking ⚠️)\n* `Sapient.ApiPerformance.ApiPerformanceActionsVerify()`:  `response.Action` **Changed** (Breaking ⚠️)\n"
+releaseNotes: |
+  ## Cli SDK Changes:
+  * `Sapient.ApiPerformance.ApiPerformanceConfigRetrieve()`:  `response` **Changed** (Breaking ⚠️)
+  * `Sapient.ApiPerformance.ApiPerformanceConfigUpdate()`:  `response` **Changed** (Breaking ⚠️)
+  * `Sapient.ApiPerformance.ApiPerformanceSourcesList()`:  `response.Data[]` **Changed** (Breaking ⚠️)
