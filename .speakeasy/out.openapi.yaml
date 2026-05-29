@@ -4078,14 +4078,11 @@
             "title": "Label"
           },
           "metadata": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Metadata"
+            "$ref": "#/components/schemas/PublicApiPerformanceSourceMetadata"
           },
           "targets": {
             "items": {
-              "additionalProperties": true,
-              "type": "object"
+              "$ref": "#/components/schemas/PublicApiEvalTarget"
             },
             "type": "array",
             "title": "Targets"
@@ -4114,6 +4111,73 @@
           "label"
         ],
         "title": "PublicApiPerformanceSource"
+      },
+      "PublicApiPerformanceSourceMetadata": {
+        "properties": {
+          "api_base_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Base Url"
+          },
+          "docs_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docs Url"
+          },
+          "default_env_profile_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default Env Profile Id"
+          },
+          "env_var_keys": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Env Var Keys"
+          },
+          "env_profiles": {
+            "items": {
+              "$ref": "#/components/schemas/PublicEvalEnvProfileSummary"
+            },
+            "type": "array",
+            "title": "Env Profiles"
+          },
+          "models": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Models"
+          },
+          "eval_types": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Eval Types"
+          }
+        },
+        "type": "object",
+        "title": "PublicApiPerformanceSourceMetadata"
       },
       "PublicApiPerformanceSourceRef": {
         "properties": {
@@ -5023,12 +5087,12 @@
             "type": "array",
             "title": "Custom Eval Ids"
           },
-          "env_vars": {
-            "additionalProperties": {
+          "env_var_keys": {
+            "items": {
               "type": "string"
             },
-            "type": "object",
-            "title": "Env Vars"
+            "type": "array",
+            "title": "Env Var Keys"
           },
           "env_profiles": {
             "items": {
@@ -5047,6 +5111,17 @@
               }
             ],
             "title": "Default Env Profile Id"
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Id"
           },
           "api_base_url": {
             "anyOf": [

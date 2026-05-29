@@ -12,8 +12,8 @@ type PublicAPIPerformanceSource struct {
 	ID             string                                    `json:"id"`
 	Type           string                                    `json:"type"`
 	Label          string                                    `json:"label"`
-	Metadata       map[string]any                            `json:"metadata,omitzero"`
-	Targets        []map[string]any                          `json:"targets,omitzero"`
+	Metadata       *PublicAPIPerformanceSourceMetadata       `json:"metadata,omitzero"`
+	Targets        []PublicAPIEvalTarget                     `json:"targets,omitzero"`
 	OperationCount *int64                                    `default:"0" json:"operation_count"`
 	CreatedAt      optionalnullable.OptionalNullable[string] `json:"created_at,omitzero"`
 }
@@ -50,14 +50,14 @@ func (p *PublicAPIPerformanceSource) GetLabel() string {
 	return p.Label
 }
 
-func (p *PublicAPIPerformanceSource) GetMetadata() map[string]any {
+func (p *PublicAPIPerformanceSource) GetMetadata() *PublicAPIPerformanceSourceMetadata {
 	if p == nil {
 		return nil
 	}
 	return p.Metadata
 }
 
-func (p *PublicAPIPerformanceSource) GetTargets() []map[string]any {
+func (p *PublicAPIPerformanceSource) GetTargets() []PublicAPIEvalTarget {
 	if p == nil {
 		return nil
 	}
