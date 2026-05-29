@@ -44,6 +44,7 @@ var sensitiveHeaderKeys = []string{
 	"authorization",
 	"proxy-authorization",
 	"x-api-key",
+	"x-sapient-api-key",
 	"api-key",
 	"x-session-token",
 	"cookie",
@@ -52,6 +53,7 @@ var sensitiveHeaderKeys = []string{
 
 // sensitiveHeaderSuffixes lists header key suffixes that should be redacted.
 var sensitiveHeaderSuffixes = []string{
+	"-api-key",
 	"-secret",
 	"-token",
 }
