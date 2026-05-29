@@ -16,8 +16,8 @@ import (
 )
 
 var apiPerformanceSkillsListCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "source-id", FieldPath: "SourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "skill-source-id", FieldPath: "SkillSourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "enabled", Shorthand: "e", FieldPath: "Enabled", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "boolean flag"},
 	{FlagName: "stale", FieldPath: "Stale", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "boolean flag"},
 }

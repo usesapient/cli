@@ -9,8 +9,8 @@ import (
 )
 
 type APIPerformanceSkillsListRequest struct {
-	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
 	SourceID      *string `queryParam:"style=form,explode=true,name=source_id"`
+	SkillSourceID *string `queryParam:"style=form,explode=true,name=skill_source_id"`
 	Enabled       *bool   `default:"true" queryParam:"style=form,explode=true,name=enabled"`
 	Stale         *bool   `default:"false" queryParam:"style=form,explode=true,name=stale"`
 }
@@ -26,18 +26,18 @@ func (a *APIPerformanceSkillsListRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *APIPerformanceSkillsListRequest) GetIntegrationID() *string {
-	if a == nil {
-		return nil
-	}
-	return a.IntegrationID
-}
-
 func (a *APIPerformanceSkillsListRequest) GetSourceID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.SourceID
+}
+
+func (a *APIPerformanceSkillsListRequest) GetSkillSourceID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.SkillSourceID
 }
 
 func (a *APIPerformanceSkillsListRequest) GetEnabled() *bool {

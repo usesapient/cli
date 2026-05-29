@@ -10,7 +10,7 @@ import (
 
 type PublicAPIPerformanceAction struct {
 	ID                   string                                    `json:"id"`
-	IntegrationID        optionalnullable.OptionalNullable[string] `json:"integration_id,omitzero"`
+	SourceID             optionalnullable.OptionalNullable[string] `json:"source_id,omitzero"`
 	ActionType           string                                    `json:"action_type"`
 	Status               string                                    `json:"status"`
 	Priority             string                                    `json:"priority"`
@@ -54,11 +54,11 @@ func (p *PublicAPIPerformanceAction) GetID() string {
 	return p.ID
 }
 
-func (p *PublicAPIPerformanceAction) GetIntegrationID() optionalnullable.OptionalNullable[string] {
+func (p *PublicAPIPerformanceAction) GetSourceID() optionalnullable.OptionalNullable[string] {
 	if p == nil {
 		return nil
 	}
-	return p.IntegrationID
+	return p.SourceID
 }
 
 func (p *PublicAPIPerformanceAction) GetActionType() string {

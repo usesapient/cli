@@ -24,7 +24,7 @@ func initEvalRunsRetrieveCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "retrieve",
 		Short:   "Retrieve Eval Run",
-		Long:    "Retrieve status and progress for a durable eval run.\n\nThe `eval_run_id` is the `id` returned by `POST /v1/eval-runs`. Progress is\ncomputed from the parent job, its dispatch, and child jobs when dispatch\nfanout has started.",
+		Long:    "Retrieve status and progress for a durable eval run.\n\nThe `eval_run_id` is the `id` returned by `POST /v1/eval-runs`. Progress is\ncomputed from the parent job, its dispatch, and child jobs.",
 		Example: "  sapient eval-runs retrieve --eval-run-id <id>",
 		RunE:    runEvalRunsRetrieveCmd,
 	}

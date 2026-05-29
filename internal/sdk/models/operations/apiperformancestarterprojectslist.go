@@ -9,14 +9,14 @@ import (
 )
 
 type APIPerformanceStarterProjectsListRequest struct {
-	IntegrationID *string `queryParam:"style=form,explode=true,name=integration_id"`
+	SourceID *string `queryParam:"style=form,explode=true,name=source_id"`
 }
 
-func (a *APIPerformanceStarterProjectsListRequest) GetIntegrationID() *string {
+func (a *APIPerformanceStarterProjectsListRequest) GetSourceID() *string {
 	if a == nil {
 		return nil
 	}
-	return a.IntegrationID
+	return a.SourceID
 }
 
 type APIPerformanceStarterProjectsListResponse struct {

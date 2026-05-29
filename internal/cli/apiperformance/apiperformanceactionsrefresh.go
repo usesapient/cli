@@ -17,7 +17,7 @@ import (
 )
 
 var apiPerformanceActionsRefreshCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "source-id", Shorthand: "s", FieldPath: "SourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 	{FlagName: "force", Shorthand: "f", FieldPath: "Force", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "boolean flag"},
 }
 

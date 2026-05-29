@@ -688,7 +688,7 @@
           "eval-runs"
         ],
         "summary": "Create Eval Run",
-        "description": "Start a durable eval run and return the parent job ID to poll.\n\nFor prompt evals, provide explicit `targets` to override the configured\nprompt targets, or omit `targets` to use the organization's configured\nscheduled prompt targets. For API Performance evals, explicit `targets` or\n`models` override the stored configuration; when omitted, Sapient uses\nconfigured scheduled targets or legacy configured models. Custom eval runs\nuse `custom_eval_ids` when provided, otherwise the configured custom eval\nset for the organization.\n\nEvery run is queued through the durable job queue. The response `id` is the\n`eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`.",
+        "description": "Start a durable eval run and return the parent job ID to poll.\n\nFor prompt evals, provide explicit `targets` to override the configured\nprompt targets, or omit `targets` to use the organization's configured\nscheduled prompt targets. For API Performance evals, explicit `targets` or\n`models` override the stored configuration; when omitted, Sapient uses\nconfigured scheduled targets or legacy configured models. Custom eval runs\nuse `custom_eval_ids` when provided, otherwise the configured custom eval\nset for the organization.\n\nFor API Performance source types backed by a source (`rest_api`, `sdk`, or\n`cli`), provide `source_id` from `api-performance sources list`, or omit it\nwhen `operation_ids`, `eval_ids`, or the requested `source_type` identify a\nsingle source. `operation_ids` are Sapient API Performance operation IDs,\nnot OpenAPI operationId strings.\n\nEvery run is queued through the durable job queue. The response `id` is the\n`eval_run_id` to pass to `GET /v1/eval-runs/{eval_run_id}`. When Sapient can\ndetermine the runnable work, the response also includes `dispatch_id` and\ninitial queued progress for the child jobs.",
         "operationId": "eval_runs_create",
         "requestBody": {
           "content": {
@@ -754,6 +754,12 @@
                       "detail": "No configured API Performance targets or models were found for cli. Configure eval targets for this source or include targets/models in the request."
                     }
                   },
+                  "ambiguous_api_performance_source": {
+                    "summary": "API Performance source is ambiguous",
+                    "value": {
+                      "detail": "source_id is required for source_type=cli unless operation_ids or eval_ids identify a single source. Get source IDs from api-performance sources list or api-performance evals list."
+                    }
+                  },
                   "missing_custom_eval_ids": {
                     "summary": "No configured custom evals",
                     "value": {
@@ -789,7 +795,7 @@
           "eval-runs"
         ],
         "summary": "Retrieve Eval Run",
-        "description": "Retrieve status and progress for a durable eval run.\n\nThe `eval_run_id` is the `id` returned by `POST /v1/eval-runs`. Progress is\ncomputed from the parent job, its dispatch, and child jobs when dispatch\nfanout has started.",
+        "description": "Retrieve status and progress for a durable eval run.\n\nThe `eval_run_id` is the `id` returned by `POST /v1/eval-runs`. Progress is\ncomputed from the parent job, its dispatch, and child jobs.",
         "operationId": "eval_runs_retrieve",
         "security": [
           {
@@ -1049,12 +1055,12 @@
         ],
         "parameters": [
           {
-            "name": "integration_id",
+            "name": "source_id",
             "in": "query",
             "required": false,
             "schema": {
               "type": "string",
-              "title": "Integration Id"
+              "title": "Source Id"
             }
           },
           {
@@ -1213,21 +1219,21 @@
         ],
         "parameters": [
           {
-            "name": "integration_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "Integration Id"
-            }
-          },
-          {
             "name": "source_id",
             "in": "query",
             "required": false,
             "schema": {
               "type": "string",
               "title": "Source Id"
+            }
+          },
+          {
+            "name": "skill_source_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "Skill Source Id"
             }
           },
           {
@@ -1290,12 +1296,12 @@
         ],
         "parameters": [
           {
-            "name": "integration_id",
+            "name": "source_id",
             "in": "query",
             "required": false,
             "schema": {
               "type": "string",
-              "title": "Integration Id"
+              "title": "Source Id"
             }
           },
           {
@@ -1849,12 +1855,12 @@
         ],
         "parameters": [
           {
-            "name": "integration_id",
+            "name": "source_id",
             "in": "query",
             "required": false,
             "schema": {
               "type": "string",
-              "title": "Integration Id"
+              "title": "Source Id"
             }
           }
         ],
@@ -2092,12 +2098,12 @@
         ],
         "parameters": [
           {
-            "name": "integration_id",
+            "name": "source_id",
             "in": "query",
             "required": false,
             "schema": {
               "type": "string",
-              "title": "Integration Id"
+              "title": "Source Id"
             }
           },
           {
@@ -3294,7 +3300,7 @@
             ],
             "title": "Id"
           },
-          "integration_id": {
+          "source_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -3303,7 +3309,7 @@
                 "type": "null"
               }
             ],
-            "title": "Integration Id"
+            "title": "Source Id"
           },
           "target_type": {
             "type": "string",
@@ -3418,7 +3424,7 @@
             "type": "string",
             "title": "Id"
           },
-          "integration_id": {
+          "source_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -3427,7 +3433,7 @@
                 "type": "null"
               }
             ],
-            "title": "Integration Id"
+            "title": "Source Id"
           },
           "action_type": {
             "type": "string",
@@ -3724,9 +3730,10 @@
             ],
             "title": "Source Type"
           },
-          "integration_id": {
+          "source_id": {
             "type": "string",
-            "title": "Integration Id"
+            "title": "Source Id",
+            "description": "API Performance source ID from api-performance sources list. Required unless operation_ids, eval_ids, or source_type identify one source."
           },
           "models": {
             "anyOf": [
@@ -3772,7 +3779,7 @@
             ],
             "title": "Categories"
           },
-          "endpoint_ids": {
+          "operation_ids": {
             "anyOf": [
               {
                 "items": {
@@ -3784,9 +3791,10 @@
                 "type": "null"
               }
             ],
-            "title": "Endpoint Ids"
+            "title": "Operation Ids",
+            "description": "API Performance operation IDs from api-performance evals list."
           },
-          "endpoint_paths": {
+          "operation_paths": {
             "anyOf": [
               {
                 "items": {
@@ -3798,8 +3806,23 @@
                 "type": "null"
               }
             ],
-            "title": "Endpoint Paths",
+            "title": "Operation Paths",
             "description": "Optional METHOD:path filters, such as GET:/v1/items."
+          },
+          "eval_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eval Ids",
+            "description": "API Performance eval definition IDs from api-performance evals list."
           },
           "custom_eval_ids": {
             "anyOf": [
@@ -3905,11 +3928,11 @@
             "type": "string",
             "title": "Id"
           },
-          "source_id": {
+          "skill_source_id": {
             "type": "string",
-            "title": "Source Id"
+            "title": "Skill Source Id"
           },
-          "integration_id": {
+          "source_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -3918,7 +3941,7 @@
                 "type": "null"
               }
             ],
-            "title": "Integration Id"
+            "title": "Source Id"
           },
           "slug": {
             "type": "string",
@@ -3971,7 +3994,7 @@
             "type": "object",
             "title": "Metadata"
           },
-          "source": {
+          "skill_source": {
             "anyOf": [
               {
                 "additionalProperties": true,
@@ -3981,7 +4004,7 @@
                 "type": "null"
               }
             ],
-            "title": "Source"
+            "title": "Skill Source"
           },
           "created_at": {
             "anyOf": [
@@ -4009,7 +4032,7 @@
         "type": "object",
         "required": [
           "id",
-          "source_id",
+          "skill_source_id",
           "slug",
           "name",
           "path",
@@ -4067,9 +4090,9 @@
             "type": "array",
             "title": "Targets"
           },
-          "endpoint_count": {
+          "operation_count": {
             "type": "integer",
-            "title": "Endpoint Count",
+            "title": "Operation Count",
             "default": 0
           },
           "created_at": {
@@ -4091,6 +4114,41 @@
           "label"
         ],
         "title": "PublicApiPerformanceSource"
+      },
+      "PublicApiPerformanceSourceRef": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "title": "PublicApiPerformanceSourceRef"
       },
       "PublicApiPerformanceSourcesResponse": {
         "properties": {
@@ -4951,12 +5009,12 @@
             "type": "array",
             "title": "Targets"
           },
-          "endpoint_ids": {
+          "operation_ids": {
             "items": {
               "type": "string"
             },
             "type": "array",
-            "title": "Endpoint Ids"
+            "title": "Operation Ids"
           },
           "custom_eval_ids": {
             "items": {
@@ -5010,7 +5068,7 @@
         "type": "object",
         "required": [
           "models",
-          "endpoint_ids"
+          "operation_ids"
         ],
         "title": "PublicEvalConfigResponse"
       },
@@ -5046,7 +5104,7 @@
             "title": "Targets",
             "description": "Scheduled text/agent targets. Use frequency='manual' to keep a target available but unscheduled."
           },
-          "endpoint_ids": {
+          "operation_ids": {
             "anyOf": [
               {
                 "items": {
@@ -5058,7 +5116,7 @@
                 "type": "null"
               }
             ],
-            "title": "Endpoint Ids"
+            "title": "Operation Ids"
           },
           "custom_eval_ids": {
             "anyOf": [
@@ -5106,9 +5164,9 @@
             "type": "string",
             "title": "Default Env Profile Id"
           },
-          "integration_id": {
+          "source_id": {
             "type": "string",
-            "title": "Integration Id"
+            "title": "Source Id"
           },
           "api_base_url": {
             "type": "string",
@@ -5124,9 +5182,30 @@
             "type": "string",
             "title": "Id"
           },
-          "endpoint_id": {
+          "operation_id": {
             "type": "string",
-            "title": "Endpoint Id"
+            "title": "Operation Id"
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Id"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PublicApiPerformanceSourceRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "eval_type": {
             "type": "string",
@@ -5251,7 +5330,7 @@
         "type": "object",
         "required": [
           "id",
-          "endpoint_id",
+          "operation_id",
           "eval_type"
         ],
         "title": "PublicEvalDefinition"
@@ -6234,9 +6313,9 @@
       },
       "PublicRefreshActionsRequest": {
         "properties": {
-          "integration_id": {
+          "source_id": {
             "type": "string",
-            "title": "Integration Id"
+            "title": "Source Id"
           },
           "force": {
             "type": "boolean",
@@ -6281,7 +6360,7 @@
             "type": "string",
             "title": "Id"
           },
-          "integration_id": {
+          "source_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -6290,7 +6369,7 @@
                 "type": "null"
               }
             ],
-            "title": "Integration Id"
+            "title": "Source Id"
           },
           "name": {
             "type": "string",
@@ -6397,9 +6476,9 @@
             "type": "array",
             "title": "Install Steps"
           },
-          "integration_id": {
+          "source_id": {
             "type": "string",
-            "title": "Integration Id"
+            "title": "Source Id"
           },
           "framework": {
             "type": "string",
@@ -6463,9 +6542,9 @@
             ],
             "title": "Install Steps"
           },
-          "integration_id": {
+          "source_id": {
             "type": "string",
-            "title": "Integration Id"
+            "title": "Source Id"
           },
           "framework": {
             "type": "string",

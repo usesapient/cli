@@ -55,24 +55,26 @@ func (e *PublicEvalDefinitionSkillsMode) IsExact() bool {
 }
 
 type PublicEvalDefinition struct {
-	ID                string                                    `json:"id"`
-	EndpointID        string                                    `json:"endpoint_id"`
-	EvalType          string                                    `json:"eval_type"`
-	Prompt            optionalnullable.OptionalNullable[string] `json:"prompt,omitzero"`
-	CustomPrompt      optionalnullable.OptionalNullable[string] `json:"custom_prompt,omitzero"`
-	ExpectedBehavior  optionalnullable.OptionalNullable[string] `json:"expected_behavior,omitzero"`
-	StartingProjectID optionalnullable.OptionalNullable[string] `json:"starting_project_id,omitzero"`
-	DocsMode          *PublicEvalDefinitionDocsMode             `default:"default" json:"docs_mode"`
-	IncludeEnvVars    *bool                                     `default:"true" json:"include_env_vars"`
-	EnvProfileIds     []string                                  `json:"env_profile_ids,omitzero"`
-	ModelIds          []string                                  `json:"model_ids,omitzero"`
-	CompareSkills     *bool                                     `default:"false" json:"compare_skills"`
-	SkillsMode        *PublicEvalDefinitionSkillsMode           `default:"none" json:"skills_mode"`
-	SkillsEnabled     *bool                                     `default:"false" json:"skills_enabled"`
-	SkillIds          []string                                  `json:"skill_ids,omitzero"`
-	McpEnabled        *bool                                     `default:"false" json:"mcp_enabled"`
-	RunContext        map[string]any                            `json:"run_context,omitzero"`
-	Enabled           *bool                                     `default:"true" json:"enabled"`
+	ID                string                                                           `json:"id"`
+	OperationID       string                                                           `json:"operation_id"`
+	SourceID          optionalnullable.OptionalNullable[string]                        `json:"source_id,omitzero"`
+	Source            optionalnullable.OptionalNullable[PublicAPIPerformanceSourceRef] `json:"source,omitzero"`
+	EvalType          string                                                           `json:"eval_type"`
+	Prompt            optionalnullable.OptionalNullable[string]                        `json:"prompt,omitzero"`
+	CustomPrompt      optionalnullable.OptionalNullable[string]                        `json:"custom_prompt,omitzero"`
+	ExpectedBehavior  optionalnullable.OptionalNullable[string]                        `json:"expected_behavior,omitzero"`
+	StartingProjectID optionalnullable.OptionalNullable[string]                        `json:"starting_project_id,omitzero"`
+	DocsMode          *PublicEvalDefinitionDocsMode                                    `default:"default" json:"docs_mode"`
+	IncludeEnvVars    *bool                                                            `default:"true" json:"include_env_vars"`
+	EnvProfileIds     []string                                                         `json:"env_profile_ids,omitzero"`
+	ModelIds          []string                                                         `json:"model_ids,omitzero"`
+	CompareSkills     *bool                                                            `default:"false" json:"compare_skills"`
+	SkillsMode        *PublicEvalDefinitionSkillsMode                                  `default:"none" json:"skills_mode"`
+	SkillsEnabled     *bool                                                            `default:"false" json:"skills_enabled"`
+	SkillIds          []string                                                         `json:"skill_ids,omitzero"`
+	McpEnabled        *bool                                                            `default:"false" json:"mcp_enabled"`
+	RunContext        map[string]any                                                   `json:"run_context,omitzero"`
+	Enabled           *bool                                                            `default:"true" json:"enabled"`
 }
 
 func (p PublicEvalDefinition) MarshalJSON() ([]byte, error) {
@@ -93,11 +95,25 @@ func (p *PublicEvalDefinition) GetID() string {
 	return p.ID
 }
 
-func (p *PublicEvalDefinition) GetEndpointID() string {
+func (p *PublicEvalDefinition) GetOperationID() string {
 	if p == nil {
 		return ""
 	}
-	return p.EndpointID
+	return p.OperationID
+}
+
+func (p *PublicEvalDefinition) GetSourceID() optionalnullable.OptionalNullable[string] {
+	if p == nil {
+		return nil
+	}
+	return p.SourceID
+}
+
+func (p *PublicEvalDefinition) GetSource() optionalnullable.OptionalNullable[PublicAPIPerformanceSourceRef] {
+	if p == nil {
+		return nil
+	}
+	return p.Source
 }
 
 func (p *PublicEvalDefinition) GetEvalType() string {

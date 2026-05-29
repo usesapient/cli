@@ -16,7 +16,7 @@ import (
 )
 
 var apiPerformanceConfigRetrieveCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "integration-id", Shorthand: "i", FieldPath: "IntegrationID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "source-id", Shorthand: "s", FieldPath: "SourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 }
 
 // initApiPerformanceConfigRetrieveCmd initializes the api-performance-config-retrieve command.
