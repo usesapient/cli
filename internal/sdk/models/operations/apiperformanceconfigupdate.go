@@ -6,36 +6,7 @@ package operations
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
-	"github.com/usesapient/cli/internal/sdk/types"
 )
-
-type APIPerformanceConfigUpdateRequest struct {
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	configScope *string                                  `const:"custom_evals" queryParam:"style=form,explode=true,name=config_scope"`
-	Body        components.PublicEvalConfigUpdateRequest `request:"mediaType=application/json"`
-}
-
-func (a APIPerformanceConfigUpdateRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *APIPerformanceConfigUpdateRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (a *APIPerformanceConfigUpdateRequest) GetConfigScope() *string {
-	return types.Pointer("custom_evals")
-}
-
-func (a *APIPerformanceConfigUpdateRequest) GetBody() components.PublicEvalConfigUpdateRequest {
-	if a == nil {
-		return components.PublicEvalConfigUpdateRequest{}
-	}
-	return a.Body
-}
 
 type APIPerformanceConfigUpdateResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
