@@ -9,31 +9,30 @@ import (
 )
 
 type PublicAPIPerformanceAction struct {
-	ID                   string                                    `json:"id"`
-	SourceID             optionalnullable.OptionalNullable[string] `json:"source_id,omitzero"`
-	ActionType           string                                    `json:"action_type"`
-	Status               string                                    `json:"status"`
-	Priority             string                                    `json:"priority"`
-	Confidence           float64                                   `json:"confidence"`
-	Effort               string                                    `json:"effort"`
-	Title                string                                    `json:"title"`
-	Description          string                                    `json:"description"`
-	PrimaryURL           optionalnullable.OptionalNullable[string] `json:"primary_url,omitzero"`
-	AffectedUrls         []string                                  `json:"affected_urls,omitzero"`
-	Evidence             map[string]any                            `json:"evidence,omitzero"`
-	Recommendation       map[string]any                            `json:"recommendation,omitzero"`
-	Impact               map[string]any                            `json:"impact,omitzero"`
-	Source               string                                    `json:"source"`
-	Fingerprint          string                                    `json:"fingerprint"`
-	OwnerUserID          optionalnullable.OptionalNullable[string] `json:"owner_user_id,omitzero"`
-	IgnoredReason        optionalnullable.OptionalNullable[string] `json:"ignored_reason,omitzero"`
-	FirstSeenAt          optionalnullable.OptionalNullable[string] `json:"first_seen_at,omitzero"`
-	LastSeenAt           optionalnullable.OptionalNullable[string] `json:"last_seen_at,omitzero"`
-	ResolvedAt           optionalnullable.OptionalNullable[string] `json:"resolved_at,omitzero"`
-	VerifiedAt           optionalnullable.OptionalNullable[string] `json:"verified_at,omitzero"`
-	CreatedAt            optionalnullable.OptionalNullable[string] `json:"created_at,omitzero"`
-	UpdatedAt            optionalnullable.OptionalNullable[string] `json:"updated_at,omitzero"`
-	AdditionalProperties map[string]any                            `additionalProperties:"true" json:"-"`
+	ID             string                                    `json:"id"`
+	SourceID       optionalnullable.OptionalNullable[string] `json:"source_id,omitzero"`
+	ActionType     string                                    `json:"action_type"`
+	Status         string                                    `json:"status"`
+	Priority       string                                    `json:"priority"`
+	Confidence     float64                                   `json:"confidence"`
+	Effort         string                                    `json:"effort"`
+	Title          string                                    `json:"title"`
+	Description    string                                    `json:"description"`
+	PrimaryURL     optionalnullable.OptionalNullable[string] `json:"primary_url,omitzero"`
+	AffectedUrls   []string                                  `json:"affected_urls,omitzero"`
+	Evidence       map[string]any                            `json:"evidence,omitzero"`
+	Recommendation map[string]any                            `json:"recommendation,omitzero"`
+	Impact         map[string]any                            `json:"impact,omitzero"`
+	Source         string                                    `json:"source"`
+	Fingerprint    string                                    `json:"fingerprint"`
+	OwnerUserID    optionalnullable.OptionalNullable[string] `json:"owner_user_id,omitzero"`
+	IgnoredReason  optionalnullable.OptionalNullable[string] `json:"ignored_reason,omitzero"`
+	FirstSeenAt    optionalnullable.OptionalNullable[string] `json:"first_seen_at,omitzero"`
+	LastSeenAt     optionalnullable.OptionalNullable[string] `json:"last_seen_at,omitzero"`
+	ResolvedAt     optionalnullable.OptionalNullable[string] `json:"resolved_at,omitzero"`
+	VerifiedAt     optionalnullable.OptionalNullable[string] `json:"verified_at,omitzero"`
+	CreatedAt      optionalnullable.OptionalNullable[string] `json:"created_at,omitzero"`
+	UpdatedAt      optionalnullable.OptionalNullable[string] `json:"updated_at,omitzero"`
 }
 
 func (p PublicAPIPerformanceAction) MarshalJSON() ([]byte, error) {
@@ -213,11 +212,4 @@ func (p *PublicAPIPerformanceAction) GetUpdatedAt() optionalnullable.OptionalNul
 		return nil
 	}
 	return p.UpdatedAt
-}
-
-func (p *PublicAPIPerformanceAction) GetAdditionalProperties() map[string]any {
-	if p == nil {
-		return nil
-	}
-	return p.AdditionalProperties
 }

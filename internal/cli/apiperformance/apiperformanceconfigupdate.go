@@ -11,20 +11,21 @@ import (
 	"github.com/usesapient/cli/internal/interactive"
 	"github.com/usesapient/cli/internal/output"
 	"github.com/usesapient/cli/internal/sdk"
+	"github.com/usesapient/cli/internal/sdk/models/components"
 	"github.com/usesapient/cli/internal/sdk/models/operations"
 	"github.com/usesapient/cli/internal/usage"
 )
 
 var apiPerformanceConfigUpdateCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "models", Shorthand: "m", FieldPath: "Body.Models", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"models,omitempty"`, Description: "Legacy flat model selection. Prefer targets for v0.3.0."},
-	{FlagName: "targets", Shorthand: "t", FieldPath: "Body.Targets", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"targets,omitempty"`, Description: "Scheduled text/agent targets. Use frequency='manual' to keep a target available but unscheduled."},
-	{FlagName: "operation-ids", FieldPath: "Body.OperationIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"operation_ids,omitempty"`, Description: "list of values"},
-	{FlagName: "custom-eval-ids", Shorthand: "c", FieldPath: "Body.CustomEvalIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"custom_eval_ids,omitempty"`, Description: "list of values"},
-	{FlagName: "env-vars", FieldPath: "Body.EnvVars", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"env_vars,omitempty"`, Description: "value"},
-	{FlagName: "env-profiles", FieldPath: "Body.EnvProfiles", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"env_profiles,omitempty"`, Description: "list of values"},
-	{FlagName: "default-env-profile-id", FieldPath: "Body.DefaultEnvProfileID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
-	{FlagName: "source-id", Shorthand: "s", FieldPath: "Body.SourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
-	{FlagName: "api-base-url", Shorthand: "a", FieldPath: "Body.APIBaseURL", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "models", Shorthand: "m", FieldPath: "Models", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"models,omitempty"`, Description: "Legacy flat model selection. Prefer targets for v0.3.0."},
+	{FlagName: "targets", Shorthand: "t", FieldPath: "Targets", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"targets,omitempty"`, Description: "Scheduled text/agent targets. Use frequency='manual' to keep a target available but unscheduled."},
+	{FlagName: "operation-ids", FieldPath: "OperationIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"operation_ids,omitempty"`, Description: "list of values"},
+	{FlagName: "custom-eval-ids", Shorthand: "c", FieldPath: "CustomEvalIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"custom_eval_ids,omitempty"`, Description: "list of values"},
+	{FlagName: "env-vars", FieldPath: "EnvVars", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"env_vars,omitempty"`, Description: "value"},
+	{FlagName: "env-profiles", FieldPath: "EnvProfiles", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"env_profiles,omitempty"`, Description: "list of values"},
+	{FlagName: "default-env-profile-id", FieldPath: "DefaultEnvProfileID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "source-id", Shorthand: "s", FieldPath: "SourceID", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
+	{FlagName: "api-base-url", Shorthand: "a", FieldPath: "APIBaseURL", Kind: flagutil.FlagKindString, Optional: true, Description: "string value"},
 }
 
 // initApiPerformanceConfigUpdateCmd initializes the api-performance-config-update command.
@@ -38,7 +39,7 @@ func initApiPerformanceConfigUpdateCmd(parent *cobra.Command) error {
 		Aliases: []string{"cu"},
 	}
 	flagutil.RegisterFlags(cmd, apiPerformanceConfigUpdateCmdMeta)
-	if err := flagutil.ValidateMeta[operations.APIPerformanceConfigUpdateRequest](apiPerformanceConfigUpdateCmdMeta); err != nil {
+	if err := flagutil.ValidateMeta[components.PublicEvalConfigUpdateRequest](apiPerformanceConfigUpdateCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for api-performance-config-update: %w", err)
 	}
 	cmd.Flags().String("body", "", "Request body as JSON (alternative to individual flags). Can also be provided via stdin.")
@@ -56,7 +57,7 @@ func runApiPerformanceConfigUpdateCmd(cmd *cobra.Command, args []string) error {
 			return err
 		}
 	}
-	req, err := flagutil.BuildRequest[operations.APIPerformanceConfigUpdateRequest](cmd, apiPerformanceConfigUpdateCmdMeta, "Body", "body")
+	request, err := flagutil.BuildRequest[components.PublicEvalConfigUpdateRequest](cmd, apiPerformanceConfigUpdateCmdMeta, "", "body")
 	if err != nil {
 		return err
 	}
@@ -79,7 +80,7 @@ func runApiPerformanceConfigUpdateCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.APIPerformance.APIPerformanceConfigUpdate(cmd.Context(), *req, sdkOpts...)
+	res, err := s.APIPerformance.APIPerformanceConfigUpdate(cmd.Context(), *request, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}
