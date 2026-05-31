@@ -6,24 +6,10 @@ package operations
 import (
 	"github.com/usesapient/cli/internal/sdk/models/components"
 	"github.com/usesapient/cli/internal/sdk/sdkinternal/utils"
-	"github.com/usesapient/cli/internal/sdk/types"
 )
 
 type APIPerformanceConfigRetrieveRequest struct {
 	SourceID *string `queryParam:"style=form,explode=true,name=source_id"`
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	configScope *string `const:"custom_evals" queryParam:"style=form,explode=true,name=config_scope"`
-}
-
-func (a APIPerformanceConfigRetrieveRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *APIPerformanceConfigRetrieveRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (a *APIPerformanceConfigRetrieveRequest) GetSourceID() *string {
@@ -31,10 +17,6 @@ func (a *APIPerformanceConfigRetrieveRequest) GetSourceID() *string {
 		return nil
 	}
 	return a.SourceID
-}
-
-func (a *APIPerformanceConfigRetrieveRequest) GetConfigScope() *string {
-	return types.Pointer("custom_evals")
 }
 
 type APIPerformanceConfigRetrieveResponse struct {

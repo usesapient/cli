@@ -1062,16 +1062,6 @@
               "type": "string",
               "title": "Source Id"
             }
-          },
-          {
-            "name": "config_scope",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "const": "custom_evals",
-              "type": "string",
-              "title": "Config Scope"
-            }
           }
         ],
         "responses": {
@@ -1107,18 +1097,6 @@
         "security": [
           {
             "SapientApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "config_scope",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "const": "custom_evals",
-              "type": "string",
-              "title": "Config Scope"
-            }
           }
         ],
         "requestBody": {
@@ -3593,7 +3571,6 @@
             "title": "Updated At"
           }
         },
-        "additionalProperties": true,
         "type": "object",
         "required": [
           "id",
